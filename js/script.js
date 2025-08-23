@@ -134,4 +134,118 @@ document.addEventListener('DOMContentLoaded', function() {
       alert('Form submitted! In a real website, this would be connected to your CRM or email system.');
     });
   }
+
+  // Claim Analyzer Form
+  const claimAnalyzerForm = document.getElementById('claim-analyzer-form');
+  if (claimAnalyzerForm) {
+    const steps = Array.from(claimAnalyzerForm.querySelectorAll('.form-step'));
+    const nextBtns = claimAnalyzerForm.querySelectorAll('.next-step');
+    const prevBtns = claimAnalyzerForm.querySelectorAll('.prev-step');
+    const injurySeveritySlider = document.getElementById('injurySeverity');
+    const injurySeverityValue = document.getElementById('injurySeverityValue');
+    const resultsDiv = document.getElementById('claim-results');
+    const estimatedValueEl = document.getElementById('estimated-value');
+    const resultsSummaryEl = document.getElementById('results-summary');
+
+    let currentStep = 0;
+
+    const showStep = (stepIndex) => {
+      steps.forEach((step, index) => {
+        step.style.display = index === stepIndex ? 'block' : 'none';
+      });
+    };
+
+    nextBtns.forEach(button => {
+      button.addEventListener('click', () => {
+        const currentStepFields = steps[currentStep].querySelectorAll('[required]');
+        let isValid = true;
+        currentStepFields.forEach(field => {
+          if (!field.value.trim() || (field.type === 'checkbox' && !field.checked)) {
+            if(field.tagName.toLowerCase() !== 'select' || field.value === '') {
+              isValid = false;
+            }
+          }
+        });
+
+        if (isValid) {
+          currentStep++;
+          if (currentStep >= steps.length) {
+            currentStep = steps.length - 1;
+          }
+          showStep(currentStep);
+        } else {
+          alert('Please fill out all required fields.');
+        }
+      });
+    });
+
+    prevBtns.forEach(button => {
+      button.addEventListener('click', () => {
+        currentStep--;
+        if (currentStep < 0) {
+          currentStep = 0;
+        }
+        showStep(currentStep);
+      });
+    });
+
+    if (injurySeveritySlider) {
+        injurySeveritySlider.addEventListener('input', (e) => {
+            if(injurySeverityValue) {
+                injurySeverityValue.textContent = e.target.value;
+            }
+        });
+    }
+
+    claimAnalyzerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const accidentType = document.getElementById('accidentType').value;
+      const injurySeverity = parseInt(document.getElementById('injurySeverity').value, 10);
+      const medicalBills = parseFloat(document.getElementById('medicalBills').value) || 0;
+      const lostWages = parseFloat(document.getElementById('lostWages').value) || 0;
+      const propertyDamage = parseFloat(document.getElementById('propertyDamage').value) || 0;
+      const name = document.getElementById('analyzerName').value;
+      const phone = document.getElementById('analyzerPhone').value;
+      const email = document.getElementById('analyzerEmail').value;
+
+      const multiplier = 1.5 + (injurySeverity - 1) * (3.5 / 9);
+
+      const economicDamages = medicalBills + lostWages;
+      const nonEconomicDamages = economicDamages * multiplier;
+      const totalEstimate = nonEconomicDamages + propertyDamage;
+
+      const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      });
+
+      const lowEstimate = totalEstimate * 0.8;
+      const highEstimate = totalEstimate * 1.2;
+
+      estimatedValueEl.textContent = `${formatter.format(lowEstimate)} - ${formatter.format(highEstimate)}`;
+
+      resultsSummaryEl.innerHTML = `
+        <li><strong>Name:</strong> ${name}</li>
+        <li><strong>Phone:</strong> ${phone}</li>
+        <li><strong>Email:</strong> ${email}</li>
+        <li><strong>Accident Type:</strong> ${accidentType}</li>
+        <li><strong>Injury Severity:</strong> ${injurySeverity}/10</li>
+        <li><strong>Medical Bills:</strong> ${formatter.format(medicalBills)}</li>
+        <li><strong>Lost Wages:</strong> ${formatter.format(lostWages)}</li>
+        <li><strong>Property Damage:</strong> ${formatter.format(propertyDamage)}</li>
+      `;
+
+      claimAnalyzerForm.style.display = 'none';
+      resultsDiv.style.display = 'block';
+
+      console.log({
+          name, phone, email, accidentType, injurySeverity, medicalBills, lostWages, propertyDamage, estimatedCaseValue: totalEstimate
+      });
+    });
+
+    showStep(currentStep);
+  }
 });

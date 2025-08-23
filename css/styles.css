@@ -1560,3 +1560,77 @@ textarea.form-control {
   margin-top: 10px;
   border-radius: 4px;
 }
+
+/* Claim Analyzer Section */
+.claim-analyzer {
+  padding: 80px 0;
+  background-color: #f8f9fa;
+}
+
+.claim-analyzer__form-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.claim-analyzer .form-step {
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.claim-analyzer .form-label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.claim-analyzer .form-select, .claim-analyzer .form-control {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+}
+
+.claim-analyzer .form-range {
+  padding: 0;
+}
+
+#injurySeverityValue {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.claim-analyzer .btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+#claim-results {
+  animation: fadeIn 0.5s;
+}
+
+#estimated-value {
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--secondary-color);
+  padding-bottom: 1rem;
+  margin-bottom: 2rem !important;
+}
+
+#results-summary {
+  text-align: left;
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+#results-summary li {
+  margin-bottom: 0.5rem;
+}

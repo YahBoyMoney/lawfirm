@@ -90,7 +90,7 @@
       <section class="hero" id="home">
         <div class="container">
           <div class="row align-items-center">
-            <div class="col-lg-7 mb-5 mb-lg-0 hero__content">
+            <div class="col-lg-12 hero__content text-center">
               <h1 class="hero__title" data-aos="fade-up">
                 Personal Injury Representation in California
               </h1>
@@ -99,8 +99,13 @@
               </p>
               <p data-aos="fade-up" data-aos-delay="150">The Fee Is Free™. You only pay when we win your case.</p>
               
-              <!-- Replacing organization logos with key benefits -->
-              <div class="hero__benefits" data-aos="fade-up" data-aos-delay="200">
+              <div class="hero__cta-container mt-4" data-aos="fade-up" data-aos-delay="200">
+                <a href="#claim-analyzer" class="btn btn-primary-custom btn-lg">
+                  Estimate Your Claim's Value <i class="fas fa-calculator ms-2"></i>
+                </a>
+              </div>
+
+              <div class="hero__benefits justify-content-center" data-aos="fade-up" data-aos-delay="250">
                 <div class="benefit-item">
                   <i class="fas fa-user-tie"></i>
                   <span>Personal Attention</span>
@@ -115,58 +120,114 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-5 hero__form-container">
-              <div class="hero__form" id="hero-form" data-aos="fade-left">
-                <h3 class="text-center mb-3">Free Case Evaluation</h3>
-                <p class="hero__form-text">
-                  Berhe Law offers personalized legal service to California injury victims. Contact us today for a free, no-obligation consultation.
-                </p>
-                <form id="contact-form" action="#" method="post">
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="firstName" placeholder="First Name" required>
-                    <label for="firstName">First Name</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
-                    <label for="lastName">Last Name</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <input type="tel" class="form-control" id="phoneNumber" placeholder="Phone Number" required>
-                    <label for="phoneNumber">Phone Number</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="emailAddress" placeholder="Email Address" required>
-                    <label for="emailAddress">Email Address</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <textarea class="form-control" id="caseDetails" placeholder="Tell us about your case" style="height: 120px" required></textarea>
-                    <label for="caseDetails">Tell us about your case</label>
-                  </div>
-                  
-                  <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" id="consentCheck" required>
-                    <label class="form-check-label" for="consentCheck">
-                      I consent to receive calls, texts, and emails about my case. I understand consent is not required to use services.
-                    </label>
-                  </div>
-                  
-                  <button type="submit" class="btn btn-primary-custom w-100">
-                    Get Your Free Case Review
-                  </button>
-                  <p class="mt-2 text-center" style="font-size: 0.8rem;">
-                    Your information is confidential and protected by attorney-client privilege.
-                  </p>
-                  <div class="text-center mt-3">
-                    <a href="tel:+19096096685" class="btn btn-outline-custom btn-sm">
-                      <i class="fas fa-phone-alt me-1"></i> Call Now: 909-609-6685
-                    </a>
-                  </div>
-                </form>
-              </div>
-            </div>
           </div>
         </div>
         <div class="hero__overlay"></div>
+      </section>
+
+      <!-- Claim Analyzer Section -->
+      <section class="claim-analyzer" id="claim-analyzer">
+        <div class="container">
+          <p class="process__subtitle text-center" data-aos="fade-up">Claim Calculator</p>
+          <h2 class="process__title text-center" data-aos="fade-up" data-aos-delay="100">Estimate Your Case Value</h2>
+          <p class="text-center mb-5" data-aos="fade-up" data-aos-delay="200">Answer a few questions to get an instant estimate of your personal injury claim's potential value.</p>
+
+          <div class="claim-analyzer__form-container" data-aos="fade-up" data-aos-delay="300">
+            <form id="claim-analyzer-form">
+              <!-- Step 1: Accident Details -->
+              <div class="form-step" id="form-step-1">
+                <h4 class="mb-4 text-center">Step 1: Tell us about your accident</h4>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="accidentType" class="form-label">Type of Accident</label>
+                    <select class="form-select" id="accidentType" required>
+                      <option selected disabled value="">Choose...</option>
+                      <option>Car Accident</option>
+                      <option>Truck Accident</option>
+                      <option>Motorcycle Accident</option>
+                      <option>Pedestrian Accident</option>
+                      <option>Slip and Fall</option>
+                      <option>Medical Malpractice</option>
+                      <option>Workplace Injury</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="injurySeverity" class="form-label">Injury Severity (1-10)</label>
+                    <input type="range" class="form-range" id="injurySeverity" min="1" max="10" step="1" value="5" required>
+                    <div class="text-center mt-2"><span id="injurySeverityValue">5</span></div>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <button type="button" class="btn btn-primary-custom next-step">Next <i class="fas fa-arrow-right ms-2"></i></button>
+                </div>
+              </div>
+
+              <!-- Step 2: Financials -->
+              <div class="form-step" id="form-step-2" style="display: none;">
+                <h4 class="mb-4 text-center">Step 2: What were the financial costs?</h4>
+                <div class="row">
+                  <div class="col-md-4 mb-3">
+                    <label for="medicalBills" class="form-label">Medical Bills ($)</label>
+                    <input type="number" class="form-control" id="medicalBills" placeholder="e.g., 5000" required>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <label for="lostWages" class="form-label">Lost Wages ($)</label>
+                    <input type="number" class="form-control" id="lostWages" placeholder="e.g., 2500" required>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <label for="propertyDamage" class="form-label">Property Damage ($)</label>
+                    <input type="number" class="form-control" id="propertyDamage" placeholder="e.g., 10000" required>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <button type="button" class="btn btn-outline-custom me-2 prev-step"><i class="fas fa-arrow-left me-2"></i> Previous</button>
+                  <button type="button" class="btn btn-primary-custom next-step">Next <i class="fas fa-arrow-right ms-2"></i></button>
+                </div>
+              </div>
+
+              <!-- Step 3: Contact Info -->
+              <div class="form-step" id="form-step-3" style="display: none;">
+                <h4 class="mb-4 text-center">Step 3: Where should we send your estimate?</h4>
+                <div class="row">
+                  <div class="col-md-4 mb-3">
+                    <label for="analyzerName" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="analyzerName" required>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <label for="analyzerPhone" class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" id="analyzerPhone" required>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <label for="analyzerEmail" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="analyzerEmail" required>
+                  </div>
+                </div>
+                <div class="form-check mb-3">
+                  <input class="form-check-input" type="checkbox" id="analyzerConsent" required>
+                  <label class="form-check-label" for="analyzerConsent">
+                    I consent to receive calls, texts, and emails about my case.
+                  </label>
+                </div>
+                <div class="text-center">
+                  <button type="button" class="btn btn-outline-custom me-2 prev-step"><i class="fas fa-arrow-left me-2"></i> Previous</button>
+                  <button type="submit" class="btn btn-primary-custom">Calculate My Estimate <i class="fas fa-calculator ms-2"></i></button>
+                </div>
+              </div>
+            </form>
+
+            <!-- Results -->
+            <div id="claim-results" style="display: none;" class="text-center">
+              <h3 class="mb-3">Your Estimated Case Value Is:</h3>
+              <h2 id="estimated-value" class="display-4 fw-bold mb-4"></h2>
+              <p class="lead">This is a preliminary estimate based on the information you provided.</p>
+              <p>An experienced attorney from Berhe Law will contact you shortly to discuss the specifics of your case and provide a more accurate evaluation. Your information has been received.</p>
+              <hr>
+              <p class="fw-bold">Your submitted details:</p>
+              <ul id="results-summary" class="list-unstyled"></ul>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- Process Section -->
