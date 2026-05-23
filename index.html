@@ -1,613 +1,1574 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr" class="h-100">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon" />
-    <title>Berhe Law | California Personal Injury Attorney</title>
-    <meta name="description" content="Berhe Law is committed to fighting for the rights of injury victims across California. Call us today for a free consultation with attorney Tam Berhe." />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
-  </head>
-  <body>
-    <!-- Preloader -->
-    <div class="preloader">
-      <div class="preloader__content">
-        <div class="preloader__spinner"></div>
-        <h2>Berhe Law</h2>
-        <p>Fighting for Justice in California</p>
-      </div>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Berhe Law | California Personal Injury Attorney | Tam Berhe</title>
+<meta name="description" content="Berhe Law represents personal injury victims across California. Attorney Tam Berhe personally handles every case. Free consultation, no fee unless we win. Call 909-609-6685." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://berhelaw.com/" />
+<meta property="og:title" content="Berhe Law | California Personal Injury Attorney | Tam Berhe" />
+<meta property="og:description" content="Direct personal injury representation by Attorney Tam Berhe. Free consultation, no fee unless we recover for you." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://berhelaw.com/" />
+<meta name="theme-color" content="#15212e" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" href="/images/berhe-law-icon.png" />
+<meta property="og:image" content="https://berhelaw.com/images/og-berhe-law.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LegalService",
+  "name": "The Berhe Law Firm, APC",
+  "alternateName": "Berhe Law",
+  "url": "https://berhelaw.com/",
+  "telephone": "+1-909-609-6685",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "901 Via Piemonte, Suite 230",
+    "addressLocality": "Ontario",
+    "addressRegion": "CA",
+    "postalCode": "91764-8500",
+    "addressCountry": "US"
+  },
+  "areaServed": "California",
+  "founder": {
+    "@type": "Attorney",
+    "name": "Tamerat S. Berhe",
+    "identifier": "State Bar of California No. 298992"
+  },
+  "priceRange": "Contingency fee"
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #15212e;          /* deep navy ink */
+    --ink-2: #2a3845;
+    --ink-soft: #4a5663;
+    --paper: #f6f1e8;        /* warm ivory */
+    --paper-2: #ece5d6;
+    --rule: #d8cfbc;
+    --brass: #9a7a2e;        /* restrained brass, not yellow */
+    --brass-2: #b89647;
+    --brass-soft: #efe3c2;
+    --white: #ffffff;
+    --danger: #8a2a2a;
+    --shadow: 0 1px 2px rgba(21,33,46,.06), 0 12px 32px -16px rgba(21,33,46,.18);
+    --shadow-lg: 0 30px 80px -32px rgba(21,33,46,.35);
+    --radius: 4px;
+    --radius-lg: 8px;
+    --container: 1180px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  ::selection { background: var(--brass); color: #fff; }
+
+  /* ---------- Top utility bar ---------- */
+  .topbar {
+    background: var(--ink);
+    color: #e6dfd1;
+    font-size: 14px;
+    letter-spacing: .02em;
+  }
+  .topbar-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 10px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .topbar a { color: #fff; text-decoration: none; }
+  .topbar .left { display: flex; align-items: center; gap: 18px; }
+  .topbar .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--brass-2);
+    font-weight: 600;
+  }
+  .topbar .pill::before {
+    content: "";
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--brass-2);
+    box-shadow: 0 0 0 4px rgba(184,150,71,.15);
+  }
+  .topbar .call {
+    font-weight: 600;
+    color: #fff;
+    border-bottom: 1px solid rgba(255,255,255,.25);
+  }
+  .topbar .call:hover { border-bottom-color: var(--brass-2); }
+  @media (max-width: 720px) {
+    .topbar { font-size: 13px; }
+    .topbar-inner { padding: 8px 18px; }
+    .topbar .left .hide-sm { display: none; }
+  }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(1.1);
+  }
+  .nav-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 18px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none; color: var(--ink);
+  }
+  .brand-mark {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--brass);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    color: var(--brass);
+    font-size: 16px;
+    letter-spacing: .02em;
+  }
+  .brand-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: .04em;
+  }
+  .brand-sub {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .22em;
+    color: var(--ink-soft);
+    margin-top: 2px;
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 32px;
+    list-style: none; margin: 0; padding: 0;
+    font-size: 14px;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--ink-2);
+    font-weight: 500;
+    padding: 6px 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .nav-links a:hover { color: var(--ink); border-bottom-color: var(--brass); }
+  .nav-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--ink);
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 14px;
+    transition: background .15s ease;
+  }
+  .nav-cta:hover { background: #0c1924; }
+  .nav-cta svg { width: 14px; height: 14px; }
+  .nav-toggle {
+    display: none;
+    background: transparent; border: 1px solid var(--rule);
+    width: 40px; height: 40px; border-radius: var(--radius);
+    align-items: center; justify-content: center;
+    cursor: pointer;
+  }
+  .nav-toggle span {
+    display: block; width: 18px; height: 1.5px; background: var(--ink);
+    position: relative;
+  }
+  .nav-toggle span::before, .nav-toggle span::after {
+    content: ""; position: absolute; left: 0; width: 18px; height: 1.5px; background: var(--ink);
+  }
+  .nav-toggle span::before { top: -6px; }
+  .nav-toggle span::after { top: 6px; }
+  @media (max-width: 900px) {
+    .nav-links, .nav-cta { display: none; }
+    .nav-toggle { display: inline-flex; }
+    .nav-links.open {
+      display: flex; flex-direction: column;
+      position: absolute; left: 0; right: 0; top: 100%;
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+      padding: 16px 28px 22px;
+      gap: 14px;
+    }
+    .nav-cta.open { display: inline-flex; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-grid {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 72px 28px 56px;
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: 72px;
+    align-items: start;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .22em;
+    color: var(--brass);
+    font-weight: 600;
+  }
+  .eyebrow::before {
+    content: ""; width: 28px; height: 1px; background: var(--brass);
+  }
+  h1.headline {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(38px, 4.8vw, 58px);
+    line-height: 1.08;
+    letter-spacing: -.01em;
+    margin: 20px 0 22px;
+    color: var(--ink);
+  }
+  h1.headline em {
+    font-style: italic;
+    color: var(--brass);
+    font-weight: 500;
+  }
+  .lede {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    max-width: 56ch;
+    margin: 0 0 28px;
+  }
+  .hero-actions {
+    display: flex; flex-wrap: wrap; gap: 14px;
+    margin-top: 8px;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 15px 22px;
+    min-height: 48px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    line-height: 1;
+    transition: transform .1s ease, background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+  }
+  .btn-primary:hover { background: #0c1924; }
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+  .btn-ghost:hover { background: var(--ink); color: #fff; }
+  .btn-call {
+    background: var(--brass);
+    color: #fff;
+    border-color: var(--brass);
+  }
+  .btn-call:hover { background: #876923; border-color: #876923; }
+  .btn svg { width: 16px; height: 16px; flex: none; }
+
+  .hero-trust {
+    margin-top: 44px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .trust-item .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .trust-item .value {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* Hero card / form */
+  .hero-card {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: 32px;
+    position: relative;
+  }
+  .hero-card::before {
+    content: "";
+    position: absolute; inset: -1px;
+    border-top: 3px solid var(--brass);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    pointer-events: none;
+  }
+  .card-eyebrow {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .22em;
+    color: var(--brass);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .card-title {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    line-height: 1.2;
+    margin: 0 0 8px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .card-sub {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin: 0 0 22px;
+  }
+  form .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .field { margin-bottom: 14px; }
+  .field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: var(--ink-2);
+    margin-bottom: 6px;
+  }
+  .field label .req { color: var(--brass); margin-left: 2px; }
+  .field input,
+  .field textarea,
+  .field select {
+    width: 100%;
+    font: inherit;
+    font-size: 15px;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 13px 14px;
+    min-height: 48px;
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  .field textarea { min-height: 96px; resize: vertical; }
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    outline: none;
+    border-color: var(--brass);
+    box-shadow: 0 0 0 3px rgba(154,122,46,.18);
+  }
+  .field .hint {
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+  .consent {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    margin: 6px 0 16px;
+  }
+  .consent input {
+    margin-top: 2px;
+    flex: none;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--brass);
+  }
+  .submit {
+    width: 100%;
+    background: var(--ink);
+    color: #fff;
+    border: 0;
+    padding: 15px 18px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: .02em;
+    cursor: pointer;
+    transition: background .15s ease;
+  }
+  .submit:hover { background: #0c1924; }
+  .privacy-note {
+    font-size: 13.5px;
+    color: #3c4854;
+    text-align: center;
+    margin: 14px 0 0;
+    display: block;
+  }
+  .privacy-note svg { display: none; }
+
+  @media (max-width: 980px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; padding: 56px 24px 48px; }
+    .hero-trust { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  }
+  @media (max-width: 560px) {
+    form .row { grid-template-columns: 1fr; }
+    .hero-card { padding: 24px; }
+    .hero-trust { grid-template-columns: 1fr 1fr; }
+    .hero-trust .trust-item:last-child { grid-column: 1 / -1; }
+    .btn { width: 100%; justify-content: center; }
+    .topbar .left span:not(.pill), .topbar .right { display: none; }
+    h1.headline { font-size: clamp(34px, 10vw, 42px); }
+    .lede, .section-lede, .attorney-body p { font-size: 16px; }
+  }
+
+  /* ---------- Section scaffolding ---------- */
+  .section {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 68px 28px;
+  }
+  .section.alt {
+    background: #fff;
+    max-width: none;
+    border-block: 1px solid var(--rule);
+  }
+  .section.alt .inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 68px 28px;
+  }
+  .section.dark {
+    background: var(--ink);
+    color: #e6dfd1;
+    max-width: none;
+    border-block: 1px solid var(--ink);
+  }
+  .section.dark .inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 96px 28px;
+  }
+  .section.dark h2 { color: #fff; }
+  .section.dark .section-eyebrow { color: var(--brass-2); }
+  .section.dark .section-eyebrow::before { background: var(--brass-2); }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: end;
+    margin-bottom: 48px;
+  }
+  .section-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 12px; text-transform: uppercase; letter-spacing: .22em;
+    color: var(--brass);
+    font-weight: 600;
+  }
+  .section-eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--brass); }
+  h2.section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(30px, 3.6vw, 44px);
+    line-height: 1.1;
+    letter-spacing: -.01em;
+    margin: 14px 0 0;
+    color: inherit;
+  }
+  .section-lede {
+    font-size: 17px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    margin: 0;
+  }
+  .section.dark .section-lede { color: #c8c0ad; }
+  @media (max-width: 820px) {
+    .section, .section.alt .inner, .section.dark .inner { padding: 52px 22px; }
+    .section-head { grid-template-columns: 1fr; gap: 16px; align-items: start; margin-bottom: 32px; }
+  }
+
+  /* ---------- Attorney section ---------- */
+  .attorney-grid {
+    display: grid;
+    grid-template-columns: .9fr 1.1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .attorney-card {
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    position: relative;
+  }
+  .attorney-portrait {
+    width: 100%;
+    min-height: 430px;
+    background: linear-gradient(180deg, #172536 0%, #101c28 100%);
+    border-radius: var(--radius);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 28px;
+  }
+  .attorney-portrait::after { display: none; }
+  .portrait-monogram {
+    display: none;
+  }
+  .profile-label {
+    position: relative;
+    z-index: 1;
+    color: var(--brass-2);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .16em;
+    font-weight: 700;
+  }
+  .profile-list {
+    position: relative;
+    z-index: 1;
+    list-style: none;
+    margin: 26px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+    color: #e6dfd1;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .profile-list li {
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,.16);
+  }
+  .portrait-caption {
+    position: relative;
+    color: #f1ead9;
+    padding: 0;
+    z-index: 1;
+    width: 100%;
+    text-align: left;
+  }
+  .portrait-caption .name {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0;
+  }
+  .portrait-caption .title {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    color: var(--brass-2);
+    margin-top: 4px;
+  }
+  .credential-row {
+    margin-top: 20px;
+    display: flex; flex-wrap: wrap; gap: 8px 14px;
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .credential-row span {
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .credential-row svg { width: 14px; height: 14px; color: var(--brass); }
+  .attorney-body p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink-2);
+    margin: 0 0 18px;
+  }
+  .attorney-body p:first-child::first-letter {
+    font-family: 'Fraunces', serif;
+    font-size: 56px;
+    float: left;
+    line-height: .9;
+    padding: 6px 10px 0 0;
+    color: var(--brass);
+    font-weight: 500;
+  }
+  .pull-quote {
+    border-left: 3px solid var(--brass);
+    padding: 6px 0 6px 22px;
+    margin: 28px 0;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+  .pull-quote cite {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    color: var(--ink-soft);
+    margin-top: 12px;
+  }
+  @media (max-width: 880px) {
+    .attorney-grid { grid-template-columns: 1fr; gap: 36px; }
+    .attorney-portrait { min-height: 0; }
+  }
+
+  /* ---------- Practice areas ---------- */
+  .areas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    border-left: 1px solid var(--rule);
+  }
+  .area {
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 32px 28px;
+    background: #fff;
+    transition: background .15s ease;
+    position: relative;
+  }
+  .area:hover { background: var(--paper); }
+  .area-num {
+    font-family: 'Fraunces', serif;
+    font-size: 12px;
+    letter-spacing: .2em;
+    color: var(--brass);
+    margin-bottom: 18px;
+    display: block;
+  }
+  .area h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.2;
+    margin: 0 0 10px;
+    color: var(--ink);
+  }
+  .area p {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin: 0;
+    line-height: 1.55;
+  }
+  @media (max-width: 860px) {
+    .areas { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 520px) {
+    .areas { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- How it works ---------- */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    counter-reset: step;
+  }
+  .step {
+    border-top: 2px solid var(--brass-2);
+    padding-top: 22px;
+    counter-increment: step;
+  }
+  .step::before {
+    content: "0" counter(step);
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-size: 13px;
+    letter-spacing: .15em;
+    color: var(--brass-2);
+    margin-bottom: 14px;
+  }
+  .step h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    line-height: 1.2;
+    margin: 0 0 10px;
+    color: #fff;
+    font-weight: 500;
+  }
+  .step p {
+    font-size: 15px;
+    color: #c8c0ad;
+    margin: 0;
+    line-height: 1.6;
+  }
+  .steps-cta {
+    margin-top: 56px;
+    padding-top: 36px;
+    border-top: 1px solid rgba(255,255,255,.12);
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 24px;
+  }
+  .steps-cta .label {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    color: #fff;
+    max-width: 36ch;
+    margin: 0;
+    font-weight: 500;
+  }
+  .steps-cta .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-on-dark {
+    background: var(--brass);
+    color: #fff;
+    border-color: var(--brass);
+  }
+  .btn-on-dark:hover { background: var(--brass-2); border-color: var(--brass-2); }
+  .btn-ghost-light {
+    background: transparent;
+    color: #fff;
+    border-color: rgba(255,255,255,.4);
+  }
+  .btn-ghost-light:hover { background: #fff; color: var(--ink); border-color: #fff; }
+  @media (max-width: 820px) {
+    .steps { grid-template-columns: 1fr; gap: 20px; }
+  }
+
+  /* ---------- Commitments ---------- */
+  .commitments {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .commit {
+    background: #fff;
+    padding: 36px 32px;
+  }
+  .commit-num {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    color: var(--brass);
+    line-height: 1;
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
+  .commit h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 20px;
+    margin: 0 0 8px;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+  .commit p {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin: 0;
+    line-height: 1.55;
+  }
+  @media (max-width: 820px) {
+    .commitments { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-grid {
+    display: grid;
+    grid-template-columns: .9fr 1.1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  details.faq {
+    border-bottom: 1px solid var(--rule);
+    padding: 22px 0;
+  }
+  details.faq:first-of-type { border-top: 1px solid var(--rule); }
+  details.faq summary {
+    list-style: none;
+    cursor: pointer;
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    color: var(--ink);
+    font-weight: 500;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+  }
+  details.faq summary::-webkit-details-marker { display: none; }
+  details.faq summary::after {
+    content: "+";
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--brass);
+    transition: transform .2s ease;
+    flex: none;
+    width: 24px; text-align: center;
+  }
+  details.faq[open] summary::after { content: "−"; }
+  details.faq p {
+    margin: 12px 0 0;
+    color: var(--ink-2);
+    font-size: 15px;
+    line-height: 1.65;
+    max-width: 62ch;
+  }
+  @media (max-width: 880px) {
+    .faq-grid { grid-template-columns: 1fr; gap: 28px; }
+  }
+
+  /* ---------- CTA strip ---------- */
+  .cta-strip {
+    background: var(--paper-2);
+    border-block: 1px solid var(--rule);
+    padding: 64px 28px;
+  }
+  .cta-strip-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .cta-strip h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(28px, 3vw, 38px);
+    line-height: 1.15;
+    margin: 0 0 12px;
+    color: var(--ink);
+  }
+  .cta-strip p {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 16px;
+    max-width: 50ch;
+  }
+  .cta-strip-actions {
+    display: flex; gap: 14px; flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  @media (max-width: 820px) {
+    .cta-strip-inner { grid-template-columns: 1fr; }
+    .cta-strip-actions { justify-content: flex-start; }
+  }
+
+  /* ---------- Footer ---------- */
+  footer.site {
+    background: var(--ink);
+    color: #c8c0ad;
+    padding: 64px 28px 28px;
+  }
+  .footer-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 48px;
+  }
+  .footer-brand .brand-name { color: #fff; }
+  .footer-brand .brand-sub { color: var(--brass-2); }
+  .footer-brand p {
+    margin: 18px 0 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #a39c8b;
+    max-width: 36ch;
+  }
+  footer h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    color: var(--brass-2);
+    margin: 0 0 16px;
+    font-weight: 600;
+  }
+  footer ul { list-style: none; padding: 0; margin: 0; }
+  footer li { margin-bottom: 10px; font-size: 14px; }
+  footer a { color: #d4cdba; text-decoration: none; }
+  footer a:hover { color: #fff; }
+  .footer-meta {
+    max-width: var(--container);
+    margin: 48px auto 0;
+    padding-top: 22px;
+    border-top: 1px solid rgba(255,255,255,.12);
+    display: flex; flex-wrap: wrap; gap: 16px;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #8e8775;
+    line-height: 1.5;
+  }
+  .footer-meta a { color: #8e8775; }
+  .footer-meta a:hover { color: #fff; }
+  .disclaimer {
+    max-width: var(--container);
+    margin: 14px auto 0;
+    font-size: 12.5px;
+    color: #aea58f;
+    line-height: 1.55;
+  }
+  @media (max-width: 880px) {
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+  }
+  @media (max-width: 520px) {
+    .footer-inner { grid-template-columns: 1fr; gap: 28px; }
+  }
+
+  /* ---------- Mobile floating call ---------- */
+  .mobile-call {
+    display: none;
+    position: fixed;
+    left: 16px; right: 16px; bottom: 16px;
+    z-index: 80;
+    background: var(--brass);
+    color: #fff;
+    padding: 14px 18px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    align-items: center; justify-content: center; gap: 10px;
+    box-shadow: 0 10px 30px -10px rgba(21,33,46,.45);
+  }
+  .mobile-call svg { width: 16px; height: 16px; }
+  @media (max-width: 720px) {
+    body { padding-bottom: 82px; }
+    .mobile-call { display: flex; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* Visually hidden but accessible */
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- Top utility bar -->
+<div class="topbar" role="region" aria-label="Office availability">
+  <div class="topbar-inner">
+    <div class="left">
+      <span class="pill">Available 24/7</span>
+      <span class="hide-sm">Free, confidential case review</span>
     </div>
-    
-    <a href="#main-content" class="visually-hidden focusable skip-link">
-      Skip to main content
+    <a class="call" href="tel:+19096096685" aria-label="Call Berhe Law at 909-609-6685">
+      Call <strong>909-609-6685</strong>
     </a>
+  </div>
+</div>
 
-    <header>
-      <div class="header__top">
-        <div class="container header__top-container">
-          <a href="tel:+19096096685" class="d-block text-center">
-            <span class="marquee__content">
-              <ul class="marquee">
-                <li><b>CALL NOW FOR A FREE CONSULTATION</b></li>
-                <li>AVAILABLE 24/7</li>
-                <li><b>909-609-6685</b></li>
-                <li>NO FEE UNLESS WE WIN</li>
-              </ul>
-              <ul class="marquee">
-                <li><b>CALL NOW FOR A FREE CONSULTATION</b></li>
-                <li>AVAILABLE 24/7</li>
-                <li><b>909-609-6685</b></li>
-                <li>NO FEE UNLESS WE WIN</li>
-              </ul>
-            </span>
-          </a>
-        </div>
+<!-- Nav -->
+<header class="nav" role="banner">
+  <div class="nav-inner">
+    <a href="#top" class="brand" aria-label="Berhe Law, home">
+      <span class="brand-mark" aria-hidden="true">B</span>
+      <span>
+        <span class="brand-name">Berhe Law</span>
+        <span class="brand-sub" style="display:block">California Personal Injury</span>
+      </span>
+    </a>
+    <nav aria-label="Primary">
+      <ul class="nav-links" id="navlinks">
+        <li><a href="#attorney">Attorney</a></li>
+        <li><a href="#practice">Practice Areas</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#commitment">Our Commitment</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="nav-cta" href="tel:+19096096685" aria-label="Call now, 909-609-6685">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.92z"/>
+      </svg>
+      909-609-6685
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-controls="navlinks" aria-expanded="false">
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
+</header>
+
+<!-- Hero -->
+<main id="top">
+<section class="hero" aria-labelledby="heroTitle">
+  <div class="hero-grid">
+    <div>
+      <span class="eyebrow">California Personal Injury</span>
+      <h1 class="headline" id="heroTitle">
+        Serious injury. <em>Direct representation</em> by the attorney on your case.
+      </h1>
+      <p class="lede">
+        Berhe Law represents injury victims across California. Attorney Tam Berhe personally
+        handles every matter from intake through resolution, with no case handoffs, no call-center
+        intermediaries. There is no fee unless we recover for you.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-call" href="tel:+19096096685" aria-label="Call 909-609-6685 for a free consultation">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          Call 909-609-6685
+        </a>
+        <a class="btn btn-ghost" href="#contact">Request a free case review</a>
       </div>
 
-      <nav class="navbar navbar-expand-lg nav-bg-primary fixed-top">
-        <div class="container">
-          <a class="navbar-brand" href="#home">
-            <div class="logo-container">
-              <h2 class="logo m-0 p-0">BERHE LAW</h2>
-            </div>
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <a class="nav-link text-white" href="#about">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="#practice-areas">Practice Areas</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="#commitment">Our Commitment</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="#testimonials">Client Stories</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="#contact">Contact</a>
-              </li>
-            </ul>
-            <a href="tel:+19096096685" class="header__phone">
-              <i class="fas fa-phone-alt"></i> 909-609-6685
-            </a>
-          </div>
+      <dl class="hero-trust">
+        <div class="trust-item">
+          <dt class="label">California Bar</dt>
+          <dd class="value" style="margin:0">No. 298992</dd>
         </div>
-      </nav>
-    </header>
-
-    <main id="main-content">
-      <!-- Hero Section -->
-      <section class="hero" id="home">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-lg-7 mb-5 mb-lg-0 hero__content">
-              <h1 class="hero__title" data-aos="fade-up">
-                Personal Injury Representation in California
-              </h1>
-              <p class="hero__descr" data-aos="fade-up" data-aos-delay="100">
-                Attorney Tam Berhe is dedicated to helping injury victims get the compensation they deserve. With personalized attention to every case, we fight relentlessly against insurance companies.
-              </p>
-              <p data-aos="fade-up" data-aos-delay="150">The Fee Is Free™. You only pay when we win your case.</p>
-              
-              <!-- Replacing organization logos with key benefits -->
-              <div class="hero__benefits" data-aos="fade-up" data-aos-delay="200">
-                <div class="benefit-item">
-                  <i class="fas fa-user-tie"></i>
-                  <span>Personal Attention</span>
-                </div>
-                <div class="benefit-item">
-                  <i class="fas fa-balance-scale"></i>
-                  <span>California Bar #298992</span>
-                </div>
-                <div class="benefit-item">
-                  <i class="fas fa-hand-holding-usd"></i>
-                  <span>No Fee Unless We Win</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-5 hero__form-container">
-              <div class="hero__form" id="hero-form" data-aos="fade-left">
-                <h3 class="text-center mb-3">Free Case Evaluation</h3>
-                <p class="hero__form-text">
-                  Berhe Law offers personalized legal service to California injury victims. Contact us today for a free, no-obligation consultation.
-                </p>
-                <form id="contact-form" action="#" method="post">
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="firstName" placeholder="First Name" required>
-                    <label for="firstName">First Name</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
-                    <label for="lastName">Last Name</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <input type="tel" class="form-control" id="phoneNumber" placeholder="Phone Number" required>
-                    <label for="phoneNumber">Phone Number</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="emailAddress" placeholder="Email Address" required>
-                    <label for="emailAddress">Email Address</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <textarea class="form-control" id="caseDetails" placeholder="Tell us about your case" style="height: 120px" required></textarea>
-                    <label for="caseDetails">Tell us about your case</label>
-                  </div>
-                  
-                  <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" id="consentCheck" required>
-                    <label class="form-check-label" for="consentCheck">
-                      I consent to receive calls, texts, and emails about my case. I understand consent is not required to use services.
-                    </label>
-                  </div>
-                  
-                  <button type="submit" class="btn btn-primary-custom w-100">
-                    Get Your Free Case Review
-                  </button>
-                  <p class="mt-2 text-center" style="font-size: 0.8rem;">
-                    Your information is confidential and protected by attorney-client privilege.
-                  </p>
-                  <div class="text-center mt-3">
-                    <a href="tel:+19096096685" class="btn btn-outline-custom btn-sm">
-                      <i class="fas fa-phone-alt me-1"></i> Call Now: 909-609-6685
-                    </a>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
+        <div class="trust-item">
+          <dt class="label">Fee Structure</dt>
+          <dd class="value" style="margin:0">Contingency · No win, no fee</dd>
         </div>
-        <div class="hero__overlay"></div>
-      </section>
-
-      <!-- Process Section -->
-      <section class="process" id="process">
-        <div class="container">
-          <p class="process__subtitle" data-aos="fade-up">HOW IT WORKS</p>
-          <h2 class="process__title" data-aos="fade-up" data-aos-delay="100">It's easy to get started.</h2>
-          <p class="text-center mb-5" data-aos="fade-up" data-aos-delay="200">The Fee Is Free<sup>™</sup>. You pay nothing unless we win.</p>
-          
-          <ul class="process__list">
-            <li class="process__item" data-aos="fade-up" data-aos-delay="300">
-              <span class="process__item-number">1</span>
-              <div class="process__icon">
-                <i class="fas fa-comments"></i>
-              </div>
-              <p class="process__step">STEP 1</p>
-              <h3 class="process__name">Submit your claim</h3>
-              <p class="process__text">With a free case evaluation, submitting your case is easy with Berhe Law. Attorney Tam Berhe personally reviews your case details.</p>
-            </li>
-            <li class="process__item" data-aos="fade-up" data-aos-delay="400">
-              <span class="process__item-number">2</span>
-              <div class="process__icon">
-                <i class="fas fa-search"></i>
-              </div>
-              <p class="process__step">STEP 2</p>
-              <h3 class="process__name">We take action</h3>
-              <p class="process__text">Our dedicated attorney gets to work immediately investigating your claim, gathering evidence, and building your strongest possible case.</p>
-            </li>
-            <li class="process__item" data-aos="fade-up" data-aos-delay="500">
-              <span class="process__item-number">3</span>
-              <div class="process__icon">
-                <i class="fas fa-gavel"></i>
-              </div>
-              <p class="process__step">STEP 3</p>
-              <h3 class="process__name">We fight for you</h3>
-              <p class="process__text">Attorney Tam Berhe fights to get you the compensation you deserve. We handle all negotiations and litigation while you focus on recovery.</p>
-            </li>
-          </ul>
-          
-          <div class="text-center mt-5">
-            <a href="tel:+19096096685" class="btn btn-primary-custom btn-lg">
-              <i class="fas fa-phone-alt me-2"></i> CALL NOW: 909-609-6685
-            </a>
-            <p class="mt-3 text-light">FREE consultation. Available 24/7. No obligation.</p>
-          </div>
+        <div class="trust-item">
+          <dt class="label">Consultation</dt>
+          <dd class="value" style="margin:0">Free · 24/7 intake</dd>
         </div>
-      </section>
+      </dl>
+    </div>
 
-      <!-- Commitment Section -->
-      <section class="results" id="commitment">
-        <div class="container">
-          <p class="results__subtitle" data-aos="fade-up">OUR COMMITMENT</p>
-          <h2 class="results__title" data-aos="fade-up" data-aos-delay="100">Focused on Your Recovery</h2>
-          
-          <div class="row">
-            <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-              <div class="results__card" data-aos="zoom-in" data-aos-delay="200">
-                <div class="results__card-icon">
-                  <i class="fas fa-user-clock"></i>
-                </div>
-                <div class="results__card-title">Personal Attention</div>
-                <div class="results__card-text">Work directly with Attorney Tam Berhe on your case from start to finish</div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-              <div class="results__card" data-aos="zoom-in" data-aos-delay="300">
-                <div class="results__card-icon">
-                  <i class="fas fa-hand-holding-usd"></i>
-                </div>
-                <div class="results__card-title">No Upfront Costs</div>
-                <div class="results__card-text">You pay nothing unless we secure compensation for your injuries</div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
-              <div class="results__card" data-aos="zoom-in" data-aos-delay="400">
-                <div class="results__card-icon">
-                  <i class="fas fa-comments"></i>
-                </div>
-                <div class="results__card-title">24/7 Communication</div>
-                <div class="results__card-text">Get answers when you need them with responsive client service</div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-              <div class="results__card" data-aos="zoom-in" data-aos-delay="500">
-                <div class="results__card-icon">
-                  <i class="fas fa-balance-scale"></i>
-                </div>
-                <div class="results__card-title">Dedicated Advocacy</div>
-                <div class="results__card-text">Personalized legal strategies focused on maximizing your recovery</div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="text-center mt-5">
-            <a href="tel:+19096096685" class="btn btn-primary-custom btn-lg">
-              <i class="fas fa-phone-alt me-2"></i> Get Free Consultation: 909-609-6685
-            </a>
-          </div>
-        </div>
-      </section>
+    <!-- Form card -->
+    <aside class="hero-card" aria-labelledby="caseTitle">
+      <div class="card-eyebrow">Confidential intake</div>
+      <h2 class="card-title" id="caseTitle">Tell us about your case</h2>
+      <p class="card-sub">Share the basic facts. Berhe Law will review the information and follow up about next steps.</p>
 
-      <!-- Practice Areas Section -->
-      <section class="practice-areas" id="practice-areas">
-        <div class="container">
-          <p class="process__subtitle" data-aos="fade-up">Practice Areas</p>
-          <h2 class="process__title" data-aos="fade-up" data-aos-delay="100">Experienced Representation Across California</h2>
-          <p class="text-center mb-5" data-aos="fade-up" data-aos-delay="200">Our firm specializes in handling a wide range of personal injury cases throughout California.</p>
-          
-          <div class="practice-areas__grid">
-            <div class="practice-area-card" data-aos="fade-up" data-aos-delay="300">
-              <div class="practice-area-card__body">
-                <div class="practice-area-card__icon">
-                  <i class="fas fa-car-crash"></i>
-                </div>
-                <h3 class="practice-area-card__title">Car Accidents</h3>
-                <p>We help victims of auto accidents get compensation for medical bills, lost wages, and pain and suffering.</p>
-                <a href="#" class="practice-area-link">Learn More <i class="fas fa-arrow-right"></i></a>
-              </div>
-            </div>
-            
-            <div class="practice-area-card" data-aos="fade-up" data-aos-delay="400">
-              <div class="practice-area-card__body">
-                <div class="practice-area-card__icon">
-                  <i class="fas fa-truck"></i>
-                </div>
-                <h3 class="practice-area-card__title">Truck Accidents</h3>
-                <p>Our team has extensive experience handling complex commercial truck accident cases.</p>
-                <a href="#" class="practice-area-link">Learn More <i class="fas fa-arrow-right"></i></a>
-              </div>
-            </div>
-            
-            <div class="practice-area-card" data-aos="fade-up" data-aos-delay="500">
-              <div class="practice-area-card__body">
-                <div class="practice-area-card__icon">
-                  <i class="fas fa-medkit"></i>
-                </div>
-                <h3 class="practice-area-card__title">Medical Malpractice</h3>
-                <p>If you've been harmed by a healthcare provider's negligence, we can help you seek justice.</p>
-                <a href="#" class="practice-area-link">Learn More <i class="fas fa-arrow-right"></i></a>
-              </div>
-            </div>
-            
-            <div class="practice-area-card" data-aos="fade-up" data-aos-delay="300">
-              <div class="practice-area-card__body">
-                <div class="practice-area-card__icon">
-                  <i class="fas fa-hard-hat"></i>
-                </div>
-                <h3 class="practice-area-card__title">Workplace Injuries</h3>
-                <p>We help injured workers navigate workers' compensation claims and third-party liability cases.</p>
-                <a href="#" class="practice-area-link">Learn More <i class="fas fa-arrow-right"></i></a>
-              </div>
-            </div>
-            
-            <div class="practice-area-card" data-aos="fade-up" data-aos-delay="400">
-              <div class="practice-area-card__body">
-                <div class="practice-area-card__icon">
-                  <i class="fas fa-skull"></i>
-                </div>
-                <h3 class="practice-area-card__title">Wrongful Death</h3>
-                <p>We provide compassionate representation for families who have lost loved ones due to negligence.</p>
-                <a href="#" class="practice-area-link">Learn More <i class="fas fa-arrow-right"></i></a>
-              </div>
-            </div>
-            
-            <div class="practice-area-card" data-aos="fade-up" data-aos-delay="500">
-              <div class="practice-area-card__body">
-                <div class="practice-area-card__icon">
-                  <i class="fas fa-store"></i>
-                </div>
-                <h3 class="practice-area-card__title">Premises Liability</h3>
-                <p>If you've been injured on someone else's property due to unsafe conditions, we can help.</p>
-                <a href="#" class="practice-area-link">Learn More <i class="fas fa-arrow-right"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Testimonials Section -->
-      <section class="testimonials" id="testimonials">
-        <div class="container">
-          <p class="process__subtitle text-white" data-aos="fade-up">Client Testimonials</p>
-          <h2 class="process__title text-white" data-aos="fade-up" data-aos-delay="100">What Our Clients Say</h2>
-          <p class="text-center text-white mb-5" data-aos="fade-up" data-aos-delay="200">Don't just take our word for it. Hear from the people we've helped.</p>
-          
-          <div class="row testimonial-slider">
-            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
-              <div class="testimonial-card h-100">
-                <div class="testimonial-card__rating">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                </div>
-                <p class="testimonial-card__text">
-                  "After my car accident, Attorney Berhe personally handled every aspect of my case. He was always available to answer my questions and fought hard to get me a fair settlement."
-                </p>
-                <p class="testimonial-card__author">- Maria R., Rancho Cucamonga</p>
-              </div>
-            </div>
-            
-            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400">
-              <div class="testimonial-card h-100">
-                <div class="testimonial-card__rating">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                </div>
-                <p class="testimonial-card__text">
-                  "Tam Berhe took the time to understand my situation and explain my options clearly. He negotiated with the insurance company and got me compensation that exceeded my expectations."
-                </p>
-                <p class="testimonial-card__author">- James T., Ontario</p>
-              </div>
-            </div>
-            
-            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="500">
-              <div class="testimonial-card h-100">
-                <div class="testimonial-card__rating">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                </div>
-                <p class="testimonial-card__text">
-                  "I felt like more than just a client with Berhe Law. Attorney Berhe was compassionate about my injury and aggressive with the insurance company. I highly recommend his services."
-                </p>
-                <p class="testimonial-card__author">- Sarah L., Riverside</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- About Section -->
-      <section class="about py-5" id="about">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-lg-5 mb-4 mb-lg-0" data-aos="fade-right">
-              <div class="about__image">
-                <img src="images/tam-berhe.jpg" alt="Attorney Tam Berhe" class="img-fluid">
-              </div>
-            </div>
-            <div class="col-lg-7" data-aos="fade-left">
-              <div class="about__content">
-                <p class="process__subtitle">About Tam Berhe</p>
-                <h2 class="mb-4">Dedicated Legal Advocate for Injury Victims</h2>
-                <p>
-                  Tamerat S. Berhe (California State Bar #298992) is dedicated to providing personalized legal representation for clients injured due to the negligence of others.
-                </p>
-                <p>
-                  After graduating from Loyola Law School in Los Angeles, Tam was admitted to the California State Bar in December 2014 and has focused his practice exclusively on personal injury law.
-                </p>
-                <p>
-                  With a commitment to personal attention and client service, Attorney Berhe takes a hands-on approach to every case. Unlike large firms where clients may rarely speak with their attorney, Tam personally handles each stage of your case from initial consultation through resolution.
-                </p>
-                
-                <div class="about__ctas mt-4">
-                  <a href="tel:+19096096685" class="btn btn-primary-custom">
-                    <i class="fas fa-phone-alt me-2"></i> 909-609-6685
-                  </a>
-                  <a href="mailto:TamBerhe@icloud.com" class="btn btn-outline-custom ms-2">
-                    <i class="fas fa-envelope me-2"></i> Email Now
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CTA Section -->
-      <section class="cta">
-        <div class="container">
-          <div class="cta__content" data-aos="zoom-in">
-            <h2 class="cta__title">We're Ready to Fight for You</h2>
-            <p class="cta__text">Our team of experienced California personal injury attorneys is standing by to help you get the compensation you deserve. Call us today for a free, no-obligation consultation about your case.</p>
-            <a href="tel:+19096096685" class="btn btn-cta">
-              <i class="fas fa-phone-alt"></i> 909-609-6685
-            </a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="mt-auto">
-      <div class="container footer__form__container">
-        <div class="footer__form__wrapper" data-aos="fade-up">
-          <div class="footer__form__content">
-            <h2 class="footer__title">Get a FREE Case Evaluation Today</h2>
-            <p class="footer__descr">
-              Berhe Law provides personalized legal representation for personal injury victims across California. Contact us today to learn how Attorney Tam Berhe can help you get the compensation you deserve.
-            </p>
-            
-            <div class="mt-4">
-              <h4 class="mb-3">Why Choose Berhe Law?</h4>
-              <ul class="ps-3">
-                <li class="mb-2">Free consultations and no fees unless we win</li>
-                <li class="mb-2">Personal attention from Attorney Tam Berhe</li>
-                <li class="mb-2">Dedicated to maximizing your compensation</li>
-                <li>Available 24/7 to answer your questions</li>
-              </ul>
-            </div>
-          </div>
-          <div class="footer__form__form" id="footer-form">
-            <form action="#" method="post">
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="footerFirstName" placeholder="First Name" required>
-                <label for="footerFirstName">First Name</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="footerLastName" placeholder="Last Name" required>
-                <label for="footerLastName">Last Name</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="tel" class="form-control" id="footerPhoneNumber" placeholder="Phone Number" required>
-                <label for="footerPhoneNumber">Phone Number</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="footerEmailAddress" placeholder="Email Address" required>
-                <label for="footerEmailAddress">Email Address</label>
-              </div>
-              <div class="form-floating mb-3">
-                <textarea class="form-control" id="footerCaseDetails" placeholder="Tell us about your case" style="height: 120px" required></textarea>
-                <label for="footerCaseDetails">Tell us about your case</label>
-              </div>
-              
-              <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" id="footerConsentCheck" required>
-                <label class="form-check-label" for="footerConsentCheck">
-                  I consent to receive calls, texts, and emails about my case.
-                </label>
-              </div>
-              
-              <button type="submit" class="btn btn-primary-custom w-100">
-                Submit Your Case
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer__first">
-        <div class="container">
-          <h2 class="logo footer__logo">BERHE LAW</h2>
-        </div>
-      </div>
-
-      <div class="container">
+      <form id="caseForm" name="case-review" method="POST" action="/success.html" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+        <input type="hidden" name="form-name" value="case-review" />
+        <p class="sr-only"><label>Do not fill this out if you are human: <input name="bot-field" /></label></p>
         <div class="row">
-          <div class="col-md-4 mb-4">
-            <h3 class="footer__list-title">Contact Us</h3>
-            <div class="footer__contact-item">
-              <i class="fas fa-map-marker-alt"></i>
-              <div>901 Via Piemonte, Suite 230<br>Ontario, CA 91764-8500</div>
-            </div>
-            <div class="footer__contact-item">
-              <i class="fas fa-phone-alt"></i>
-              <div><a href="tel:+19096096685">909-609-6685</a></div>
-            </div>
-            <div class="footer__contact-item">
-              <i class="fas fa-fax"></i>
-              <div>909-890-1043</div>
-            </div>
-            <div class="footer__contact-item">
-              <i class="fas fa-envelope"></i>
-              <div><a href="mailto:TamBerhe@icloud.com">TamBerhe@icloud.com</a></div>
-            </div>
-            <div class="footer__social mt-4">
-              <a href="#" class="footer__social-link"><i class="fab fa-facebook-f"></i></a>
-              <a href="#" class="footer__social-link"><i class="fab fa-twitter"></i></a>
-              <a href="#" class="footer__social-link"><i class="fab fa-linkedin-in"></i></a>
-              <a href="#" class="footer__social-link"><i class="fab fa-instagram"></i></a>
-            </div>
+          <div class="field">
+            <label for="firstName">First name<span class="req" aria-hidden="true">*</span></label>
+            <input id="firstName" name="firstName" type="text" autocomplete="given-name" required aria-required="true" />
           </div>
-          <div class="col-md-4 mb-4">
-            <h3 class="footer__list-title">Practice Areas</h3>
-            <ul class="footer__list">
-              <li><a href="#" class="footer__list-link">Car Accidents</a></li>
-              <li><a href="#" class="footer__list-link">Truck Accidents</a></li>
-              <li><a href="#" class="footer__list-link">Motorcycle Accidents</a></li>
-              <li><a href="#" class="footer__list-link">Pedestrian Accidents</a></li>
-              <li><a href="#" class="footer__list-link">Slip and Fall</a></li>
-              <li><a href="#" class="footer__list-link">Dog Bites</a></li>
-              <li><a href="#" class="footer__list-link">Wrongful Death</a></li>
-            </ul>
+          <div class="field">
+            <label for="lastName">Last name<span class="req" aria-hidden="true">*</span></label>
+            <input id="lastName" name="lastName" type="text" autocomplete="family-name" required aria-required="true" />
           </div>
-          <div class="col-md-4 mb-4">
-            <h3 class="footer__list-title">Quick Links</h3>
-            <ul class="footer__list">
-              <li><a href="#" class="footer__list-link">About Us</a></li>
-              <li><a href="#" class="footer__list-link">Our Commitment</a></li>
-              <li><a href="#" class="footer__list-link">Client Testimonials</a></li>
-              <li><a href="#" class="footer__list-link">Blog</a></li>
-              <li><a href="#" class="footer__list-link">FAQs</a></li>
-              <li><a href="#" class="footer__list-link">Contact</a></li>
-            </ul>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="phone">Phone<span class="req" aria-hidden="true">*</span></label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(555) 555-5555" required aria-required="true" />
           </div>
+          <div class="field">
+            <label for="email">Email<span class="req" aria-hidden="true">*</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" required aria-required="true" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="injuryType">Type of incident</label>
+          <select id="injuryType" name="injuryType">
+            <option value="">Select one (optional)</option>
+            <option>Auto accident</option>
+            <option>Truck accident</option>
+            <option>Motorcycle accident</option>
+            <option>Pedestrian or bicycle</option>
+            <option>Slip and fall</option>
+            <option>Dog bite</option>
+            <option>Wrongful death</option>
+            <option>Other / not sure</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="message">Briefly describe what happened</label>
+          <textarea id="message" name="message" rows="4" aria-describedby="msgHint" placeholder="Date, location, and any injuries or treatment so far."></textarea>
+          <p class="hint" id="msgHint">Share only what you're comfortable with. We'll follow up to gather what we need.</p>
+        </div>
+
+        <label class="consent">
+          <input id="consent" name="consent" type="checkbox" required aria-required="true" />
+          <span>I consent to receive calls, texts, and emails from Berhe Law about my case. Consent is not required to use these services. Message rates may apply.</span>
+        </label>
+
+        <button class="submit" type="submit">Request my free case review</button>
+        <p class="privacy-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          Your information stays confidential. Sending this form does not create an attorney-client relationship until Berhe Law agrees to represent you.
+        </p>
+      </form>
+    </aside>
+  </div>
+</section>
+
+<!-- Attorney section -->
+<section class="section" id="attorney" aria-labelledby="attorneyTitle">
+  <div class="section-head">
+    <div>
+      <span class="section-eyebrow">The attorney on your case</span>
+      <h2 class="section-title" id="attorneyTitle">Tam Berhe.<br/>Personal counsel, personally delivered.</h2>
+    </div>
+    <p class="section-lede">
+      Berhe Law is a single-attorney practice by design. When you call, you reach the lawyer
+      who will negotiate with the insurance carrier and, if necessary, try your case in court.
+    </p>
+  </div>
+
+  <div class="attorney-grid">
+    <div class="attorney-card">
+      <div class="attorney-portrait" role="img" aria-label="Attorney profile summary for Tam Berhe">
+        <div>
+          <div class="profile-label">Attorney profile</div>
+          <ul class="profile-list">
+            <li>Personal injury representation across California.</li>
+            <li>Direct attorney attention from intake through resolution.</li>
+            <li>Contingency-fee structure: no fee unless there is a recovery.</li>
+          </ul>
+        </div>
+        <div class="portrait-caption">
+          <p class="name">Tam Berhe, Esq.</p>
+          <p class="title">Founding Attorney</p>
         </div>
       </div>
-
-      <div class="footer__bottom">
-        <div class="container d-flex flex-column flex-md-row justify-content-between">
-          <p class="footer__text"> 2025 The Berhe Law Firm, APC. All rights reserved.</p>
-          <p class="footer__text">
-            <a href="#" class="text-white me-3">Privacy Policy</a>
-            <a href="#" class="text-white me-3">Terms of Service</a>
-            <a href="#" class="text-white">Disclaimer</a>
-          </p>
-        </div>
-        <div class="container mt-2">
-          <p class="footer__text text-center small">State Bar of California #298992 | Admitted since December 2014</p>
-          <p class="footer__text text-center small">Attorney Advertising. Prior results do not guarantee a similar outcome.</p>
-        </div>
-      </div>
-    </footer>
-
-    <!-- Live Chat Widget -->
-    <div class="chat-widget">
-      <div class="chat-button">
-        <i class="fas fa-comment-dots"></i>
+      <div class="credential-row">
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2 3 7l9 5 9-5-9-5z"/><path d="M3 7v10l9 5 9-5V7"/></svg>
+          State Bar of California · No. 298992
+        </span>
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          California personal injury
+        </span>
       </div>
     </div>
 
-    <!-- Back to Top Button -->
-    <div class="back-to-top">
-      <i class="fas fa-arrow-up"></i>
+    <div class="attorney-body">
+      <p>
+        Berhe Law was founded on a single principle: the person who answers the phone should be
+        the person who tries the case. Insurance carriers know which firms move quickly and
+        which ones don't. Tam Berhe builds each file with that pressure in mind: documented
+        early, prepared for litigation from day one, and resolved on terms that reflect the
+        full picture of medical care, lost income, and lasting impact.
+      </p>
+      <p>
+        That posture matters most when an injury changes a life. Clients work directly with
+        Attorney Berhe through every stage: investigation, medical lien negotiation, demand,
+        settlement, and trial when settlement falls short.
+      </p>
+      <blockquote class="pull-quote">
+        “Personal injury work isn't a volume business. Each case is one family's most difficult
+        year, and they deserve a lawyer who has actually read every page of their file.”
+        <cite>Tam Berhe, Founding Attorney</cite>
+      </blockquote>
+      <p>
+        Berhe Law accepts cases on contingency. There are no upfront fees, no hourly billing,
+        and no charge of any kind unless we secure a recovery on your behalf.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Practice areas -->
+<section class="section alt" id="practice" aria-labelledby="practiceTitle">
+  <div class="inner">
+    <div class="section-head">
+      <div>
+        <span class="section-eyebrow">Practice areas</span>
+        <h2 class="section-title" id="practiceTitle">Representation across California's most common injury claims.</h2>
+      </div>
+      <p class="section-lede">
+        If your situation isn't listed, call anyway. Most personal injury matters share the
+        same core anatomy, and a short conversation usually clarifies whether you have a case.
+      </p>
     </div>
 
-    <!-- Dark Mode Toggle -->
-    <div class="dark-mode-toggle">
-      <i class="fas fa-moon"></i>
+    <div class="areas" role="list">
+      <article class="area" role="listitem">
+        <span class="area-num">01</span>
+        <h3>Auto Accidents</h3>
+        <p>Rear-end, intersection, multi-vehicle, and uninsured-motorist claims throughout the state.</p>
+      </article>
+      <article class="area" role="listitem">
+        <span class="area-num">02</span>
+        <h3>Truck &amp; Commercial Vehicle</h3>
+        <p>Collisions involving semi-trucks, delivery fleets, and commercially insured drivers.</p>
+      </article>
+      <article class="area" role="listitem">
+        <span class="area-num">03</span>
+        <h3>Motorcycle Accidents</h3>
+        <p>Lane-share, left-turn, and visibility-disputed crashes where bias often shapes the offer.</p>
+      </article>
+      <article class="area" role="listitem">
+        <span class="area-num">04</span>
+        <h3>Pedestrian &amp; Bicycle</h3>
+        <p>Crosswalk, intersection, and roadway claims, including hit-and-run investigation.</p>
+      </article>
+      <article class="area" role="listitem">
+        <span class="area-num">05</span>
+        <h3>Slip &amp; Fall</h3>
+        <p>Premises liability against property owners, retailers, and commercial landlords.</p>
+      </article>
+      <article class="area" role="listitem">
+        <span class="area-num">06</span>
+        <h3>Dog Bites</h3>
+        <p>California strict-liability claims for serious bite injuries and resulting medical care.</p>
+      </article>
+      <article class="area" role="listitem">
+        <span class="area-num">07</span>
+        <h3>Wrongful Death</h3>
+        <p>Representation for surviving spouses, children, and family members under California law.</p>
+      </article>
+      <article class="area" role="listitem">
+        <span class="area-num">08</span>
+        <h3>Catastrophic Injury</h3>
+        <p>Brain, spinal, and long-recovery cases requiring life-care planning and expert analysis.</p>
+      </article>
+      <article class="area" role="listitem">
+        <span class="area-num">09</span>
+        <h3>Uninsured / Underinsured</h3>
+        <p>Pursuing UM/UIM coverage on your own policy when the at-fault driver has too little coverage, or none.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="section dark" id="how" aria-labelledby="howTitle">
+  <div class="inner">
+    <div class="section-head">
+      <div>
+        <span class="section-eyebrow">How it works</span>
+        <h2 class="section-title" id="howTitle">Three steps. Direct attorney access throughout.</h2>
+      </div>
+      <p class="section-lede">
+        Most clients reach a decision within one phone call. From there, we handle the
+        investigative and adversarial work so you can focus on medical recovery.
+      </p>
     </div>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script src="js/script.js"></script>
-  </body>
+    <div class="steps">
+      <div class="step">
+        <h3>Free consultation</h3>
+        <p>A direct call with Attorney Berhe. We listen, identify the legal questions, and
+          tell you plainly whether we believe a claim is worth pursuing.</p>
+      </div>
+      <div class="step">
+        <h3>We build the case</h3>
+        <p>We secure evidence early: scene photos, police reports, medical records, witness
+          statements, and put the insurance carrier on formal notice.</p>
+      </div>
+      <div class="step">
+        <h3>We negotiate or litigate</h3>
+        <p>We pursue the maximum reasonable recovery through settlement, and file suit when
+          the carrier's position does not reflect the harm.</p>
+      </div>
+    </div>
+
+    <div class="steps-cta">
+      <p class="label">Free, confidential consultation. Available 24/7. No obligation to retain.</p>
+      <div class="actions">
+        <a class="btn btn-on-dark" href="tel:+19096096685" aria-label="Call 909-609-6685">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          Call 909-609-6685
+        </a>
+        <a class="btn btn-ghost-light" href="#contact">Submit case details</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Commitment -->
+<section class="section" id="commitment" aria-labelledby="commitTitle">
+  <div class="section-head">
+    <div>
+      <span class="section-eyebrow">Our commitment</span>
+      <h2 class="section-title" id="commitTitle">A small practice, intentionally.</h2>
+    </div>
+    <p class="section-lede">
+      Personal injury law is often run as a referral mill. We've structured Berhe Law in the
+      opposite direction: fewer clients, deeper involvement, and a single attorney accountable
+      from start to finish.
+    </p>
+  </div>
+
+  <div class="commitments">
+    <div class="commit">
+      <div class="commit-num">I.</div>
+      <h3>One attorney, your case</h3>
+      <p>You will not be passed to a case manager, paralegal, or unnamed associate. Tam
+        Berhe is the lawyer on the file.</p>
+    </div>
+    <div class="commit">
+      <div class="commit-num">II.</div>
+      <h3>No upfront cost</h3>
+      <p>Contingency representation. We advance case costs. If we don't recover, you owe nothing.</p>
+    </div>
+    <div class="commit">
+      <div class="commit-num">III.</div>
+      <h3>Direct, 24/7 access</h3>
+      <p>Calls and texts after a collision rarely happen during business hours. We answer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section alt" id="faq" aria-labelledby="faqTitle">
+  <div class="inner">
+    <div class="faq-grid">
+      <div>
+        <span class="section-eyebrow">Frequently asked</span>
+        <h2 class="section-title" id="faqTitle">Honest answers, before you call.</h2>
+        <p class="section-lede" style="margin-top:18px">
+          Below are the questions most people ask in the first conversation. There is no
+          obligation, and no charge, to ask the rest by phone.
+        </p>
+      </div>
+      <div>
+        <details class="faq">
+          <summary>How much does a consultation cost?</summary>
+          <p>Nothing. The initial consultation is free, and we accept cases on contingency,
+            meaning you pay no attorney fees unless we recover compensation for you.</p>
+        </details>
+        <details class="faq">
+          <summary>How long do I have to file a claim in California?</summary>
+          <p>For most personal injury claims in California, the statute of limitations is two
+            years from the date of injury. Claims against public entities can require notice
+            within six months. The clock matters, call sooner rather than later.</p>
+        </details>
+        <details class="faq">
+          <summary>What if I've already spoken with the insurance company?</summary>
+          <p>It's common, and not necessarily fatal to a case. We'll review what was said
+            and recorded, take over communications, and stop further contact between you and
+            the adjuster.</p>
+        </details>
+        <details class="faq">
+          <summary>Will my case go to trial?</summary>
+          <p>The majority of personal injury claims resolve before trial, but we prepare every
+            file as if it will. That preparation is often what produces a fair settlement.</p>
+        </details>
+        <details class="faq">
+          <summary>What does Berhe Law charge?</summary>
+          <p>A standard contingency fee, taken only from a recovery. There is no hourly billing
+            and no charge for the consultation. We discuss specific fee terms in writing
+            before you sign anything.</p>
+        </details>
+        <details class="faq">
+          <summary>What if my injury seems minor?</summary>
+          <p>Injuries from soft-tissue damage to concussions often develop over days or weeks.
+            A short conversation is worth having before assumptions are made, for you or
+            by an adjuster.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Closing CTA -->
+<section class="cta-strip" id="contact" aria-labelledby="ctaTitle">
+  <div class="cta-strip-inner">
+    <div>
+      <h2 id="ctaTitle">Ready when you are.</h2>
+      <p>Free consultation. Available 24/7. Speak directly with Attorney Tam Berhe about
+        your case, no intake screener, no obligation.</p>
+    </div>
+    <div class="cta-strip-actions">
+      <a class="btn btn-call" href="tel:+19096096685" aria-label="Call Berhe Law at 909-609-6685">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        Call 909-609-6685
+      </a>
+      <a class="btn btn-ghost" href="#top">Submit case details</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- Footer -->
+<footer class="site" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#top" class="brand" style="color:#fff" aria-label="Berhe Law, home">
+        <span class="brand-mark" aria-hidden="true">B</span>
+        <span>
+          <span class="brand-name">Berhe Law</span>
+          <span class="brand-sub" style="display:block">California Personal Injury</span>
+        </span>
+      </a>
+      <p>
+        A California personal injury law practice. Direct representation by Attorney Tam Berhe.
+        Free consultation. No fee unless we win.
+      </p>
+    </div>
+
+    <div>
+      <h4>Office</h4>
+      <ul>
+        <li>901 Via Piemonte, Suite 230</li>
+        <li>Ontario, CA 91764-8500</li>
+        <li style="margin-top:14px"><a href="tel:+19096096685" aria-label="Call 909-609-6685">909-609-6685</a></li>
+        <li><a href="tel:+19098906043" aria-label="Fax 909-890-6043">909-890-6043 (fax)</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Practice</h4>
+      <ul>
+        <li><a href="#practice">Auto Accidents</a></li>
+        <li><a href="#practice">Truck &amp; Commercial Vehicle</a></li>
+        <li><a href="#practice">Pedestrian &amp; Bicycle</a></li>
+        <li><a href="#practice">Slip &amp; Fall</a></li>
+        <li><a href="#practice">Dog Bites</a></li>
+        <li><a href="#practice">Wrongful Death</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Firm</h4>
+      <ul>
+        <li><a href="#attorney">About Tam Berhe</a></li>
+        <li><a href="#commitment">Our Commitment</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-meta">
+    <span>© 2026 The Berhe Law Firm, APC. All rights reserved. · State Bar of California No. 298992</span>
+    <span>
+      <a href="/privacy.html">Privacy</a> &nbsp;·&nbsp;
+      <a href="/terms.html">Terms of Service</a> &nbsp;·&nbsp;
+      <a href="/disclaimer.html">Disclaimer</a>
+    </span>
+  </div>
+  <p class="disclaimer">
+    Attorney advertising. The information on this site is for general information purposes
+    only and is not legal advice. Prior results do not guarantee a similar outcome. Contacting
+    Berhe Law through this site does not create an attorney-client relationship; that
+    relationship is established only by a signed written agreement.
+  </p>
+</footer>
+
+<a class="mobile-call" href="tel:+19096096685" aria-label="Call Berhe Law at 909-609-6685">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.92z"/>
+  </svg>
+  Call now · 909-609-6685
+</a>
+
+<script>
+  // Mobile nav toggle
+  (function () {
+    var btn = document.getElementById('navToggle');
+    var list = document.getElementById('navlinks');
+    if (!btn || !list) return;
+    btn.addEventListener('click', function () {
+      var open = list.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+    list.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A' && list.classList.contains('open')) {
+        list.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open menu');
+      }
+    });
+  })();
+
+  // Form validation + Netlify Forms AJAX submission
+  (function () {
+    var form = document.getElementById('caseForm');
+    if (!form) return;
+
+    function encode(data) {
+      return new URLSearchParams(data).toString();
+    }
+
+    form.addEventListener('submit', function (e) {
+      var required = form.querySelectorAll('[required]');
+      var ok = true;
+      required.forEach(function (el) {
+        var valid = el.type === 'checkbox' ? el.checked : el.value.trim() !== '';
+        el.style.borderColor = valid ? '' : '#8a2a2a';
+        el.setAttribute('aria-invalid', valid ? 'false' : 'true');
+        if (!valid) ok = false;
+      });
+      if (!ok) {
+        e.preventDefault();
+        var firstBad = form.querySelector('[aria-invalid="true"]');
+        if (firstBad) firstBad.focus();
+        return;
+      }
+
+      // Let the normal POST work if fetch is unavailable.
+      if (!window.fetch) return;
+      e.preventDefault();
+
+      var btn = form.querySelector('.submit');
+      var originalText = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode(new FormData(form))
+      }).then(function () {
+        btn.textContent = 'Received, we will call shortly';
+        btn.style.background = '#2f5b3a';
+        form.reset();
+      }).catch(function () {
+        btn.disabled = false;
+        btn.textContent = originalText;
+        form.submit();
+      });
+    });
+  })();
+</script>
+
+</body>
 </html>
