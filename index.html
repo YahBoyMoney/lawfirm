@@ -1658,25 +1658,23 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 74% center;
-    filter: saturate(.94) contrast(1.05) brightness(.94);
+    object-position: 88% center;
+    filter: saturate(.98) contrast(1.04) brightness(.99);
   }
   .hero::before {
     z-index: 1;
     background:
-      linear-gradient(90deg, rgba(3,12,24,.97) 0%, rgba(3,12,24,.91) 34%, rgba(3,12,24,.58) 59%, rgba(3,12,24,.34) 100%),
-      linear-gradient(180deg, rgba(3,12,24,.18) 0%, rgba(3,12,24,.08) 45%, rgba(3,12,24,.74) 100%);
+      linear-gradient(90deg, rgba(3,12,24,.98) 0%, rgba(3,12,24,.94) 36%, rgba(3,12,24,.64) 62%, rgba(3,12,24,.26) 100%),
+      linear-gradient(180deg, rgba(3,12,24,.10) 0%, rgba(3,12,24,.05) 48%, rgba(3,12,24,.76) 100%);
     mask-image: none;
     -webkit-mask-image: none;
   }
   .hero::after {
     z-index: 2;
-    background-image:
-      linear-gradient(to right, rgba(255,255,255,.045) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255,255,255,.038) 1px, transparent 1px),
-      radial-gradient(780px 420px at 13% 12%, rgba(184,150,71,.19), transparent 62%);
-    background-size: 64px 64px, 64px 64px, auto;
-    opacity: .72;
+    background:
+      radial-gradient(820px 420px at 11% 12%, rgba(184,150,71,.16), transparent 64%),
+      linear-gradient(180deg, rgba(255,255,255,.025), transparent 42%);
+    opacity: .82;
   }
   .hero-grid {
     min-height: inherit;
@@ -1762,7 +1760,7 @@
       height: 650px;
       bottom: auto;
     }
-    .hero-media img { object-position: 52% top; }
+    .hero-media img { object-position: 58% top; }
     .hero::before {
       background:
         linear-gradient(180deg, rgba(3,12,24,.16) 0%, rgba(3,12,24,.42) 34%, rgba(3,12,24,.94) 74%, rgba(3,12,24,.99) 100%),
@@ -1778,7 +1776,7 @@
   }
   @media (max-width: 560px) {
     .hero-media { height: 610px; }
-    .hero-media img { object-position: 52% top; }
+    .hero-media img { object-position: 58% top; }
     .hero-grid { padding-top: 342px; }
     .hero h1.headline { font-size: clamp(38px, 12vw, 54px); }
     .hero .eyebrow { font-size: 11.5px; letter-spacing: .16em; }
