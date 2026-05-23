@@ -17,6 +17,7 @@
 <meta property="og:image" content="https://berhelaw.com/images/og-berhe-jones-llp.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
+<link rel="preload" as="image" href="/images/berhe-jones-hero-team.webp" imagesrcset="/images/berhe-jones-hero-team-mobile.webp 720w, /images/berhe-jones-hero-team.webp 1280w" imagesizes="100vw" />
 <meta name="twitter:card" content="summary_large_image" />
 <script type="application/ld+json">
 {
@@ -1637,6 +1638,193 @@
     .presence-facts > div { border-right: 0; border-bottom: 1px solid var(--rule); }
     .presence-facts > div:last-child { border-bottom: 0; }
   }
+
+
+  /* ---------- Photo-led hero from supplied firm image ---------- */
+  .hero {
+    min-height: clamp(720px, 74vh, 880px);
+    background: #071525;
+    color: #fff;
+    border-bottom-color: rgba(239,227,194,.22);
+  }
+  .hero-media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: block;
+    background: #071525;
+  }
+  .hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 74% center;
+    filter: saturate(.94) contrast(1.05) brightness(.94);
+  }
+  .hero::before {
+    z-index: 1;
+    background:
+      linear-gradient(90deg, rgba(3,12,24,.97) 0%, rgba(3,12,24,.91) 34%, rgba(3,12,24,.58) 59%, rgba(3,12,24,.34) 100%),
+      linear-gradient(180deg, rgba(3,12,24,.18) 0%, rgba(3,12,24,.08) 45%, rgba(3,12,24,.74) 100%);
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+  .hero::after {
+    z-index: 2;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,.038) 1px, transparent 1px),
+      radial-gradient(780px 420px at 13% 12%, rgba(184,150,71,.19), transparent 62%);
+    background-size: 64px 64px, 64px 64px, auto;
+    opacity: .72;
+  }
+  .hero-grid {
+    min-height: inherit;
+    align-items: center;
+    position: relative;
+    z-index: 3;
+    padding-top: clamp(76px, 8vw, 116px);
+    padding-bottom: clamp(64px, 7vw, 96px);
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 470px);
+  }
+  .hero .system-status {
+    border-color: rgba(239,227,194,.26);
+    background: rgba(7,21,37,.64);
+    color: #efe6d2;
+    box-shadow: 0 1px 0 rgba(255,255,255,.08) inset, 0 18px 50px rgba(0,0,0,.24);
+    backdrop-filter: blur(12px);
+  }
+  .hero .system-status .dot,
+  .hero .system-status .ref { color: #efe6d2; }
+  .hero .system-status .sep { background: rgba(239,227,194,.28); }
+  .hero .eyebrow { color: var(--brass-2); text-shadow: 0 1px 10px rgba(0,0,0,.35); }
+  .hero .eyebrow::before { background: var(--brass-2); }
+  .hero h1.headline {
+    color: #fff;
+    max-width: 760px;
+    font-size: clamp(42px, 5.3vw, 72px);
+    line-height: .98;
+    text-shadow: 0 3px 24px rgba(0,0,0,.42);
+  }
+  .hero h1.headline em { color: #d8b56d; }
+  .hero .lede {
+    color: #e8e1d3;
+    max-width: 60ch;
+    text-shadow: 0 2px 18px rgba(0,0,0,.38);
+  }
+  .hero .btn-call {
+    background: #c49b50;
+    border-color: #c49b50;
+    color: #071525;
+    box-shadow: 0 16px 40px rgba(0,0,0,.26);
+  }
+  .hero .btn-call:hover { background: #d6ad61; border-color: #d6ad61; }
+  .hero .btn-ghost {
+    border-color: rgba(255,255,255,.74);
+    color: #fff;
+    background: rgba(7,21,37,.22);
+    backdrop-filter: blur(8px);
+  }
+  .hero .btn-ghost:hover { background: rgba(255,255,255,.12); color: #fff; }
+  .hero .hero-trust {
+    border-top-color: rgba(239,227,194,.25);
+    max-width: 760px;
+  }
+  .hero .trust-item .label { color: #c9bdab; }
+  .hero .trust-item .value { color: #fff; }
+  .hero .matrix {
+    max-width: 760px;
+    border-color: rgba(239,227,194,.24);
+    background: rgba(7,21,37,.56);
+    box-shadow: 0 24px 70px rgba(0,0,0,.28);
+    backdrop-filter: blur(12px);
+  }
+  .hero .matrix-head { background: rgba(7,21,37,.84); border-bottom-color: rgba(239,227,194,.22); }
+  .hero .matrix-row { border-top-color: rgba(239,227,194,.12); }
+  .hero .matrix-row .label { color: #f6f1e8; }
+  .hero .matrix-row .label small,
+  .hero .matrix-row .state,
+  .hero .matrix-foot { color: #c9bdab; }
+  .hero .matrix-foot {
+    background: rgba(7,21,37,.72);
+    border-top-color: rgba(239,227,194,.18);
+  }
+  .hero .hero-card {
+    background: rgba(255,255,255,.94);
+    box-shadow: 0 28px 80px -24px rgba(0,0,0,.55);
+    backdrop-filter: blur(10px);
+  }
+  @media (max-width: 980px) {
+    .hero {
+      min-height: auto;
+    }
+    .hero-media {
+      height: 650px;
+      bottom: auto;
+    }
+    .hero-media img { object-position: 52% top; }
+    .hero::before {
+      background:
+        linear-gradient(180deg, rgba(3,12,24,.16) 0%, rgba(3,12,24,.42) 34%, rgba(3,12,24,.94) 74%, rgba(3,12,24,.99) 100%),
+        linear-gradient(90deg, rgba(3,12,24,.78) 0%, rgba(3,12,24,.38) 55%, rgba(3,12,24,.18) 100%);
+    }
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 34px;
+      padding-top: 340px;
+    }
+    .hero .matrix { margin-top: 28px; }
+    .hero .hero-card { max-width: 680px; }
+  }
+  @media (max-width: 560px) {
+    .hero-media { height: 610px; }
+    .hero-media img { object-position: 52% top; }
+    .hero-grid { padding-top: 342px; }
+    .hero h1.headline { font-size: clamp(38px, 12vw, 54px); }
+    .hero .eyebrow { font-size: 11.5px; letter-spacing: .16em; }
+    .hero .system-status { max-width: 100%; align-items: flex-start; border-radius: 12px; }
+    .hero .hero-trust { grid-template-columns: 1fr; gap: 14px; }
+    .hero .hero-trust .trust-item:last-child { grid-column: auto; }
+    .hero .matrix { display: none; }
+  }
+
+
+
+  /* Standalone intake panel, separated so the hero photo stays unobstructed */
+  .intake-panel-section {
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.62), rgba(246,241,232,.94)),
+      radial-gradient(700px 280px at 8% 0%, rgba(184,150,71,.12), transparent 62%);
+    border-bottom: 1px solid var(--rule);
+  }
+  .intake-panel-grid {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 66px 28px;
+    display: grid;
+    grid-template-columns: minmax(280px, .78fr) minmax(360px, 560px);
+    align-items: start;
+    gap: 56px;
+  }
+  .intake-panel-copy {
+    padding-top: 18px;
+  }
+  .intake-form-card {
+    background: #fff;
+    box-shadow: var(--shadow-lg);
+  }
+  .intake-panel-section .section-lede {
+    margin-top: 18px;
+    max-width: 48ch;
+  }
+  @media (min-width: 981px) {
+    .hero-grid > div:first-child { max-width: 790px; }
+  }
+  @media (max-width: 900px) {
+    .intake-panel-grid { grid-template-columns: 1fr; gap: 32px; padding: 52px 22px; }
+    .intake-panel-copy { padding-top: 0; }
+  }
+
 </style>
 </head>
 <body>
@@ -1686,6 +1874,11 @@
 <!-- Hero -->
 <main id="top">
 <section class="hero" aria-labelledby="heroTitle">
+  <picture class="hero-media" aria-hidden="true">
+    <source media="(max-width: 760px)" srcset="/images/berhe-jones-hero-team-mobile.webp" type="image/webp" />
+    <source srcset="/images/berhe-jones-hero-team.webp" type="image/webp" />
+    <img src="/images/berhe-jones-hero-team.jpg" width="1280" height="720" alt="" decoding="async" fetchpriority="high" />
+  </picture>
   <div class="hero-grid">
     <div>
       <div class="system-status" role="status" aria-label="Intake system status">
@@ -1709,7 +1902,7 @@
           </svg>
           Call 909-609-6685
         </a>
-        <a class="btn btn-ghost" href="#contact">Request a free case review</a>
+        <a class="btn btn-ghost" href="#intake">Request a free case review</a>
       </div>
 
       <dl class="hero-trust">
@@ -1770,8 +1963,18 @@
       </figure>
     </div>
 
-    <!-- Form card -->
-    <aside class="hero-card" aria-labelledby="caseTitle">
+  </div>
+</section>
+
+<!-- Intake form -->
+<section class="intake-panel-section" id="intake" aria-labelledby="intakeTitle">
+  <div class="intake-panel-grid">
+    <div class="intake-panel-copy">
+      <span class="section-eyebrow">Start the review</span>
+      <h2 class="section-title" id="intakeTitle">Send the basics. The firm screens for fit, deadlines, and next steps.</h2>
+      <p class="section-lede">Use the form for a short case summary, or call directly if a deadline is approaching. Submitting the form does not create an attorney-client relationship.</p>
+    </div>
+    <aside class="hero-card intake-form-card" aria-labelledby="caseTitle">
       <div class="hero-card-tab" aria-hidden="true">
         <div class="left">
           <span class="ttl">Intake Form</span>
@@ -2202,7 +2405,7 @@
         </svg>
         Call 909-609-6685
       </a>
-      <a class="btn btn-ghost" href="#top">Submit case details</a>
+      <a class="btn btn-ghost" href="#intake">Submit case details</a>
     </div>
   </div>
 </section>
