@@ -10,6 +10,9 @@ PUBLIC_PAGES = {
     "/free-case-review/": ROOT / "free-case-review" / "index.html",
     "/referrals-co-counsel/": ROOT / "referrals-co-counsel" / "index.html",
     "/landing/truck-fleet-rideshare-accident-california/": ROOT / "landing" / "truck-fleet-rideshare-accident-california" / "index.html",
+    "/resources/prepare-for-case-review/": ROOT / "resources" / "prepare-for-case-review" / "index.html",
+    "/resources/commercial-vehicle-evidence-checklist/": ROOT / "resources" / "commercial-vehicle-evidence-checklist" / "index.html",
+    "/resources/deadlines-and-early-review/": ROOT / "resources" / "deadlines-and-early-review" / "index.html",
 }
 
 PROHIBITED_PUBLIC_TERMS = [
