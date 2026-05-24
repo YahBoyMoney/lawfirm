@@ -1,10 +1,26 @@
 {
-  "lastVerifiedUtc": "2026-05-24T09:02:38Z",
+  "lastVerifiedUtc": "2026-05-24T11:17:33Z",
   "statusLabel": "Public-source monitoring",
-  "summary": "Public sources continue to describe the Garden Grove GKN Aerospace methyl methacrylate incident, evacuation disruption, school closures, state emergency support, DA investigation reporting, and chemical safety concerns. Residents should follow official safety instructions first and use this page to preserve proof and request conflict-safe screening.",
+  "summary": "Public sources continue to describe the Garden Grove GKN Aerospace methyl methacrylate incident, evacuation disruption, school closures, state emergency support, DA investigation reporting, emerging class-action reporting, and chemical safety concerns. Residents should follow official safety instructions first and use this page to preserve proof and request conflict-safe screening.",
   "updates": [
     {
-      "timeUtc": "2026-05-24T16:00:00Z",
+      "timeUtc": "2026-05-24T11:17:33Z",
+      "category": "Official resources",
+      "title": "Garden Grove emergency page lists evacuation map and hotlines",
+      "summary": "The City of Garden Grove emergency page identifies the GKN Aerospace / MMA leak evacuation zone, provides an address checker, and lists Garden Grove, Orange County public-information, and OCFA medical-information hotline numbers.",
+      "sourceLabel": "City of Garden Grove",
+      "sourceUrl": "https://ggcity.org/emergency"
+    },
+    {
+      "timeUtc": "2026-05-24T07:18:00Z",
+      "category": "Legal action",
+      "title": "ABC7 reports class-action filing connected to the GKN tank crisis",
+      "summary": "ABC7 reported that two evacuation-zone residents are named plaintiffs in a class-action lawsuit connected to the Garden Grove GKN Aerospace chemical tank emergency, with X-Law Group and Presidio Law Firm described as leading the action. The report did not provide a case number.",
+      "sourceLabel": "ABC7 Los Angeles",
+      "sourceUrl": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/"
+    },
+    {
+      "timeUtc": "2026-05-24T06:15:00Z",
       "category": "Investigation",
       "title": "Orange County DA investigation reporting adds accountability context",
       "summary": "CBS Los Angeles reported that the Orange County District Attorney opened an investigation connected to the Garden Grove GKN Aerospace chemical leak and sought whistleblower information.",
@@ -38,9 +54,14 @@
   ],
   "resources": [
     {
-      "title": "Official city reporting",
-      "description": "Use Garden Grove city resources for local environmental reporting and city contact routes.",
-      "url": "https://ggcity.org/environmental-compliance"
+      "title": "Official Garden Grove emergency page",
+      "description": "City page with the evacuation map/address checker, public hotlines, multilingual emergency instructions, shelters, and local emergency-alert links.",
+      "url": "https://ggcity.org/emergency"
+    },
+    {
+      "title": "Cal OES community resources",
+      "description": "State emergency-management resource page listing shelter centers, animal-shelter notes, local hotlines, Ready.CA.gov alerts, and aging/disability resources.",
+      "url": "https://www.news.caloes.ca.gov/community-resources-for-garden-grove-hazmat-incident/"
     },
     {
       "title": "School closures and campus updates",
@@ -59,7 +80,7 @@
     },
     {
       "title": "ABC7 live incident updates",
-      "description": "Local live coverage with evacuation-zone reporting, official statements, and incident developments.",
+      "description": "Local live coverage with evacuation-zone reporting, official statements, legal-action reporting, and incident developments.",
       "url": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/"
     },
     {
