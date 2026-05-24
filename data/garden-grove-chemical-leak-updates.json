@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-24T11:17:33Z",
+  "lastVerifiedUtc": "2026-05-24T13:23:25Z",
   "statusLabel": "Public-source monitoring",
-  "summary": "Public sources continue to describe the Garden Grove GKN Aerospace methyl methacrylate incident, evacuation disruption, school closures, state emergency support, DA investigation reporting, emerging class-action reporting, and chemical safety concerns. Residents should follow official safety instructions first and use this page to preserve proof and request conflict-safe screening.",
+  "summary": "Public sources continue to describe the Garden Grove GKN Aerospace methyl methacrylate incident, evacuation disruption affecting tens of thousands of residents, school closures, state emergency support, DA investigation reporting, emerging class-action reporting, and chemical safety concerns. Residents should follow official safety instructions first and use this page to preserve proof and request conflict-safe screening.",
   "updates": [
+    {
+      "timeUtc": "2026-05-24T12:53:32Z",
+      "category": "Response status",
+      "title": "ABC7 latest update says tank remains unstable as experts search for options",
+      "summary": "ABC7 reported that the GKN Aerospace tank remained on a path toward failure, that about 50,000 people were affected by evacuation orders, and that OCFA observed the internal temperature rising about one degree per hour while responders consulted outside experts about possible solutions.",
+      "sourceLabel": "ABC7 Los Angeles",
+      "sourceUrl": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/"
+    },
     {
       "timeUtc": "2026-05-24T11:17:33Z",
       "category": "Official resources",
