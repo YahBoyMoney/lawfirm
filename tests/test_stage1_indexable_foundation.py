@@ -172,12 +172,30 @@ def test_stage1_forms_are_live_netlify_intake_without_uploads():
         assert form is not None, f"{path} needs live case-review form"
         assert str(form.get("method", "")).upper() == "POST"
         assert form.get("action") == "/success.html"
+        assert form.get("enctype") == "application/x-www-form-urlencoded"
         assert form.get("data-netlify") == "true"
+        assert form.has_attr("netlify")
         assert doc.select_one('input[name="form-name"][value="case-review"]') is not None
         assert not doc.select_one('input[type="file"]')
         text = form.get_text(" ", strip=True).lower()
         assert "do not include privileged" in text
         assert "attorney-client relationship" in text
+
+
+def test_homepage_declares_netlify_form_detection_stubs():
+    doc = page_doc(ROOT / "index.html")
+    hidden_forms = doc.select('div[hidden][aria-hidden="true"] form')
+    names = {str(form.get("name")) for form in hidden_forms}
+    assert {"case-review", "garden-grove-updates"}.issubset(names)
+    for name in ["case-review", "garden-grove-updates"]:
+        form = doc.select_one(f'div[hidden] form[name="{name}"]')
+        assert form is not None
+        assert str(form.get("method", "")).upper() == "POST"
+        assert form.get("action") == "/success.html"
+        assert form.get("enctype") == "application/x-www-form-urlencoded"
+        assert form.get("data-netlify") == "true"
+        assert form.has_attr("netlify")
+        assert form.select_one(f'input[name="form-name"][value="{name}"]') is not None
 
 
 def test_html_pages_have_keyboard_skip_link_to_main_content():
