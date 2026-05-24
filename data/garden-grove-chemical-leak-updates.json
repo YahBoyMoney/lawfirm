@@ -1,15 +1,15 @@
 {
   "lastVerifiedUtc": "2026-05-24T09:02:38Z",
-  "statusLabel": "Active monitoring",
-  "summary": "Verified public sources continue to describe the Garden Grove GKN Aerospace chemical tank incident, evacuation disruption, school closures, state emergency support, and chemical safety concerns. Residents should follow official safety instructions first and use this page to preserve proof and request conflict-safe screening.",
+  "statusLabel": "Public-source monitoring",
+  "summary": "Public sources continue to describe the Garden Grove GKN Aerospace methyl methacrylate incident, evacuation disruption, school closures, state emergency support, DA investigation reporting, and chemical safety concerns. Residents should follow official safety instructions first and use this page to preserve proof and request conflict-safe screening.",
   "updates": [
     {
-      "timeUtc": "2026-05-24T09:02:38Z",
-      "category": "Monitoring",
-      "title": "Berhe Jones update center is live",
-      "summary": "This page periodically refreshes a verified update feed, resource hub, and resident/business proof checklist so affected people can act quickly while the incident develops.",
-      "sourceLabel": "Berhe Jones update feed",
-      "sourceUrl": "https://berhelaw.com/landing/garden-grove-chemical-leak/"
+      "timeUtc": "2026-05-24T16:00:00Z",
+      "category": "Investigation",
+      "title": "Orange County DA investigation reporting adds accountability context",
+      "summary": "CBS Los Angeles reported that the Orange County District Attorney opened an investigation connected to the Garden Grove GKN Aerospace chemical leak and sought whistleblower information.",
+      "sourceLabel": "CBS Los Angeles",
+      "sourceUrl": "https://www.cbsnews.com/losangeles/news/garden-grove-gkn-aerospace-chemical-leak-investigation-orange-county-district-attorney-whistleblowers/"
     },
     {
       "timeUtc": "2026-05-23T19:01:25Z",
@@ -49,8 +49,8 @@
     },
     {
       "title": "Chemical safety information",
-      "description": "NIOSH methyl methacrylate guidance explains exposure limits, symptoms, and safety information.",
-      "url": "https://www.cdc.gov/niosh/npg/npgd0414.html"
+      "description": "NIOSH methyl methacrylate guidance explains exposure limits, target organs, symptoms, and safety information.",
+      "url": "https://www.cdc.gov/niosh/npg/npgd0426.html"
     },
     {
       "title": "Air-quality complaint route",
@@ -64,8 +64,8 @@
     },
     {
       "title": "NBC Los Angeles live updates",
-      "description": "Local live reporting on the Garden Grove chemical tank crisis and public-safety response.",
-      "url": "https://www.nbclosangeles.com/news/local/live-updates-garden-grove-chemical-tank-crisis/3894268/"
+      "description": "Local reporting on the Garden Grove chemical tank incident, blast-zone concerns, and public-safety response.",
+      "url": "https://www.nbclosangeles.com/news/local/garden-grove-chemical-tank-blast-map/3894254/"
     }
   ]
 }
