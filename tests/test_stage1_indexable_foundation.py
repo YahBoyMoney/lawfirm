@@ -10,6 +10,14 @@ PUBLIC_PAGES = {
     "/free-case-review/": ROOT / "free-case-review" / "index.html",
     "/referrals-co-counsel/": ROOT / "referrals-co-counsel" / "index.html",
     "/landing/truck-fleet-rideshare-accident-california/": ROOT / "landing" / "truck-fleet-rideshare-accident-california" / "index.html",
+    "/practice-areas/": ROOT / "practice-areas" / "index.html",
+    "/practice-areas/personal-injury-wrongful-death/": ROOT / "practice-areas" / "personal-injury-wrongful-death" / "index.html",
+    "/practice-areas/employment-workplace-claims/": ROOT / "practice-areas" / "employment-workplace-claims" / "index.html",
+    "/practice-areas/civil-rights-government-accountability/": ROOT / "practice-areas" / "civil-rights-government-accountability" / "index.html",
+    "/practice-areas/consumer-protection-lemon-law/": ROOT / "practice-areas" / "consumer-protection-lemon-law" / "index.html",
+    "/practice-areas/insurance-bad-faith/": ROOT / "practice-areas" / "insurance-bad-faith" / "index.html",
+    "/practice-areas/catastrophic-injury/": ROOT / "practice-areas" / "catastrophic-injury" / "index.html",
+    "/practice-areas/select-civil-litigation/": ROOT / "practice-areas" / "select-civil-litigation" / "index.html",
     "/resources/prepare-for-case-review/": ROOT / "resources" / "prepare-for-case-review" / "index.html",
     "/resources/commercial-vehicle-evidence-checklist/": ROOT / "resources" / "commercial-vehicle-evidence-checklist" / "index.html",
     "/resources/deadlines-and-early-review/": ROOT / "resources" / "deadlines-and-early-review" / "index.html",
@@ -67,7 +75,7 @@ def test_stage1_pages_are_in_sitemap_and_homepage_footer():
     sitemap_text = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
     home_doc = page_doc(ROOT / "index.html")
     footer_hrefs = {str(a.get("href")) for a in home_doc.select("footer.site a[href]")}
-    assert sitemap_text.count("<lastmod>2026-05-24</lastmod>") == 12
+    assert sitemap_text.count("<lastmod>2026-05-24</lastmod>") == 20
     for route in PUBLIC_PAGES:
         assert f"https://berhelaw.com{route}" in sitemap_text
         assert route in footer_hrefs
@@ -125,3 +133,19 @@ def test_stage1_forms_are_live_netlify_intake_without_uploads():
         text = form.get_text(" ", strip=True).lower()
         assert "do not include privileged" in text
         assert "attorney-client relationship" in text
+
+
+def test_practice_area_pages_have_substantive_safe_copy():
+    practice_routes = [route for route in PUBLIC_PAGES if route.startswith("/practice-areas/")]
+    assert len(practice_routes) == 8
+    for route in practice_routes:
+        html = PUBLIC_PAGES[route].read_text(encoding="utf-8")
+        assert "—" not in html
+        doc = page_doc(PUBLIC_PAGES[route])
+        text = doc.get_text(" ", strip=True).lower()
+        assert len(text.split()) >= 450, f"{route} copy is too thin"
+        assert "deadlines" in text
+        assert "signed written agreement" in text
+        assert "attorney-client relationship" in text
+        assert "no guarantee" in text or "does not guarantee" in text
+        assert doc.select_one('a[href="/free-case-review/"]') is not None

@@ -737,6 +737,17 @@
     margin: 0;
     line-height: 1.55;
   }
+  .area h3 a { color: inherit; text-decoration: none; position: relative; z-index: 2; }
+  .area h3 a:hover { color: var(--brass); }
+  .area-link-full { position: absolute; inset: 0; z-index: 1; }
+  .area-top, .area p, .area-list, .area-cta { position: relative; z-index: 2; }
+  .area-list { margin: 16px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 12.5px; color: var(--ink-2); }
+  .area-list li { padding-left: 14px; position: relative; }
+  .area-list li::before { content: ""; position: absolute; left: 0; top: .75em; width: 6px; height: 1px; background: var(--brass); }
+  .area-cta { display: inline-block; margin-top: 18px; font-size: 12px; text-transform: uppercase; letter-spacing: .16em; color: var(--brass); font-weight: 700; }
+  .practice-hub-cta { margin-top: 28px; padding: 22px 24px; background: var(--paper); border: 1px solid var(--rule); display: flex; justify-content: space-between; gap: 18px; align-items: center; flex-wrap: wrap; }
+  .practice-hub-cta p { margin: 0; color: var(--ink-2); max-width: 64ch; }
+
   @media (max-width: 860px) {
     .areas { grid-template-columns: repeat(2, 1fr); }
   }
@@ -2427,7 +2438,7 @@
     <nav aria-label="Primary">
       <ul class="nav-links" id="navlinks">
         <li><a href="#attorney">Attorney</a></li>
-        <li><a href="#practice">Practice Areas</a></li>
+        <li><a href="/practice-areas/">Practice Areas</a></li>
         <li><a href="#how">How It Works</a></li>
         <li><a href="#commitment">Our Commitment</a></li>
         <li><a href="#faq">FAQ</a></li>
@@ -2805,60 +2816,90 @@
     <div class="section-head">
       <div>
         <span class="section-eyebrow">Practice areas</span>
-        <h2 class="section-title" id="practiceTitle">A multi-practice firm built around serious contingency cases.</h2>
+        <h2 class="section-title" id="practiceTitle">Not just one accident page. A broader contingency practice with dedicated landing pages.</h2>
       </div>
       <p class="section-lede">
-        Berhe Jones LLP evaluates matters across several plaintiff-side practice areas. The common thread
-        is case value, provable harm, and whether focused attorney work can improve leverage.
+        Berhe Jones LLP evaluates serious plaintiff-side matters across multiple practice areas. Each area now has its own public landing page with a focused review standard, document checklist, and safe path to case review.
       </p>
     </div>
 
     <div class="areas reveal-stagger" role="list">
       <article class="area" role="listitem">
+        <a class="area-link-full" href="/practice-areas/personal-injury-wrongful-death/" aria-label="Review Personal Injury and Wrongful Death"></a>
         <div class="area-top"><span class="area-num">01</span><span class="area-glyph" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 20h26"/><path d="M20 7v26"/><rect x="10" y="10" width="20" height="20" rx="2"/><path d="M14 26h12M14 14h12"/></svg></span></div>
-        <h3>Personal Injury &amp; Wrongful Death</h3>
-        <p>Catastrophic collisions, premises liability, dog bites, serious injury, and death claims requiring focused damages work.</p>
+        <h3><a href="/practice-areas/personal-injury-wrongful-death/">Personal Injury and Wrongful Death</a></h3>
+        <p>Serious collision, premises, dog-bite, catastrophic injury, and death matters where proof, damages, coverage, and deadlines need attorney review.</p>
+        <ul class="area-list"><li>Liability proof</li><li>Medical and life impact</li><li>Deadline issues</li></ul>
+        <span class="area-cta">View landing page</span>
       </article>
       <article class="area" role="listitem">
+        <a class="area-link-full" href="/practice-areas/employment-workplace-claims/" aria-label="Review Employment and Workplace Claims"></a>
         <div class="area-top"><span class="area-num">02</span><span class="area-glyph" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 20h26"/><path d="M20 7v26"/><rect x="10" y="10" width="20" height="20" rx="2"/><path d="M14 26h12M14 14h12"/></svg></span></div>
-        <h3>Employment &amp; Workplace Claims</h3>
-        <p>Wrongful termination, discrimination, harassment, retaliation, wage-and-hour, and related plaintiff-side matters.</p>
+        <h3><a href="/practice-areas/employment-workplace-claims/">Employment and Workplace Claims</a></h3>
+        <p>Wrongful termination, retaliation, discrimination, harassment, wage-and-hour, and other workplace matters reviewed for evidence, deadlines, and leverage.</p>
+        <ul class="area-list"><li>Timeline clarity</li><li>Protected activity or status</li><li>Agency deadlines</li></ul>
+        <span class="area-cta">View landing page</span>
       </article>
       <article class="area" role="listitem">
+        <a class="area-link-full" href="/practice-areas/civil-rights-government-accountability/" aria-label="Review Civil Rights and Government Accountability"></a>
         <div class="area-top"><span class="area-num">03</span><span class="area-glyph" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 20h26"/><path d="M20 7v26"/><rect x="10" y="10" width="20" height="20" rx="2"/><path d="M14 26h12M14 14h12"/></svg></span></div>
-        <h3>Civil Rights</h3>
-        <p>Rights-based claims and government-accountability matters reviewed carefully for facts, damages, deadlines, and fit.</p>
+        <h3><a href="/practice-areas/civil-rights-government-accountability/">Civil Rights and Government Accountability</a></h3>
+        <p>Rights-based claims and government-accountability matters reviewed carefully for facts, damages, public-entity deadlines, and evidence preservation.</p>
+        <ul class="area-list"><li>Government actor or agency</li><li>Rights-based harm</li><li>Notice deadlines</li></ul>
+        <span class="area-cta">View landing page</span>
       </article>
       <article class="area" role="listitem">
+        <a class="area-link-full" href="/practice-areas/consumer-protection-lemon-law/" aria-label="Review Consumer Protection and Lemon Law"></a>
         <div class="area-top"><span class="area-num">04</span><span class="area-glyph" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 20h26"/><path d="M20 7v26"/><rect x="10" y="10" width="20" height="20" rx="2"/><path d="M14 26h12M14 14h12"/></svg></span></div>
-        <h3>Consumer Protection</h3>
-        <p>Lemon Law, deceptive practices, defective products, and statutory-fee matters reviewed for leverage and fit.</p>
+        <h3><a href="/practice-areas/consumer-protection-lemon-law/">Consumer Protection and Lemon Law</a></h3>
+        <p>Consumer, Lemon Law, defective-product, finance, warranty, and statutory-fee matters reviewed for documents, loss, defendant responsibility, and leverage.</p>
+        <ul class="area-list"><li>Purchase or lease paper trail</li><li>Repair and complaint history</li><li>Statutory fee potential</li></ul>
+        <span class="area-cta">View landing page</span>
       </article>
       <article class="area" role="listitem">
+        <a class="area-link-full" href="/practice-areas/insurance-bad-faith/" aria-label="Review Insurance Bad Faith"></a>
         <div class="area-top"><span class="area-num">05</span><span class="area-glyph" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 20h26"/><path d="M20 7v26"/><rect x="10" y="10" width="20" height="20" rx="2"/><path d="M14 26h12M14 14h12"/></svg></span></div>
-        <h3>Insurance Bad Faith</h3>
-        <p>Coverage denials, unreasonable delay, low-value claim handling, and serious disputes with insurers.</p>
+        <h3><a href="/practice-areas/insurance-bad-faith/">Insurance Bad Faith</a></h3>
+        <p>Coverage denials, unreasonable delay, underpayment, failure to defend, and serious claim-handling disputes reviewed for policy terms, damages, and leverage.</p>
+        <ul class="area-list"><li>Policy and coverage position</li><li>Claim timeline</li><li>Underlying loss proof</li></ul>
+        <span class="area-cta">View landing page</span>
       </article>
       <article class="area" role="listitem">
+        <a class="area-link-full" href="/practice-areas/catastrophic-injury/" aria-label="Review Catastrophic Injury"></a>
         <div class="area-top"><span class="area-num">06</span><span class="area-glyph" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 20h26"/><path d="M20 7v26"/><rect x="10" y="10" width="20" height="20" rx="2"/><path d="M14 26h12M14 14h12"/></svg></span></div>
-        <h3>Truck, Fleet &amp; Rideshare</h3>
-        <p>Commercial transportation cases involving company policies, driver records, insurance layers, and rapid evidence preservation.</p>
+        <h3><a href="/practice-areas/catastrophic-injury/">Catastrophic Injury</a></h3>
+        <p>Brain, spine, burn, amputation, paralysis, surgical, and long-recovery injury matters reviewed for medical proof, future care, fault, and recovery sources.</p>
+        <ul class="area-list"><li>Medical severity</li><li>Future care and life impact</li><li>Insurance layers</li></ul>
+        <span class="area-cta">View landing page</span>
       </article>
       <article class="area" role="listitem">
+        <a class="area-link-full" href="/practice-areas/select-civil-litigation/" aria-label="Review Select Civil Litigation"></a>
         <div class="area-top"><span class="area-num">07</span><span class="area-glyph" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 20h26"/><path d="M20 7v26"/><rect x="10" y="10" width="20" height="20" rx="2"/><path d="M14 26h12M14 14h12"/></svg></span></div>
-        <h3>Catastrophic Injury</h3>
-        <p>Brain, spine, burn, amputation, and long-recovery cases requiring medical, life-care, and damages analysis.</p>
+        <h3><a href="/practice-areas/select-civil-litigation/">Select Civil Litigation</a></h3>
+        <p>High-stakes fraud, business tort, contract, fiduciary-duty, and serious civil disputes reviewed case-by-case for proof, damages, collectability, and fee structure.</p>
+        <ul class="area-list"><li>Documented wrongdoing</li><li>Provable damages</li><li>Timing and forum</li></ul>
+        <span class="area-cta">View landing page</span>
       </article>
       <article class="area" role="listitem">
+        <a class="area-link-full" href="/landing/truck-fleet-rideshare-accident-california/" aria-label="Review truck, fleet, and rideshare accidents"></a>
         <div class="area-top"><span class="area-num">08</span><span class="area-glyph" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 20h26"/><path d="M20 7v26"/><rect x="10" y="10" width="20" height="20" rx="2"/><path d="M14 26h12M14 14h12"/></svg></span></div>
-        <h3>Select Civil Litigation</h3>
-        <p>High-stakes business tort, fraud, and civil disputes considered case-by-case for contingency or hybrid structures.</p>
+        <h3><a href="/landing/truck-fleet-rideshare-accident-california/">Truck, Fleet, and Rideshare Accidents</a></h3>
+        <p>Commercial transportation matters involving company vehicles, delivery drivers, rideshare platforms, driver records, insurance layers, and rapid evidence preservation.</p>
+        <ul class="area-list"><li>Vehicle and company records</li><li>Coverage layers</li><li>Evidence preservation</li></ul>
+        <span class="area-cta">View landing page</span>
       </article>
       <article class="area" role="listitem">
+        <a class="area-link-full" href="/referrals-co-counsel/" aria-label="Review co-counsel and referral inquiries"></a>
         <div class="area-top"><span class="area-num">09</span><span class="area-glyph" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 20h26"/><path d="M20 7v26"/><rect x="10" y="10" width="20" height="20" rx="2"/><path d="M14 26h12M14 14h12"/></svg></span></div>
-        <h3>Co-Counsel &amp; Referrals</h3>
-        <p>Matters outside the firm's immediate scope may be evaluated for co-counsel, referral, or coordinated litigation support.</p>
+        <h3><a href="/referrals-co-counsel/">Co-Counsel and Referrals</a></h3>
+        <p>Attorney and firm inquiries reviewed for conflict posture, practice fit, case value, resource needs, and coordinated litigation support.</p>
+        <ul class="area-list"><li>Attorney-to-attorney review</li><li>Resource fit</li><li>Referral routing</li></ul>
+        <span class="area-cta">View landing page</span>
       </article>
+    </div>
+    <div class="practice-hub-cta">
+      <p>Need to compare practice areas first? Use the full practice-area hub before submitting a case review.</p>
+      <a class="btn btn-call" href="/practice-areas/">View all practice areas</a>
     </div>
   </div>
 </section>
@@ -3092,12 +3133,15 @@
     <div>
       <h4>Practice</h4>
       <ul>
-        <li><a href="#practice">Personal Injury</a></li>
-        <li><a href="#practice">Employment Claims</a></li>
-        <li><a href="#practice">Civil Rights</a></li>
-        <li><a href="#practice">Consumer Protection</a></li>
-        <li><a href="#practice">Insurance Bad Faith</a></li>
-        <li><a href="#practice">Select Civil Litigation</a></li>
+        <li><a href="/practice-areas/">Practice Area Hub</a></li>
+        <li><a href="/practice-areas/personal-injury-wrongful-death/">Personal Injury and Wrongful Death</a></li>
+        <li><a href="/practice-areas/employment-workplace-claims/">Employment and Workplace Claims</a></li>
+        <li><a href="/practice-areas/civil-rights-government-accountability/">Civil Rights and Government Accountability</a></li>
+        <li><a href="/practice-areas/consumer-protection-lemon-law/">Consumer Protection and Lemon Law</a></li>
+        <li><a href="/practice-areas/insurance-bad-faith/">Insurance Bad Faith</a></li>
+        <li><a href="/practice-areas/catastrophic-injury/">Catastrophic Injury</a></li>
+        <li><a href="/practice-areas/select-civil-litigation/">Select Civil Litigation</a></li>
+        <li><a href="/landing/truck-fleet-rideshare-accident-california/">Truck, Fleet, and Rideshare</a></li>
       </ul>
     </div>
 
