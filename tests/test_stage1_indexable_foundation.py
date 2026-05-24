@@ -23,6 +23,14 @@ PUBLIC_PAGES = {
     "/resources/deadlines-and-early-review/": ROOT / "resources" / "deadlines-and-early-review" / "index.html",
 }
 
+SUPPORT_PAGES = {
+    "/privacy.html": ROOT / "privacy.html",
+    "/terms.html": ROOT / "terms.html",
+    "/disclaimer.html": ROOT / "disclaimer.html",
+}
+
+SOCIAL_IMAGE = "https://berhelaw.com/images/og-berhe-jones-llp.png"
+
 PROHIBITED_PUBLIC_TERMS = [
     "noindex",
     "nofollow",
@@ -133,6 +141,36 @@ def test_stage1_forms_are_live_netlify_intake_without_uploads():
         text = form.get_text(" ", strip=True).lower()
         assert "do not include privileged" in text
         assert "attorney-client relationship" in text
+
+
+def test_public_pages_have_complete_social_share_metadata():
+    for route, path in {**PUBLIC_PAGES, **SUPPORT_PAGES}.items():
+        doc = page_doc(path)
+        title = doc.select_one("title")
+        description = doc.select_one('meta[name="description"]')
+        canonical = doc.select_one('link[rel="canonical"]')
+        assert title is not None, f"{route} needs a title"
+        assert description is not None, f"{route} needs a meta description"
+        assert canonical is not None, f"{route} needs a canonical"
+
+        expected = {
+            'meta[property="og:title"]': title.get_text(strip=True),
+            'meta[property="og:description"]': description.get("content"),
+            'meta[property="og:type"]': "website",
+            'meta[property="og:url"]': canonical.get("href"),
+            'meta[property="og:site_name"]': "Berhe Jones LLP",
+            'meta[property="og:image"]': SOCIAL_IMAGE,
+            'meta[property="og:image:width"]': "1200",
+            'meta[property="og:image:height"]': "630",
+            'meta[name="twitter:card"]': "summary_large_image",
+            'meta[name="twitter:title"]': title.get_text(strip=True),
+            'meta[name="twitter:description"]': description.get("content"),
+            'meta[name="twitter:image"]': SOCIAL_IMAGE,
+        }
+        for selector, expected_content in expected.items():
+            tags = doc.select(selector)
+            assert len(tags) == 1, f"{route} needs exactly one {selector} tag"
+            assert tags[0].get("content") == expected_content, f"{route} has wrong {selector} content"
 
 
 def test_practice_area_pages_have_substantive_safe_copy():
