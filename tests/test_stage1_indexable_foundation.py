@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 from bs4 import BeautifulSoup
@@ -221,6 +222,37 @@ def test_public_pages_have_complete_social_share_metadata():
             tags = doc.select(selector)
             assert len(tags) == 1, f"{route} needs exactly one {selector} tag"
             assert tags[0].get("content") == expected_content, f"{route} has wrong {selector} content"
+
+
+def test_public_sitemap_pages_have_single_breadcrumb_schema():
+    sitemap_text = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
+    public_routes = ["/"] + list(PUBLIC_PAGES) + list(SUPPORT_PAGES)
+    for route in public_routes:
+        assert f"https://berhelaw.com{route}" in sitemap_text
+
+    for route, path in {**PUBLIC_PAGES, **SUPPORT_PAGES}.items():
+        doc = page_doc(path)
+        canonical = doc.select_one('link[rel="canonical"]')
+        assert canonical is not None, f"{route} needs canonical URL for breadcrumb schema"
+
+        breadcrumb_nodes = []
+        for script in doc.select('script[type="application/ld+json"]'):
+            data = json.loads(script.get_text())
+            nodes = data if isinstance(data, list) else [data]
+            breadcrumb_nodes.extend(
+                node
+                for node in nodes
+                if isinstance(node, dict) and node.get("@type") == "BreadcrumbList"
+            )
+
+        assert len(breadcrumb_nodes) == 1, f"{route} needs exactly one BreadcrumbList schema"
+        items = breadcrumb_nodes[0].get("itemListElement")
+        assert isinstance(items, list) and len(items) >= 2, f"{route} breadcrumb needs home and current page"
+        assert items[0].get("position") == 1
+        assert items[0].get("name") == "Home"
+        assert items[0].get("item") == "https://berhelaw.com/"
+        assert items[-1].get("position") == len(items)
+        assert items[-1].get("item") == canonical.get("href")
 
 
 def test_practice_area_pages_have_substantive_safe_copy():
