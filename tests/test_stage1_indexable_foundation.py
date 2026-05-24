@@ -90,6 +90,20 @@ def test_stage1_internal_links_resolve_and_include_legal_pages():
         assert all(route_exists(href) for href in hrefs), f"{route} has broken local links: {hrefs}"
 
 
+def test_public_html_has_working_phone_links_and_valid_markup_basics():
+    expected_phone_href = "tel:+19096096685"
+    expected_fax_href = "tel:+19098906043"
+    for path in ROOT.rglob("*.html"):
+        html = path.read_text(encoding="utf-8")
+        assert "tel:+190****" not in html, f"{path} contains a redacted/non-dialable tel: link"
+        assert "<p><p>" not in html and "</p></p>" not in html, f"{path} contains nested paragraph markup"
+        assert 'id=""' not in html, f"{path} contains an empty id attribute"
+        doc = BeautifulSoup(html, "html.parser")
+        for tel in doc.select('a[href^="tel:"]'):
+            href = str(tel.get("href"))
+            assert href in {expected_phone_href, expected_fax_href}, f"{path} has unexpected tel link: {href}"
+
+
 def test_stage1_forms_are_live_netlify_intake_without_uploads():
     form_pages = [
         PUBLIC_PAGES["/free-case-review/"],
