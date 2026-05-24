@@ -106,6 +106,22 @@ def test_resource_hub_is_indexable_and_links_to_all_resource_guides():
     assert "/resources/deadlines-and-early-review/" in hrefs
 
 
+def test_standard_subpage_navigation_links_to_resource_hub():
+    routes_with_standard_nav = {
+        route: path
+        for route, path in PUBLIC_PAGES.items()
+        if route != "/landing/garden-grove-chemical-leak/"
+    }
+    for route, path in routes_with_standard_nav.items():
+        doc = page_doc(path)
+        nav = doc.select_one('nav[aria-label="Foundation pages"]')
+        assert nav is not None, f"{route} needs standard exploratory navigation"
+        resource_link = nav.select_one('a[href="/resources/"]')
+        assert resource_link is not None, f"{route} nav should link to the resource hub"
+        assert resource_link.get_text(" ", strip=True) == "Resources"
+        assert route_exists(str(resource_link.get("href")))
+
+
 def test_stage1_pages_include_dba_and_safety_copy_without_staging_terms():
     for route, path in PUBLIC_PAGES.items():
         text = page_doc(path).get_text(" ", strip=True).lower()
