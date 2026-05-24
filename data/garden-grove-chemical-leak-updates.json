@@ -1,13 +1,13 @@
 {
-  "lastVerifiedUtc": "2026-05-24T18:18:00Z",
+  "lastVerifiedUtc": "2026-05-24T19:50:20Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, and proof-preservation tools. Follow emergency officials first for active safety orders.",
   "updates": [
     {
-      "timeUtc": "2026-05-24T17:37:35Z",
-      "category": "Air monitoring",
-      "title": "OC Register reports normal air-monitor readings; tank status quo Sunday morning",
-      "summary": "The Orange County Register reported that OCFA described the GKN Aerospace tank as showing no significant overnight change into Sunday morning. The same report said South Coast AQMD found no contaminants near the facility and that EPA monitors in the area also did not detect contaminants.",
+      "timeUtc": "2026-05-24T19:49:16Z",
+      "category": "Response status",
+      "title": "OCFA says potential crack could change tank-response strategy",
+      "summary": "The Orange County Register reported that OCFA inspected the GKN Aerospace tank overnight and found a potential crack that may be relieving pressure; officials were still examining the information and said it could change the response strategy. The same report said South Coast AQMD and EPA monitoring had not detected contaminants near the facility.",
       "sourceLabel": "Orange County Register",
       "sourceUrl": "https://www.ocregister.com/2026/05/24/no-contaminants-found-in-air-near-garden-grove-chemical-plant-tank-remains-intact/"
     },
