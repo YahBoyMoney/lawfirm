@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-24T13:23:25Z",
+  "lastVerifiedUtc": "2026-05-24T15:29:44Z",
   "statusLabel": "Public-source monitoring",
-  "summary": "Public sources continue to describe the Garden Grove GKN Aerospace methyl methacrylate incident, evacuation disruption affecting tens of thousands of residents, school closures, state emergency support, DA investigation reporting, emerging class-action reporting, and chemical safety concerns. Residents should follow official safety instructions first and use this page to preserve proof and request conflict-safe screening.",
+  "summary": "Public sources continue to describe the Garden Grove GKN Aerospace methyl methacrylate incident, evacuation disruption affecting tens of thousands of residents, school closures, state emergency support, DA investigation reporting, emerging class-action reporting, chemical safety concerns, and regulatory-history reporting. Residents should follow official safety instructions first and use this page to preserve proof and request conflict-safe screening.",
   "updates": [
+    {
+      "timeUtc": "2026-05-24T14:33:00Z",
+      "category": "Health guidance",
+      "title": "ABC7 posts methyl methacrylate health-effect explainer",
+      "summary": "ABC7 reported that methyl methacrylate can irritate the skin, eyes, lungs, and nasal passages, that short-term inhalation can cause nausea and dizziness, and that very high levels can cause severe respiratory distress requiring hospitalization. The report also noted officials were monitoring air quality and, as of early Friday afternoon, levels were within normal limits.",
+      "sourceLabel": "ABC7 Los Angeles",
+      "sourceUrl": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/entry/19152926/"
+    },
     {
       "timeUtc": "2026-05-24T12:53:32Z",
       "category": "Response status",
@@ -36,6 +44,14 @@
       "sourceUrl": "https://www.cbsnews.com/losangeles/news/garden-grove-gkn-aerospace-chemical-leak-investigation-orange-county-district-attorney-whistleblowers/"
     },
     {
+      "timeUtc": "2026-05-24T01:54:44Z",
+      "category": "Regulatory history",
+      "title": "OC Register reports prior South Coast AQMD settlement and notices",
+      "summary": "The Orange County Register reported, citing South Coast AQMD and public records, that GKN Aerospace paid an estimated $900,000 civil penalty to settle 2021 environmental violations involving VOC emission records, equipment permitting, toxic-air-contaminant coatings, and other issues, and that two additional notices to comply were issued in March 2025.",
+      "sourceLabel": "Orange County Register",
+      "sourceUrl": "https://www.ocregister.com/2026/05/23/gkn-aerospace-paid-nearly-1-million-to-settle-2021-environmental-violations/"
+    },
+    {
       "timeUtc": "2026-05-23T19:01:25Z",
       "category": "State emergency",
       "title": "California state emergency proclamation reported for Orange County",
@@ -50,14 +66,6 @@
       "summary": "Orange County Department of Education coverage tracked school closures and emergency updates tied to the hazardous chemical response.",
       "sourceLabel": "Orange County Department of Education",
       "sourceUrl": "https://newsroom.ocde.us/several-garden-grove-unified-campuses-closed-following-chemical-leak-response/"
-    },
-    {
-      "timeUtc": "2026-05-22T18:00:00Z",
-      "category": "Evacuation",
-      "title": "Live news updates tracked evacuation-zone changes and response details",
-      "summary": "ABC7 and NBC Los Angeles live pages tracked evacuation orders, tank-response reporting, blast-zone concerns, and public-safety statements as the situation developed.",
-      "sourceLabel": "ABC7 live updates",
-      "sourceUrl": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/"
     }
   ],
   "resources": [
