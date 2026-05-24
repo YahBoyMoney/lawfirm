@@ -1,7 +1,7 @@
 {
-  "lastVerifiedUtc": "2026-05-24T17:45:21Z",
-  "statusLabel": "Public-source monitoring",
-  "summary": "Public sources continue to describe the Garden Grove GKN Aerospace methyl methacrylate incident, evacuation disruption affecting tens of thousands of residents, normal reported air-monitoring readings as of Sunday morning, school closures, state emergency support, DA investigation reporting, emerging class-action reporting, chemical safety concerns, and regulatory-history reporting. Residents should follow official safety instructions first and use this page to preserve proof and request conflict-safe screening.",
+  "lastVerifiedUtc": "2026-05-24T18:18:00Z",
+  "statusLabel": "Public-source update center",
+  "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, and proof-preservation tools. Follow emergency officials first for active safety orders.",
   "updates": [
     {
       "timeUtc": "2026-05-24T17:37:35Z",
@@ -70,39 +70,74 @@
   ],
   "resources": [
     {
+      "category": "Official safety",
       "title": "Official Garden Grove emergency page",
-      "description": "City page with the evacuation map/address checker, public hotlines, multilingual emergency instructions, shelters, and local emergency-alert links.",
-      "url": "https://ggcity.org/emergency"
+      "description": "Evacuation map/address checker, public hotlines, shelter information, local alerts, and multilingual emergency instructions.",
+      "url": "https://ggcity.org/emergency",
+      "cta": "Open official emergency page"
     },
     {
+      "category": "State support",
       "title": "Cal OES community resources",
-      "description": "State emergency-management resource page listing shelter centers, animal-shelter notes, local hotlines, Ready.CA.gov alerts, and aging/disability resources.",
-      "url": "https://www.news.caloes.ca.gov/community-resources-for-garden-grove-hazmat-incident/"
+      "description": "Shelter-center information, animal-shelter notes, local hotlines, Ready.CA.gov alerts, and aging/disability resources.",
+      "url": "https://www.news.caloes.ca.gov/community-resources-for-garden-grove-hazmat-incident/",
+      "cta": "Open Cal OES resources"
     },
     {
-      "title": "School closures and campus updates",
-      "description": "OCDE coverage tracks school disruptions and public education updates connected to the hazmat response.",
-      "url": "https://newsroom.ocde.us/several-garden-grove-unified-campuses-closed-following-chemical-leak-response/"
+      "category": "Schools",
+      "title": "OCDE school closures and campus updates",
+      "description": "Education-related disruption coverage for families, staff, and students affected by the hazmat response.",
+      "url": "https://newsroom.ocde.us/several-garden-grove-unified-campuses-closed-following-chemical-leak-response/",
+      "cta": "Open school update"
     },
     {
-      "title": "Chemical safety information",
-      "description": "NIOSH methyl methacrylate guidance explains exposure limits, target organs, symptoms, and safety information.",
-      "url": "https://www.cdc.gov/niosh/npg/npgd0426.html"
+      "category": "Chemical health",
+      "title": "NIOSH methyl methacrylate guide",
+      "description": "Federal chemical reference listing exposure limits, target organs, symptoms, and safety details for methyl methacrylate.",
+      "url": "https://www.cdc.gov/niosh/npg/npgd0426.html",
+      "cta": "Open health reference"
     },
     {
-      "title": "Air-quality complaint route",
-      "description": "South Coast AQMD accepts air-quality complaints and odor or emissions reports for Southern California.",
-      "url": "https://www.aqmd.gov/home/air-quality/complaints"
+      "category": "Air quality",
+      "title": "South Coast AQMD complaint route",
+      "description": "Official complaint route for odor, emissions, air-quality, or facility-related concerns in Southern California.",
+      "url": "https://www.aqmd.gov/home/air-quality/complaints",
+      "cta": "Open complaint route"
     },
     {
+      "category": "Local news",
       "title": "ABC7 live incident updates",
-      "description": "Local live coverage with evacuation-zone reporting, official statements, legal-action reporting, and incident developments.",
-      "url": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/"
+      "description": "Local live coverage with evacuation-zone reporting, public-safety statements, and legal-action reporting.",
+      "url": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/",
+      "cta": "Open ABC7 updates"
     },
     {
-      "title": "NBC Los Angeles live updates",
-      "description": "Local reporting on the Garden Grove chemical tank incident, blast-zone concerns, and public-safety response.",
-      "url": "https://www.nbclosangeles.com/news/local/garden-grove-chemical-tank-blast-map/3894254/"
+      "category": "Local news",
+      "title": "NBC Los Angeles blast-zone reporting",
+      "description": "Reporting on the potential blast-zone map, evacuation geography, and public-safety response.",
+      "url": "https://www.nbclosangeles.com/news/local/garden-grove-chemical-tank-blast-map/3894254/",
+      "cta": "Open NBC report"
+    },
+    {
+      "category": "Investigation",
+      "title": "CBS Los Angeles DA investigation report",
+      "description": "Reporting that the Orange County District Attorney opened an investigation and sought whistleblower information.",
+      "url": "https://www.cbsnews.com/losangeles/news/garden-grove-gkn-aerospace-chemical-leak-investigation-orange-county-district-attorney-whistleblowers/",
+      "cta": "Open CBS report"
+    },
+    {
+      "category": "Proof tool",
+      "title": "Proof checklist on this page",
+      "description": "Receipts, photos, alerts, symptom logs, wage records, business closure notes, cleanup invoices, and property records to preserve.",
+      "url": "#proof",
+      "cta": "Jump to proof checklist"
+    },
+    {
+      "category": "Legal screening",
+      "title": "Free Berhe Jones screening",
+      "description": "Send a short conflict-safe summary for attorney-supervised review. Keep sensitive records for secure follow-up.",
+      "url": "#case-review",
+      "cta": "Start free screening"
     }
   ]
 }

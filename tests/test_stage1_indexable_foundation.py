@@ -292,3 +292,32 @@ def test_practice_area_pages_have_substantive_safe_copy():
         assert "attorney-client relationship" in text
         assert "no guarantee" in text or "does not guarantee" in text
         assert doc.select_one('a[href="/free-case-review/"]') is not None
+
+
+def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
+    route = "/landing/garden-grove-chemical-leak/"
+    path = PUBLIC_PAGES[route]
+    html = path.read_text(encoding="utf-8")
+    doc = page_doc(path)
+    text = doc.get_text(" ", strip=True).lower()
+
+    assert "telegram" not in text, "Public page should not expose internal Telegram alert routing"
+    assert doc.select_one('button.nav-toggle[aria-controls="primaryNavLinks"]') is not None
+    assert doc.select_one('#primaryNavLinks') is not None
+    assert doc.select_one('#updatesFeed') is not None
+    assert doc.select_one('#resourceGrid') is not None
+    assert doc.select_one('#screeningStatus[role="status"][aria-live="polite"]') is not None
+    assert "public-source update center" in text
+    assert "no affiliation with emergency officials, gkn aerospace, or class action counsel" in text
+    assert "no attorney-client relationship" in text
+    assert "signed written agreement" in text
+
+    updates_path = ROOT / "data" / "garden-grove-chemical-leak-updates.json"
+    data = json.loads(updates_path.read_text(encoding="utf-8"))
+    assert data["statusLabel"] == "Public-source update center"
+    assert len(data["updates"]) <= 8
+    assert len(data["resources"]) >= 10
+    for resource in data["resources"]:
+        assert {"category", "title", "description", "url", "cta"}.issubset(resource)
+
+    assert "setInterval(loadUpdates,300000)" in html
