@@ -126,6 +126,25 @@ def test_stage1_internal_links_resolve_and_include_legal_pages():
         assert all(route_exists(href) for href in hrefs), f"{route} has broken local links: {hrefs}"
 
 
+def test_garden_grove_incident_media_images_are_performance_safe():
+    doc = page_doc(PUBLIC_PAGES["/landing/garden-grove-chemical-leak/"])
+    hero_img = doc.select_one(".hero-media img")
+    assert hero_img is not None
+    assert hero_img.get("fetchpriority") == "high"
+    assert hero_img.get("loading") == "eager"
+    assert hero_img.get("decoding") == "async"
+    assert hero_img.get("width") and hero_img.get("height")
+    assert str(hero_img.get("alt") or "").strip(), "hero incident photo needs descriptive alt text"
+
+    gallery_images = doc.select("#incident-photos .media-card img")
+    assert len(gallery_images) == 3
+    for img in gallery_images:
+        assert img.get("loading") == "lazy", "below-fold incident gallery images should lazy-load"
+        assert img.get("decoding") == "async"
+        assert img.get("width") and img.get("height"), "incident images need intrinsic dimensions"
+        assert str(img.get("alt") or "").strip(), "incident images need factual alt text"
+
+
 def test_public_html_has_working_phone_links_and_valid_markup_basics():
     expected_phone_href = "tel:+19096096685"
     expected_fax_href = "tel:+19098906043"
