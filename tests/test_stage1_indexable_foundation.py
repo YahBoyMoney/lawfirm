@@ -10,6 +10,7 @@ PUBLIC_PAGES = {
     "/free-case-review/": ROOT / "free-case-review" / "index.html",
     "/referrals-co-counsel/": ROOT / "referrals-co-counsel" / "index.html",
     "/landing/truck-fleet-rideshare-accident-california/": ROOT / "landing" / "truck-fleet-rideshare-accident-california" / "index.html",
+    "/landing/garden-grove-chemical-leak/": ROOT / "landing" / "garden-grove-chemical-leak" / "index.html",
     "/practice-areas/": ROOT / "practice-areas" / "index.html",
     "/practice-areas/personal-injury-wrongful-death/": ROOT / "practice-areas" / "personal-injury-wrongful-death" / "index.html",
     "/practice-areas/employment-workplace-claims/": ROOT / "practice-areas" / "employment-workplace-claims" / "index.html",
@@ -83,7 +84,7 @@ def test_stage1_pages_are_in_sitemap_and_homepage_footer():
     sitemap_text = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
     home_doc = page_doc(ROOT / "index.html")
     footer_hrefs = {str(a.get("href")) for a in home_doc.select("footer.site a[href]")}
-    assert sitemap_text.count("<lastmod>2026-05-24</lastmod>") == 20
+    assert sitemap_text.count("<lastmod>2026-05-24</lastmod>") == 21
     for route in PUBLIC_PAGES:
         assert f"https://berhelaw.com{route}" in sitemap_text
         assert route in footer_hrefs
@@ -128,6 +129,7 @@ def test_stage1_forms_are_live_netlify_intake_without_uploads():
     form_pages = [
         PUBLIC_PAGES["/free-case-review/"],
         PUBLIC_PAGES["/landing/truck-fleet-rideshare-accident-california/"],
+        PUBLIC_PAGES["/landing/garden-grove-chemical-leak/"],
     ]
     for path in form_pages:
         doc = page_doc(path)
