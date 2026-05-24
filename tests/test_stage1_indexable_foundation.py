@@ -19,6 +19,7 @@ PUBLIC_PAGES = {
     "/practice-areas/insurance-bad-faith/": ROOT / "practice-areas" / "insurance-bad-faith" / "index.html",
     "/practice-areas/catastrophic-injury/": ROOT / "practice-areas" / "catastrophic-injury" / "index.html",
     "/practice-areas/select-civil-litigation/": ROOT / "practice-areas" / "select-civil-litigation" / "index.html",
+    "/resources/": ROOT / "resources" / "index.html",
     "/resources/prepare-for-case-review/": ROOT / "resources" / "prepare-for-case-review" / "index.html",
     "/resources/commercial-vehicle-evidence-checklist/": ROOT / "resources" / "commercial-vehicle-evidence-checklist" / "index.html",
     "/resources/deadlines-and-early-review/": ROOT / "resources" / "deadlines-and-early-review" / "index.html",
@@ -84,10 +85,24 @@ def test_stage1_pages_are_in_sitemap_and_homepage_footer():
     sitemap_text = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
     home_doc = page_doc(ROOT / "index.html")
     footer_hrefs = {str(a.get("href")) for a in home_doc.select("footer.site a[href]")}
-    assert sitemap_text.count("<lastmod>2026-05-24</lastmod>") == 21
+    assert sitemap_text.count("<lastmod>2026-05-24</lastmod>") == 22
     for route in PUBLIC_PAGES:
         assert f"https://berhelaw.com{route}" in sitemap_text
         assert route in footer_hrefs
+
+
+def test_resource_hub_is_indexable_and_links_to_all_resource_guides():
+    route = "/resources/"
+    doc = page_doc(PUBLIC_PAGES[route])
+    assert doc.select_one("h1") is not None
+    assert len(doc.select("h1")) == 1
+    canonical = doc.select_one('link[rel="canonical"]')
+    assert canonical is not None
+    assert canonical.get("href") == "https://berhelaw.com/resources/"
+    hrefs = {str(a.get("href")) for a in doc.select("a[href]")}
+    assert "/resources/prepare-for-case-review/" in hrefs
+    assert "/resources/commercial-vehicle-evidence-checklist/" in hrefs
+    assert "/resources/deadlines-and-early-review/" in hrefs
 
 
 def test_stage1_pages_include_dba_and_safety_copy_without_staging_terms():

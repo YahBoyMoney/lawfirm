@@ -91,6 +91,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://berhelaw.com/resources/</loc>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
     <loc>https://berhelaw.com/resources/prepare-for-case-review/</loc>
     <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
