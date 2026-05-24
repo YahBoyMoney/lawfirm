@@ -1,0 +1,71 @@
+{
+  "lastVerifiedUtc": "2026-05-24T09:02:38Z",
+  "statusLabel": "Active monitoring",
+  "summary": "Verified public sources continue to describe the Garden Grove GKN Aerospace chemical tank incident, evacuation disruption, school closures, state emergency support, and chemical safety concerns. Residents should follow official safety instructions first and use this page to preserve proof and request conflict-safe screening.",
+  "updates": [
+    {
+      "timeUtc": "2026-05-24T09:02:38Z",
+      "category": "Monitoring",
+      "title": "Berhe Jones update center is live",
+      "summary": "This page periodically refreshes a verified update feed, resource hub, and resident/business proof checklist so affected people can act quickly while the incident develops.",
+      "sourceLabel": "Berhe Jones update feed",
+      "sourceUrl": "https://berhelaw.com/landing/garden-grove-chemical-leak/"
+    },
+    {
+      "timeUtc": "2026-05-23T19:01:25Z",
+      "category": "State emergency",
+      "title": "California state emergency proclamation reported for Orange County",
+      "summary": "The Governor's office published a proclamation related to the ongoing chemical incident in Garden Grove and additional shelter-site support.",
+      "sourceLabel": "Governor of California",
+      "sourceUrl": "https://www.gov.ca.gov/2026/05/23/governor-newsom-proclaims-state-of-emergency-in-orange-county-in-response-to-ongoing-chemical-incident-in-garden-grove-makes-additional-shelter-sites-available/"
+    },
+    {
+      "timeUtc": "2026-05-22T23:50:00Z",
+      "category": "Schools",
+      "title": "OCDE reported Garden Grove school disruptions and closures",
+      "summary": "Orange County Department of Education coverage tracked school closures and emergency updates tied to the hazardous chemical response.",
+      "sourceLabel": "Orange County Department of Education",
+      "sourceUrl": "https://newsroom.ocde.us/several-garden-grove-unified-campuses-closed-following-chemical-leak-response/"
+    },
+    {
+      "timeUtc": "2026-05-22T18:00:00Z",
+      "category": "Evacuation",
+      "title": "Live news updates tracked evacuation-zone changes and response details",
+      "summary": "ABC7 and NBC Los Angeles live pages tracked evacuation orders, tank-response reporting, blast-zone concerns, and public-safety statements as the situation developed.",
+      "sourceLabel": "ABC7 live updates",
+      "sourceUrl": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/"
+    }
+  ],
+  "resources": [
+    {
+      "title": "Official city reporting",
+      "description": "Use Garden Grove city resources for local environmental reporting and city contact routes.",
+      "url": "https://ggcity.org/environmental-compliance"
+    },
+    {
+      "title": "School closures and campus updates",
+      "description": "OCDE coverage tracks school disruptions and public education updates connected to the hazmat response.",
+      "url": "https://newsroom.ocde.us/several-garden-grove-unified-campuses-closed-following-chemical-leak-response/"
+    },
+    {
+      "title": "Chemical safety information",
+      "description": "NIOSH methyl methacrylate guidance explains exposure limits, symptoms, and safety information.",
+      "url": "https://www.cdc.gov/niosh/npg/npgd0414.html"
+    },
+    {
+      "title": "Air-quality complaint route",
+      "description": "South Coast AQMD accepts air-quality complaints and odor or emissions reports for Southern California.",
+      "url": "https://www.aqmd.gov/home/air-quality/complaints"
+    },
+    {
+      "title": "ABC7 live incident updates",
+      "description": "Local live coverage with evacuation-zone reporting, official statements, and incident developments.",
+      "url": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/"
+    },
+    {
+      "title": "NBC Los Angeles live updates",
+      "description": "Local live reporting on the Garden Grove chemical tank crisis and public-safety response.",
+      "url": "https://www.nbclosangeles.com/news/local/live-updates-garden-grove-chemical-tank-crisis/3894268/"
+    }
+  ]
+}
