@@ -144,7 +144,7 @@ def test_stage1_forms_are_live_netlify_intake_without_uploads():
 
 
 def test_public_pages_have_complete_social_share_metadata():
-    for route, path in {**PUBLIC_PAGES, **SUPPORT_PAGES}.items():
+    for route, path in {"/": ROOT / "index.html", **PUBLIC_PAGES, **SUPPORT_PAGES}.items():
         doc = page_doc(path)
         title = doc.select_one("title")
         description = doc.select_one('meta[name="description"]')
