@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-24T19:50:20Z",
+  "lastVerifiedUtc": "2026-05-24T21:55:58Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, and proof-preservation tools. Follow emergency officials first for active safety orders.",
   "updates": [
+    {
+      "timeUtc": "2026-05-24T21:39:43Z",
+      "category": "Response status",
+      "title": "EPA chief says low-volume release is the most likely scenario",
+      "summary": "The Guardian reported that EPA Administrator Lee Zeldin told CNN the tank was expected to fail, but that officials had been told the most likely scenario was a low-volume release that local authorities could monitor, neutralize, and contain. The same report noted evacuations remained in effect and cited South Coast AQMD reporting normal air-monitoring measurements.",
+      "sourceLabel": "The Guardian",
+      "sourceUrl": "https://www.theguardian.com/us-news/2026/may/24/chemical-tank-california-epa-lee-zeldin"
+    },
     {
       "timeUtc": "2026-05-24T19:49:16Z",
       "category": "Response status",
@@ -58,14 +66,6 @@
       "summary": "The Orange County Register reported, citing South Coast AQMD and public records, that GKN Aerospace paid an estimated $900,000 civil penalty to settle 2021 environmental violations involving VOC emission records, equipment permitting, toxic-air-contaminant coatings, and other issues, and that two additional notices to comply were issued in March 2025.",
       "sourceLabel": "Orange County Register",
       "sourceUrl": "https://www.ocregister.com/2026/05/23/gkn-aerospace-paid-nearly-1-million-to-settle-2021-environmental-violations/"
-    },
-    {
-      "timeUtc": "2026-05-23T19:01:25Z",
-      "category": "State emergency",
-      "title": "California state emergency proclamation reported for Orange County",
-      "summary": "The Governor's office published a proclamation related to the ongoing chemical incident in Garden Grove and additional shelter-site support.",
-      "sourceLabel": "Governor of California",
-      "sourceUrl": "https://www.gov.ca.gov/2026/05/23/governor-newsom-proclaims-state-of-emergency-in-orange-county-in-response-to-ongoing-chemical-incident-in-garden-grove-makes-additional-shelter-sites-available/"
     }
   ],
   "resources": [
