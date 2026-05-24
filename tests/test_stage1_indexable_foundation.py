@@ -171,7 +171,12 @@ def test_stage1_forms_are_live_netlify_intake_without_uploads():
         form = doc.select_one(f'form[name="{form_name}"]')
         assert form is not None, f"{path} needs live {form_name} form"
         assert str(form.get("method", "")).upper() == "POST"
-        assert form.get("action") == "/success.html"
+        expected_action = (
+            "https://docs.google.com/forms/d/e/1FAIpQLSeqsUsCXzzYV482zQLpw23RYZHnQqvX_EgK0Jjj4PjJMvDJaQ/formResponse"
+            if form_name == "garden-grove-case-review"
+            else "/success.html"
+        )
+        assert form.get("action") == expected_action
         assert form.get("enctype") == "application/x-www-form-urlencoded"
         assert form.get("data-netlify") == "true"
         assert form.has_attr("netlify")

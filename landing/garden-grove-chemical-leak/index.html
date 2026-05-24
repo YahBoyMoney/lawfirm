@@ -326,9 +326,20 @@ p{margin:0}.lede{font-size:clamp(18px,2.2vw,22px);line-height:1.55;color:var(--i
     <h2>Request a Garden Grove chemical incident case screening</h2>
     <p class="lede">Use the form to send a short, conflict-safe summary of where you were, when you were affected, what you lost, and what proof you have. For urgent issues, deadline concerns, or sensitive facts, call instead.</p><p class="inline-warning"><strong>Takes about 2 minutes.</strong> Share the basic impact first, then keep full medical, financial, or privileged documents for a secure follow-up route. Review the <a href="/privacy.html">Privacy Policy</a> and <a href="/disclaimer.html">Legal Disclaimer</a> before submitting.</p>
     <div class="form-wrap">
-      <form name="garden-grove-case-review" method="POST" action="/success.html" enctype="application/x-www-form-urlencoded" data-netlify="true" netlify netlify-honeypot="bot-field" aria-label="Garden Grove chemical incident case review form">
+      <form id="gardenGroveCaseForm" name="garden-grove-case-review" method="POST" action="https://docs.google.com/forms/d/e/1FAIpQLSeqsUsCXzzYV482zQLpw23RYZHnQqvX_EgK0Jjj4PjJMvDJaQ/formResponse" enctype="application/x-www-form-urlencoded" data-netlify="true" netlify netlify-honeypot="bot-field" aria-label="Garden Grove chemical incident case review form">
         <input type="hidden" name="form-name" value="garden-grove-case-review" />
         <input type="hidden" name="matterType" value="Garden Grove chemical incident" />
+        <input type="hidden" name="entry.1078640570" data-google-entry="firstName" />
+        <input type="hidden" name="entry.1431992338" data-google-entry="lastName" />
+        <input type="hidden" name="entry.899186074" data-google-entry="phone" />
+        <input type="hidden" name="entry.1147663058" data-google-entry="email" />
+        <input type="hidden" name="entry.1173587489" data-google-entry="contactMethod" />
+        <input type="hidden" name="entry.170076689" data-google-entry="affectedCity" />
+        <input type="hidden" name="entry.1252839351" data-google-entry="affectedAddress" />
+        <input type="hidden" name="entry.1648296147" data-google-entry="impactType" />
+        <input type="hidden" name="entry.1215651022" data-google-entry="alreadySigned" />
+        <input type="hidden" name="entry.1533520462" data-google-entry="summary" />
+        <input type="hidden" name="entry.886968026" data-google-entry="consent" />
         <p class="notice"><strong>Privacy and notice at collection:</strong> send a short conflict-safe summary only. Do not include privileged documents, full medical records, Social Security numbers, account credentials, or highly sensitive details through this public form. Berhe Jones may use the contact and matter information you provide to respond, screen conflicts, evaluate fit, and maintain intake records. Review the <a href="/privacy.html">Privacy Policy</a>. If your matter is urgent or deadline-sensitive, call 909-609-6685.</p>
         <p style="position:absolute;left:-9999px" aria-hidden="true"><label>Do not fill this out if you are human: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
         <div class="form-grid">
@@ -344,6 +355,7 @@ p{margin:0}.lede{font-size:clamp(18px,2.2vw,22px);line-height:1.55;color:var(--i
           <div class="field full"><label for="summary">Short conflict-safe summary</label><textarea id="summary" name="summary" placeholder="Briefly describe evacuation dates, symptoms, expenses, missed work or business closure, property issues, and documents you have. Do not include privileged or highly sensitive details yet." required></textarea></div>
         </div>
         <label class="consent"><input type="checkbox" name="consent" required /> <span>I understand that submitting information does not create an attorney-client relationship. Representation begins only after conflicts review and a signed written agreement. I also understand there is no guarantee of outcome.</span></label>
+        <p class="form-status" id="screeningStatus" role="status" aria-live="polite" hidden></p>
         <button class="submit" type="submit">Request free screening</button>
       </form>
     </div>
@@ -380,6 +392,52 @@ p{margin:0}.lede{font-size:clamp(18px,2.2vw,22px);line-height:1.55;color:var(--i
   toggle.addEventListener('click', () => setOpen(!nav.classList.contains('nav-open')));
   links.forEach((link) => link.addEventListener('click', () => setOpen(false)));
   document.addEventListener('keydown', (event) => { if(event.key === 'Escape') setOpen(false); });
+})();
+</script>
+
+<script>
+(function(){
+  const form = document.getElementById('gardenGroveCaseForm');
+  if(!form) return;
+  const status = document.getElementById('screeningStatus');
+  const submit = form.querySelector('button[type="submit"]');
+  const originalText = submit ? submit.textContent : 'Request free screening';
+  const endpoint = 'https://docs.google.com/forms/d/e/1FAIpQLSeqsUsCXzzYV482zQLpw23RYZHnQqvX_EgK0Jjj4PjJMvDJaQ/formResponse';
+  const consentText = 'I agree to be contacted and understand this does not create an attorney-client relationship.';
+  function setStatus(kind, html){
+    if(!status) return;
+    status.hidden = false;
+    status.className = 'form-status ' + kind;
+    status.innerHTML = html;
+    status.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+  function syncGoogleFields(){
+    form.querySelectorAll('[data-google-entry]').forEach((hidden) => {
+      const sourceName = hidden.getAttribute('data-google-entry');
+      const source = form.elements[sourceName];
+      if(!source) return;
+      if(source.type === 'checkbox') hidden.value = source.checked ? consentText : '';
+      else hidden.value = source.value || '';
+    });
+  }
+  form.addEventListener('submit', async function(event){
+    syncGoogleFields();
+    if(!form.checkValidity()) return;
+    if(!window.fetch || !window.URLSearchParams) return;
+    event.preventDefault();
+    if(submit){ submit.disabled = true; submit.textContent = 'Sending screening...'; }
+    try{
+      const payload = new URLSearchParams();
+      form.querySelectorAll('[name^="entry."]').forEach((field) => payload.append(field.name, field.value || ''));
+      await fetch(endpoint, {method:'POST', mode:'no-cors', body:payload});
+      if(submit){ submit.textContent = 'Screening received'; submit.style.background = '#2f5b3a'; }
+      setStatus('success', '<strong>Screening received.</strong> Berhe Jones will review the information and follow up. If your matter is urgent or deadline-sensitive, call <a href="tel:+19096096685">909-609-6685</a> now.');
+      form.reset();
+    }catch(error){
+      if(submit){ submit.disabled = false; submit.textContent = originalText; }
+      setStatus('error', '<strong>The form did not confirm delivery.</strong> Please call <a href="tel:+19096096685">909-609-6685</a> now, or try again from a different browser.');
+    }
+  });
 })();
 </script>
 <script>
