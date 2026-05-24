@@ -145,6 +145,20 @@ def test_stage1_forms_are_live_netlify_intake_without_uploads():
         assert "attorney-client relationship" in text
 
 
+def test_html_pages_have_keyboard_skip_link_to_main_content():
+    for path in ROOT.rglob("*.html"):
+        if ".git" in path.parts:
+            continue
+        doc = page_doc(path)
+        skip_link = doc.select_one('a.skip-link[href="#main"]')
+        assert skip_link is not None, f"{path} needs a skip-to-main link"
+        assert skip_link.get_text(" ", strip=True) == "Skip to main content"
+        main = doc.select("main#main")
+        assert len(main) == 1, f"{path} needs exactly one main#main landmark"
+        style_text = "\n".join(style.get_text() for style in doc.select("style"))
+        assert ".skip-link:focus" in style_text, f"{path} needs visible focus styling for skip link"
+
+
 def test_public_pages_have_complete_social_share_metadata():
     for route, path in {"/": ROOT / "index.html", **PUBLIC_PAGES, **SUPPORT_PAGES}.items():
         doc = page_doc(path)

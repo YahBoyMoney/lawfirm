@@ -26,12 +26,15 @@
 /* Public page mobile polish */
 form{scroll-margin-top:190px}
 @media(max-width:760px){.top-inner{align-items:flex-start}.top-actions{gap:8px}.nav{position:static}.nav-inner{align-items:flex-start;gap:10px}.nav-links{gap:8px 12px}.nav-links a{min-height:44px;padding:6px 0}.hero{padding-top:44px}.section,.section.alt .inner{scroll-margin-top:24px}}
-@media(max-width:420px){.top-inner{align-items:flex-start}.top-actions{width:100%;justify-content:space-between}.pill{font-size:11px;padding:6px 8px}.call{font-size:14px}.actions{display:grid}.actions .btn{text-align:center}}</style>
+@media(max-width:420px){.top-inner{align-items:flex-start}.top-actions{width:100%;justify-content:space-between}.pill{font-size:11px;padding:6px 8px}.call{font-size:14px}.actions{display:grid}.actions .btn{text-align:center}}
+.skip-link{position:fixed;left:24px;top:12px;transform:translateY(-160%);z-index:9999;background:#fff;color:#15212e;border:2px solid #9a7a2e;border-radius:4px;padding:10px 14px;font-weight:700;text-decoration:none;box-shadow:0 12px 32px -20px rgba(21,33,46,.35)}.skip-link:focus{transform:translateY(0);outline:3px solid rgba(184,150,71,.45);outline-offset:2px}
+</style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to main content</a>
 <header class="top"><div class="top-inner"><a class="brand" href="/">Berhe Jones<small>DBA of The Berhe Law Firm</small></a><div class="top-actions"><span class="pill">California case review</span><a class="call" href="tel:+19096096685">909-609-6685</a></div></div></header>
 <nav class="nav" aria-label="Foundation pages"><div class="nav-inner"><strong>Explore</strong><ul class="nav-links"><li><a href="/attorney-tam-berhe/">Attorney</a></li><li><a href="/case-review-process/">Process</a></li><li><a href="/free-case-review/">Case Review</a></li><li><a href="/referrals-co-counsel/">Referrals</a></li><li><a href="/landing/truck-fleet-rideshare-accident-california/">Truck/Fleet Review</a></li><li><a href="/resources/prepare-for-case-review/">Resources</a></li></ul></div></nav>
-<main>
+<main id="main">
 <section class="hero">
   <div>
     <span class="eyebrow">Case review preparation</span>

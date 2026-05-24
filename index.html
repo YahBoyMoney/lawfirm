@@ -2415,9 +2415,12 @@
     .hero-media img { transform: none !important; }
   }
 
+
+.skip-link{position:fixed;left:24px;top:12px;transform:translateY(-160%);z-index:9999;background:#fff;color:#15212e;border:2px solid #9a7a2e;border-radius:4px;padding:10px 14px;font-weight:700;text-decoration:none;box-shadow:0 12px 32px -20px rgba(21,33,46,.35)}.skip-link:focus{transform:translateY(0);outline:3px solid rgba(184,150,71,.45);outline-offset:2px}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- Top utility bar -->
 <div class="topbar" role="region" aria-label="Office availability">
@@ -2433,7 +2436,7 @@
 </div>
 
 <!-- Nav -->
-<header class="nav" role="banner">
+<header class="nav" role="banner" id="top">
   <div class="nav-inner">
     <a href="#top" class="brand" aria-label="Berhe Jones LLP, home">
       <img class="brand-logo" src="/images/berhe-jones-llp-logo.png" alt="Berhe Jones LLP" width="1305" height="308" />
@@ -2462,7 +2465,7 @@
 </header>
 
 <!-- Hero -->
-<main id="top">
+<main id="main">
 <section class="hero" aria-labelledby="heroTitle">
   <picture class="hero-media" aria-hidden="true">
     <source media="(max-width: 760px)" srcset="/images/berhe-jones-hero-team-mobile.webp" type="image/webp" />

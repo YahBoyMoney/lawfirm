@@ -92,6 +92,8 @@ p{margin:0}.lede{font-size:clamp(18px,2.2vw,22px);line-height:1.55;color:var(--i
 .form-wrap{margin-top:28px;background:#fff;border:1px solid var(--rule);border-radius:18px;padding:28px;box-shadow:var(--shadow)}.notice{background:#fff7df;border:1px solid #e7d39b;border-radius:12px;padding:14px 16px;font-size:15px;line-height:1.55;color:#4a3b17}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}.field{display:grid;gap:8px}.field.full{grid-column:1/-1}label{font-weight:800;color:var(--ink);font-size:14px}input,select,textarea{width:100%;border:1px solid #cfc5b2;border-radius:9px;background:#fff;padding:13px 13px;font:inherit;color:var(--ink);min-height:48px}textarea{min-height:178px;resize:vertical}input:focus,select:focus,textarea:focus{outline:3px solid rgba(184,150,71,.28);border-color:var(--brass)}.consent{display:flex;align-items:flex-start;gap:12px;margin-top:17px;font-weight:500;color:var(--ink-2);font-size:15px;line-height:1.55}.consent input{width:18px;min-width:18px;height:18px;margin-top:3px;min-height:18px}.submit{margin-top:18px;width:100%;min-height:54px;border:0;border-radius:9px;background:var(--red);color:#fff;font:inherit;font-weight:900;cursor:pointer;box-shadow:var(--shadow-soft)}.submit:hover{background:#671f1f}.footer{background:var(--ink);color:#d6dedc;padding:52px 24px 28px}.footer-inner{max-width:var(--container);margin:0 auto;display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:36px}.footer .brand-logo{width:min(238px,86vw);filter:none}.footer h4{color:#fff;margin:0 0 12px;font-size:14px;letter-spacing:.13em;text-transform:uppercase}.footer p,.footer li{font-size:14px;color:#c8d0cf}.footer ul{margin:0;padding-left:18px}.footer a{color:#fff}.identity-note{margin-top:16px}.disclaimer{max-width:var(--container);margin:34px auto 0;border-top:1px solid rgba(255,255,255,.13);padding-top:18px;font-size:12px;color:#aeb8b6;line-height:1.55}
 @media(max-width:980px){.hero-grid,.split{grid-template-columns:1fr}.hero-grid{padding-top:48px}.hero-media{max-width:660px}.facts,.media-grid,.footer-inner{grid-template-columns:1fr 1fr}.fact:nth-child(2){border-right:0}.fact:nth-child(3),.fact:nth-child(4){border-top:1px solid rgba(255,255,255,.12)}.media-card.large{grid-row:auto}.media-card.large img{height:280px}}
 @media(max-width:720px){.topbar-inner{align-items:flex-start;flex-direction:column;gap:6px;padding:9px 18px}.nav-inner{padding:13px 18px;align-items:flex-start;flex-direction:column}.brand-logo{width:184px}.nav-links{width:100%;gap:0;display:grid;grid-template-columns:1fr 1fr}.nav-links a{min-height:40px}.nav-cta{width:100%}.alert-inner{padding:12px 18px}.hero-grid{padding:40px 18px 46px;gap:30px}.hero-media{border-radius:14px}.hero-media img{aspect-ratio:1/1}.actions .btn{width:100%}.fact-strip{padding:0 18px;margin-top:-18px}.facts{grid-template-columns:1fr}.fact{border-right:0;border-top:1px solid rgba(255,255,255,.12)}.fact:first-child{border-top:0}.section{padding:58px 18px}.media-grid,.grid,.form-grid,.footer-inner{grid-template-columns:1fr}.media-card img,.media-card.large img{height:240px}.panel,.form-wrap{padding:22px}.field.full{grid-column:auto}h1{font-size:45px}.lede{font-size:18px}.source-note{text-align:left}.footer{padding-inline:18px}}
+
+.skip-link{position:fixed;left:24px;top:12px;transform:translateY(-160%);z-index:9999;background:#fff;color:#15212e;border:2px solid #9a7a2e;border-radius:4px;padding:10px 14px;font-weight:700;text-decoration:none;box-shadow:0 12px 32px -20px rgba(21,33,46,.35)}.skip-link:focus{transform:translateY(0);outline:3px solid rgba(184,150,71,.45);outline-offset:2px}
 </style>
 
 <script type="application/ld+json">
@@ -99,6 +101,7 @@ p{margin:0}.lede{font-size:clamp(18px,2.2vw,22px);line-height:1.55;color:var(--i
 </script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to main content</a>
 <header class="topbar" id="top">
   <div class="topbar-inner">
     <div class="left"><span class="signal">California incident screening</span><span>Garden Grove, Stanton, Anaheim, Westminster, Cypress, Buena Park</span></div>
@@ -119,7 +122,7 @@ p{margin:0}.lede{font-size:clamp(18px,2.2vw,22px);line-height:1.55;color:var(--i
   </div>
 </nav>
 <div class="alert"><div class="alert-inner"><strong>Public information page:</strong> Berhe Jones is not affiliated with GKN Aerospace, the City of Garden Grove, emergency agencies, shelters, or any currently filed class action counsel. Images below are source-linked public news images from reports about the incident.</div></div>
-<main>
+<main id="main">
 <section class="hero">
   <div class="hero-grid">
     <div>
