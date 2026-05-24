@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-24T15:29:44Z",
+  "lastVerifiedUtc": "2026-05-24T17:45:21Z",
   "statusLabel": "Public-source monitoring",
-  "summary": "Public sources continue to describe the Garden Grove GKN Aerospace methyl methacrylate incident, evacuation disruption affecting tens of thousands of residents, school closures, state emergency support, DA investigation reporting, emerging class-action reporting, chemical safety concerns, and regulatory-history reporting. Residents should follow official safety instructions first and use this page to preserve proof and request conflict-safe screening.",
+  "summary": "Public sources continue to describe the Garden Grove GKN Aerospace methyl methacrylate incident, evacuation disruption affecting tens of thousands of residents, normal reported air-monitoring readings as of Sunday morning, school closures, state emergency support, DA investigation reporting, emerging class-action reporting, chemical safety concerns, and regulatory-history reporting. Residents should follow official safety instructions first and use this page to preserve proof and request conflict-safe screening.",
   "updates": [
+    {
+      "timeUtc": "2026-05-24T17:37:35Z",
+      "category": "Air monitoring",
+      "title": "OC Register reports normal air-monitor readings; tank status quo Sunday morning",
+      "summary": "The Orange County Register reported that OCFA described the GKN Aerospace tank as showing no significant overnight change into Sunday morning. The same report said South Coast AQMD found no contaminants near the facility and that EPA monitors in the area also did not detect contaminants.",
+      "sourceLabel": "Orange County Register",
+      "sourceUrl": "https://www.ocregister.com/2026/05/24/no-contaminants-found-in-air-near-garden-grove-chemical-plant-tank-remains-intact/"
+    },
     {
       "timeUtc": "2026-05-24T14:33:00Z",
       "category": "Health guidance",
@@ -58,14 +66,6 @@
       "summary": "The Governor's office published a proclamation related to the ongoing chemical incident in Garden Grove and additional shelter-site support.",
       "sourceLabel": "Governor of California",
       "sourceUrl": "https://www.gov.ca.gov/2026/05/23/governor-newsom-proclaims-state-of-emergency-in-orange-county-in-response-to-ongoing-chemical-incident-in-garden-grove-makes-additional-shelter-sites-available/"
-    },
-    {
-      "timeUtc": "2026-05-22T23:50:00Z",
-      "category": "Schools",
-      "title": "OCDE reported Garden Grove school disruptions and closures",
-      "summary": "Orange County Department of Education coverage tracked school closures and emergency updates tied to the hazardous chemical response.",
-      "sourceLabel": "Orange County Department of Education",
-      "sourceUrl": "https://newsroom.ocde.us/several-garden-grove-unified-campuses-closed-following-chemical-leak-response/"
     }
   ],
   "resources": [
