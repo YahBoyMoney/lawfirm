@@ -242,6 +242,11 @@ def test_stage1_forms_are_live_netlify_intake_without_uploads():
         text = form.get_text(" ", strip=True).lower()
         assert "do not include privileged" in text
         assert "attorney-client relationship" in text
+        if form_name == "case-review":
+            assert form.get("aria-labelledby") == "caseReviewTitle"
+            assert form.get("aria-describedby") == "caseReviewPrivacyNote"
+            assert doc.select_one("#caseReviewTitle") is not None
+            assert doc.select_one("#caseReviewPrivacyNote.notice") is not None
 
 
 def test_homepage_declares_netlify_form_detection_stubs():
