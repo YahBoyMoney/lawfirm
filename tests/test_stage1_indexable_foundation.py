@@ -33,6 +33,7 @@ SUPPORT_PAGES = {
 }
 
 SOCIAL_IMAGE = "https://berhelaw.com/images/og-berhe-jones-llp.png"
+SOCIAL_IMAGE_ALT = "Berhe Jones LLP branded social preview image for California legal services."
 
 PROHIBITED_PUBLIC_TERMS = [
     "noindex",
@@ -272,10 +273,12 @@ def test_public_pages_have_complete_social_share_metadata():
             'meta[property="og:image"]': SOCIAL_IMAGE,
             'meta[property="og:image:width"]': "1200",
             'meta[property="og:image:height"]': "630",
+            'meta[property="og:image:alt"]': SOCIAL_IMAGE_ALT,
             'meta[name="twitter:card"]': "summary_large_image",
             'meta[name="twitter:title"]': title.get_text(strip=True),
             'meta[name="twitter:description"]': description.get("content"),
             'meta[name="twitter:image"]': SOCIAL_IMAGE,
+            'meta[name="twitter:image:alt"]': SOCIAL_IMAGE_ALT,
         }
         for selector, expected_content in expected.items():
             tags = doc.select(selector)
