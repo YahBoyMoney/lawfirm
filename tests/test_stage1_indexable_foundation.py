@@ -122,6 +122,26 @@ def test_standard_subpage_navigation_links_to_resource_hub():
         assert route_exists(str(resource_link.get("href")))
 
 
+def test_public_pages_expose_current_page_state_in_navigation_links():
+    home_doc = page_doc(ROOT / "index.html")
+    home_brand = home_doc.select_one('a.brand[href="#top"][aria-current="page"]')
+    assert home_brand is not None, "homepage brand/home link should expose the current page"
+    home_style = "\n".join(style.get_text() for style in home_doc.select("style"))
+    assert '.nav-links a[aria-current="page"]' in home_style
+
+    for route, path in PUBLIC_PAGES.items():
+        if route == "/landing/garden-grove-chemical-leak/":
+            continue
+        doc = page_doc(path)
+        current_links = doc.select(f'a[href="{route}"][aria-current="page"]')
+        assert current_links, f"{route} should mark at least one exact current-page link"
+        style_text = "\n".join(style.get_text() for style in doc.select("style"))
+        assert '.nav-links a[aria-current="page"]' in style_text
+        if route.startswith("/practice-areas/") and route != "/practice-areas/":
+            assert doc.select_one(f'.practice-nav a[href="{route}"][aria-current="page"]') is not None
+            assert '.practice-nav a[aria-current="page"]' in style_text
+
+
 def test_stage1_pages_include_dba_and_safety_copy_without_staging_terms():
     for route, path in PUBLIC_PAGES.items():
         text = page_doc(path).get_text(" ", strip=True).lower()

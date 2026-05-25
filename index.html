@@ -183,7 +183,7 @@
     border-bottom: 1px solid transparent;
     transition: border-color .15s ease, color .15s ease;
   }
-  .nav-links a:hover { color: var(--ink); border-bottom-color: var(--brass); }
+  .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--brass); }
   .nav-cta {
     display: inline-flex; align-items: center; gap: 8px;
     background: var(--ink);
@@ -2438,7 +2438,7 @@
 <!-- Nav -->
 <header class="nav" role="banner" id="top">
   <div class="nav-inner">
-    <a href="#top" class="brand" aria-label="Berhe Jones LLP, home">
+    <a href="#top" class="brand" aria-label="Berhe Jones LLP, home" aria-current="page">
       <img class="brand-logo" src="/images/berhe-jones-llp-logo.png" alt="Berhe Jones LLP" width="1305" height="308" />
       <span class="sr-only">Trial &amp; Contingency Counsel</span>
     </a>
