@@ -1,5 +1,5 @@
 {
-  "lastVerifiedUtc": "2026-05-25T06:59:23Z",
+  "lastVerifiedUtc": "2026-05-25T09:12:00Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, and proof-preservation tools. Follow emergency officials first for active safety orders.",
   "updates": [
@@ -60,12 +60,12 @@
       "sourceUrl": "https://www.ocregister.com/2026/05/24/no-contaminants-found-in-air-near-garden-grove-chemical-plant-tank-remains-intact/"
     },
     {
-      "timeUtc": "2026-05-24T14:33:00Z",
-      "category": "Health guidance",
-      "title": "ABC7 posts methyl methacrylate health-effect explainer",
-      "summary": "ABC7 reported that methyl methacrylate can irritate the skin, eyes, lungs, and nasal passages, that short-term inhalation can cause nausea and dizziness, and that very high levels can cause severe respiratory distress requiring hospitalization. The report also noted officials were monitoring air quality and, as of early Friday afternoon, levels were within normal limits.",
-      "sourceLabel": "ABC7 Los Angeles",
-      "sourceUrl": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/entry/19152926/"
+      "timeUtc": "2026-05-24T17:44:51Z",
+      "category": "Legal action",
+      "title": "KTLA reports attorney behind Garden Grove class-action lawsuit spoke publicly",
+      "summary": "KTLA reported that The X-Law Group P.C. and Presidio Law Firm LLP filed a proposed class-action lawsuit on behalf of residents living inside the evacuation zone. KTLA said attorney Filippo Marchino discussed claimed evacuation expenses, loss-of-use issues, and possible diminished property-value damages; the report did not list a public case number.",
+      "sourceLabel": "KTLA",
+      "sourceUrl": "https://ktla.com/news/orange-county/garden-grove-families-did-not-sign-up-for-this-attorney-behind-lawsuit-speaks-out/"
     }
   ],
   "resources": [
