@@ -1,15 +1,23 @@
 {
-  "lastVerifiedUtc": "2026-05-25T19:55:22Z",
+  "lastVerifiedUtc": "2026-05-25T22:01:06Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, and proof-preservation tools. Follow emergency officials first for active safety orders.",
   "updates": [
     {
-      "timeUtc": "2026-05-25T18:44:00Z",
+      "timeUtc": "2026-05-25T21:03:00Z",
+      "category": "Evacuation status",
+      "title": "City page cites OCFA: evacuation zones being re-evaluated, no reentry yet",
+      "summary": "The City of Garden Grove emergency page posted an OCFA update from 2:03 p.m. PT saying that, because the BLEVE threat has been eliminated, fire and law-enforcement officials are re-evaluating evacuation zones. The same update warned residents not to enter evacuation zones yet and said officials planned a 6 p.m. press conference at the Incident Command Post in Los Alamitos.",
+      "sourceLabel": "City of Garden Grove / OCFA",
+      "sourceUrl": "https://ggcity.org/emergency"
+    },
+    {
+      "timeUtc": "2026-05-25T18:31:02Z",
       "category": "Emergency assistance",
-      "title": "CBS reports Newsom says federal emergency declaration was approved",
-      "summary": "CBS Los Angeles reported that Governor Gavin Newsom said President Trump approved California's request for a federal emergency declaration for the Orange County chemical-leak response. CBS said Newsom's office described the approval as allowing FEMA to direct federal assistance with personnel, equipment, and specialized resources for life-saving response; residents should still follow official City and public-safety instructions for evacuation-zone status and reentry.",
-      "sourceLabel": "CBS Los Angeles",
-      "sourceUrl": "https://www.cbsnews.com/losangeles/live-updates/california-chemical-leak-orange-county-garden-grove-emergency-day-5/#post-update-30bcd7ed"
+      "title": "Governor says Presidential Emergency Declaration was approved for hazmat response",
+      "summary": "The Governor of California announced that President Trump approved California's request for a Presidential Emergency Declaration tied to the Garden Grove chemical incident. The Governor's office said the declaration allows FEMA to provide direct federal assistance with personnel, equipment, and specialized resources for life-saving response; it also said significant public health and environmental risks remain and evacuation orders continue to be in place.",
+      "sourceLabel": "Governor of California",
+      "sourceUrl": "https://www.gov.ca.gov/2026/05/25/governor-newsom-secures-presidential-emergency-declaration-approval-for-orange-county-hazmat-response/"
     },
     {
       "timeUtc": "2026-05-25T17:27:00Z",
@@ -58,14 +66,6 @@
       "summary": "ABC7 reported that Orange County District Attorney Todd Spitzer launched a criminal investigation into the Garden Grove chemical-tank incident, established an anonymous tipline and online reporting form, and ordered GKN Aerospace to preserve records. ABC7 said the DA's office sought information about the release, facility operations, and the quality and frequency of maintenance for the tanks and systems at issue; the report describes an investigation and records-preservation step, not a finding of liability.",
       "sourceLabel": "ABC7 Los Angeles",
       "sourceUrl": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/entry/19165127/"
-    },
-    {
-      "timeUtc": "2026-05-25T06:47:27Z",
-      "category": "Investigation",
-      "title": "NBC4 reports 2025 South Coast AQMD settlement involving GKN Aerospace",
-      "summary": "NBC4 Los Angeles reported that GKN Aerospace settled a South Coast Air Quality Management District matter in early 2025 for $909,935.95. NBC4 said the cited violations stemmed from a 2020 inspection and involved permit requirements, emissions beyond allowed limits, recordkeeping, and equipment or procedure permits; NBC4 also reported that more recent inspections it reviewed showed the company in compliance and that the specific chemical involved in the Garden Grove tank emergency was not mentioned in those settlement documents.",
-      "sourceLabel": "NBC4 Los Angeles",
-      "sourceUrl": "https://www.nbclosangeles.com/news/local/gkn-aerospace-air-quality-safety-violation-settlement/3894740/"
     }
   ],
   "resources": [
