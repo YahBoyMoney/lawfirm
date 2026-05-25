@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-25T00:27:53Z",
+  "lastVerifiedUtc": "2026-05-25T02:40:27Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, and proof-preservation tools. Follow emergency officials first for active safety orders.",
   "updates": [
+    {
+      "timeUtc": "2026-05-25T01:21:23Z",
+      "category": "Evacuation resources",
+      "title": "LA Times reports shelters full while OCFA says areas outside evacuation zone are safe",
+      "summary": "The Los Angeles Times live update reported that City-linked shelter information showed Orange County evacuation shelters full, while a separate OCFA-cited update said areas outside the current evacuation zone were considered completely safe and day-to-day activities could continue as normal. Residents inside the evacuation zone should continue following official evacuation orders and City/OCFA instructions.",
+      "sourceLabel": "Los Angeles Times",
+      "sourceUrl": "https://www.latimes.com/california/live/garden-grove-gas-leak-live-evacuation-maps-closures-and-updates#all-shelters-for-o-c-evacuees-are-full-according-to-city"
+    },
     {
       "timeUtc": "2026-05-24T21:39:43Z",
       "category": "Response status",
@@ -58,14 +66,6 @@
       "summary": "ABC7 reported that two evacuation-zone residents are named plaintiffs in a class-action lawsuit connected to the Garden Grove GKN Aerospace chemical tank emergency, with X-Law Group and Presidio Law Firm described as leading the action. The report did not provide a case number.",
       "sourceLabel": "ABC7 Los Angeles",
       "sourceUrl": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/"
-    },
-    {
-      "timeUtc": "2026-05-24T06:15:00Z",
-      "category": "Investigation",
-      "title": "Orange County DA investigation reporting adds accountability context",
-      "summary": "CBS Los Angeles reported that the Orange County District Attorney opened an investigation connected to the Garden Grove GKN Aerospace chemical leak and sought whistleblower information.",
-      "sourceLabel": "CBS Los Angeles",
-      "sourceUrl": "https://www.cbsnews.com/losangeles/news/garden-grove-gkn-aerospace-chemical-leak-investigation-orange-county-district-attorney-whistleblowers/"
     }
   ],
   "resources": [
