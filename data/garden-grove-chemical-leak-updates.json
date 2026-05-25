@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-25T13:27:35Z",
+  "lastVerifiedUtc": "2026-05-25T15:41:40Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, and proof-preservation tools. Follow emergency officials first for active safety orders.",
   "updates": [
+    {
+      "timeUtc": "2026-05-25T15:24:27Z",
+      "category": "Response status",
+      "title": "ABC7 reports catastrophic explosion threat has been eliminated",
+      "summary": "ABC7 reported that Orange County Fire Authority officials said the GKN Aerospace tank has released its pressure, its temperature has stabilized and is decreasing, and the catastrophic explosion threat has been eliminated. ABC7 also reported that evacuation orders remained in effect while officials continued response and return-home planning, so residents should keep following official City/OCFA instructions.",
+      "sourceLabel": "ABC7 Los Angeles",
+      "sourceUrl": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/"
+    },
     {
       "timeUtc": "2026-05-25T12:57:37Z",
       "category": "Response status",
@@ -58,14 +66,6 @@
       "summary": "The Governor's office reported that more than 785 state and local responders and emergency personnel were supporting the Orange County hazmat response, including three specialized hazmat teams, CHP traffic and evacuation support, public-health and sheltering staff, and environmental monitoring. The update said state and environmental agencies were monitoring air quality and public-health impacts, with no known chemicals leaking on the ground or in the air at the time of publication.",
       "sourceLabel": "Governor of California",
       "sourceUrl": "https://www.gov.ca.gov/2026/05/24/california-mobilizes-785-emergency-personnel-in-orange-county-hazmat-response/"
-    },
-    {
-      "timeUtc": "2026-05-24T21:39:43Z",
-      "category": "Response status",
-      "title": "EPA chief says low-volume release is the most likely scenario",
-      "summary": "The Guardian reported that EPA Administrator Lee Zeldin told CNN the tank was expected to fail, but that officials had been told the most likely scenario was a low-volume release that local authorities could monitor, neutralize, and contain. The same report noted evacuations remained in effect and cited South Coast AQMD reporting normal air-monitoring measurements.",
-      "sourceLabel": "The Guardian",
-      "sourceUrl": "https://www.theguardian.com/us-news/2026/may/24/chemical-tank-california-epa-lee-zeldin"
     }
   ],
   "resources": [
