@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-25T16:21:37Z",
+  "lastVerifiedUtc": "2026-05-25T17:47:10Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, and proof-preservation tools. Follow emergency officials first for active safety orders.",
   "updates": [
+    {
+      "timeUtc": "2026-05-25T16:43:41Z",
+      "category": "Response status",
+      "title": "KTLA reports OCFA says evacuations remain despite reduced explosion risk",
+      "summary": "KTLA reported that Orange County Fire Authority said evacuation orders remained in place even after officials determined the catastrophic BLEVE explosion risk had been eliminated. KTLA quoted OCFA as saying there was still an ongoing public-safety threat, that continuous atmospheric monitoring verified no chemical leak, and that officials planned a press conference later in the day; residents should keep following official evacuation-zone instructions.",
+      "sourceLabel": "KTLA",
+      "sourceUrl": "https://ktla.com/news/orange-county/garden-grove-chemical-tank-crack-explosion-risk/"
+    },
     {
       "timeUtc": "2026-05-25T16:11:54Z",
       "category": "Response status",
@@ -58,14 +66,6 @@
       "summary": "The Orange County Department of Education reported that several districts were adjusting campus operations, relocating students, or expanding remote-learning plans while the Garden Grove hazmat response continues. OCDE said 12 Garden Grove Unified campuses would remain closed through the final day of school on May 27, while affected Westminster, Magnolia, Savanna, and ACCESS programs also announced closures, relocations, or remote instruction.",
       "sourceLabel": "Orange County Department of Education",
       "sourceUrl": "https://newsroom.ocde.us/several-garden-grove-unified-campuses-closed-following-chemical-leak-response/"
-    },
-    {
-      "timeUtc": "2026-05-25T01:21:23Z",
-      "category": "Evacuation resources",
-      "title": "LA Times reports shelters full while OCFA says areas outside evacuation zone are safe",
-      "summary": "The Los Angeles Times live update reported that City-linked shelter information showed Orange County evacuation shelters full, while a separate OCFA-cited update said areas outside the current evacuation zone were considered completely safe and day-to-day activities could continue as normal. Residents inside the evacuation zone should continue following official evacuation orders and City/OCFA instructions.",
-      "sourceLabel": "Los Angeles Times",
-      "sourceUrl": "https://www.latimes.com/california/live/garden-grove-gas-leak-live-evacuation-maps-closures-and-updates#all-shelters-for-o-c-evacuees-are-full-according-to-city"
     }
   ],
   "resources": [
