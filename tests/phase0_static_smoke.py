@@ -26,7 +26,7 @@ def test_robots_and_sitemap_cover_public_canonical_pages_only():
     }
     for url in expected:
         assert f"<loc>{url}</loc>" in sitemap_text
-    assert sitemap_text.count("<lastmod>2026-05-24</lastmod>") >= len(expected)
+    assert sitemap_text.count("<lastmod>2026-05-25</lastmod>") >= len(expected)
     assert "success.html" not in sitemap_text
 
 
