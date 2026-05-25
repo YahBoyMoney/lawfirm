@@ -1,5 +1,5 @@
 {
-  "lastVerifiedUtc": "2026-05-24T21:55:58Z",
+  "lastVerifiedUtc": "2026-05-25T00:27:53Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, and proof-preservation tools. Follow emergency officials first for active safety orders.",
   "updates": [
@@ -10,6 +10,14 @@
       "summary": "The Guardian reported that EPA Administrator Lee Zeldin told CNN the tank was expected to fail, but that officials had been told the most likely scenario was a low-volume release that local authorities could monitor, neutralize, and contain. The same report noted evacuations remained in effect and cited South Coast AQMD reporting normal air-monitoring measurements.",
       "sourceLabel": "The Guardian",
       "sourceUrl": "https://www.theguardian.com/us-news/2026/may/24/chemical-tank-california-epa-lee-zeldin"
+    },
+    {
+      "timeUtc": "2026-05-24T20:32:00Z",
+      "category": "Official response",
+      "title": "Governor requests federal emergency declaration for Orange County response",
+      "summary": "Governor Newsom announced a request to President Trump for an Emergency Declaration to support the Orange County response, including federal cost-share support for evacuations, sheltering, emergency medical support, equipment, overtime, technical support, and other emergency protective measures. The Governor's office noted that this request is focused on immediate response and does not itself include later individual-assistance or major-disaster recovery programs.",
+      "sourceLabel": "Governor of California",
+      "sourceUrl": "https://www.gov.ca.gov/2026/05/24/governor-newsom-submits-request-to-president-trump-for-emergency-declaration-to-support-response-efforts-in-orange-county/"
     },
     {
       "timeUtc": "2026-05-24T19:49:16Z",
@@ -58,14 +66,6 @@
       "summary": "CBS Los Angeles reported that the Orange County District Attorney opened an investigation connected to the Garden Grove GKN Aerospace chemical leak and sought whistleblower information.",
       "sourceLabel": "CBS Los Angeles",
       "sourceUrl": "https://www.cbsnews.com/losangeles/news/garden-grove-gkn-aerospace-chemical-leak-investigation-orange-county-district-attorney-whistleblowers/"
-    },
-    {
-      "timeUtc": "2026-05-24T01:54:44Z",
-      "category": "Regulatory history",
-      "title": "OC Register reports prior South Coast AQMD settlement and notices",
-      "summary": "The Orange County Register reported, citing South Coast AQMD and public records, that GKN Aerospace paid an estimated $900,000 civil penalty to settle 2021 environmental violations involving VOC emission records, equipment permitting, toxic-air-contaminant coatings, and other issues, and that two additional notices to comply were issued in March 2025.",
-      "sourceLabel": "Orange County Register",
-      "sourceUrl": "https://www.ocregister.com/2026/05/23/gkn-aerospace-paid-nearly-1-million-to-settle-2021-environmental-violations/"
     }
   ],
   "resources": [
