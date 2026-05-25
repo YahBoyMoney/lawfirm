@@ -1,4 +1,5 @@
 import json
+import re
 from pathlib import Path
 
 from bs4 import BeautifulSoup
@@ -183,12 +184,23 @@ def test_garden_grove_incident_media_images_are_performance_safe():
         assert str(img.get("alt") or "").strip(), "incident images need factual alt text"
 
 
+def test_garden_grove_mobile_sticky_call_has_specific_accessible_name():
+    doc = page_doc(PUBLIC_PAGES["/landing/garden-grove-chemical-leak/"])
+    sticky_call = doc.select_one('.mobile-sticky-cta a[href="tel:+19096096685"]')
+    assert sticky_call is not None
+    assert sticky_call.get_text(" ", strip=True) == "Call now"
+    assert sticky_call.get("aria-label") == "Call Berhe Jones LLP at 909-609-6685"
+
+
 def test_public_html_has_working_phone_links_and_valid_markup_basics():
     expected_phone_href = "tel:+19096096685"
     expected_fax_href = "tel:+19098906043"
+    redacted_tel_pattern = re.compile(r'tel:[^"\']*\*')
     for path in ROOT.rglob("*.html"):
         html = path.read_text(encoding="utf-8")
-        assert "tel:+190****" not in html, f"{path} contains a redacted/non-dialable tel: link"
+        assert not redacted_tel_pattern.search(html), (
+            f"{path} contains a redacted/non-dialable tel: link"
+        )
         assert "<p><p>" not in html and "</p></p>" not in html, f"{path} contains nested paragraph markup"
         assert 'id=""' not in html, f"{path} contains an empty id attribute"
         doc = BeautifulSoup(html, "html.parser")
