@@ -1,8 +1,24 @@
 {
-  "lastVerifiedUtc": "2026-05-25T17:47:10Z",
+  "lastVerifiedUtc": "2026-05-25T18:31:00Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, and proof-preservation tools. Follow emergency officials first for active safety orders.",
   "updates": [
+    {
+      "timeUtc": "2026-05-25T18:15:33Z",
+      "category": "Emergency assistance",
+      "title": "ABC7 reports federal emergency declaration signed for Garden Grove district",
+      "summary": "ABC7 reported that President Trump signed a federal emergency declaration for the Garden Grove district, citing Orange County Supervisor Janet Nguyen and Congressman Derek Tran. The report describes emergency-response support connected to the ongoing GKN Aerospace incident; residents should still follow official City and public-safety instructions for evacuation-zone status and reentry.",
+      "sourceLabel": "ABC7 Los Angeles",
+      "sourceUrl": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/entry/19168842/"
+    },
+    {
+      "timeUtc": "2026-05-25T17:27:00Z",
+      "category": "Response status",
+      "title": "ABC7 reports OCFA says crisis is not fully over despite BLEVE threat reduction",
+      "summary": "ABC7 reported that OCFA Interim Fire Chief TJ McGovern clarified the crisis was not fully averted even though the most catastrophic BLEVE explosion threat had been eliminated after a tank crack relieved pressure. ABC7 quoted McGovern as saying a smaller explosion or leak remained possible and that residents should stay out of evacuation zones until officials deem reentry safe.",
+      "sourceLabel": "ABC7 Los Angeles",
+      "sourceUrl": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/entry/19168697/"
+    },
     {
       "timeUtc": "2026-05-25T16:43:41Z",
       "category": "Response status",
@@ -50,22 +66,6 @@
       "summary": "NBC4 Los Angeles reported that GKN Aerospace settled a South Coast Air Quality Management District matter in early 2025 for $909,935.95. NBC4 said the cited violations stemmed from a 2020 inspection and involved permit requirements, emissions beyond allowed limits, recordkeeping, and equipment or procedure permits; NBC4 also reported that more recent inspections it reviewed showed the company in compliance and that the specific chemical involved in the Garden Grove tank emergency was not mentioned in those settlement documents.",
       "sourceLabel": "NBC4 Los Angeles",
       "sourceUrl": "https://www.nbclosangeles.com/news/local/gkn-aerospace-air-quality-safety-violation-settlement/3894740/"
-    },
-    {
-      "timeUtc": "2026-05-25T04:45:54Z",
-      "category": "Response status",
-      "title": "ABC7 reports OCFA all-night operation after multiple tank cracks discovered",
-      "summary": "ABC7 reported that OCFA planned an all-night operation to determine whether pressure in the GKN Aerospace tank had been released and whether the catastrophic BLEVE threat had been eliminated. The same live update said OCFA officials reported multiple cracks in the tank, no contaminants currently leaking from those cracks, continued cooling with water, and continued instructions for residents to stay out of the evacuation zone.",
-      "sourceLabel": "ABC7 Los Angeles",
-      "sourceUrl": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/"
-    },
-    {
-      "timeUtc": "2026-05-25T04:16:21Z",
-      "category": "Schools",
-      "title": "OCDE says several districts are adjusting operations for the week ahead",
-      "summary": "The Orange County Department of Education reported that several districts were adjusting campus operations, relocating students, or expanding remote-learning plans while the Garden Grove hazmat response continues. OCDE said 12 Garden Grove Unified campuses would remain closed through the final day of school on May 27, while affected Westminster, Magnolia, Savanna, and ACCESS programs also announced closures, relocations, or remote instruction.",
-      "sourceLabel": "Orange County Department of Education",
-      "sourceUrl": "https://newsroom.ocde.us/several-garden-grove-unified-campuses-closed-following-chemical-leak-response/"
     }
   ],
   "resources": [
