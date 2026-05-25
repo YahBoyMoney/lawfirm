@@ -165,6 +165,21 @@ def test_stage1_internal_links_resolve_and_include_legal_pages():
         assert all(route_exists(href) for href in hrefs), f"{route} has broken local links: {hrefs}"
 
 
+def test_support_and_success_pages_have_named_home_links():
+    support_routes = {
+        **SUPPORT_PAGES,
+        "/success.html": ROOT / "success.html",
+    }
+    for route, path in support_routes.items():
+        doc = page_doc(path)
+        brand_home = doc.select_one('header .brand[href="/"]')
+        back_home = doc.select_one('main .back[href="/"]')
+        assert brand_home is not None, f"{route} needs a header home link"
+        assert back_home is not None, f"{route} needs a back-home link"
+        assert brand_home.get("aria-label") == "Berhe Jones LLP home"
+        assert back_home.get("aria-label") == "Back to Berhe Jones LLP home"
+
+
 def test_garden_grove_incident_media_images_are_performance_safe():
     doc = page_doc(PUBLIC_PAGES["/landing/garden-grove-chemical-leak/"])
     hero_img = doc.select_one(".hero-media img")
