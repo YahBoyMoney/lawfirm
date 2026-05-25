@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-25T04:51:11Z",
+  "lastVerifiedUtc": "2026-05-25T06:59:23Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, and proof-preservation tools. Follow emergency officials first for active safety orders.",
   "updates": [
+    {
+      "timeUtc": "2026-05-25T06:47:27Z",
+      "category": "Investigation",
+      "title": "NBC4 reports 2025 South Coast AQMD settlement involving GKN Aerospace",
+      "summary": "NBC4 Los Angeles reported that GKN Aerospace settled a South Coast Air Quality Management District matter in early 2025 for $909,935.95. NBC4 said the cited violations stemmed from a 2020 inspection and involved permit requirements, emissions beyond allowed limits, recordkeeping, and equipment or procedure permits; NBC4 also reported that more recent inspections it reviewed showed the company in compliance and that the specific chemical involved in the Garden Grove tank emergency was not mentioned in those settlement documents.",
+      "sourceLabel": "NBC4 Los Angeles",
+      "sourceUrl": "https://www.nbclosangeles.com/news/local/gkn-aerospace-air-quality-safety-violation-settlement/3894740/"
+    },
     {
       "timeUtc": "2026-05-25T04:45:54Z",
       "category": "Response status",
@@ -58,14 +66,6 @@
       "summary": "ABC7 reported that methyl methacrylate can irritate the skin, eyes, lungs, and nasal passages, that short-term inhalation can cause nausea and dizziness, and that very high levels can cause severe respiratory distress requiring hospitalization. The report also noted officials were monitoring air quality and, as of early Friday afternoon, levels were within normal limits.",
       "sourceLabel": "ABC7 Los Angeles",
       "sourceUrl": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/entry/19152926/"
-    },
-    {
-      "timeUtc": "2026-05-24T11:17:33Z",
-      "category": "Official resources",
-      "title": "Garden Grove emergency page lists evacuation map and hotlines",
-      "summary": "The City of Garden Grove emergency page identifies the GKN Aerospace / MMA leak evacuation zone, provides an address checker, and lists Garden Grove, Orange County public-information, and OCFA medical-information hotline numbers.",
-      "sourceLabel": "City of Garden Grove",
-      "sourceUrl": "https://ggcity.org/emergency"
     }
   ],
   "resources": [
