@@ -113,6 +113,7 @@
     font-weight: 700;
     color: #fff;
     text-decoration: none;
+    white-space: nowrap;
   }
   .topbar .call:hover { color: var(--brass-soft); }
   @media (max-width: 720px) {
@@ -186,18 +187,34 @@
     transition: border-color .15s ease, color .15s ease;
   }
   .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--brass); }
-  .nav-cta {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--ink);
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 16px;
-    border-radius: var(--radius);
-    font-weight: 600;
-    font-size: 14px;
-    transition: background .15s ease;
+  .nav-actions {
+    display: flex; align-items: center; gap: 10px;
+    flex: none;
   }
-  .nav-cta:hover { background: #0c1924; }
+  .nav-cta,
+  .nav-review-cta {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: var(--radius);
+    font-weight: 700;
+    font-size: 14px;
+    min-height: 42px;
+    transition: background .15s ease, border-color .15s ease, color .15s ease, transform .15s ease;
+    white-space: nowrap;
+  }
+  .nav-review-cta {
+    background: var(--brass);
+    border: 1px solid var(--brass);
+    color: #fff;
+  }
+  .nav-review-cta:hover { background: #876923; border-color: #876923; transform: translateY(-1px); }
+  .nav-cta {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--rule);
+  }
+  .nav-cta:hover { background: #fff; border-color: var(--brass); }
   .nav-cta svg { width: 14px; height: 14px; }
   .nav-toggle {
     display: none;
@@ -218,7 +235,7 @@
   @media (max-width: 900px) {
     .nav-inner { padding-top: 14px; padding-bottom: 14px; }
     .brand-logo { width: 176px; }
-    .nav-links, .nav-cta { display: none; }
+    .nav-links, .nav-actions { display: none; }
     .nav-toggle { display: inline-flex; }
     .nav-links.open {
       display: flex; flex-direction: column;
@@ -228,7 +245,7 @@
       padding: 16px 28px 22px;
       gap: 14px;
     }
-    .nav-cta.open { display: inline-flex; }
+    .nav-actions.open { display: flex; }
   }
 
   /* ---------- Hero ---------- */
@@ -660,9 +677,16 @@
     font-size: 13px;
     color: var(--ink-2);
   }
-  .credential-row span {
+  .credential-row span,
+  .credential-row a {
     display: inline-flex; align-items: center; gap: 6px;
   }
+  .credential-row a {
+    color: var(--ink-2);
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+  .credential-row a:hover { color: var(--ink); }
   .credential-row svg { width: 14px; height: 14px; color: var(--brass); }
   .attorney-body p {
     font-size: 17px;
@@ -1408,12 +1432,12 @@
     margin: 10px 0 18px;
   }
   .shingle-stamp .ring {
-    width: 132px; height: 132px;
+    width: 116px; height: 116px;
     border-radius: 50%;
-    border: 1.5px solid var(--brass);
+    border: 1px solid rgba(154,122,46,.42);
     position: relative;
     display: grid; place-items: center;
-    background: rgba(255,255,255,.35);
+    background: rgba(255,255,255,.28);
   }
   .shingle-stamp .ring::before,
   .shingle-stamp .ring::after {
@@ -1441,9 +1465,9 @@
   .shingle-stamp .ring-inner .num {
     display: block;
     font-family: 'Fraunces', serif;
-    font-size: 30px;
+    font-size: 22px;
     color: var(--ink);
-    letter-spacing: .04em;
+    letter-spacing: .03em;
     margin-top: 4px;
     line-height: 1;
   }
@@ -1864,7 +1888,7 @@
     .hero-enter { display: flex; flex-direction: column; }
     .hero .system-status { order: 1; }
     .hero .eyebrow { order: 2; }
-    .hero h1.headline { order: 3; font-size: clamp(33px, 10.4vw, 46px); line-height: .99; }
+    .hero h1.headline { order: 3; font-size: clamp(31px, 9.4vw, 42px); line-height: 1; }
     .hero .hero-actions { order: 4; margin-top: 16px; }
     .hero .lede { order: 5; font-size: 15.5px; line-height: 1.58; color: #fff8ea; margin-top: 18px; }
     .hero .conv-chips { order: 6; }
@@ -1905,6 +1929,88 @@
   .intake-panel-section .section-lede {
     margin-top: 18px;
     max-width: 48ch;
+  }
+  .review-steps {
+    margin-top: 24px;
+    display: grid;
+    gap: 10px;
+  }
+  .review-step {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 14px 16px;
+    background: rgba(255,255,255,.72);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+  }
+  .review-step .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: #f1d48d;
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 11px;
+    font-weight: 800;
+  }
+  .review-step strong { display: block; color: var(--ink); margin-bottom: 2px; }
+  .review-step span:last-child { color: var(--ink-2); font-size: 14.5px; line-height: 1.45; }
+  .deadline-alert,
+  .form-quick-note {
+    margin-top: 18px;
+    padding: 15px 16px;
+    border: 1px solid rgba(154,122,46,.36);
+    border-left: 4px solid var(--brass);
+    border-radius: var(--radius);
+    background: #fffaf0;
+    color: var(--ink-2);
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+  .deadline-alert strong,
+  .form-quick-note strong { color: var(--ink); }
+  .lead-fit-panel {
+    margin: 20px 0 22px;
+    padding: 16px 18px;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: rgba(246,241,232,.72);
+  }
+  .lead-fit-panel h3 {
+    margin: 0 0 10px;
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .lead-fit-panel ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 8px;
+  }
+  .lead-fit-panel li {
+    position: relative;
+    padding-left: 18px;
+    color: var(--ink-2);
+    font-size: 14.5px;
+    line-height: 1.45;
+  }
+  .lead-fit-panel li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .68em;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--brass);
   }
   @media (min-width: 981px) {
     .hero-grid > div:first-child { max-width: 790px; }
@@ -2428,11 +2534,11 @@
 <div class="topbar" role="region" aria-label="Office availability">
   <div class="topbar-inner">
     <div class="left">
-      <span class="pill">Online intake available 24/7</span>
-      <span class="hide-sm">Free case review for serious claims</span>
+      <span class="pill">Online case review available 24/7</span>
+      <span class="hide-sm">Focused screening for serious, documentable claims</span>
     </div>
     <a class="call" href="tel:+19096096685" aria-label="Call Berhe Jones LLP at 909-609-6685">
-      Call <strong>909-609-6685</strong>
+      Deadline-sensitive? <strong>Call now</strong>
     </a>
   </div>
 </div>
@@ -2454,12 +2560,15 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
-    <a class="nav-cta" href="tel:+19096096685" aria-label="Call now, 909-609-6685">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.92z"/>
-      </svg>
-      909-609-6685
-    </a>
+    <div class="nav-actions" id="navActions">
+      <a class="nav-review-cta" href="#intake" aria-label="Request a free case review">Request Free Review</a>
+      <a class="nav-cta" href="tel:+19096096685" aria-label="Call now, 909-609-6685">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        909-609-6685
+      </a>
+    </div>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-controls="navlinks" aria-expanded="false">
       <span aria-hidden="true"></span>
     </button>
@@ -2479,7 +2588,7 @@
       <div class="system-status" role="status" aria-label="Intake system status">
         <span class="dot">Intake online</span>
         <span class="sep" aria-hidden="true"></span>
-        <span class="ref mono">Attorney-supervised intake<span class="hide-xs"> · Inland Empire · CA Bar 298992</span></span>
+        <span class="ref mono">Attorney-supervised intake<span class="hide-xs"> · Inland Empire · fit and deadline screen</span></span>
       </div>
       <span class="eyebrow">Trial &amp; Contingency Counsel · Inland Empire-Based · California Statewide</span>
       <h1 class="headline" id="heroTitle">
@@ -2491,7 +2600,7 @@
       </p>
       <div class="hero-actions">
         <a class="btn btn-call" href="#intake" aria-label="Start a free case review">
-          Start a free review
+          Request a Free Case Review
         </a>
         <a class="btn btn-ghost" href="tel:+19096096685" aria-label="Call 909-609-6685 for a free case review">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -2501,15 +2610,15 @@
         </a>
       </div>
       <div class="conv-chips" aria-label="Case review proof points">
-        <span class="chip"><svg class="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m4 10 4 4 8-9"/></svg><strong>Free review</strong></span>
-        <span class="chip"><svg class="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m4 10 4 4 8-9"/></svg><strong>Deadline screen</strong></span>
-        <span class="chip"><svg class="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m4 10 4 4 8-9"/></svg><strong>Contingency-fit analysis</strong></span>
+        <span class="chip"><svg class="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m4 10 4 4 8-9"/></svg><strong>Free case review</strong></span>
+        <span class="chip"><svg class="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m4 10 4 4 8-9"/></svg><strong>Deadline and evidence screen</strong></span>
+        <span class="chip"><svg class="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m4 10 4 4 8-9"/></svg><strong>Serious-case fit analysis</strong></span>
       </div>
 
       <dl class="hero-trust">
         <div class="trust-item">
-          <dt class="label">California Bar</dt>
-          <dd class="value mono" style="margin:0">No. 298992</dd>
+          <dt class="label">Attorney Review</dt>
+          <dd class="value" style="margin:0">Direct screening</dd>
         </div>
         <div class="trust-item">
           <dt class="label">Base</dt>
@@ -2565,7 +2674,7 @@
     </div>
 
   </div>
-  <a class="scroll-cue" href="#intake" aria-label="Scroll to case review form"><span class="line" aria-hidden="true"></span>Start review</a>
+  <a class="scroll-cue" href="#intake" aria-label="Scroll to case review form"><span class="line" aria-hidden="true"></span>Request review</a>
 </section>
 
 <!-- Intake form -->
@@ -2575,6 +2684,12 @@
       <span class="section-eyebrow">Start the review</span>
       <h2 class="section-title" id="intakeTitle">Send the basics. The firm screens for fit, deadlines, and next steps.</h2>
       <p class="section-lede">Use the form for a short case summary, or call directly if a deadline is approaching. Submitting the form does not create an attorney-client relationship.</p>
+      <div class="review-steps" aria-label="What happens after you submit">
+        <div class="review-step"><span class="num">1</span><span><strong>Send the essentials.</strong> Names, contact information, case type, date, responsible parties, and what harm or loss occurred.</span></div>
+        <div class="review-step"><span class="num">2</span><span><strong>The firm screens for fit.</strong> Review focuses on deadlines, evidence, damages, recovery source, and whether the matter fits a serious-case strategy.</span></div>
+        <div class="review-step"><span class="num">3</span><span><strong>Next steps are identified.</strong> If appropriate, the firm may request documents, schedule a call, discuss representation, or suggest another route.</span></div>
+      </div>
+      <p class="deadline-alert"><strong>Deadline or evidence issue?</strong> If a government-claim deadline, filing deadline, hearing, denial letter, or evidence-preservation problem is coming up, call instead of waiting on the form.</p>
     </div>
     <aside class="hero-card intake-form-card" aria-labelledby="caseTitle">
       <div class="hero-card-tab" aria-hidden="true">
@@ -2583,13 +2698,22 @@
           <span class="sub">FILE · 2026 / CONFIDENTIAL</span>
         </div>
         <div class="right">
-          <span class="bar">CA BAR 298992</span>
+          <span class="bar">Deadline + fit screen</span>
           <span class="stat">Firm review</span>
         </div>
       </div>
       <div class="card-eyebrow">Confidential intake</div>
       <h2 class="card-title" id="caseTitle">Tell us about your case</h2>
       <p class="card-sub">Share the basic facts. The firm reviews each matter for fit, urgency, and next steps before representation begins.</p>
+
+      <div class="lead-fit-panel" aria-label="Good-fit case details">
+        <h3>Helpful details for a stronger review</h3>
+        <ul>
+          <li>Date, location, and who may be responsible.</li>
+          <li>Medical treatment, lost wages, denial letters, photos, notices, or other documents.</li>
+          <li>Upcoming deadlines, agency notices, hearings, or evidence that may disappear.</li>
+        </ul>
+      </div>
 
       <form id="caseForm" name="case-review" method="POST" action="/success.html" enctype="application/x-www-form-urlencoded" data-netlify="true" netlify netlify-honeypot="bot-field" novalidate>
         <input type="hidden" name="form-name" value="case-review" />
@@ -2653,19 +2777,19 @@
           <p class="field-error" id="consentError"></p>
         </div>
 
-        <button class="submit" type="submit">Request a free case review</button>
+        <button class="submit" type="submit">Request a Free Case Review</button>
         <p class="privacy-note" id="formPrivacyNote">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
           </svg>
-          Sending this form does not create an attorney-client relationship. The firm uses submitted information to review and respond to your request; see the <a href="/privacy.html">Privacy Policy</a>. Do not send highly sensitive details until the firm agrees to represent you. If your matter is urgent or deadline-sensitive, deadlines vary; call <a href="tel:+19096096685">909-609-6685</a> now.
+          Sending this form does not create an attorney-client relationship. The firm uses submitted information to review and respond to your request; see the <a href="/privacy.html">Privacy Policy</a>. Do not send highly sensitive details until the firm agrees to represent you. If your matter is urgent or deadline-sensitive, deadlines vary; call <a href="tel:+19096096685">909-609-6685</a> now. If documents are needed, the firm can request them after the first screen.
         </p>
       </form>
 
       <div class="intake-meta" aria-hidden="true">
         <div><span class="k">Reviewed by</span><span class="v">Berhe Jones LLP</span></div>
         <div><span class="k">Review</span><span class="v">Attorney-supervised</span></div>
-        <div><span class="k">Cost</span><span class="v">No fee · no obligation</span></div>
+        <div><span class="k">Documents</span><span class="v">Requested if needed</span></div>
       </div>
     </aside>
   </div>
@@ -2728,7 +2852,7 @@
       <p>Not sure whether your facts are enough? Send the basics anyway. The review is designed to identify fit, gaps, deadlines, and whether the firm can help.</p>
       <div class="actions">
         <a class="btn btn-call" href="tel:+19096096685" aria-label="Call 909-609-6685 for a free case review">Call 909-609-6685</a>
-        <a class="btn btn-ghost" href="#intake">Start the form</a>
+        <a class="btn btn-ghost" href="#intake">Request a Free Case Review</a>
       </div>
     </div>
   </div>
@@ -2754,11 +2878,11 @@
         <span class="corner tl" aria-hidden="true"></span><span class="corner tr" aria-hidden="true"></span>
         <span class="corner bl" aria-hidden="true"></span><span class="corner br" aria-hidden="true"></span>
         <div class="shingle-head">
-          <div class="shingle-kicker">Verified attorney profile</div>
-          <div class="shingle-title">State Bar of California</div>
+          <div class="shingle-kicker">Attorney-led review</div>
+          <div class="shingle-title">Serious California matters</div>
         </div>
         <div class="shingle-stamp" aria-hidden="true">
-          <div class="ring"><div class="ring-inner"><span class="lbl">Bar No.</span><span class="num">298992</span><span class="juris">California</span></div></div>
+          <div class="ring"><div class="ring-inner"><span class="lbl">Direct</span><span class="num">Review</span><span class="juris">California</span></div></div>
         </div>
         <div class="shingle-name">Tam Berhe, Esq.</div>
         <div class="shingle-role">Founding Attorney · Berhe Jones LLP</div>
@@ -2784,7 +2908,7 @@
       <div class="credential-row">
         <span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2 3 7l9 5 9-5-9-5z"/><path d="M3 7v10l9 5 9-5V7"/></svg>
-          State Bar of California · No. 298992
+          <a href=\"https://apps.calbar.ca.gov/attorney/Licensee/Detail/298992\" target=\"_blank\" rel=\"noopener noreferrer\">State Bar verification</a>
         </span>
         <span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -2907,8 +3031,8 @@
       </article>
     </div>
     <div class="practice-hub-cta">
-      <p>Need to compare practice areas first? Use the full practice-area hub before submitting a case review.</p>
-      <a class="btn btn-call" href="/practice-areas/">View all practice areas</a>
+      <p>Not sure where your case fits? Use the practice-area hub if you want details, or request a review and the firm will screen for fit.</p>
+      <div class="case-fit-foot actions"><a class="btn btn-call" href="#intake">Request a Free Case Review</a><a class="btn btn-ghost" href="/practice-areas/">View all practice areas</a></div>
     </div>
   </div>
 </section>
@@ -2998,7 +3122,7 @@
           </svg>
           Call 909-609-6685
         </a>
-        <a class="btn btn-ghost-light" href="#contact">Submit case details</a>
+        <a class="btn btn-ghost-light" href="#contact">Request a Free Case Review</a>
       </div>
     </div>
   </div>
@@ -3053,7 +3177,7 @@
         </p>
       </div>
       <div>
-        <details class="faq">
+        <details class="faq" open>
           <summary>How much does a case review cost?</summary>
           <p>Nothing. The initial review is free. Most accepted matters are handled on contingency,
             meaning attorney's fees are paid from a recovery if there is one.</p>
@@ -3088,6 +3212,22 @@
             defendant or insurance source that can pay, and evidence that can be developed into
             negotiation or litigation leverage.</p>
         </details>
+        <details class="faq">
+          <summary>What should I include in the first message?</summary>
+          <p>Include the date, location, responsible person or company, injuries or losses, insurance or claim information if known, and any upcoming deadline. A short, clear summary is enough to start screening.</p>
+        </details>
+        <details class="faq">
+          <summary>Can I send documents or photos?</summary>
+          <p>Start with the form or a call. If documents, photos, notices, denial letters, or records are needed, the firm can request them after the first screen.</p>
+        </details>
+        <details class="faq">
+          <summary>What if I am not sure whether my case fits?</summary>
+          <p>Send the basics anyway. The review is designed to identify fit, gaps, deadlines, and whether representation, co-counsel, referral, or another route makes sense.</p>
+        </details>
+        <details class="faq">
+          <summary>What if a deadline is close?</summary>
+          <p>Call now. Deadlines vary, and some claims require fast action to preserve rights or evidence. The website is not a substitute for legal advice about a specific deadline.</p>
+        </details>
       </div>
     </div>
   </div>
@@ -3108,7 +3248,7 @@
         </svg>
         Call 909-609-6685
       </a>
-      <a class="btn btn-ghost" href="#intake">Submit case details</a>
+      <a class="btn btn-ghost" href="#intake">Request a Free Case Review</a>
     </div>
   </div>
 </section>
@@ -3173,7 +3313,7 @@
   </div>
 
   <div class="footer-meta">
-    <span>© 2026 Berhe Jones LLP. All rights reserved. · State Bar of California No. 298992</span>
+    <span>© 2026 Berhe Jones LLP. All rights reserved.</span>
     <span>
       <a href="/privacy.html">Privacy</a> &nbsp;·&nbsp;
       <a href="/terms.html">Terms of Service</a> &nbsp;·&nbsp;
@@ -3203,9 +3343,11 @@
   (function () {
     var btn = document.getElementById('navToggle');
     var list = document.getElementById('navlinks');
+    var actions = document.getElementById('navActions');
     if (!btn || !list) return;
     btn.addEventListener('click', function () {
       var open = list.classList.toggle('open');
+      if (actions) actions.classList.toggle('open', open);
       document.body.classList.toggle('menu-open', open);
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
       btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
@@ -3213,6 +3355,7 @@
     list.addEventListener('click', function (e) {
       if (e.target.tagName === 'A' && list.classList.contains('open')) {
         list.classList.remove('open');
+        if (actions) actions.classList.remove('open');
         document.body.classList.remove('menu-open');
         btn.setAttribute('aria-expanded', 'false');
         btn.setAttribute('aria-label', 'Open menu');
@@ -3408,12 +3551,12 @@
         body: encode(new FormData(form))
       }).then(function (response) {
         if (!response || response.ok === false) throw new Error('Form delivery failed');
-        btn.textContent = 'Received, we will call shortly';
+        btn.textContent = 'Received. Review requested';
         btn.style.background = '#2f5b3a';
         if (summary) {
           summary.hidden = false;
           summary.classList.add('is-success');
-          summary.innerHTML = '<p><strong>Received.</strong> We will call shortly. If your matter is urgent or deadline-sensitive, call <a href="tel:+19096096685">909-609-6685</a> now.</p>';
+          summary.innerHTML = '<p><strong>Received.</strong> The request was sent for review. If your matter is urgent or deadline-sensitive, call <a href="tel:+19096096685">909-609-6685</a> now.</p>';
           summary.focus();
         }
       }).catch(function () {
