@@ -372,3 +372,4 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
         assert {"category", "title", "description", "url", "cta"}.issubset(resource)
 
     assert "setInterval(loadUpdates,300000)" in html
+    assert "data.updates.slice(0,8)" in html
