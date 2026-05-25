@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-25T11:19:01Z",
+  "lastVerifiedUtc": "2026-05-25T13:27:35Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, and proof-preservation tools. Follow emergency officials first for active safety orders.",
   "updates": [
+    {
+      "timeUtc": "2026-05-25T12:57:37Z",
+      "category": "Response status",
+      "title": "ABC7 reports crews still assessing whether explosion threat has reduced",
+      "summary": "ABC7 reported that firefighters continued a high-risk assessment at the GKN Aerospace tank after an overnight operation to determine whether a crack has relieved enough pressure to reduce the explosion threat. ABC7 cited OCFA as saying there was one known crack, no active chemical leak, and crews were still assessing the tank and surrounding conditions; residents should continue following official evacuation-zone instructions.",
+      "sourceLabel": "ABC7 Los Angeles",
+      "sourceUrl": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/"
+    },
     {
       "timeUtc": "2026-05-25T07:01:32Z",
       "category": "Investigation",
@@ -58,14 +66,6 @@
       "summary": "The Guardian reported that EPA Administrator Lee Zeldin told CNN the tank was expected to fail, but that officials had been told the most likely scenario was a low-volume release that local authorities could monitor, neutralize, and contain. The same report noted evacuations remained in effect and cited South Coast AQMD reporting normal air-monitoring measurements.",
       "sourceLabel": "The Guardian",
       "sourceUrl": "https://www.theguardian.com/us-news/2026/may/24/chemical-tank-california-epa-lee-zeldin"
-    },
-    {
-      "timeUtc": "2026-05-24T19:49:16Z",
-      "category": "Response status",
-      "title": "OCFA says potential crack could change tank-response strategy",
-      "summary": "The Orange County Register reported that OCFA inspected the GKN Aerospace tank overnight and found a potential crack that may be relieving pressure; officials were still examining the information and said it could change the response strategy. The same report said South Coast AQMD and EPA monitoring had not detected contaminants near the facility.",
-      "sourceLabel": "Orange County Register",
-      "sourceUrl": "https://www.ocregister.com/2026/05/24/no-contaminants-found-in-air-near-garden-grove-chemical-plant-tank-remains-intact/"
     }
   ],
   "resources": [
