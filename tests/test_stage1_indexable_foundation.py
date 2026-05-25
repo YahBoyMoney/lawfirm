@@ -239,6 +239,11 @@ def test_stage1_forms_are_live_netlify_intake_without_uploads():
         assert form.has_attr("netlify")
         assert doc.select_one(f'input[name="form-name"][value="{form_name}"]') is not None
         assert not doc.select_one('input[type="file"]')
+        honeypot = form.select_one('input[name="bot-field"]')
+        assert honeypot is not None
+        assert honeypot.get("type") == "text"
+        assert honeypot.get("autocomplete") == "off"
+        assert honeypot.get("tabindex") == "-1"
         text = form.get_text(" ", strip=True).lower()
         assert "do not include privileged" in text
         assert "attorney-client relationship" in text
