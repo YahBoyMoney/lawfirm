@@ -209,6 +209,14 @@ def test_public_html_has_working_phone_links_and_valid_markup_basics():
             assert href in {expected_phone_href, expected_fax_href}, f"{path} has unexpected tel link: {href}"
 
 
+def test_public_images_have_intrinsic_dimensions_and_async_decoding():
+    for path in ROOT.rglob("*.html"):
+        doc = BeautifulSoup(path.read_text(encoding="utf-8"), "html.parser")
+        for img in doc.select("img"):
+            assert img.get("width") and img.get("height"), f"{path} image {img.get('src')} needs intrinsic dimensions"
+            assert img.get("decoding") == "async", f"{path} image {img.get('src')} should decode async"
+
+
 def test_stage1_forms_are_live_netlify_intake_without_uploads():
     form_pages = [
         (PUBLIC_PAGES["/free-case-review/"], "case-review"),
