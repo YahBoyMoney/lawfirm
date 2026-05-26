@@ -411,3 +411,33 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
 
     assert "setInterval(loadUpdates,300000)" in html
     assert "data.updates.slice(0,8)" in html
+    assert "data.resources.slice(0,11)" in html
+
+
+def test_garden_grove_resources_include_official_orange_county_incident_page():
+    oc_url = "https://www.ocgov.com/page/garden-grove-chemical-spill-incident"
+
+    updates_path = ROOT / "data" / "garden-grove-chemical-leak-updates.json"
+    data = json.loads(updates_path.read_text(encoding="utf-8"))
+    oc_resources = [r for r in data["resources"] if r.get("url") == oc_url]
+    assert len(oc_resources) == 1, "OC County official incident page must appear exactly once in JSON resources"
+    oc_resource = oc_resources[0]
+    assert oc_resource.get("category"), "OC County resource needs a category"
+    assert oc_resource.get("title"), "OC County resource needs a title"
+    assert oc_resource.get("description"), "OC County resource needs a description"
+    assert oc_resource.get("cta"), "OC County resource needs a CTA label"
+    description = oc_resource["description"].lower()
+    assert "orange county" in oc_resource["title"].lower() or "orange county" in description
+    assert "evacuation" in description or "incident" in description or "map" in description
+
+    landing_path = PUBLIC_PAGES["/landing/garden-grove-chemical-leak/"]
+    doc = page_doc(landing_path)
+    resource_grid = doc.select_one("#resourceGrid")
+    assert resource_grid is not None
+    grid_hrefs = {str(a.get("href")) for a in resource_grid.select("a[href]")}
+    assert oc_url in grid_hrefs, "static resource grid fallback must surface the OC County official page"
+
+    sources = doc.select_one("#sources")
+    assert sources is not None
+    source_hrefs = {str(a.get("href")) for a in sources.select("a[href]")}
+    assert oc_url in source_hrefs, "sources/citations list must cite the OC County official page"
