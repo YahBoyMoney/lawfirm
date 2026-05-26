@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-26T17:27:23Z",
+  "lastVerifiedUtc": "2026-05-26T18:47:02Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for active safety orders.",
   "updates": [
+    {
+      "timeUtc": "2026-05-26T18:47:02Z",
+      "category": "Legal-action status",
+      "title": "Daily Journal reports additional plaintiffs firms formed a Garden Grove response coalition",
+      "summary": "The Daily Journal reported that ACTS LAW, Becker Law Group, and Nguyen Lawyers ALC announced a joint effort to represent residents, workers, and businesses affected by the Garden Grove chemical emergency tied to GKN Aerospace. This is another public legal-action signal only; Berhe Jones is not claiming affiliation with those firms or class counsel, and this check still did not independently verify a public court case number for the filed action.",
+      "sourceLabel": "Daily Journal",
+      "sourceUrl": "https://www.dailyjournal.com/article/391685-garden-grove-chemical-emergency-spurs-new-plaintiffs-legal-coalition"
+    },
     {
       "timeUtc": "2026-05-26T16:56:00Z",
       "category": "Schools / closures",
@@ -58,14 +66,6 @@
       "summary": "Orange County Workforce & Economic Development Division posted a May 25 press release encouraging small businesses impacted by the Garden Grove chemical incident to complete and submit an SBA Economic Injury Disaster Loan worksheet so eligibility for potential assistance programs can be assessed. The County page directs businesses to download the worksheet and email completed forms to the County emergency-operations liaison address listed in the official notice.",
       "sourceLabel": "Orange County Workforce & Economic Development Division",
       "sourceUrl": "https://workforce.ocgov.com/press/small-businesses-impacted-garden-grove-chemical-incident-encouraged-submit-sba-assistance"
-    },
-    {
-      "timeUtc": "2026-05-25T18:31:02Z",
-      "category": "Emergency assistance",
-      "title": "Governor says Presidential Emergency Declaration was approved for hazmat response",
-      "summary": "The Governor of California announced that President Trump approved California's request for a Presidential Emergency Declaration tied to the Garden Grove chemical incident. The Governor's office said the declaration allows FEMA to provide direct federal assistance with personnel, equipment, and specialized resources for life-saving response; it also said significant public health and environmental risks remain and evacuation orders continue to be in place.",
-      "sourceLabel": "Governor of California",
-      "sourceUrl": "https://www.gov.ca.gov/2026/05/25/governor-newsom-secures-presidential-emergency-declaration-approval-for-orange-county-hazmat-response/"
     }
   ],
   "resources": [
