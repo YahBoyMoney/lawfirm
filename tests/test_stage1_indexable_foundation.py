@@ -88,7 +88,12 @@ def test_stage1_pages_are_in_sitemap_and_homepage_footer():
     sitemap_text = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
     home_doc = page_doc(ROOT / "index.html")
     footer_hrefs = {str(a.get("href")) for a in home_doc.select("footer.site a[href]")}
-    assert sitemap_text.count("<lastmod>2026-05-25</lastmod>") == 22
+    assert sitemap_text.count("<lastmod>2026-05-25</lastmod>") == 21
+    assert sitemap_text.count("<lastmod>2026-05-26</lastmod>") == 1
+    assert (
+        "<loc>https://berhelaw.com/landing/garden-grove-chemical-leak/</loc>\n"
+        "    <lastmod>2026-05-26</lastmod>"
+    ) in sitemap_text
     for route in PUBLIC_PAGES:
         assert f"https://berhelaw.com{route}" in sitemap_text
         assert route in footer_hrefs
