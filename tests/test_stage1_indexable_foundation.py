@@ -411,6 +411,10 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     data = json.loads(updates_path.read_text(encoding="utf-8"))
     assert data["statusLabel"] == "Public-source update center"
     assert len(data["updates"]) <= 8
+    legal_status_updates = [u for u in data["updates"] if u.get("sourceUrl") == "https://www.gkngardengrove.com/"]
+    assert len(legal_status_updates) == 1, "public legal-action feed should cite the GKN Garden Grove class-action status source once"
+    assert legal_status_updates[0].get("category") == "Legal-action status"
+    assert "not claiming affiliation" in legal_status_updates[0].get("summary", "").lower()
     assert len(data["resources"]) >= 10
     for resource in data["resources"]:
         assert {"category", "title", "description", "url", "cta"}.issubset(resource)

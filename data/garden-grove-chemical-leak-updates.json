@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-26T06:55:00Z",
+  "lastVerifiedUtc": "2026-05-26T07:48:00Z",
   "statusLabel": "Public-source update center",
-  "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, and proof-preservation tools. Follow emergency officials first for active safety orders.",
+  "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for active safety orders.",
   "updates": [
+    {
+      "timeUtc": "2026-05-26T07:48:00Z",
+      "category": "Legal-action status",
+      "title": "Class-counsel site is now publicly documenting the GKN Garden Grove action",
+      "summary": "A dedicated GKN Garden Grove Class Action website states that The X-Law Group P.C. and Presidio Law Firm LLP filed a class action connected to the GKN Aerospace chemical incident and invites residents, workers, businesses, and property owners to document losses. This is a public source only; Berhe Jones is not claiming affiliation with class counsel, and a court case number was not verified from this source during this check.",
+      "sourceLabel": "GKN Garden Grove Class Action site",
+      "sourceUrl": "https://www.gkngardengrove.com/"
+    },
     {
       "timeUtc": "2026-05-26T03:24:00Z",
       "category": "Public health / reentry",
@@ -58,14 +66,6 @@
       "summary": "KTLA reported that Orange County Fire Authority said evacuation orders remained in place even after officials determined the catastrophic BLEVE explosion risk had been eliminated. KTLA quoted OCFA as saying there was still an ongoing public-safety threat, that continuous atmospheric monitoring verified no chemical leak, and that officials planned a press conference later in the day; residents should keep following official evacuation-zone instructions.",
       "sourceLabel": "KTLA",
       "sourceUrl": "https://ktla.com/news/orange-county/garden-grove-chemical-tank-crack-explosion-risk/"
-    },
-    {
-      "timeUtc": "2026-05-25T16:11:54Z",
-      "category": "Response status",
-      "title": "ABC7 says explosion threat eliminated while evacuations remain in place",
-      "summary": "ABC7 reported that Orange County Fire Authority officials said the GKN Aerospace tank has released its pressure, the tank's temperature stabilized and was reducing, and the catastrophic explosion threat had been eliminated. ABC7 also reported that evacuation orders remained in effect and that it was unclear when residents would be allowed to return home, so residents should keep following official City/OCFA instructions.",
-      "sourceLabel": "ABC7 Los Angeles",
-      "sourceUrl": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/"
     }
   ],
   "resources": [
