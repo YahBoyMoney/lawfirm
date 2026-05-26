@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-26T21:02:02Z",
+  "lastVerifiedUtc": "2026-05-26T21:43:26Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for active safety orders.",
   "updates": [
+    {
+      "timeUtc": "2026-05-26T21:17:00Z",
+      "category": "Schools / recovery resources",
+      "title": "OCDE says state superintendent highlighted relief fund and emergency waivers for impacted schools",
+      "summary": "OCDE updated its Garden Grove chemical-tank digest at 2:17 p.m. on May 26 to report that State Superintendent Tony Thurmond encouraged support for students, families, educators, and school staff affected by the emergency through the SupplyBank.org Disaster Relief Fund. OCDE also reported that the California Department of Education is encouraging impacted districts and charter schools to submit J-13A waivers to avoid attendance-based funding losses tied to emergency school closures, while the same digest continues to list district-by-district reopenings, remaining closures, active shelters, and planned Wednesday returns for some programs.",
+      "sourceLabel": "OCDE Newsroom",
+      "sourceUrl": "https://newsroom.ocde.us/several-garden-grove-unified-campuses-closed-following-chemical-leak-response/"
+    },
     {
       "timeUtc": "2026-05-26T19:17:00Z",
       "category": "Response status",
@@ -18,14 +26,6 @@
       "summary": "The Daily Journal reported that ACTS LAW, Becker Law Group, and Nguyen Lawyers ALC announced a joint effort to represent residents, workers, and businesses affected by the Garden Grove chemical emergency tied to GKN Aerospace. This is another public legal-action signal only; Berhe Jones is not claiming affiliation with those firms or class counsel, and this check still did not independently verify a public court case number for the filed action.",
       "sourceLabel": "Daily Journal",
       "sourceUrl": "https://www.dailyjournal.com/article/391685-garden-grove-chemical-emergency-spurs-new-plaintiffs-legal-coalition"
-    },
-    {
-      "timeUtc": "2026-05-26T16:56:00Z",
-      "category": "Schools / closures",
-      "title": "OCDE lists Tuesday reopenings, remaining closures, and Wednesday return plans",
-      "summary": "OCDE updated its Garden Grove chemical-tank school digest at 9:56 a.m. on May 26 with district-by-district operations: nine Garden Grove Unified campuses reopened Tuesday, while Alamitos Intermediate, Lawrence Elementary, Wakeham Elementary, and several GGUSD facilities remained under evacuation orders and closed. OCDE also reported Westminster, Magnolia, Savanna, Cypress, and ACCESS status updates, including planned Wednesday returns for B.R.I.G.H.T. Learners Preschool and previously impacted ACCESS sites. Families and staff should still follow their own district notices and official evacuation instructions.",
-      "sourceLabel": "OCDE Newsroom",
-      "sourceUrl": "https://newsroom.ocde.us/several-garden-grove-unified-campuses-closed-following-chemical-leak-response/"
     },
     {
       "timeUtc": "2026-05-26T15:17:00Z",

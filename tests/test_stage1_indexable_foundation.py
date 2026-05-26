@@ -459,6 +459,19 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     assert "source-attributed" in kfi_updates[0].get("summary", "").lower()
     assert "not claiming affiliation" in kfi_updates[0].get("summary", "").lower()
     assert "court case number" in kfi_updates[0].get("summary", "").lower()
+
+    ocde_updates = [
+        u
+        for u in data["updates"]
+        if u.get("sourceUrl")
+        == "https://newsroom.ocde.us/several-garden-grove-unified-campuses-closed-following-chemical-leak-response/"
+    ]
+    assert len(ocde_updates) == 1, "OCDE school/recovery update should stay visible in capped feed"
+    assert ocde_updates[0].get("category") == "Schools / recovery resources"
+    ocde_summary = ocde_updates[0].get("summary", "").lower()
+    assert "supplybank.org disaster relief fund" in ocde_summary
+    assert "j-13a waivers" in ocde_summary
+    assert "district-by-district" in ocde_summary
     assert len(data["resources"]) >= 10
     for resource in data["resources"]:
         assert {"category", "title", "description", "url", "cta"}.issubset(resource)
