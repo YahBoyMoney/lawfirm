@@ -1,5 +1,5 @@
 {
-  "lastVerifiedUtc": "2026-05-26T09:00:00Z",
+  "lastVerifiedUtc": "2026-05-26T13:12:05Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for active safety orders.",
   "updates": [
@@ -28,19 +28,19 @@
       "sourceUrl": "https://newsroom.ocde.us/several-garden-grove-unified-campuses-closed-following-chemical-leak-response/"
     },
     {
+      "timeUtc": "2026-05-26T02:28:00Z",
+      "category": "Evacuation status",
+      "title": "Orange County lists the current reduced evacuation zone and public map route",
+      "summary": "Orange County's official Garden Grove Chemical Spill Incident page states that local law enforcement reduced the evacuation zone to the area between Orangewood Avenue, Dale Street, Garden Grove Boulevard, and Knott Street. The City of Garden Grove emergency page also shows evacuation orders active for that reduced zone and directs residents and businesses to use the address checker/public information map and follow official public-safety instructions.",
+      "sourceLabel": "Orange County official incident page",
+      "sourceUrl": "https://www.ocgov.com/page/garden-grove-chemical-spill-incident"
+    },
+    {
       "timeUtc": "2026-05-25T21:20:00Z",
       "category": "Official city update",
       "title": "City posts official video update and schedules May 26 special meeting",
       "summary": "The City of Garden Grove emergency page posted a 2:20 p.m. official video update and said the regular May 26 City Council meeting has been canceled. The City said it will instead hold a special meeting on Tuesday, May 26 at 5:30 p.m. at the community meeting center focused on the incident, the City's response, and the latest available information, with translation services available.",
       "sourceLabel": "City of Garden Grove",
-      "sourceUrl": "https://ggcity.org/emergency"
-    },
-    {
-      "timeUtc": "2026-05-25T21:03:00Z",
-      "category": "Evacuation status",
-      "title": "City page cites OCFA: evacuation zones being re-evaluated, no reentry yet",
-      "summary": "The City of Garden Grove emergency page posted an OCFA update from 2:03 p.m. PT saying that, because the BLEVE threat has been eliminated, fire and law-enforcement officials are re-evaluating evacuation zones. The same update warned residents not to enter evacuation zones yet and said officials planned a 6 p.m. press conference at the Incident Command Post in Los Alamitos.",
-      "sourceLabel": "City of Garden Grove / OCFA",
       "sourceUrl": "https://ggcity.org/emergency"
     },
     {
