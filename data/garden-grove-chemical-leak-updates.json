@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-26T14:34:35Z",
+  "lastVerifiedUtc": "2026-05-26T15:21:10Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for active safety orders.",
   "updates": [
+    {
+      "timeUtc": "2026-05-26T13:34:00Z",
+      "category": "Public health / monitoring",
+      "title": "AP reports follow-up air, sewer, and storm-drain monitoring after the evacuation reduction",
+      "summary": "The Associated Press reported that Orange County Supervisor Janet Nguyen said South Coast AQMD will monitor the air for several months and EPA will check sewer and storm drains after the GKN Aerospace tank emergency. The same report said county health officials advised that odor may be noticeable over a large area without necessarily indicating harm, while official evacuation and reentry instructions should still come from County/City public-safety sources.",
+      "sourceLabel": "Associated Press",
+      "sourceUrl": "https://apnews.com/article/california-tank-leak-explosion-garden-grove-770af6de585b1771824539b163555eaa"
+    },
     {
       "timeUtc": "2026-05-26T07:48:00Z",
       "category": "Legal-action status",
@@ -58,14 +66,6 @@
       "summary": "The Governor of California announced that President Trump approved California's request for a Presidential Emergency Declaration tied to the Garden Grove chemical incident. The Governor's office said the declaration allows FEMA to provide direct federal assistance with personnel, equipment, and specialized resources for life-saving response; it also said significant public health and environmental risks remain and evacuation orders continue to be in place.",
       "sourceLabel": "Governor of California",
       "sourceUrl": "https://www.gov.ca.gov/2026/05/25/governor-newsom-secures-presidential-emergency-declaration-approval-for-orange-county-hazmat-response/"
-    },
-    {
-      "timeUtc": "2026-05-25T17:27:00Z",
-      "category": "Response status",
-      "title": "ABC7 reports OCFA says crisis is not fully over despite BLEVE threat reduction",
-      "summary": "ABC7 reported that OCFA Interim Fire Chief TJ McGovern clarified the crisis was not fully averted even though the most catastrophic BLEVE explosion threat had been eliminated after a tank crack relieved pressure. ABC7 quoted McGovern as saying a smaller explosion or leak remained possible and that residents should stay out of evacuation zones until officials deem reentry safe.",
-      "sourceLabel": "ABC7 Los Angeles",
-      "sourceUrl": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/entry/19168697/"
     }
   ],
   "resources": [
