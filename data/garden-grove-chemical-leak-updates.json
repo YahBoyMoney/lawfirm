@@ -1,5 +1,5 @@
 {
-  "lastVerifiedUtc": "2026-05-26T13:12:05Z",
+  "lastVerifiedUtc": "2026-05-26T14:34:35Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for active safety orders.",
   "updates": [
@@ -12,12 +12,12 @@
       "sourceUrl": "https://www.gkngardengrove.com/"
     },
     {
-      "timeUtc": "2026-05-26T03:24:00Z",
+      "timeUtc": "2026-05-26T11:16:45Z",
       "category": "Public health / reentry",
-      "title": "CBS reports officials said reduced-zone returnees can feel safe while response continues",
-      "summary": "CBS Los Angeles reported that Orange County officials reduced the Garden Grove evacuation zone by about 65%, leaving about 16,000 residents still under evacuation orders. CBS also reported Orange County Health Care Agency Dr. Regina Chinsio-Kwong said people allowed to return Monday could feel safe and that there was no contamination, while OCFA said runoff water was being tested and had remained clean during monitoring. Residents and businesses should still check the official County/City map for their address and follow active evacuation instructions.",
-      "sourceLabel": "CBS Los Angeles",
-      "sourceUrl": "https://www.cbsnews.com/losangeles/live-updates/california-chemical-leak-orange-county-garden-grove-emergency-day-5/"
+      "title": "L.A. Times reports most evacuees began returning while the reduced zone stayed active",
+      "summary": "The Los Angeles Times reported that the vast majority of the roughly 50,000 people evacuated because of the damaged GKN Aerospace chemical tank began returning home, and quoted Orange County Health Officer Dr. Regina Chinsio-Kwong as saying people outside the new evacuation zone could feel safe because officials found no contamination, fumes, vapors, or leak. The same report noted the immediate area around the facility remained under evacuation for about 16,000 people while crews continued monitoring tank temperature and runoff water, so residents and businesses should still use the official County/City map for active reentry instructions.",
+      "sourceLabel": "Los Angeles Times",
+      "sourceUrl": "https://www.latimes.com/california/story/2026-05-26/o-c-communities-hit-by-chemical-crisis-are-safe-for-return-officials-say"
     },
     {
       "timeUtc": "2026-05-26T03:02:00Z",
