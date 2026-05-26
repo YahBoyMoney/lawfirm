@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-26T18:47:02Z",
+  "lastVerifiedUtc": "2026-05-26T19:35:05Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for active safety orders.",
   "updates": [
+    {
+      "timeUtc": "2026-05-26T19:17:00Z",
+      "category": "Response status",
+      "title": "ABC7 reports tank cooling shifted to onsite sprinklers while valves remain inoperable",
+      "summary": "ABC7 reported a Tuesday update from Orange County Fire Authority officials that crews stopped using the unmanned hose that had been spraying the GKN Aerospace tank and that the facility's onsite sprinkler system is now keeping the tank cool. ABC7 also reported that the affected tank's valves remain inoperable, preventing offloading of the hazardous material, while two other tanks at the site were not compromised and Garden Grove police reported seven evacuation-zone arrests, including one involving theft.",
+      "sourceLabel": "ABC7 Los Angeles",
+      "sourceUrl": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/"
+    },
     {
       "timeUtc": "2026-05-26T18:47:02Z",
       "category": "Legal-action status",
@@ -58,14 +66,6 @@
       "summary": "The City of Garden Grove emergency page posted a 2:20 p.m. official video update and said the regular May 26 City Council meeting has been canceled. The City said it will instead hold a special meeting on Tuesday, May 26 at 5:30 p.m. at the community meeting center focused on the incident, the City's response, and the latest available information, with translation services available.",
       "sourceLabel": "City of Garden Grove",
       "sourceUrl": "https://ggcity.org/emergency"
-    },
-    {
-      "timeUtc": "2026-05-25T19:54:10Z",
-      "category": "Business recovery",
-      "title": "Orange County asks impacted small businesses to submit SBA assistance worksheet",
-      "summary": "Orange County Workforce & Economic Development Division posted a May 25 press release encouraging small businesses impacted by the Garden Grove chemical incident to complete and submit an SBA Economic Injury Disaster Loan worksheet so eligibility for potential assistance programs can be assessed. The County page directs businesses to download the worksheet and email completed forms to the County emergency-operations liaison address listed in the official notice.",
-      "sourceLabel": "Orange County Workforce & Economic Development Division",
-      "sourceUrl": "https://workforce.ocgov.com/press/small-businesses-impacted-garden-grove-chemical-incident-encouraged-submit-sba-assistance"
     }
   ],
   "resources": [
