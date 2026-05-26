@@ -1,5 +1,5 @@
 {
-  "lastVerifiedUtc": "2026-05-26T04:39:44Z",
+  "lastVerifiedUtc": "2026-05-26T06:55:00Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, and proof-preservation tools. Follow emergency officials first for active safety orders.",
   "updates": [
@@ -10,6 +10,14 @@
       "summary": "CBS Los Angeles reported that Orange County officials reduced the Garden Grove evacuation zone by about 65%, leaving about 16,000 residents still under evacuation orders. CBS also reported Orange County Health Care Agency Dr. Regina Chinsio-Kwong said people allowed to return Monday could feel safe and that there was no contamination, while OCFA said runoff water was being tested and had remained clean during monitoring. Residents and businesses should still check the official County/City map for their address and follow active evacuation instructions.",
       "sourceLabel": "CBS Los Angeles",
       "sourceUrl": "https://www.cbsnews.com/losangeles/live-updates/california-chemical-leak-orange-county-garden-grove-emergency-day-5/"
+    },
+    {
+      "timeUtc": "2026-05-26T03:02:00Z",
+      "category": "Schools / closures",
+      "title": "OCDE says some campuses can reopen Tuesday while others stay closed or remote",
+      "summary": "The Orange County Department of Education updated its Garden Grove chemical-tank digest at 8:02 p.m. on May 25, reporting that some campuses outside the reduced evacuation zone were scheduled to reopen Tuesday, while certain Garden Grove Unified schools would continue distance learning and Alamitos Intermediate and Walton Intermediate would remain closed because they were still within evacuation orders. Families should follow their own district and school notices for attendance, remote-learning, and reopening instructions.",
+      "sourceLabel": "OCDE Newsroom",
+      "sourceUrl": "https://newsroom.ocde.us/several-garden-grove-unified-campuses-closed-following-chemical-leak-response/"
     },
     {
       "timeUtc": "2026-05-25T21:20:00Z",
@@ -58,14 +66,6 @@
       "summary": "ABC7 reported that Orange County Fire Authority officials said the GKN Aerospace tank has released its pressure, the tank's temperature stabilized and was reducing, and the catastrophic explosion threat had been eliminated. ABC7 also reported that evacuation orders remained in effect and that it was unclear when residents would be allowed to return home, so residents should keep following official City/OCFA instructions.",
       "sourceLabel": "ABC7 Los Angeles",
       "sourceUrl": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/"
-    },
-    {
-      "timeUtc": "2026-05-25T15:11:03Z",
-      "category": "Evacuation resources",
-      "title": "ABC7 reports voting assistance planned for evacuees",
-      "summary": "ABC7 reported that Orange County election officials planned to send Registrar of Voters staff to emergency shelters to help displaced residents cast ballots, and that all voters, including evacuees, may visit any Orange County vote center. ABC7 also reported that the Garden Grove Sports and Recreation Center vote center was closed until further notice because the site was being used as an evacuation center.",
-      "sourceLabel": "ABC7 Los Angeles",
-      "sourceUrl": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/entry/19168104/"
     }
   ],
   "resources": [
