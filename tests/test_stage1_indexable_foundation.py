@@ -272,6 +272,12 @@ def test_stage1_forms_are_live_netlify_intake_without_uploads():
             assert form.get("aria-describedby") == "caseReviewPrivacyNote"
             assert doc.select_one("#caseReviewTitle") is not None
             assert doc.select_one("#caseReviewPrivacyNote.notice") is not None
+        if form_name == "garden-grove-case-review":
+            assert form.get("aria-labelledby") == "gardenGroveCaseReviewTitle"
+            assert form.get("aria-describedby") == "gardenGroveUrgentNotice gardenGrovePrivacyNotice"
+            assert doc.select_one("#gardenGroveCaseReviewTitle") is not None
+            assert doc.select_one("#gardenGrovePrivacyNotice.notice") is not None
+            assert doc.select_one("#gardenGroveUrgentNotice.notice") is not None
 
 
 def test_homepage_declares_netlify_form_detection_stubs():
