@@ -57,6 +57,7 @@ def test_intake_has_accessible_errors_honeypot_and_conservative_privacy_copy():
     assert honeypot_wrap is not None
     assert honeypot_wrap.get("aria-hidden") == "true"
     assert honeypot_input is not None
+    assert honeypot_input.get("type") == "text"
     assert honeypot_input.get("tabindex") == "-1"
     assert honeypot_input.get("autocomplete") == "off"
     consent_label = form.select_one("label.consent")

@@ -308,6 +308,13 @@ def test_homepage_declares_netlify_form_detection_stubs():
         assert form.get("data-netlify") == "true"
         assert form.has_attr("netlify")
         assert form.select_one(f'input[name="form-name"][value="{name}"]') is not None
+        honeypot_name = str(form.get("netlify-honeypot") or "")
+        assert honeypot_name
+        honeypot = form.select_one(f'input[name="{honeypot_name}"]')
+        assert honeypot is not None
+        assert honeypot.get("type") == "text"
+        assert honeypot.get("tabindex") == "-1"
+        assert honeypot.get("autocomplete") == "off"
 
 
 def test_html_pages_have_keyboard_skip_link_to_main_content():
