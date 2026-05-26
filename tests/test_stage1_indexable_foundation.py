@@ -170,6 +170,20 @@ def test_stage1_internal_links_resolve_and_include_legal_pages():
         assert all(route_exists(href) for href in hrefs), f"{route} has broken local links: {hrefs}"
 
 
+def test_external_new_tab_links_include_noopener_and_noreferrer():
+    for path in ROOT.rglob("*.html"):
+        if ".git" in path.parts:
+            continue
+        doc = page_doc(path)
+        for link in doc.select('a[target="_blank"][href]'):
+            href = str(link.get("href"))
+            if href.startswith("http") and "berhelaw.com" not in href:
+                rel_tokens = set(link.get("rel") or [])
+                assert "noopener" in rel_tokens, f"{path} external new-tab link needs noopener: {href}"
+                assert "noreferrer" in rel_tokens, f"{path} external new-tab link needs noreferrer: {href}"
+
+
+
 def test_support_and_success_pages_have_named_home_links():
     support_routes = {
         **SUPPORT_PAGES,
