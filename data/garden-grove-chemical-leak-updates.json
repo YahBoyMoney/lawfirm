@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-26T15:21:10Z",
+  "lastVerifiedUtc": "2026-05-26T17:27:23Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for active safety orders.",
   "updates": [
+    {
+      "timeUtc": "2026-05-26T16:56:00Z",
+      "category": "Schools / closures",
+      "title": "OCDE lists Tuesday reopenings, remaining closures, and Wednesday return plans",
+      "summary": "OCDE updated its Garden Grove chemical-tank school digest at 9:56 a.m. on May 26 with district-by-district operations: nine Garden Grove Unified campuses reopened Tuesday, while Alamitos Intermediate, Lawrence Elementary, Wakeham Elementary, and several GGUSD facilities remained under evacuation orders and closed. OCDE also reported Westminster, Magnolia, Savanna, Cypress, and ACCESS status updates, including planned Wednesday returns for B.R.I.G.H.T. Learners Preschool and previously impacted ACCESS sites. Families and staff should still follow their own district notices and official evacuation instructions.",
+      "sourceLabel": "OCDE Newsroom",
+      "sourceUrl": "https://newsroom.ocde.us/several-garden-grove-unified-campuses-closed-following-chemical-leak-response/"
+    },
     {
       "timeUtc": "2026-05-26T13:34:00Z",
       "category": "Public health / monitoring",
@@ -10,14 +18,6 @@
       "summary": "The Associated Press reported that Orange County Supervisor Janet Nguyen said South Coast AQMD will monitor the air for several months and EPA will check sewer and storm drains after the GKN Aerospace tank emergency. The same report said county health officials advised that odor may be noticeable over a large area without necessarily indicating harm, while official evacuation and reentry instructions should still come from County/City public-safety sources.",
       "sourceLabel": "Associated Press",
       "sourceUrl": "https://apnews.com/article/california-tank-leak-explosion-garden-grove-770af6de585b1771824539b163555eaa"
-    },
-    {
-      "timeUtc": "2026-05-26T07:48:00Z",
-      "category": "Legal-action status",
-      "title": "Class-counsel site is now publicly documenting the GKN Garden Grove action",
-      "summary": "A dedicated GKN Garden Grove Class Action website states that The X-Law Group P.C. and Presidio Law Firm LLP filed a class action connected to the GKN Aerospace chemical incident and invites residents, workers, businesses, and property owners to document losses. This is a public source only; Berhe Jones is not claiming affiliation with class counsel, and a court case number was not verified from this source during this check.",
-      "sourceLabel": "GKN Garden Grove Class Action site",
-      "sourceUrl": "https://www.gkngardengrove.com/"
     },
     {
       "timeUtc": "2026-05-26T11:16:45Z",
@@ -28,12 +28,12 @@
       "sourceUrl": "https://www.latimes.com/california/story/2026-05-26/o-c-communities-hit-by-chemical-crisis-are-safe-for-return-officials-say"
     },
     {
-      "timeUtc": "2026-05-26T03:02:00Z",
-      "category": "Schools / closures",
-      "title": "OCDE says some campuses can reopen Tuesday while others stay closed or remote",
-      "summary": "The Orange County Department of Education updated its Garden Grove chemical-tank digest at 8:02 p.m. on May 25, reporting that some campuses outside the reduced evacuation zone were scheduled to reopen Tuesday, while certain Garden Grove Unified schools would continue distance learning and Alamitos Intermediate and Walton Intermediate would remain closed because they were still within evacuation orders. Families should follow their own district and school notices for attendance, remote-learning, and reopening instructions.",
-      "sourceLabel": "OCDE Newsroom",
-      "sourceUrl": "https://newsroom.ocde.us/several-garden-grove-unified-campuses-closed-following-chemical-leak-response/"
+      "timeUtc": "2026-05-26T07:48:00Z",
+      "category": "Legal-action status",
+      "title": "Class-counsel site is now publicly documenting the GKN Garden Grove action",
+      "summary": "A dedicated GKN Garden Grove Class Action website states that The X-Law Group P.C. and Presidio Law Firm LLP filed a class action connected to the GKN Aerospace chemical incident and invites residents, workers, businesses, and property owners to document losses. This is a public source only; Berhe Jones is not claiming affiliation with class counsel, and a court case number was not verified from this source during this check.",
+      "sourceLabel": "GKN Garden Grove Class Action site",
+      "sourceUrl": "https://www.gkngardengrove.com/"
     },
     {
       "timeUtc": "2026-05-26T02:28:00Z",
