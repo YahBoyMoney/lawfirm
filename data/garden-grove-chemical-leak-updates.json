@@ -1,15 +1,15 @@
 {
-  "lastVerifiedUtc": "2026-05-26T02:28:16Z",
+  "lastVerifiedUtc": "2026-05-26T04:39:44Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, and proof-preservation tools. Follow emergency officials first for active safety orders.",
   "updates": [
     {
-      "timeUtc": "2026-05-26T02:28:16Z",
-      "category": "Evacuation status",
-      "title": "Orange County says evacuation zone has been reduced to a smaller four-street area",
-      "summary": "Orange County's official incident page says local law enforcement has reduced the evacuation zone to the area between Orangewood Avenue, Dale Street, Garden Grove Boulevard and Knott Street in response to the ongoing Garden Grove incident. The County directs residents and businesses to check the public information map for the status of their address and continue following official instructions.",
-      "sourceLabel": "Orange County",
-      "sourceUrl": "https://www.ocgov.com/page/garden-grove-chemical-spill-incident"
+      "timeUtc": "2026-05-26T03:24:00Z",
+      "category": "Public health / reentry",
+      "title": "CBS reports officials said reduced-zone returnees can feel safe while response continues",
+      "summary": "CBS Los Angeles reported that Orange County officials reduced the Garden Grove evacuation zone by about 65%, leaving about 16,000 residents still under evacuation orders. CBS also reported Orange County Health Care Agency Dr. Regina Chinsio-Kwong said people allowed to return Monday could feel safe and that there was no contamination, while OCFA said runoff water was being tested and had remained clean during monitoring. Residents and businesses should still check the official County/City map for their address and follow active evacuation instructions.",
+      "sourceLabel": "CBS Los Angeles",
+      "sourceUrl": "https://www.cbsnews.com/losangeles/live-updates/california-chemical-leak-orange-county-garden-grove-emergency-day-5/"
     },
     {
       "timeUtc": "2026-05-25T21:20:00Z",
