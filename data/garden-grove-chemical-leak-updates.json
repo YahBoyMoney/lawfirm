@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-25T22:01:06Z",
+  "lastVerifiedUtc": "2026-05-26T00:17:28Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, and proof-preservation tools. Follow emergency officials first for active safety orders.",
   "updates": [
+    {
+      "timeUtc": "2026-05-25T21:20:00Z",
+      "category": "Official city update",
+      "title": "City posts official video update and schedules May 26 special meeting",
+      "summary": "The City of Garden Grove emergency page posted a 2:20 p.m. official video update and said the regular May 26 City Council meeting has been canceled. The City said it will instead hold a special meeting on Tuesday, May 26 at 5:30 p.m. at the community meeting center focused on the incident, the City's response, and the latest available information, with translation services available.",
+      "sourceLabel": "City of Garden Grove",
+      "sourceUrl": "https://ggcity.org/emergency"
+    },
     {
       "timeUtc": "2026-05-25T21:03:00Z",
       "category": "Evacuation status",
@@ -58,14 +66,6 @@
       "summary": "ABC7 reported that firefighters continued a high-risk assessment at the GKN Aerospace tank after an overnight operation to determine whether a crack has relieved enough pressure to reduce the explosion threat. ABC7 cited OCFA as saying there was one known crack, no active chemical leak, and crews were still assessing the tank and surrounding conditions; residents should continue following official evacuation-zone instructions.",
       "sourceLabel": "ABC7 Los Angeles",
       "sourceUrl": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/"
-    },
-    {
-      "timeUtc": "2026-05-25T07:01:32Z",
-      "category": "Investigation",
-      "title": "ABC7 reports Orange County DA records-preservation order for GKN Aerospace",
-      "summary": "ABC7 reported that Orange County District Attorney Todd Spitzer launched a criminal investigation into the Garden Grove chemical-tank incident, established an anonymous tipline and online reporting form, and ordered GKN Aerospace to preserve records. ABC7 said the DA's office sought information about the release, facility operations, and the quality and frequency of maintenance for the tanks and systems at issue; the report describes an investigation and records-preservation step, not a finding of liability.",
-      "sourceLabel": "ABC7 Los Angeles",
-      "sourceUrl": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/entry/19165127/"
     }
   ],
   "resources": [
