@@ -460,6 +460,19 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     assert "not claiming affiliation" in kfi_updates[0].get("summary", "").lower()
     assert "court case number" in kfi_updates[0].get("summary", "").lower()
 
+    abc7_epa_updates = [
+        u
+        for u in data["updates"]
+        if u.get("sourceUrl")
+        == "https://abc7.com/post/check-enforcement-compliance-history-chemical-facilities-area-epas-interactive-map/19176249/"
+    ]
+    assert len(abc7_epa_updates) == 1, "ABC7 EPA compliance-map update should stay visible in capped feed"
+    assert abc7_epa_updates[0].get("category") == "Regulatory history"
+    abc7_epa_summary = abc7_epa_updates[0].get("summary", "").lower()
+    assert "131,000 pounds" in abc7_epa_summary
+    assert "generator-related violations" in abc7_epa_summary
+    assert "does not, by itself, establish the cause" in abc7_epa_summary
+
     ocde_updates = [
         u
         for u in data["updates"]
