@@ -238,6 +238,17 @@ def test_homepage_mobile_intake_cta_has_specific_accessible_name():
     assert intake_link.get("aria-label") == "Start Online Intake for Berhe Jones LLP case review"
 
 
+def test_homepage_consent_checkbox_has_explicit_label():
+    doc = page_doc(ROOT / "index.html")
+    form = doc.select_one("#caseForm")
+    assert form is not None
+    consent = form.select_one('#consent[name="consent"][type="checkbox"]')
+    assert consent is not None
+    consent_label = form.select_one('label.consent[for="consent"]')
+    assert consent_label is not None
+    assert "attorney-client relationship" in consent_label.get_text(" ", strip=True).lower()
+
+
 def test_public_html_has_working_phone_links_and_valid_markup_basics():
     expected_phone_href = "tel:+19096096685"
     expected_fax_href = "tel:+19098906043"

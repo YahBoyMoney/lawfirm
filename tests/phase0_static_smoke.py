@@ -60,7 +60,7 @@ def test_intake_has_accessible_errors_honeypot_and_conservative_privacy_copy():
     assert honeypot_input.get("type") == "text"
     assert honeypot_input.get("tabindex") == "-1"
     assert honeypot_input.get("autocomplete") == "off"
-    consent_label = form.select_one("label.consent")
+    consent_label = form.select_one('label.consent[for="consent"]')
     assert consent_label is not None
     consent_text = consent_label.get_text(" ", strip=True).lower()
     assert "attorney-client relationship" in consent_text
