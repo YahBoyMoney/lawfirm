@@ -421,6 +421,25 @@ def test_html_pages_have_keyboard_skip_link_to_main_content():
         assert ".skip-link:focus" in style_text, f"{path} needs visible focus styling for skip link"
 
 
+def test_html_pages_have_consistent_browser_branding_metadata():
+    for path in ROOT.rglob("*.html"):
+        if ".git" in path.parts:
+            continue
+        doc = page_doc(path)
+        theme_tags = doc.select('meta[name="theme-color"]')
+        assert len(theme_tags) == 1, f"{path} needs exactly one theme-color meta tag"
+        assert theme_tags[0].get("content") == "#15212e"
+
+        icon_tags = doc.select('link[rel="icon"]')
+        assert len(icon_tags) == 1, f"{path} needs exactly one favicon link"
+        assert icon_tags[0].get("href") == "/favicon.ico"
+        assert icon_tags[0].get("sizes") == "any"
+
+        apple_icons = doc.select('link[rel="apple-touch-icon"]')
+        assert len(apple_icons) == 1, f"{path} needs exactly one apple-touch-icon link"
+        assert apple_icons[0].get("href") == "/images/berhe-jones-icon.png"
+
+
 def test_public_pages_have_complete_social_share_metadata():
     for route, path in {"/": ROOT / "index.html", **PUBLIC_PAGES, **SUPPORT_PAGES}.items():
         doc = page_doc(path)
