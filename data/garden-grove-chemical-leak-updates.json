@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-27T11:04:08Z",
+  "lastVerifiedUtc": "2026-05-27T18:36:00Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for any remaining road closures, exclusion zones, or monitoring instructions.",
   "updates": [
+    {
+      "timeUtc": "2026-05-27T18:36:00Z",
+      "category": "Recovery / claims",
+      "title": "Voice of OC reports officials are exploring reimbursement or compensation routes",
+      "summary": "Voice of OC reported May 27 that Orange County Board of Supervisors Chair Doug Chaffee expects there will be a claim process where residents impacted by the evacuation can ask for reimbursement or compensation, while the funding source and process remain undetermined. The report says Chaffee advised affected residents to save receipts and list expenses, Rep. Derek Tran said he is working on federal resources for residents and businesses and called for GKN accountability, and local cities said compensation guidance is still developing. The City of Garden Grove's May 27 FAQ separately directs evacuated residents to contact homeowners or renters insurance and businesses to contact their insurance providers. This is a recovery-resource and proof-preservation update only, not a promise that any specific expense will be paid.",
+      "sourceLabel": "Voice of OC / City of Garden Grove recovery reporting",
+      "sourceUrl": "https://voiceofoc.org/2026/05/oc-residents-impacted-by-faulty-chemical-tank-may-get-reimbursed/"
+    },
     {
       "timeUtc": "2026-05-27T08:14:16Z",
       "category": "Schools / operations",
@@ -58,14 +66,6 @@
       "summary": "The Daily Journal reported that ACTS LAW, Becker Law Group, and Nguyen Lawyers ALC announced a joint effort to represent residents, workers, and businesses affected by the Garden Grove chemical emergency tied to GKN Aerospace. This is another public legal-action signal only; Berhe Jones is not claiming affiliation with those firms or class counsel, and this check still did not independently verify a public court case number for the filed action.",
       "sourceLabel": "Daily Journal",
       "sourceUrl": "https://www.dailyjournal.com/article/391685-garden-grove-chemical-emergency-spurs-new-plaintiffs-legal-coalition"
-    },
-    {
-      "timeUtc": "2026-05-26T15:17:00Z",
-      "category": "Legal-action status",
-      "title": "KFI reports federal lawsuit allegations and claimed damages categories",
-      "summary": "KFI AM 640 reported that a Garden Grove couple filed a federal lawsuit against GKN Aerospace alleging negligence, trespass, and strict liability for ultrahazardous activity after the methyl methacrylate tank emergency. KFI reported that the lawsuit seeks damages for property damage, evacuation-related expenses, and emotional distress tied to the threat of toxic exposure, and noted GKN Aerospace said it is working with authorities to resolve the situation safely. This is a source-attributed legal-action update only; Berhe Jones is not claiming affiliation with the plaintiffs, their counsel, or class counsel, and this check did not independently verify a public court case number.",
-      "sourceLabel": "KFI AM 640",
-      "sourceUrl": "https://kfiam640.iheart.com/content/2026-05-26-lawsuit-filed-against-gkn-aerospace-over-chemical-leak/"
     }
   ],
   "resources": [

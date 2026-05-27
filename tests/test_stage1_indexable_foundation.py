@@ -515,14 +515,28 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     latest_update = data["updates"][0]
     assert (
         latest_update.get("sourceUrl")
-        == "https://www.ggusd.us/news/evacuation-orders-lifted-all-schools-reopen-tomorrowevacuation-orders-lifted-all-schools-reopen-tomorrow"
+        == "https://voiceofoc.org/2026/05/oc-residents-impacted-by-faulty-chemical-tank-may-get-reimbursed/"
     )
-    assert latest_update.get("category") == "Schools / operations"
+    assert latest_update.get("category") == "Recovery / claims"
     latest_summary = latest_update.get("summary", "").lower()
-    assert "all schools would be open wednesday" in latest_summary
-    assert "students unable to attend" in latest_summary
-    assert "not be penalized" in latest_summary
-    assert "held harmless" in latest_summary
+    assert "claim process" in latest_summary
+    assert "save receipts" in latest_summary
+    assert "insurance providers" in latest_summary
+    assert "not a promise" in latest_summary
+
+    ggusd_updates = [
+        u
+        for u in data["updates"]
+        if u.get("sourceUrl")
+        == "https://www.ggusd.us/news/evacuation-orders-lifted-all-schools-reopen-tomorrowevacuation-orders-lifted-all-schools-reopen-tomorrow"
+    ]
+    assert len(ggusd_updates) == 1, "GGUSD all-schools-reopen update should stay visible in capped feed"
+    assert ggusd_updates[0].get("category") == "Schools / operations"
+    ggusd_summary = ggusd_updates[0].get("summary", "").lower()
+    assert "all schools would be open wednesday" in ggusd_summary
+    assert "students unable to attend" in ggusd_summary
+    assert "not be penalized" in ggusd_summary
+    assert "held harmless" in ggusd_summary
 
     oc_register_updates = [
         u
@@ -573,17 +587,6 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     assert "not claiming affiliation" in daily_journal_updates[0].get("summary", "").lower()
     assert "court case number" in daily_journal_updates[0].get("summary", "").lower()
 
-    kfi_updates = [
-        u
-        for u in data["updates"]
-        if u.get("sourceUrl")
-        == "https://kfiam640.iheart.com/content/2026-05-26-lawsuit-filed-against-gkn-aerospace-over-chemical-leak/"
-    ]
-    assert len(kfi_updates) == 1, "KFI federal-lawsuit update should stay visible in capped feed"
-    assert kfi_updates[0].get("category") == "Legal-action status"
-    assert "source-attributed" in kfi_updates[0].get("summary", "").lower()
-    assert "not claiming affiliation" in kfi_updates[0].get("summary", "").lower()
-    assert "court case number" in kfi_updates[0].get("summary", "").lower()
 
     abc7_epa_updates = [
         u
