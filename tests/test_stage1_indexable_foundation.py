@@ -89,10 +89,10 @@ def test_stage1_pages_are_in_sitemap_and_homepage_footer():
     home_doc = page_doc(ROOT / "index.html")
     footer_hrefs = {str(a.get("href")) for a in home_doc.select("footer.site a[href]")}
     assert sitemap_text.count("<lastmod>2026-05-25</lastmod>") == 21
-    assert sitemap_text.count("<lastmod>2026-05-26</lastmod>") == 1
+    assert sitemap_text.count("<lastmod>2026-05-27</lastmod>") == 1
     assert (
         "<loc>https://berhelaw.com/landing/garden-grove-chemical-leak/</loc>\n"
-        "    <lastmod>2026-05-26</lastmod>"
+        "    <lastmod>2026-05-27</lastmod>"
     ) in sitemap_text
     for route in PUBLIC_PAGES:
         assert f"https://berhelaw.com{route}" in sitemap_text
@@ -440,6 +440,16 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     data = json.loads(updates_path.read_text(encoding="utf-8"))
     assert data["statusLabel"] == "Public-source update center"
     assert len(data["updates"]) <= 8
+    assert len(data["updates"]) == 8, "public incident feed should render the full capped update set"
+    latest_update = data["updates"][0]
+    assert latest_update.get("sourceUrl") == "https://ggcity.org/emergency"
+    assert latest_update.get("category") == "Official safety status"
+    latest_summary = latest_update.get("summary", "").lower()
+    assert "all evacuation orders" in latest_summary
+    assert "no chemical leak" in latest_summary
+    assert "no threat of explosion or fire" in latest_summary
+    assert "western avenue between chapman avenue and garden grove boulevard remains closed" in latest_summary
+    assert "exclusion zone" in latest_summary
     legal_status_updates = [u for u in data["updates"] if u.get("sourceUrl") == "https://www.gkngardengrove.com/"]
     assert len(legal_status_updates) == 1, "public legal-action feed should cite the GKN Garden Grove class-action status source once"
     assert legal_status_updates[0].get("category") == "Legal-action status"
@@ -496,6 +506,15 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     assert len(data["resources"]) >= 10
     for resource in data["resources"]:
         assert {"category", "title", "description", "url", "cta"}.issubset(resource)
+
+    static_resource_and_source_text = " ".join(
+        node.get_text(" ", strip=True).lower()
+        for node in [doc.select_one("#resourceGrid"), doc.select_one("#sources")]
+        if node is not None
+    )
+    assert "reduced four-street evacuation zone" not in static_resource_and_source_text
+    assert "evacuation-order lift" in static_resource_and_source_text
+    assert "road-closure guidance" in static_resource_and_source_text
 
     assert "setInterval(loadUpdates,300000)" in html
     assert "data.updates.slice(0,8)" in html

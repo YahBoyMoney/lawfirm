@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-26T23:15:52Z",
+  "lastVerifiedUtc": "2026-05-27T04:03:57Z",
   "statusLabel": "Public-source update center",
-  "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for active safety orders.",
+  "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for any remaining road closures, exclusion zones, or monitoring instructions.",
   "updates": [
+    {
+      "timeUtc": "2026-05-27T02:30:00Z",
+      "category": "Official safety status",
+      "title": "City says all evacuation orders were lifted effective May 26 at 7:30 p.m.",
+      "summary": "The City of Garden Grove emergency page says that, effective May 26 at 7:30 p.m., all evacuation orders related to the hazardous materials incident were lifted. The City says Unified Command confirmed there is no chemical leak, no threat of explosion or fire, and no risk to the public, while Western Avenue between Chapman Avenue and Garden Grove Boulevard remains closed and a small exclusion zone remains for hazardous-materials teams to monitor tanks out of an abundance of caution.",
+      "sourceLabel": "City of Garden Grove emergency page",
+      "sourceUrl": "https://ggcity.org/emergency"
+    },
     {
       "timeUtc": "2026-05-26T23:14:45Z",
       "category": "Regulatory history",
@@ -44,14 +52,6 @@
       "sourceUrl": "https://kfiam640.iheart.com/content/2026-05-26-lawsuit-filed-against-gkn-aerospace-over-chemical-leak/"
     },
     {
-      "timeUtc": "2026-05-26T13:34:00Z",
-      "category": "Public health / monitoring",
-      "title": "AP reports follow-up air, sewer, and storm-drain monitoring after the evacuation reduction",
-      "summary": "The Associated Press reported that Orange County Supervisor Janet Nguyen said South Coast AQMD will monitor the air for several months and EPA will check sewer and storm drains after the GKN Aerospace tank emergency. The same report said county health officials advised that odor may be noticeable over a large area without necessarily indicating harm, while official evacuation and reentry instructions should still come from County/City public-safety sources.",
-      "sourceLabel": "Associated Press",
-      "sourceUrl": "https://apnews.com/article/california-tank-leak-explosion-garden-grove-770af6de585b1771824539b163555eaa"
-    },
-    {
       "timeUtc": "2026-05-26T11:16:45Z",
       "category": "Public health / reentry",
       "title": "L.A. Times reports most evacuees began returning while the reduced zone stayed active",
@@ -72,14 +72,14 @@
     {
       "category": "Official safety",
       "title": "Official Garden Grove emergency page",
-      "description": "Evacuation map/address checker, public hotlines, shelter information, local alerts, and multilingual emergency instructions.",
+      "description": "Official City emergency page with the May 26 evacuation-order lift, remaining Western Avenue road closure, monitoring exclusion-zone notes, public hotlines, local alerts, and multilingual emergency instructions.",
       "url": "https://ggcity.org/emergency",
       "cta": "Open official emergency page"
     },
     {
       "category": "Official county",
       "title": "Orange County official chemical spill incident page",
-      "description": "County's official Garden Grove chemical spill incident page with the public information map, the reduced four-street evacuation zone (Orangewood, Dale, Garden Grove Blvd, Knott), and official instructions for residents and businesses.",
+      "description": "Orange County official Garden Grove chemical spill incident page with public information map, incident updates, remaining road-closure guidance, and official instructions for residents and businesses.",
       "url": "https://www.ocgov.com/page/garden-grove-chemical-spill-incident",
       "cta": "Open Orange County official page"
     },
