@@ -220,10 +220,22 @@ def test_garden_grove_incident_media_images_are_performance_safe():
 
 def test_garden_grove_mobile_sticky_call_has_specific_accessible_name():
     doc = page_doc(PUBLIC_PAGES["/landing/garden-grove-chemical-leak/"])
+    sticky_screening = doc.select_one('.mobile-sticky-cta a[href="#case-review"]')
+    assert sticky_screening is not None
+    assert sticky_screening.get_text(" ", strip=True) == "Start screening"
+    assert sticky_screening.get("aria-label") == "Start screening for Garden Grove chemical incident case review"
     sticky_call = doc.select_one('.mobile-sticky-cta a[href="tel:+19096096685"]')
     assert sticky_call is not None
     assert sticky_call.get_text(" ", strip=True) == "Call now"
     assert sticky_call.get("aria-label") == "Call Berhe Jones LLP at 909-609-6685"
+
+
+def test_homepage_mobile_intake_cta_has_specific_accessible_name():
+    doc = page_doc(ROOT / "index.html")
+    intake_link = doc.select_one('.mobile-cta-bar a.mobile-cta.intake[href="#intake"]')
+    assert intake_link is not None
+    assert intake_link.get_text(" ", strip=True) == "Start Online Intake"
+    assert intake_link.get("aria-label") == "Start Online Intake for Berhe Jones LLP case review"
 
 
 def test_public_html_has_working_phone_links_and_valid_markup_basics():

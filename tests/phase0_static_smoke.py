@@ -78,6 +78,9 @@ def test_mobile_cta_pair_has_intake_and_call_and_hides_for_footer_links():
     doc = soup()
     bar = doc.select_one(".mobile-cta-bar")
     assert bar is not None
+    intake_link = bar.select_one('a.mobile-cta.intake[href="#intake"]')
+    assert intake_link is not None
+    assert intake_link.get("aria-label") == "Start Online Intake for Berhe Jones LLP case review"
     links = {a.get_text(" ", strip=True) for a in bar.select("a")}
     assert any("Start Online Intake" in text for text in links)
     assert any("Call 909-609-6685" in text for text in links)
