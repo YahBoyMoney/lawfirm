@@ -483,10 +483,20 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     assert "no threat of explosion or fire" in official_summary
     assert "western avenue between chapman avenue and garden grove boulevard remains closed" in official_summary
     assert "exclusion zone" in official_summary
-    legal_status_updates = [u for u in data["updates"] if u.get("sourceUrl") == "https://www.gkngardengrove.com/"]
-    assert len(legal_status_updates) == 1, "public legal-action feed should cite the GKN Garden Grove class-action status source once"
-    assert legal_status_updates[0].get("category") == "Legal-action status"
-    assert "not claiming affiliation" in legal_status_updates[0].get("summary", "").lower()
+    oc_register_lawsuit_updates = [
+        u
+        for u in data["updates"]
+        if u.get("sourceUrl")
+        == "https://www.ocregister.com/2026/05/26/70-people-suing-garden-grove-chemical-tank-owner-over-crisis-as-of-tuesday/"
+    ]
+    assert len(oc_register_lawsuit_updates) == 1, "OC Register / PacerMonitor legal-action update should stay visible in capped feed"
+    assert oc_register_lawsuit_updates[0].get("category") == "Legal-action status"
+    lawsuit_summary = oc_register_lawsuit_updates[0].get("summary", "").lower()
+    assert "at least seven lawsuits" in lawsuit_summary
+    assert "about 70 plaintiffs" in lawsuit_summary
+    assert "8:26-cv-01293" in lawsuit_summary
+    assert "8:26-cv-01296" in lawsuit_summary
+    assert "not claiming affiliation" in lawsuit_summary
 
     daily_journal_updates = [
         u

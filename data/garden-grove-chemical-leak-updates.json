@@ -1,5 +1,5 @@
 {
-  "lastVerifiedUtc": "2026-05-27T08:14:16Z",
+  "lastVerifiedUtc": "2026-05-27T11:04:08Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for any remaining road closures, exclusion zones, or monitoring instructions.",
   "updates": [
@@ -18,6 +18,14 @@
       "summary": "The Orange County Register reported from the May 26 evening update that OCFA officials said the hazmat response began after GKN staff noticed the tank-cooling system was no longer working. OCFA Capt. Brian Yau was quoted as saying there was a failure in that cooling system, which caused the facility team to call 911; the same report says officials do not yet know why the cooling system stopped working. The article also reported the compromised tank held about 7,000 gallons of methyl methacrylate, stayed stable after water spraying stopped, and that all agencies agreed it was safe to cancel evacuations. This is a source-attributed investigation/status update, not a final finding of legal fault.",
       "sourceLabel": "Orange County Register / OCFA briefing reporting",
       "sourceUrl": "https://www.ocregister.com/2026/05/26/chemical-tank-in-garden-grove-at-92-degrees-tuesday-a-m-crews-work-to-lower-it/"
+    },
+    {
+      "timeUtc": "2026-05-27T03:33:00Z",
+      "category": "Legal-action status",
+      "title": "Orange County Register reports at least seven state lawsuits and about 70 early plaintiffs",
+      "summary": "The Orange County Register reported that at least seven lawsuits had been filed against GKN in Orange County Superior Court by Tuesday afternoon after courthouse operations resumed, with one federal lawsuit already filed over the weekend and about 70 plaintiffs collectively included in the early lawsuits. The report says the lawsuits generally allege negligence and public nuisance tied to the compromised methyl methacrylate tank and alleged emergency-system failures. PacerMonitor also lists related federal docket entries for Page et al. v. GKN Aerospace Transparency Systems Inc. et al., No. 8:26-cv-01293, filed May 23, 2026, and Sanchez v. GKN Aerospace Transparency Systems Inc. et al., No. 8:26-cv-01296, filed May 26, 2026. This is a source-attributed legal-action update only; Berhe Jones is not claiming affiliation with any plaintiffs, class counsel, or filed action.",
+      "sourceLabel": "Orange County Register / PacerMonitor docket references",
+      "sourceUrl": "https://www.ocregister.com/2026/05/26/70-people-suing-garden-grove-chemical-tank-owner-over-crisis-as-of-tuesday/"
     },
     {
       "timeUtc": "2026-05-27T02:30:00Z",
@@ -58,14 +66,6 @@
       "summary": "KFI AM 640 reported that a Garden Grove couple filed a federal lawsuit against GKN Aerospace alleging negligence, trespass, and strict liability for ultrahazardous activity after the methyl methacrylate tank emergency. KFI reported that the lawsuit seeks damages for property damage, evacuation-related expenses, and emotional distress tied to the threat of toxic exposure, and noted GKN Aerospace said it is working with authorities to resolve the situation safely. This is a source-attributed legal-action update only; Berhe Jones is not claiming affiliation with the plaintiffs, their counsel, or class counsel, and this check did not independently verify a public court case number.",
       "sourceLabel": "KFI AM 640",
       "sourceUrl": "https://kfiam640.iheart.com/content/2026-05-26-lawsuit-filed-against-gkn-aerospace-over-chemical-leak/"
-    },
-    {
-      "timeUtc": "2026-05-26T07:48:00Z",
-      "category": "Legal-action status",
-      "title": "Class-counsel site is now publicly documenting the GKN Garden Grove action",
-      "summary": "A dedicated GKN Garden Grove Class Action website states that The X-Law Group P.C. and Presidio Law Firm LLP filed a class action connected to the GKN Aerospace chemical incident and invites residents, workers, businesses, and property owners to document losses. This is a public source only; Berhe Jones is not claiming affiliation with class counsel, and a court case number was not verified from this source during this check.",
-      "sourceLabel": "GKN Garden Grove Class Action site",
-      "sourceUrl": "https://www.gkngardengrove.com/"
     }
   ],
   "resources": [
