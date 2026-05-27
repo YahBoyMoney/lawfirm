@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-27T04:03:57Z",
+  "lastVerifiedUtc": "2026-05-27T04:37:43Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for any remaining road closures, exclusion zones, or monitoring instructions.",
   "updates": [
+    {
+      "timeUtc": "2026-05-27T04:16:00Z",
+      "category": "Investigation / tank operations",
+      "title": "Orange County Register reports OCFA said a cooling-system failure prompted the hazmat response",
+      "summary": "The Orange County Register reported from the May 26 evening update that OCFA officials said the hazmat response began after GKN staff noticed the tank-cooling system was no longer working. OCFA Capt. Brian Yau was quoted as saying there was a failure in that cooling system, which caused the facility team to call 911; the same report says officials do not yet know why the cooling system stopped working. The article also reported the compromised tank held about 7,000 gallons of methyl methacrylate, stayed stable after water spraying stopped, and that all agencies agreed it was safe to cancel evacuations. This is a source-attributed investigation/status update, not a final finding of legal fault.",
+      "sourceLabel": "Orange County Register / OCFA briefing reporting",
+      "sourceUrl": "https://www.ocregister.com/2026/05/26/chemical-tank-in-garden-grove-at-92-degrees-tuesday-a-m-crews-work-to-lower-it/"
+    },
     {
       "timeUtc": "2026-05-27T02:30:00Z",
       "category": "Official safety status",
@@ -50,14 +58,6 @@
       "summary": "KFI AM 640 reported that a Garden Grove couple filed a federal lawsuit against GKN Aerospace alleging negligence, trespass, and strict liability for ultrahazardous activity after the methyl methacrylate tank emergency. KFI reported that the lawsuit seeks damages for property damage, evacuation-related expenses, and emotional distress tied to the threat of toxic exposure, and noted GKN Aerospace said it is working with authorities to resolve the situation safely. This is a source-attributed legal-action update only; Berhe Jones is not claiming affiliation with the plaintiffs, their counsel, or class counsel, and this check did not independently verify a public court case number.",
       "sourceLabel": "KFI AM 640",
       "sourceUrl": "https://kfiam640.iheart.com/content/2026-05-26-lawsuit-filed-against-gkn-aerospace-over-chemical-leak/"
-    },
-    {
-      "timeUtc": "2026-05-26T11:16:45Z",
-      "category": "Public health / reentry",
-      "title": "L.A. Times reports most evacuees began returning while the reduced zone stayed active",
-      "summary": "The Los Angeles Times reported that the vast majority of the roughly 50,000 people evacuated because of the damaged GKN Aerospace chemical tank began returning home, and quoted Orange County Health Officer Dr. Regina Chinsio-Kwong as saying people outside the new evacuation zone could feel safe because officials found no contamination, fumes, vapors, or leak. The same report noted the immediate area around the facility remained under evacuation for about 16,000 people while crews continued monitoring tank temperature and runoff water, so residents and businesses should still use the official County/City map for active reentry instructions.",
-      "sourceLabel": "Los Angeles Times",
-      "sourceUrl": "https://www.latimes.com/california/story/2026-05-26/o-c-communities-hit-by-chemical-crisis-are-safe-for-return-officials-say"
     },
     {
       "timeUtc": "2026-05-26T07:48:00Z",

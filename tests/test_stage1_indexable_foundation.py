@@ -442,14 +442,26 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     assert len(data["updates"]) <= 8
     assert len(data["updates"]) == 8, "public incident feed should render the full capped update set"
     latest_update = data["updates"][0]
-    assert latest_update.get("sourceUrl") == "https://ggcity.org/emergency"
-    assert latest_update.get("category") == "Official safety status"
+    assert (
+        latest_update.get("sourceUrl")
+        == "https://www.ocregister.com/2026/05/26/chemical-tank-in-garden-grove-at-92-degrees-tuesday-a-m-crews-work-to-lower-it/"
+    )
+    assert latest_update.get("category") == "Investigation / tank operations"
     latest_summary = latest_update.get("summary", "").lower()
-    assert "all evacuation orders" in latest_summary
-    assert "no chemical leak" in latest_summary
-    assert "no threat of explosion or fire" in latest_summary
-    assert "western avenue between chapman avenue and garden grove boulevard remains closed" in latest_summary
-    assert "exclusion zone" in latest_summary
+    assert "cooling system" in latest_summary
+    assert "facility team to call 911" in latest_summary
+    assert "do not yet know why the cooling system stopped working" in latest_summary
+    assert "not a final finding of legal fault" in latest_summary
+
+    official_lift_updates = [u for u in data["updates"] if u.get("sourceUrl") == "https://ggcity.org/emergency"]
+    assert len(official_lift_updates) == 1, "City evacuation-lift update should stay visible in capped feed"
+    official_summary = official_lift_updates[0].get("summary", "").lower()
+    assert official_lift_updates[0].get("category") == "Official safety status"
+    assert "all evacuation orders" in official_summary
+    assert "no chemical leak" in official_summary
+    assert "no threat of explosion or fire" in official_summary
+    assert "western avenue between chapman avenue and garden grove boulevard remains closed" in official_summary
+    assert "exclusion zone" in official_summary
     legal_status_updates = [u for u in data["updates"] if u.get("sourceUrl") == "https://www.gkngardengrove.com/"]
     assert len(legal_status_updates) == 1, "public legal-action feed should cite the GKN Garden Grove class-action status source once"
     assert legal_status_updates[0].get("category") == "Legal-action status"
