@@ -258,6 +258,34 @@ def test_public_phone_form_fields_trigger_mobile_phone_keyboards():
             assert phone.get("inputmode") == "tel", f"{path} phone field should request the mobile phone keyboard"
 
 
+def test_case_review_forms_expose_complete_mobile_autofill_contract():
+    form_pages = [
+        PUBLIC_PAGES["/free-case-review/"],
+        PUBLIC_PAGES["/landing/truck-fleet-rideshare-accident-california/"],
+    ]
+    expected_fields = {
+        "firstName": {"type": "text", "autocomplete": "given-name"},
+        "lastName": {"type": "text", "autocomplete": "family-name"},
+        "email": {"type": "email", "autocomplete": "email"},
+        "phone": {"type": "tel", "autocomplete": "tel", "inputmode": "tel"},
+        "county": {"type": "text", "autocomplete": "address-level2"},
+    }
+    for path in form_pages:
+        doc = page_doc(path)
+        form = doc.select_one('form[name="case-review"]')
+        assert form is not None, f"{path} needs the standard case review form"
+        for field_id, attributes in expected_fields.items():
+            field = form.select_one(f"#{field_id}")
+            label = form.select_one(f'label[for="{field_id}"]')
+            assert field is not None, f"{path} missing #{field_id}"
+            assert label is not None, f"{path} field #{field_id} needs an explicit label"
+            for attribute, expected in attributes.items():
+                assert field.get(attribute) == expected, f"{path} #{field_id} needs {attribute}={expected}"
+        consent = form.select_one('#consent[name="consent"][type="checkbox"]')
+        assert consent is not None, f"{path} consent checkbox needs a stable id/name/type"
+        assert form.select_one('label.consent[for="consent"]') is not None, f"{path} consent checkbox needs an explicit label"
+
+
 def test_public_images_have_intrinsic_dimensions_and_async_decoding():
     for path in ROOT.rglob("*.html"):
         doc = BeautifulSoup(path.read_text(encoding="utf-8"), "html.parser")
