@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-27T04:37:43Z",
+  "lastVerifiedUtc": "2026-05-27T08:14:16Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for any remaining road closures, exclusion zones, or monitoring instructions.",
   "updates": [
+    {
+      "timeUtc": "2026-05-27T08:14:16Z",
+      "category": "Schools / operations",
+      "title": "GGUSD says evacuation orders lifted and all schools reopen Wednesday",
+      "summary": "Garden Grove Unified School District posted Tuesday, May 26 that officials announced all evacuation orders related to the Garden Grove hazardous-materials incident had been lifted and that command officials confirmed no chemical leak, no explosion threat, no fire threat, and no public risk. GGUSD said all schools would be open Wednesday for the final day of the school year, while students unable to attend as families recover or make arrangements will not be penalized and will be held harmless for grades.",
+      "sourceLabel": "Garden Grove Unified School District",
+      "sourceUrl": "https://www.ggusd.us/news/evacuation-orders-lifted-all-schools-reopen-tomorrowevacuation-orders-lifted-all-schools-reopen-tomorrow"
+    },
     {
       "timeUtc": "2026-05-27T04:16:00Z",
       "category": "Investigation / tank operations",
@@ -34,14 +42,6 @@
       "summary": "OCDE updated its Garden Grove chemical-tank digest at 2:17 p.m. on May 26 to report that State Superintendent Tony Thurmond encouraged support for students, families, educators, and school staff affected by the emergency through the SupplyBank.org Disaster Relief Fund. OCDE also reported that the California Department of Education is encouraging impacted districts and charter schools to submit J-13A waivers to avoid attendance-based funding losses tied to emergency school closures, while the same digest continues to list district-by-district reopenings, remaining closures, active shelters, and planned Wednesday returns for some programs.",
       "sourceLabel": "OCDE Newsroom",
       "sourceUrl": "https://newsroom.ocde.us/several-garden-grove-unified-campuses-closed-following-chemical-leak-response/"
-    },
-    {
-      "timeUtc": "2026-05-26T19:17:00Z",
-      "category": "Response status",
-      "title": "ABC7 reports tank cooling shifted to onsite sprinklers while valves remain inoperable",
-      "summary": "ABC7 reported a Tuesday update from Orange County Fire Authority officials that crews stopped using the unmanned hose that had been spraying the GKN Aerospace tank and that the facility's onsite sprinkler system is now keeping the tank cool. ABC7 also reported that the affected tank's valves remain inoperable, preventing offloading of the hazardous material, while two other tanks at the site were not compromised and Garden Grove police reported seven evacuation-zone arrests, including one involving theft.",
-      "sourceLabel": "ABC7 Los Angeles",
-      "sourceUrl": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/"
     },
     {
       "timeUtc": "2026-05-26T18:47:02Z",

@@ -444,14 +444,28 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     latest_update = data["updates"][0]
     assert (
         latest_update.get("sourceUrl")
-        == "https://www.ocregister.com/2026/05/26/chemical-tank-in-garden-grove-at-92-degrees-tuesday-a-m-crews-work-to-lower-it/"
+        == "https://www.ggusd.us/news/evacuation-orders-lifted-all-schools-reopen-tomorrowevacuation-orders-lifted-all-schools-reopen-tomorrow"
     )
-    assert latest_update.get("category") == "Investigation / tank operations"
+    assert latest_update.get("category") == "Schools / operations"
     latest_summary = latest_update.get("summary", "").lower()
-    assert "cooling system" in latest_summary
-    assert "facility team to call 911" in latest_summary
-    assert "do not yet know why the cooling system stopped working" in latest_summary
-    assert "not a final finding of legal fault" in latest_summary
+    assert "all schools would be open wednesday" in latest_summary
+    assert "students unable to attend" in latest_summary
+    assert "not be penalized" in latest_summary
+    assert "held harmless" in latest_summary
+
+    oc_register_updates = [
+        u
+        for u in data["updates"]
+        if u.get("sourceUrl")
+        == "https://www.ocregister.com/2026/05/26/chemical-tank-in-garden-grove-at-92-degrees-tuesday-a-m-crews-work-to-lower-it/"
+    ]
+    assert len(oc_register_updates) == 1, "OC Register / OCFA cooling-system update should stay visible in capped feed"
+    assert oc_register_updates[0].get("category") == "Investigation / tank operations"
+    oc_register_summary = oc_register_updates[0].get("summary", "").lower()
+    assert "cooling system" in oc_register_summary
+    assert "facility team to call 911" in oc_register_summary
+    assert "do not yet know why the cooling system stopped working" in oc_register_summary
+    assert "not a final finding of legal fault" in oc_register_summary
 
     official_lift_updates = [u for u in data["updates"] if u.get("sourceUrl") == "https://ggcity.org/emergency"]
     assert len(official_lift_updates) == 1, "City evacuation-lift update should stay visible in capped feed"
