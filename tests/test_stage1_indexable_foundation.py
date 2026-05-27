@@ -526,14 +526,27 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     latest_update = data["updates"][0]
     assert (
         latest_update.get("sourceUrl")
-        == "https://voiceofoc.org/2026/05/oc-residents-impacted-by-faulty-chemical-tank-may-get-reimbursed/"
+        == "https://www.news.caloes.ca.gov/community-resources-for-garden-grove-hazmat-incident/"
     )
-    assert latest_update.get("category") == "Recovery / claims"
+    assert latest_update.get("category") == "Recovery / public resources"
     latest_summary = latest_update.get("summary", "").lower()
-    assert "claim process" in latest_summary
-    assert "save receipts" in latest_summary
-    assert "insurance providers" in latest_summary
-    assert "not a promise" in latest_summary
+    assert "all evacuation orders have been lifted" in latest_summary
+    assert "emergency shelters will close at 7:00 p.m." in latest_summary
+    assert "may 27, 2026" in latest_summary
+    assert "public information hotline" in latest_summary
+
+    voice_updates = [
+        u
+        for u in data["updates"]
+        if u.get("sourceUrl")
+        == "https://voiceofoc.org/2026/05/oc-residents-impacted-by-faulty-chemical-tank-may-get-reimbursed/"
+    ]
+    assert len(voice_updates) == 1, "Voice of OC recovery/claims update should stay visible in capped feed"
+    voice_summary = voice_updates[0].get("summary", "").lower()
+    assert "claim process" in voice_summary
+    assert "save receipts" in voice_summary
+    assert "insurance providers" in voice_summary
+    assert "not a promise" in voice_summary
 
     ggusd_updates = [
         u
@@ -587,16 +600,21 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     assert "8:26-cv-01296" in lawsuit_summary
     assert "not claiming affiliation" in lawsuit_summary
 
-    daily_journal_updates = [
+    zimmerman_reed_updates = [
         u
         for u in data["updates"]
         if u.get("sourceUrl")
-        == "https://www.dailyjournal.com/article/391685-garden-grove-chemical-emergency-spurs-new-plaintiffs-legal-coalition"
+        == "https://www.prnewswire.com/news-releases/orange-county-residents-file-class-action-over-garden-grove-chemical-tank-crisis-302783544.html"
     ]
-    assert len(daily_journal_updates) == 1, "Daily Journal plaintiffs-coalition update should stay visible in capped feed"
-    assert daily_journal_updates[0].get("category") == "Legal-action status"
-    assert "not claiming affiliation" in daily_journal_updates[0].get("summary", "").lower()
-    assert "court case number" in daily_journal_updates[0].get("summary", "").lower()
+    assert len(zimmerman_reed_updates) == 1, "Zimmerman Reed state-court complaint update should stay visible in capped feed"
+    assert zimmerman_reed_updates[0].get("category") == "Legal-action status"
+    zimmerman_summary = zimmerman_reed_updates[0].get("summary", "").lower()
+    assert "guadarrama" in zimmerman_summary
+    assert "zimmerman reed" in zimmerman_reed_updates[0].get("sourceLabel", "").lower()
+    assert "california superior court" in zimmerman_summary
+    assert "unfair competition law" in zimmerman_summary
+    assert "did not independently verify a state-court case number" in zimmerman_summary
+    assert "not claiming affiliation" in zimmerman_summary
 
 
     abc7_epa_updates = [
@@ -612,18 +630,6 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     assert "generator-related violations" in abc7_epa_summary
     assert "does not, by itself, establish the cause" in abc7_epa_summary
 
-    ocde_updates = [
-        u
-        for u in data["updates"]
-        if u.get("sourceUrl")
-        == "https://newsroom.ocde.us/several-garden-grove-unified-campuses-closed-following-chemical-leak-response/"
-    ]
-    assert len(ocde_updates) == 1, "OCDE school/recovery update should stay visible in capped feed"
-    assert ocde_updates[0].get("category") == "Schools / recovery resources"
-    ocde_summary = ocde_updates[0].get("summary", "").lower()
-    assert "supplybank.org disaster relief fund" in ocde_summary
-    assert "j-13a waivers" in ocde_summary
-    assert "district-by-district" in ocde_summary
     assert len(data["resources"]) >= 10
     for resource in data["resources"]:
         assert {"category", "title", "description", "url", "cta"}.issubset(resource)

@@ -1,8 +1,24 @@
 {
-  "lastVerifiedUtc": "2026-05-27T18:36:00Z",
+  "lastVerifiedUtc": "2026-05-27T20:45:00Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for any remaining road closures, exclusion zones, or monitoring instructions.",
   "updates": [
+    {
+      "timeUtc": "2026-05-27T20:45:00Z",
+      "category": "Recovery / public resources",
+      "title": "Cal OES says emergency shelters close at 7 p.m. May 27 after evacuation orders lift",
+      "summary": "Cal OES updated its Garden Grove hazmat community-resources page to say all evacuation orders have been lifted and it is safe for residents to return. The same page says emergency shelters will close at 7:00 p.m. on Wednesday, May 27, 2026, following the lifting of evacuation orders, and directs residents to call the Public Information Hotline at (714) 741-5444 for current shelter-status information because shelter vacancy can fluctuate. This is a public-resource update only; residents and businesses should continue following official City, County, OCFA, and public-health instructions for any remaining road closures, exclusion zones, or monitoring.",
+      "sourceLabel": "Cal OES community resources",
+      "sourceUrl": "https://www.news.caloes.ca.gov/community-resources-for-garden-grove-hazmat-incident/"
+    },
+    {
+      "timeUtc": "2026-05-27T18:58:00Z",
+      "category": "Legal-action status",
+      "title": "Zimmerman Reed announces Guadarrama state-court class-action complaint",
+      "summary": "A May 27 PRNewswire release from Zimmerman Reed reported that Orange County residents filed Guadarrama et al. v. GKN Aerospace Transparency Systems Inc. et al. in California Superior Court, County of Orange, against GKN Aerospace Transparency Systems Inc., GKN Aerospace Services Ltd., and Melrose Industries PLC. The release says the complaint names four plaintiffs and a proposed evacuated-resident class, alleges negligent storage, monitoring, and maintenance of the methyl methacrylate tank, and asserts negligence, premises liability, private nuisance, public nuisance, trespass, strict liability for ultrahazardous activity, and California Unfair Competition Law claims. This is a counsel-announced, source-attributed legal-action update; this check did not independently verify a state-court case number or complaint image, and Berhe Jones is not claiming affiliation with the plaintiffs, class counsel, or filed actions.",
+      "sourceLabel": "Zimmerman Reed / PRNewswire",
+      "sourceUrl": "https://www.prnewswire.com/news-releases/orange-county-residents-file-class-action-over-garden-grove-chemical-tank-crisis-302783544.html"
+    },
     {
       "timeUtc": "2026-05-27T18:36:00Z",
       "category": "Recovery / claims",
@@ -50,22 +66,6 @@
       "summary": "ABC7's 7 On Your Side report directed residents to EPA compliance-map tools and reported that EPA records showed more than 131,000 pounds of methyl methacrylate were released or transferred out of the GKN Aerospace facility in 2024. ABC7 also reported that the EPA website showed hazardous-waste shipments in most years and 2024 generator-related violations that were later corrected, while separate South Coast AQMD documents obtained by ABC7 described a $909,935.95 settlement for 2021 violations. This is regulatory-history context only and does not, by itself, establish the cause of the current tank emergency.",
       "sourceLabel": "ABC7 / EPA compliance reporting",
       "sourceUrl": "https://abc7.com/post/check-enforcement-compliance-history-chemical-facilities-area-epas-interactive-map/19176249/"
-    },
-    {
-      "timeUtc": "2026-05-26T21:17:00Z",
-      "category": "Schools / recovery resources",
-      "title": "OCDE says state superintendent highlighted relief fund and emergency waivers for impacted schools",
-      "summary": "OCDE updated its Garden Grove chemical-tank digest at 2:17 p.m. on May 26 to report that State Superintendent Tony Thurmond encouraged support for students, families, educators, and school staff affected by the emergency through the SupplyBank.org Disaster Relief Fund. OCDE also reported that the California Department of Education is encouraging impacted districts and charter schools to submit J-13A waivers to avoid attendance-based funding losses tied to emergency school closures, while the same digest continues to list district-by-district reopenings, remaining closures, active shelters, and planned Wednesday returns for some programs.",
-      "sourceLabel": "OCDE Newsroom",
-      "sourceUrl": "https://newsroom.ocde.us/several-garden-grove-unified-campuses-closed-following-chemical-leak-response/"
-    },
-    {
-      "timeUtc": "2026-05-26T18:47:02Z",
-      "category": "Legal-action status",
-      "title": "Daily Journal reports additional plaintiffs firms formed a Garden Grove response coalition",
-      "summary": "The Daily Journal reported that ACTS LAW, Becker Law Group, and Nguyen Lawyers ALC announced a joint effort to represent residents, workers, and businesses affected by the Garden Grove chemical emergency tied to GKN Aerospace. This is another public legal-action signal only; Berhe Jones is not claiming affiliation with those firms or class counsel, and this check still did not independently verify a public court case number for the filed action.",
-      "sourceLabel": "Daily Journal",
-      "sourceUrl": "https://www.dailyjournal.com/article/391685-garden-grove-chemical-emergency-spurs-new-plaintiffs-legal-coalition"
     }
   ],
   "resources": [
