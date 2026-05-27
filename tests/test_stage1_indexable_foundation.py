@@ -635,19 +635,21 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     assert "did not independently verify a state-court case number" in zimmerman_summary
     assert "not claiming affiliation" in zimmerman_summary
 
-
-    abc7_epa_updates = [
+    dicello_updates = [
         u
         for u in data["updates"]
         if u.get("sourceUrl")
-        == "https://abc7.com/post/check-enforcement-compliance-history-chemical-facilities-area-epas-interactive-map/19176249/"
+        == "https://dicellolevitt.com/dicello-levitt-and-co-counsel-file-class-action-against-gkn-aerospace-over-garden-grove-chemical-emergency/"
     ]
-    assert len(abc7_epa_updates) == 1, "ABC7 EPA compliance-map update should stay visible in capped feed"
-    assert abc7_epa_updates[0].get("category") == "Regulatory history"
-    abc7_epa_summary = abc7_epa_updates[0].get("summary", "").lower()
-    assert "131,000 pounds" in abc7_epa_summary
-    assert "generator-related violations" in abc7_epa_summary
-    assert "does not, by itself, establish the cause" in abc7_epa_summary
+    assert len(dicello_updates) == 1, "DiCello Levitt Carey complaint update should stay visible in capped feed"
+    assert dicello_updates[0].get("category") == "Legal-action status"
+    dicello_summary = dicello_updates[0].get("summary", "").lower()
+    assert "courtney carey" in dicello_summary
+    assert "complaint pdf" in dicello_summary
+    assert "case no. line blank" in dicello_summary
+    assert "negligence, private nuisance, and public nuisance" in dicello_summary
+    assert "no public state-court case number was independently verified" in dicello_summary
+    assert "not claiming affiliation" in dicello_summary
 
     assert len(data["resources"]) >= 10
     for resource in data["resources"]:

@@ -1,5 +1,5 @@
 {
-  "lastVerifiedUtc": "2026-05-27T20:45:00Z",
+  "lastVerifiedUtc": "2026-05-27T22:55:59Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for any remaining road closures, exclusion zones, or monitoring instructions.",
   "updates": [
@@ -18,6 +18,14 @@
       "summary": "A May 27 PRNewswire release from Zimmerman Reed reported that Orange County residents filed Guadarrama et al. v. GKN Aerospace Transparency Systems Inc. et al. in California Superior Court, County of Orange, against GKN Aerospace Transparency Systems Inc., GKN Aerospace Services Ltd., and Melrose Industries PLC. The release says the complaint names four plaintiffs and a proposed evacuated-resident class, alleges negligent storage, monitoring, and maintenance of the methyl methacrylate tank, and asserts negligence, premises liability, private nuisance, public nuisance, trespass, strict liability for ultrahazardous activity, and California Unfair Competition Law claims. This is a counsel-announced, source-attributed legal-action update; this check did not independently verify a state-court case number or complaint image, and Berhe Jones is not claiming affiliation with the plaintiffs, class counsel, or filed actions.",
       "sourceLabel": "Zimmerman Reed / PRNewswire",
       "sourceUrl": "https://www.prnewswire.com/news-releases/orange-county-residents-file-class-action-over-garden-grove-chemical-tank-crisis-302783544.html"
+    },
+    {
+      "timeUtc": "2026-05-27T18:50:41Z",
+      "category": "Legal-action status",
+      "title": "DiCello Levitt posts Carey class-action complaint PDF against GKN Aerospace",
+      "summary": "DiCello Levitt reported May 27 that it, Miner, Barnhill & Galland, P.C., and Collins Law Group, P.C. filed Courtney Carey, Robert Carey, Jody Carey, and Christopher Carey v. GKN Aerospace Transparency Systems, Inc. in California Superior Court, County of Orange. The firm’s release links a 17-page complaint PDF; the preserved copy reviewed in this check leaves the caption’s Case No. line blank. The complaint alleges negligence tied to maintenance, inspection, testing, repair, monitoring, security, and safety controls for MMA tanks and seeks relief for property/economic losses under negligence, private nuisance, and public nuisance theories. This is a counsel-posted, source-attributed legal-action update only: allegations are not findings, no public state-court case number was independently verified in this check, and Berhe Jones is not claiming affiliation with the plaintiffs, class counsel, or filed actions.",
+      "sourceLabel": "DiCello Levitt complaint release",
+      "sourceUrl": "https://dicellolevitt.com/dicello-levitt-and-co-counsel-file-class-action-against-gkn-aerospace-over-garden-grove-chemical-emergency/"
     },
     {
       "timeUtc": "2026-05-27T18:36:00Z",
@@ -58,14 +66,6 @@
       "summary": "The City of Garden Grove emergency page says that, effective May 26 at 7:30 p.m., all evacuation orders related to the hazardous materials incident were lifted. The City says Unified Command confirmed there is no chemical leak, no threat of explosion or fire, and no risk to the public, while Western Avenue between Chapman Avenue and Garden Grove Boulevard remains closed and a small exclusion zone remains for hazardous-materials teams to monitor tanks out of an abundance of caution.",
       "sourceLabel": "City of Garden Grove emergency page",
       "sourceUrl": "https://ggcity.org/emergency"
-    },
-    {
-      "timeUtc": "2026-05-26T23:14:45Z",
-      "category": "Regulatory history",
-      "title": "ABC7 reports EPA compliance-map records for the GKN Garden Grove facility",
-      "summary": "ABC7's 7 On Your Side report directed residents to EPA compliance-map tools and reported that EPA records showed more than 131,000 pounds of methyl methacrylate were released or transferred out of the GKN Aerospace facility in 2024. ABC7 also reported that the EPA website showed hazardous-waste shipments in most years and 2024 generator-related violations that were later corrected, while separate South Coast AQMD documents obtained by ABC7 described a $909,935.95 settlement for 2021 violations. This is regulatory-history context only and does not, by itself, establish the cause of the current tank emergency.",
-      "sourceLabel": "ABC7 / EPA compliance reporting",
-      "sourceUrl": "https://abc7.com/post/check-enforcement-compliance-history-chemical-facilities-area-epas-interactive-map/19176249/"
     }
   ],
   "resources": [
