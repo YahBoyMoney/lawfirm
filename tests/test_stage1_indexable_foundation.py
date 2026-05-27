@@ -286,6 +286,30 @@ def test_case_review_forms_expose_complete_mobile_autofill_contract():
         assert form.select_one('label.consent[for="consent"]') is not None, f"{path} consent checkbox needs an explicit label"
 
 
+def test_garden_grove_form_exposes_complete_mobile_autofill_contract():
+    path = PUBLIC_PAGES["/landing/garden-grove-chemical-leak/"]
+    doc = page_doc(path)
+    form = doc.select_one('form[name="garden-grove-case-review"]')
+    assert form is not None, "Garden Grove page needs its live screening form"
+    expected_fields = {
+        "firstName": {"type": "text", "autocomplete": "given-name"},
+        "lastName": {"type": "text", "autocomplete": "family-name"},
+        "email": {"type": "email", "autocomplete": "email"},
+        "phone": {"type": "tel", "autocomplete": "tel", "inputmode": "tel"},
+        "affectedAddress": {"type": "text"},
+    }
+    for field_id, attributes in expected_fields.items():
+        field = form.select_one(f"#{field_id}")
+        label = form.select_one(f'label[for="{field_id}"]')
+        assert field is not None, f"Garden Grove form missing #{field_id}"
+        assert label is not None, f"Garden Grove #{field_id} needs an explicit label"
+        for attribute, expected in attributes.items():
+            assert field.get(attribute) == expected, f"Garden Grove #{field_id} needs {attribute}={expected}"
+    consent = form.select_one('#gardenGroveConsent[name="consent"][type="checkbox"]')
+    assert consent is not None, "Garden Grove consent checkbox needs a stable id/name/type"
+    assert form.select_one('label.consent[for="gardenGroveConsent"]') is not None
+
+
 def test_public_images_have_intrinsic_dimensions_and_async_decoding():
     for path in ROOT.rglob("*.html"):
         doc = BeautifulSoup(path.read_text(encoding="utf-8"), "html.parser")
