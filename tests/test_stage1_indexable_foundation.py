@@ -243,6 +243,14 @@ def test_public_html_has_working_phone_links_and_valid_markup_basics():
             assert href in {expected_phone_href, expected_fax_href}, f"{path} has unexpected tel link: {href}"
 
 
+def test_public_phone_form_fields_trigger_mobile_phone_keyboards():
+    for path in ROOT.rglob("*.html"):
+        doc = page_doc(path)
+        for phone in doc.select('input[type="tel"]'):
+            assert phone.get("autocomplete") == "tel", f"{path} phone field should preserve tel autocomplete"
+            assert phone.get("inputmode") == "tel", f"{path} phone field should request the mobile phone keyboard"
+
+
 def test_public_images_have_intrinsic_dimensions_and_async_decoding():
     for path in ROOT.rglob("*.html"):
         doc = BeautifulSoup(path.read_text(encoding="utf-8"), "html.parser")
