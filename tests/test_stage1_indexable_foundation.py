@@ -229,6 +229,10 @@ def test_garden_grove_mobile_sticky_call_has_specific_accessible_name():
 def test_public_html_has_working_phone_links_and_valid_markup_basics():
     expected_phone_href = "tel:+19096096685"
     expected_fax_href = "tel:+19098906043"
+    expected_tel_labels = {
+        expected_phone_href: "Call Berhe Jones LLP at 909-609-6685",
+        expected_fax_href: "Fax Berhe Jones LLP at 909-890-6043",
+    }
     redacted_tel_pattern = re.compile(r'tel:[^"\']*\*')
     for path in ROOT.rglob("*.html"):
         html = path.read_text(encoding="utf-8")
@@ -240,7 +244,10 @@ def test_public_html_has_working_phone_links_and_valid_markup_basics():
         doc = BeautifulSoup(html, "html.parser")
         for tel in doc.select('a[href^="tel:"]'):
             href = str(tel.get("href"))
-            assert href in {expected_phone_href, expected_fax_href}, f"{path} has unexpected tel link: {href}"
+            assert href in expected_tel_labels, f"{path} has unexpected tel link: {href}"
+            assert tel.get("aria-label") == expected_tel_labels[href], (
+                f"{path} tel link should expose a specific accessible name: {href}"
+            )
 
 
 def test_public_phone_form_fields_trigger_mobile_phone_keyboards():

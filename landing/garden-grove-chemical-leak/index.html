@@ -1176,7 +1176,7 @@
     </nav>
     <div class="nav-actions" id="navActions">
       <a class="nav-review-cta" href="#case-review">Request screening</a>
-      <a class="nav-call-cta" href="tel:+19096096685" aria-label="Call 909-609-6685">
+      <a class="nav-call-cta" href="tel:+19096096685" aria-label="Call Berhe Jones LLP at 909-609-6685">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.92z"/></svg>
         909-609-6685
       </a>
@@ -1452,7 +1452,7 @@
       <span class="eyebrow">FAQ</span>
       <h2 id="faqHeading">Common questions from affected residents and businesses.</h2>
       <p class="lede">General information only, not legal advice. Facts, deadlines, representation status, proof, and damages determine whether a matter can be reviewed, referred, accepted, or declined.</p>
-      <p class="lede">Call <a href="tel:+19096096685">909-609-6685</a> if your matter is urgent or deadline-sensitive.</p>
+      <p class="lede">Call <a href="tel:+19096096685" aria-label="Call Berhe Jones LLP at 909-609-6685">909-609-6685</a> if your matter is urgent or deadline-sensitive.</p>
     </div>
     <div>
       <details class="faq">
@@ -1490,7 +1490,7 @@
         <span class="eyebrow">Request review</span>
         <h2 id="gardenGroveCaseReviewTitle">Request a Garden Grove chemical incident screening.</h2>
         <p class="lede">Use the form to send a short summary of your situation. The intake team reads each submission, runs a conflicts check, and reaches out only if a screening fits. Free, no obligation.</p>
-        <p class="notice" id="gardenGroveUrgentNotice"><strong>Important:</strong> do not send privileged documents, full medical records, Social Security numbers, account credentials, or urgent safety requests through this public form. If your matter is urgent or deadline-sensitive, call <a href="tel:+19096096685">909-609-6685</a> now.</p>
+        <p class="notice" id="gardenGroveUrgentNotice"><strong>Important:</strong> do not send privileged documents, full medical records, Social Security numbers, account credentials, or urgent safety requests through this public form. If your matter is urgent or deadline-sensitive, call <a href="tel:+19096096685" aria-label="Call Berhe Jones LLP at 909-609-6685">909-609-6685</a> now.</p>
         <ul class="guard-list">
           <li>General information and attorney advertising only.</li>
           <li>No attorney-client relationship is created by a form, call, email, text, or checklist request.</li>
@@ -1563,7 +1563,7 @@
         </label>
         <p class="form-status" id="screeningStatus" role="status" aria-live="polite" hidden></p>
         <button class="submit" type="submit">Send screening request</button>
-        <p class="form-fine">By submitting, you confirm the information is your own and is not privileged. The firm reads each submission and runs a conflicts check before any contact. If urgent, call <a href="tel:+19096096685">909-609-6685</a>.</p>
+        <p class="form-fine">By submitting, you confirm the information is your own and is not privileged. The firm reads each submission and runs a conflicts check before any contact. If urgent, call <a href="tel:+19096096685" aria-label="Call Berhe Jones LLP at 909-609-6685">909-609-6685</a>.</p>
       </form>
     </div>
   </div>
@@ -1634,8 +1634,8 @@
         <li><a href="/privacy.html">Privacy</a></li>
         <li><a href="/disclaimer.html">Disclaimer</a></li>
         <li><a href="/terms.html">Terms</a></li>
-        <li><a href="tel:+19096096685">909-609-6685</a></li>
-        <li><a href="tel:+19098906043">909-890-6043 (fax)</a></li>
+        <li><a href="tel:+19096096685" aria-label="Call Berhe Jones LLP at 909-609-6685">909-609-6685</a></li>
+        <li><a href="tel:+19098906043" aria-label="Fax Berhe Jones LLP at 909-890-6043">909-890-6043 (fax)</a></li>
       </ul>
     </div>
   </div>
@@ -1722,11 +1722,11 @@
       form.querySelectorAll('[name^="entry."]').forEach(function(field){ payload.append(field.name, field.value || ''); });
       await fetch(endpoint, { method: 'POST', mode: 'no-cors', body: payload });
       if (submit) { submit.textContent = 'Screening received'; submit.style.background = '#2f5b3a'; }
-      setStatus('success', '<strong>Screening received.</strong> The intake team reads each submission and runs a conflicts check before any follow-up contact. If your matter is urgent or deadline-sensitive, call <a href="tel:+19096096685">909-609-6685</a> now.');
+      setStatus('success', '<strong>Screening received.</strong> The intake team reads each submission and runs a conflicts check before any follow-up contact. If your matter is urgent or deadline-sensitive, call <a href="tel:+19096096685" aria-label="Call Berhe Jones LLP at 909-609-6685">909-609-6685</a> now.');
       form.reset();
     } catch (error) {
       if (submit) { submit.disabled = false; submit.textContent = originalText; }
-      setStatus('error', '<strong>The form did not confirm delivery.</strong> Please call <a href="tel:+19096096685">909-609-6685</a> now, or try again from a different browser.');
+      setStatus('error', '<strong>The form did not confirm delivery.</strong> Please call <a href="tel:+19096096685" aria-label="Call Berhe Jones LLP at 909-609-6685">909-609-6685</a> now, or try again from a different browser.');
     }
   });
 })();
