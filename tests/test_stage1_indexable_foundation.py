@@ -371,6 +371,11 @@ def test_case_review_forms_expose_complete_mobile_autofill_contract():
         consent = form.select_one('#consent[name="consent"][type="checkbox"]')
         assert consent is not None, f"{path} consent checkbox needs a stable id/name/type"
         assert form.select_one('label.consent[for="consent"]') is not None, f"{path} consent checkbox needs an explicit label"
+        summary = form.select_one('textarea#summary[name="summary"]')
+        assert summary is not None, f"{path} summary textarea needs a stable id/name"
+        assert summary.get("aria-describedby") == "caseReviewPrivacyNote", (
+            f"{path} summary textarea should reference the visible privacy notice"
+        )
 
 
 def test_garden_grove_form_exposes_complete_mobile_autofill_contract():
@@ -395,6 +400,9 @@ def test_garden_grove_form_exposes_complete_mobile_autofill_contract():
     consent = form.select_one('#gardenGroveConsent[name="consent"][type="checkbox"]')
     assert consent is not None, "Garden Grove consent checkbox needs a stable id/name/type"
     assert form.select_one('label.consent[for="gardenGroveConsent"]') is not None
+    summary = form.select_one('textarea#summary[name="summary"]')
+    assert summary is not None, "Garden Grove summary textarea needs a stable id/name"
+    assert summary.get("aria-describedby") == "gardenGroveUrgentNotice gardenGrovePrivacyNotice"
 
 
 def test_public_images_have_intrinsic_dimensions_and_async_decoding():

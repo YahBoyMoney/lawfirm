@@ -88,7 +88,7 @@ form{scroll-margin-top:190px}
     <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required aria-required="true" /></div>
     <div class="field"><label for="contactMethod">Preferred contact</label><select id="contactMethod" name="contactMethod"><option>Call</option><option>Text</option><option>Email</option></select></div>
     <div class="field"><label for="county">City and county</label><input id="county" name="county" type="text" autocomplete="address-level2" /></div>
-    <div class="field full"><label for="summary">Short conflict-safe summary</label><textarea id="summary" name="summary" placeholder="Briefly describe the general issue, parties involved, and timing. Do not include privileged or highly sensitive details yet." required aria-required="true"></textarea></div>
+    <div class="field full"><label for="summary">Short conflict-safe summary</label><textarea id="summary" name="summary" placeholder="Briefly describe the general issue, parties involved, and timing. Do not include privileged or highly sensitive details yet." required aria-required="true" aria-describedby="caseReviewPrivacyNote"></textarea></div>
   </div>
   <label class="consent" for="consent"><input id="consent" type="checkbox" name="consent" required aria-required="true" /> <span>I understand that submitting information does not create an attorney-client relationship. Representation begins only after conflicts review and a signed written agreement.</span></label>
   <button class="submit" type="submit">Request a case review</button>
