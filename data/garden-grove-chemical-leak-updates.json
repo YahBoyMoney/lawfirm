@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-28T21:18:30Z",
+  "lastVerifiedUtc": "2026-05-28T23:28:06Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for any remaining road closures, exclusion zones, or monitoring instructions.",
   "updates": [
+    {
+      "timeUtc": "2026-05-28T23:15:00Z",
+      "category": "Recovery / business resources",
+      "title": "City posts May 29 SBDC webinar and SBA worksheet route for impacted businesses",
+      "summary": "The City of Garden Grove business-resources page, last updated May 28 at 4:15 p.m., says OC Workforce is sharing county resources for small businesses impacted by the chemical incident, directs affected businesses to complete the SBA Assistance Worksheet and submit completed worksheets to the Orange County Sheriff's EOC Team, and says the SBDC will host a free May 29, 2026 at 9:00 a.m. webinar for businesses impacted by the chemical incident. The City says the webinar will be offered in English, Spanish, Vietnamese, and Korean and will cover available federal, state, county, and local resources, business support services, and guidance for impacted businesses. This is an official business-recovery resource update only, not a compensation promise, not a claim approval, not a legal finding, not a representation offer, or Berhe Jones affiliation with the City, County, SBDC, SBA, or any public agency.",
+      "sourceLabel": "City of Garden Grove business resources",
+      "sourceUrl": "https://ggcity.org/hazmat-incident/business-resources"
+    },
     {
       "timeUtc": "2026-05-28T18:05:43Z",
       "category": "Company / response status",
@@ -58,14 +66,6 @@
       "summary": "DiCello Levitt reported May 27 that it, Miner, Barnhill & Galland, P.C., and Collins Law Group, P.C. filed Courtney Carey, Robert Carey, Jody Carey, and Christopher Carey v. GKN Aerospace Transparency Systems, Inc. in California Superior Court, County of Orange. The firm’s release links a 17-page complaint PDF; the preserved copy reviewed in this check leaves the caption’s Case No. line blank. The complaint alleges negligence tied to maintenance, inspection, testing, repair, monitoring, security, and safety controls for MMA tanks and seeks relief for property/economic losses under negligence, private nuisance, and public nuisance theories. This is a counsel-posted, source-attributed legal-action update only: allegations are not findings, no public state-court case number was independently verified in this check, and Berhe Jones is not claiming affiliation with the plaintiffs, class counsel, or filed actions.",
       "sourceLabel": "DiCello Levitt complaint release",
       "sourceUrl": "https://dicellolevitt.com/dicello-levitt-and-co-counsel-file-class-action-against-gkn-aerospace-over-garden-grove-chemical-emergency/"
-    },
-    {
-      "timeUtc": "2026-05-27T18:36:00Z",
-      "category": "Recovery / claims",
-      "title": "Voice of OC reports officials are exploring reimbursement or compensation routes",
-      "summary": "Voice of OC reported May 27 that Orange County Board of Supervisors Chair Doug Chaffee expects there will be a claim process where residents impacted by the evacuation can ask for reimbursement or compensation, while the funding source and process remain undetermined. The report says Chaffee advised affected residents to save receipts and list expenses, Rep. Derek Tran said he is working on federal resources for residents and businesses and called for GKN accountability, and local cities said compensation guidance is still developing. The City of Garden Grove's May 27 FAQ separately directs evacuated residents to contact homeowners or renters insurance and businesses to contact their insurance providers. This is a recovery-resource and proof-preservation update only, not a promise that any specific expense will be paid.",
-      "sourceLabel": "Voice of OC / City of Garden Grove recovery reporting",
-      "sourceUrl": "https://voiceofoc.org/2026/05/oc-residents-impacted-by-faulty-chemical-tank-may-get-reimbursed/"
     }
   ],
   "resources": [

@@ -665,19 +665,18 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     assert feed_times == sorted(feed_times, reverse=True), "public incident feed should remain latest-first before the 8-item cap is rendered"
     assert any(u.get("category") == "Legal-action status" for u in data["updates"]), "at least one legal-action status item should remain visible in the capped public feed"
     latest_update = data["updates"][0]
-    assert (
-        latest_update.get("sourceUrl")
-        == "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/"
-    )
-    assert latest_update.get("category") == "Company / response status"
+    assert latest_update.get("sourceUrl") == "https://ggcity.org/hazmat-incident/business-resources"
+    assert latest_update.get("category") == "Recovery / business resources"
     latest_summary = latest_update.get("summary", "").lower()
-    assert "last updated may 28 at 6:05 p.m. gmt" in latest_summary
-    assert "more legal claims have been filed" in latest_summary
-    assert "20 chemical detectors" in latest_summary
-    assert "no exceedances above action levels" in latest_summary
-    assert "crews remain on standby" in latest_summary
-    assert "cleanup/removal planning" in latest_summary
-    assert "not a court finding" in latest_summary
+    assert "last updated may 28 at 4:15 p.m." in latest_summary
+    assert "sba assistance worksheet" in latest_summary
+    assert "orange county sheriff's eoc team" in latest_summary
+    assert "may 29, 2026 at 9:00 a.m." in latest_summary
+    assert "english, spanish, vietnamese, and korean" in latest_summary
+    assert "federal, state, county, and local resources" in latest_summary
+    assert "not a compensation promise" in latest_summary
+    assert "not a legal finding" in latest_summary
+    assert "not a representation offer" in latest_summary
 
     latimes_accountability_updates = [
         u
@@ -783,12 +782,7 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
         if u.get("sourceUrl")
         == "https://voiceofoc.org/2026/05/oc-residents-impacted-by-faulty-chemical-tank-may-get-reimbursed/"
     ]
-    assert len(voice_updates) == 1, "Voice of OC recovery/claims update should stay visible in capped feed"
-    voice_summary = voice_updates[0].get("summary", "").lower()
-    assert "claim process" in voice_summary
-    assert "save receipts" in voice_summary
-    assert "insurance providers" in voice_summary
-    assert "not a promise" in voice_summary
+    assert len(voice_updates) == 0, "The time-sensitive City/SBDC business-resource webinar can push the older Voice of OC recovery/claims item out of the 8-update cap"
 
     nbc_business_updates = [
         u
