@@ -263,6 +263,30 @@ def test_homepage_consent_checkbox_has_explicit_label():
     assert "attorney-client relationship" in consent_label.get_text(" ", strip=True).lower()
 
 
+def test_homepage_intake_form_references_visible_privacy_notice():
+    doc = page_doc(ROOT / "index.html")
+    form = doc.select_one("#caseForm")
+    assert form is not None
+    assert form.get("aria-labelledby") == "caseTitle"
+    assert form.get("aria-describedby") == "caseFormIntro formPrivacyNote"
+    assert doc.select_one("#caseTitle") is not None
+    assert doc.select_one("#caseFormIntro") is not None
+    privacy_note = doc.select_one("#formPrivacyNote.privacy-note")
+    assert privacy_note is not None
+    privacy_text = privacy_note.get_text(" ", strip=True).lower()
+    assert "attorney-client relationship" in privacy_text
+    assert "do not send highly sensitive details" in privacy_text
+    assert "urgent or deadline-sensitive" in privacy_text
+    message = form.select_one('textarea#message[name="message"]')
+    assert message is not None
+    assert message.get("aria-describedby") == "msgHint formPrivacyNote"
+    hint = form.select_one("#msgHint")
+    assert hint is not None
+    hint_text = hint.get_text(" ", strip=True).lower()
+    assert "conflict-safe summary" in hint_text
+    assert "do not include privileged documents" in hint_text
+
+
 def test_visible_public_intake_required_fields_expose_aria_required():
     form_specs = {
         "/": (ROOT / "index.html", "form#caseForm"),

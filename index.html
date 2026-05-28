@@ -2706,7 +2706,7 @@
       </div>
       <div class="card-eyebrow">Confidential intake</div>
       <h2 class="card-title" id="caseTitle">Tell us about your case</h2>
-      <p class="card-sub" id="caseFormIntro">Share the basic facts. The firm reviews each matter for fit, urgency, and next steps before representation begins.</p>
+      <p class="card-sub" id="caseFormIntro">Share the basic conflict-safe facts. The firm reviews each matter for fit, urgency, and next steps before representation begins.</p>
 
       <div class="lead-fit-panel" aria-label="Good-fit case details">
         <h3>Helpful details for a stronger review</h3>
@@ -2717,7 +2717,7 @@
         </ul>
       </div>
 
-      <form id="caseForm" name="case-review" method="POST" action="/success.html" enctype="application/x-www-form-urlencoded" data-netlify="true" netlify netlify-honeypot="bot-field" aria-labelledby="caseTitle" aria-describedby="caseFormIntro" novalidate>
+      <form id="caseForm" name="case-review" method="POST" action="/success.html" enctype="application/x-www-form-urlencoded" data-netlify="true" netlify netlify-honeypot="bot-field" aria-labelledby="caseTitle" aria-describedby="caseFormIntro formPrivacyNote" novalidate>
         <input type="hidden" name="form-name" value="case-review" />
         <p class="sr-only" aria-hidden="true" data-honeypot-wrapper><label>Do not fill this out if you are human: <input name="bot-field" type="text" tabindex="-1" autocomplete="off" /></label></p>
         <div id="formErrors" class="error-summary" role="alert" aria-live="assertive" tabindex="-1" hidden></div>
@@ -2767,8 +2767,8 @@
 
         <div class="field">
           <label for="message">Briefly describe what happened</label>
-          <textarea id="message" name="message" rows="4" aria-describedby="msgHint" placeholder="What happened, when it happened, who is involved, and the harm or loss involved."></textarea>
-          <p class="hint" id="msgHint">Share only what you're comfortable with. We will follow up to gather what we need.</p>
+          <textarea id="message" name="message" rows="4" aria-describedby="msgHint formPrivacyNote" placeholder="What happened, when it happened, who is involved, and the harm or loss involved."></textarea>
+          <p class="hint" id="msgHint">Share a short conflict-safe summary only. Do not include privileged documents, account credentials, full medical records, or highly sensitive details in this public form.</p>
         </div>
 
         <div class="consent-wrap">

@@ -40,9 +40,10 @@ def test_intake_has_accessible_errors_honeypot_and_conservative_privacy_copy():
     form = doc.select_one("#caseForm")
     assert form is not None
     assert form.get("aria-labelledby") == "caseTitle"
-    assert form.get("aria-describedby") == "caseFormIntro"
+    assert form.get("aria-describedby") == "caseFormIntro formPrivacyNote"
     assert doc.select_one("#caseTitle") is not None
     assert doc.select_one("#caseFormIntro") is not None
+    assert doc.select_one("#formPrivacyNote") is not None
     summary = form.select_one("#formErrors[role='alert'][aria-live='assertive']")
     assert summary is not None
     assert summary.has_attr("hidden")
