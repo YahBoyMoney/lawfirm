@@ -1,5 +1,5 @@
 {
-  "lastVerifiedUtc": "2026-05-28T18:58:51Z",
+  "lastVerifiedUtc": "2026-05-28T21:18:30Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for any remaining road closures, exclusion zones, or monitoring instructions.",
   "updates": [
@@ -26,6 +26,14 @@
       "summary": "The City of Garden Grove hazardous-materials incident survey says the City is seeking information from residents, businesses, and community members impacted by the recent chemical emergency and evacuation orders tied to the methyl methacrylate tank incident. The City says the survey is meant to help it understand community impacts and unmet needs related to displacement, housing, business interruption, and other recovery-related concerns, and that respondents may be contacted by the City or partner agencies about available resources, follow-up assistance, or additional recovery support. This is an official City recovery-needs survey and resource-routing update only; it is not a compensation promise, claim approval, legal finding, or Berhe Jones affiliation with the City or any public agency.",
       "sourceLabel": "City of Garden Grove hazardous-materials incident survey",
       "sourceUrl": "https://ggcity.org/hazmat-incident/survey"
+    },
+    {
+      "timeUtc": "2026-05-28T06:26:00Z",
+      "category": "Recovery / business impact",
+      "title": "NBC Los Angeles reports businesses and families are documenting financial fallout",
+      "summary": "NBC Los Angeles reported May 27, updated at 11:26 p.m., that several businesses near the Garden Grove GKN Aerospace incident described losses above $10,000 during the five-day shutdown, including one cafe estimating $35,000 to $40,000 in food and business losses and other shops estimating at least $10,000. The report also described evacuees' hotel, travel, food, and gas costs, quoted GKN's statement apologizing for uncertainty and disruption and saying it is committed to understanding what occurred and identifying ways to support those affected, and quoted an OCFA deputy incident commander saying Orange County Health and EPA would work with the company on waste removal. This is a source-attributed recovery and business-impact update only, not a compensation promise, not a claim approval, not a court finding, not a representation offer, and not a finding of legal responsibility; residents and businesses should preserve receipts, closure notes, wage/business records, insurance communications, health/cleanup notes, and official notices while following current City, County, OCFA, public-health, and EPA instructions.",
+      "sourceLabel": "NBC Los Angeles financial-impact report",
+      "sourceUrl": "https://www.nbclosangeles.com/news/local/garden-grove-chemical-tank-whats-next-financial-fallout/3895967/"
     },
     {
       "timeUtc": "2026-05-28T01:00:00Z",
@@ -58,14 +66,6 @@
       "summary": "Voice of OC reported May 27 that Orange County Board of Supervisors Chair Doug Chaffee expects there will be a claim process where residents impacted by the evacuation can ask for reimbursement or compensation, while the funding source and process remain undetermined. The report says Chaffee advised affected residents to save receipts and list expenses, Rep. Derek Tran said he is working on federal resources for residents and businesses and called for GKN accountability, and local cities said compensation guidance is still developing. The City of Garden Grove's May 27 FAQ separately directs evacuated residents to contact homeowners or renters insurance and businesses to contact their insurance providers. This is a recovery-resource and proof-preservation update only, not a promise that any specific expense will be paid.",
       "sourceLabel": "Voice of OC / City of Garden Grove recovery reporting",
       "sourceUrl": "https://voiceofoc.org/2026/05/oc-residents-impacted-by-faulty-chemical-tank-may-get-reimbursed/"
-    },
-    {
-      "timeUtc": "2026-05-27T08:14:16Z",
-      "category": "Schools / operations",
-      "title": "GGUSD says evacuation orders lifted and all schools reopen Wednesday",
-      "summary": "Garden Grove Unified School District posted Tuesday, May 26 that officials announced all evacuation orders related to the Garden Grove hazardous-materials incident had been lifted and that command officials confirmed no chemical leak, no explosion threat, no fire threat, and no public risk. GGUSD said all schools would be open Wednesday for the final day of the school year, while students unable to attend as families recover or make arrangements will not be penalized and will be held harmless for grades.",
-      "sourceLabel": "Garden Grove Unified School District",
-      "sourceUrl": "https://www.ggusd.us/news/evacuation-orders-lifted-all-schools-reopen-tomorrowevacuation-orders-lifted-all-schools-reopen-tomorrow"
     }
   ],
   "resources": [

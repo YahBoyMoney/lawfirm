@@ -782,19 +782,32 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     assert "insurance providers" in voice_summary
     assert "not a promise" in voice_summary
 
+    nbc_business_updates = [
+        u
+        for u in data["updates"]
+        if u.get("sourceUrl")
+        == "https://www.nbclosangeles.com/news/local/garden-grove-chemical-tank-whats-next-financial-fallout/3895967/"
+    ]
+    assert len(nbc_business_updates) == 1, "NBC Los Angeles financial-impact item should stay visible in capped feed"
+    assert nbc_business_updates[0].get("category") == "Recovery / business impact"
+    nbc_summary = nbc_business_updates[0].get("summary", "").lower()
+    assert "several businesses" in nbc_summary
+    assert "losses above $10,000" in nbc_summary
+    assert "$35,000 to $40,000" in nbc_summary
+    assert "hotel, travel, food, and gas costs" in nbc_summary
+    assert "orange county health and epa" in nbc_summary
+    assert "waste removal" in nbc_summary
+    assert "not a compensation promise" in nbc_summary
+    assert "not a court finding" in nbc_summary
+    assert "preserve receipts" in nbc_summary
+
     ggusd_updates = [
         u
         for u in data["updates"]
         if u.get("sourceUrl")
         == "https://www.ggusd.us/news/evacuation-orders-lifted-all-schools-reopen-tomorrowevacuation-orders-lifted-all-schools-reopen-tomorrow"
     ]
-    assert len(ggusd_updates) == 1, "GGUSD all-schools-reopen update should stay visible in capped feed"
-    assert ggusd_updates[0].get("category") == "Schools / operations"
-    ggusd_summary = ggusd_updates[0].get("summary", "").lower()
-    assert "all schools would be open wednesday" in ggusd_summary
-    assert "students unable to attend" in ggusd_summary
-    assert "not be penalized" in ggusd_summary
-    assert "held harmless" in ggusd_summary
+    assert len(ggusd_updates) == 0, "The newer NBC financial-impact item can push the final-day GGUSD school-operations item out of the 8-update cap"
 
     oc_register_updates = [
         u
