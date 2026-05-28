@@ -1,15 +1,15 @@
 {
-  "lastVerifiedUtc": "2026-05-28T12:22:07Z",
+  "lastVerifiedUtc": "2026-05-28T14:41:01Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for any remaining road closures, exclusion zones, or monitoring instructions.",
   "updates": [
     {
-      "timeUtc": "2026-05-28T10:00:00Z",
-      "category": "Business / litigation impact",
-      "title": "Los Angeles Times reports GKN faces lawsuits and potential aerospace supply disruption",
-      "summary": "The Los Angeles Times reported May 28 that, after evacuation orders lifted, GKN Aerospace faces class-action litigation and questions about potential operational and aerospace supply-chain disruption tied to its Garden Grove transparencies facility. The report says the plant is a rare supplier of fighter-jet canopies and commercial-aircraft windows, cites company disclosures that the site generated about $182.3 million in 2025 sales and employed roughly 500 people, and quotes aerospace analysts warning that prolonged production-line disruption could affect customers such as Boeing and Lockheed for proprietary components. The same report says OCFA officials suspect a cooling-system failure contributed to the incident while the cause remains unclear, and summarizes resident lawsuits alleging negligent storage, monitoring, and maintenance. This is a source-attributed business, litigation, and operational-impact update only: allegations are not findings, the article does not establish causation or legal liability, and Berhe Jones is not claiming affiliation with GKN, customers, plaintiffs, class counsel, or filed actions.",
-      "sourceLabel": "Los Angeles Times business report",
-      "sourceUrl": "https://www.latimes.com/business/story/2026-05-28/garden-grove-chemical-leak-plant-faces-lawsuits-supply-disruption"
+      "timeUtc": "2026-05-28T13:00:00Z",
+      "category": "Official / accountability status",
+      "title": "LA Times reports elected officials demanded GKN records and recovery answers",
+      "summary": "The Los Angeles Times reported May 28 that, after the six-day chemical crisis, members of the Orange County Board of Supervisors asked GKN Aerospace to compensate evacuated residents, and U.S. Reps. Robert Garcia and Derek Tran sent GKN Chief Executive Peter Dilnot a letter demanding answers about the catastrophic threat and the company's response. The report says the representatives asked GKN to produce documents by June 10, including facility inspections, compliance history, maintenance logs, staffing levels, emergency protocols, a detailed event timeline, prevention steps, and community-risk notice practices. The same report notes Orange County District Attorney Todd Spitzer opened a criminal investigation and demanded that GKN retain relevant records, while more than half a dozen Orange County Superior Court lawsuits had been filed. This is a source-attributed oversight and accountability update only: document requests, investigations, and lawsuits are not findings of liability, and Berhe Jones is not claiming affiliation with GKN, public officials, plaintiffs, class counsel, or filed actions.",
+      "sourceLabel": "Los Angeles Times accountability report",
+      "sourceUrl": "https://www.latimes.com/california/story/2026-05-28/politicians-demand-accountability-from-gkn-aerospace-after-hazmat-crisis"
     },
     {
       "timeUtc": "2026-05-28T07:53:07Z",

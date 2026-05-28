@@ -621,18 +621,31 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     latest_update = data["updates"][0]
     assert (
         latest_update.get("sourceUrl")
-        == "https://www.latimes.com/business/story/2026-05-28/garden-grove-chemical-leak-plant-faces-lawsuits-supply-disruption"
+        == "https://www.latimes.com/california/story/2026-05-28/politicians-demand-accountability-from-gkn-aerospace-after-hazmat-crisis"
     )
-    assert latest_update.get("category") == "Business / litigation impact"
+    assert latest_update.get("category") == "Official / accountability status"
     latest_summary = latest_update.get("summary", "").lower()
-    assert "class-action litigation" in latest_summary
-    assert "aerospace supply-chain disruption" in latest_summary
-    assert "rare supplier of fighter-jet canopies" in latest_summary
-    assert "about $182.3 million in 2025 sales" in latest_summary
-    assert "ocfa officials suspect a cooling-system failure" in latest_summary
-    assert "allegations are not findings" in latest_summary
-    assert "does not establish causation or legal liability" in latest_summary
+    assert "orange county board of supervisors" in latest_summary
+    assert "compensate evacuated residents" in latest_summary
+    assert "robert garcia" in latest_summary
+    assert "derek tran" in latest_summary
+    assert "produce documents by june 10" in latest_summary
+    assert "facility inspections" in latest_summary
+    assert "compliance history" in latest_summary
+    assert "maintenance logs" in latest_summary
+    assert "emergency protocols" in latest_summary
+    assert "district attorney todd spitzer opened a criminal investigation" in latest_summary
+    assert "more than half a dozen orange county superior court lawsuits" in latest_summary
+    assert "not findings of liability" in latest_summary
     assert "not claiming affiliation" in latest_summary
+
+    older_latimes_business_updates = [
+        u
+        for u in data["updates"]
+        if u.get("sourceUrl")
+        == "https://www.latimes.com/business/story/2026-05-28/garden-grove-chemical-leak-plant-faces-lawsuits-supply-disruption"
+    ]
+    assert len(older_latimes_business_updates) == 0, "The newer L.A. Times accountability item should replace the older same-day business/litigation item under the 8-update cap"
 
     city_survey_updates = [
         u for u in data["updates"] if u.get("sourceUrl") == "https://ggcity.org/hazmat-incident/survey"
