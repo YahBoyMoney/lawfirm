@@ -249,6 +249,56 @@ def test_homepage_consent_checkbox_has_explicit_label():
     assert "attorney-client relationship" in consent_label.get_text(" ", strip=True).lower()
 
 
+def test_visible_public_intake_required_fields_expose_aria_required():
+    form_specs = {
+        "/": (ROOT / "index.html", "form#caseForm"),
+        "/free-case-review/": (
+            PUBLIC_PAGES["/free-case-review/"],
+            'form[name="case-review"][aria-labelledby="caseReviewTitle"]',
+        ),
+        "/landing/truck-fleet-rideshare-accident-california/": (
+            PUBLIC_PAGES["/landing/truck-fleet-rideshare-accident-california/"],
+            'form[name="case-review"][aria-labelledby="caseReviewTitle"]',
+        ),
+        "/landing/garden-grove-chemical-leak/": (
+            PUBLIC_PAGES["/landing/garden-grove-chemical-leak/"],
+            'form[name="garden-grove-case-review"][aria-labelledby="gardenGroveCaseReviewTitle"]',
+        ),
+    }
+    expected_required_names = {
+        "/": {"firstName", "lastName", "phone", "email", "consent"},
+        "/free-case-review/": {"firstName", "lastName", "phone", "email", "summary", "consent"},
+        "/landing/truck-fleet-rideshare-accident-california/": {
+            "firstName",
+            "lastName",
+            "phone",
+            "email",
+            "summary",
+            "consent",
+        },
+        "/landing/garden-grove-chemical-leak/": {
+            "firstName",
+            "lastName",
+            "phone",
+            "email",
+            "summary",
+            "consent",
+        },
+    }
+    for route, (path, selector) in form_specs.items():
+        doc = page_doc(path)
+        form = doc.select_one(selector)
+        assert form is not None, f"{route} needs the visible public intake form"
+        required_controls = form.select("input[required], textarea[required], select[required]")
+        required_names = {str(control.get("name")) for control in required_controls}
+        assert expected_required_names[route] == required_names
+        for control in required_controls:
+            control_name = str(control.get("name"))
+            assert control.get("aria-required") == "true", (
+                f"{route} required control {control_name} should expose aria-required"
+            )
+
+
 def test_public_html_has_working_phone_links_and_valid_markup_basics():
     expected_phone_href = "tel:+19096096685"
     expected_fax_href = "tel:+19098906043"

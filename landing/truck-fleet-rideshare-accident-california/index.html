@@ -81,15 +81,15 @@ form{scroll-margin-top:190px}
   <p class="notice" id="caseReviewPrivacyNote"><strong>Privacy note:</strong> send a short conflict-safe summary only. Do not include privileged documents, full medical records, Social Security numbers, account credentials, or highly sensitive details through this public form. If your matter is urgent or deadline-sensitive, call instead.</p>
   <p style="position:absolute;left:-9999px" aria-hidden="true"><label>Do not fill this out if you are human: <input name="bot-field" type="text" tabindex="-1" autocomplete="off" /></label></p>
   <div class="form-grid">
-    <div class="field"><label for="firstName">First name</label><input id="firstName" name="firstName" type="text" autocomplete="given-name" required /></div>
-    <div class="field"><label for="lastName">Last name</label><input id="lastName" name="lastName" type="text" autocomplete="family-name" required /></div>
-    <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required /></div>
-    <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required /></div>
+    <div class="field"><label for="firstName">First name</label><input id="firstName" name="firstName" type="text" autocomplete="given-name" required aria-required="true" /></div>
+    <div class="field"><label for="lastName">Last name</label><input id="lastName" name="lastName" type="text" autocomplete="family-name" required aria-required="true" /></div>
+    <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required aria-required="true" /></div>
+    <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required aria-required="true" /></div>
     <div class="field"><label for="contactMethod">Preferred contact</label><select id="contactMethod" name="contactMethod"><option>Call</option><option>Text</option><option>Email</option></select></div>
     <div class="field"><label for="county">City and county</label><input id="county" name="county" type="text" autocomplete="address-level2" /></div>
-    <div class="field full"><label for="summary">Short conflict-safe summary</label><textarea id="summary" name="summary" placeholder="Briefly describe the general issue, parties involved, and timing. Do not include privileged or highly sensitive details yet." required></textarea></div>
+    <div class="field full"><label for="summary">Short conflict-safe summary</label><textarea id="summary" name="summary" placeholder="Briefly describe the general issue, parties involved, and timing. Do not include privileged or highly sensitive details yet." required aria-required="true"></textarea></div>
   </div>
-  <label class="consent" for="consent"><input id="consent" type="checkbox" name="consent" required /> <span>I understand that submitting information does not create an attorney-client relationship. Representation begins only after conflicts review and a signed written agreement.</span></label>
+  <label class="consent" for="consent"><input id="consent" type="checkbox" name="consent" required aria-required="true" /> <span>I understand that submitting information does not create an attorney-client relationship. Representation begins only after conflicts review and a signed written agreement.</span></label>
   <button class="submit" type="submit">Request a case review</button>
 </form></div></section>
 </main>
