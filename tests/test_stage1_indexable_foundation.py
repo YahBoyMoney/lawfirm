@@ -628,6 +628,8 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     assert "committed to understanding what occurred" in abc7_summary
     assert "all roads closed because of the incident had reopened" in abc7_summary
     assert "cleanup/removal planning" in abc7_summary
+    assert "20 monitoring devices" in abc7_summary
+    assert "exceedances above action levels" in abc7_summary
     assert "not an admission" in abc7_summary
     assert "not a claims process" in abc7_summary
     assert "finding of legal responsibility" in abc7_summary
