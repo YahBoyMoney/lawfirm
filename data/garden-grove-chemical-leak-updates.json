@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-27T22:55:59Z",
+  "lastVerifiedUtc": "2026-05-28T00:52:13Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for any remaining road closures, exclusion zones, or monitoring instructions.",
   "updates": [
+    {
+      "timeUtc": "2026-05-28T00:03:00Z",
+      "category": "Official safety status",
+      "title": "City posts May 27 street-opening and small-business resource updates",
+      "summary": "The City of Garden Grove hazardous-materials incident page says all evacuation orders have been lifted and that Unified Command had confirmed no chemical leak, no threat of explosion or fire, and no risk to the public. A later City street-closure update posted May 27 at 5:03 p.m. says Lampson Avenue and Western Avenue are now open, while the page also points residents and businesses to hotlines, insurance guidance, and Orange County Inland Empire SBDC small-business recovery resources. Those official safety statements describe the emergency status, not a court finding on property loss, economic loss, or legal liability; follow the City, County, OCFA, and public-health agencies for any remaining or future road, exclusion-zone, or monitoring instructions.",
+      "sourceLabel": "City of Garden Grove hazardous-materials incident page",
+      "sourceUrl": "https://ggcity.org/emergency"
+    },
     {
       "timeUtc": "2026-05-27T20:45:00Z",
       "category": "Recovery / public resources",
@@ -63,7 +71,7 @@
       "timeUtc": "2026-05-27T02:30:00Z",
       "category": "Official safety status",
       "title": "City says all evacuation orders were lifted effective May 26 at 7:30 p.m.",
-      "summary": "The City of Garden Grove emergency page says that, effective May 26 at 7:30 p.m., all evacuation orders related to the hazardous materials incident were lifted. The City says Unified Command confirmed there is no chemical leak, no threat of explosion or fire, and no risk to the public, while Western Avenue between Chapman Avenue and Garden Grove Boulevard remains closed and a small exclusion zone remains for hazardous-materials teams to monitor tanks out of an abundance of caution.",
+      "summary": "The City of Garden Grove emergency page says that, effective May 26 at 7:30 p.m., all evacuation orders related to the hazardous materials incident were lifted. The City says Unified Command confirmed there is no chemical leak, no threat of explosion or fire, and no risk to the public, while Western Avenue between Chapman Avenue and Garden Grove Boulevard remained closed at that time and a small exclusion zone remained for hazardous-materials teams to monitor tanks out of an abundance of caution.",
       "sourceLabel": "City of Garden Grove emergency page",
       "sourceUrl": "https://ggcity.org/emergency"
     }
@@ -71,10 +79,10 @@
   "resources": [
     {
       "category": "Official safety",
-      "title": "Official Garden Grove emergency page",
-      "description": "Official City emergency page with the May 26 evacuation-order lift, remaining Western Avenue road closure, monitoring exclusion-zone notes, public hotlines, local alerts, and multilingual emergency instructions.",
+      "title": "Official Garden Grove hazardous-materials incident page",
+      "description": "Official City incident page with street-status updates, hotlines, insurance guidance, alerts, and small-business recovery links.",
       "url": "https://ggcity.org/emergency",
-      "cta": "Open official emergency page"
+      "cta": "Open official incident page"
     },
     {
       "category": "Official county",

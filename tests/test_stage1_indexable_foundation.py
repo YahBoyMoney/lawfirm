@@ -540,19 +540,33 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     updates_path = ROOT / "data" / "garden-grove-chemical-leak-updates.json"
     data = json.loads(updates_path.read_text(encoding="utf-8"))
     assert data["statusLabel"] == "Public-source update center"
-    assert len(data["updates"]) <= 8
-    assert len(data["updates"]) == 8, "public incident feed should render the full capped update set"
+    assert len(data["updates"]) <= 9
+    assert len(data["updates"]) == 9, "public incident feed should render the full capped update set"
     latest_update = data["updates"][0]
     assert (
         latest_update.get("sourceUrl")
-        == "https://www.news.caloes.ca.gov/community-resources-for-garden-grove-hazmat-incident/"
+        == "https://ggcity.org/emergency"
     )
-    assert latest_update.get("category") == "Recovery / public resources"
+    assert latest_update.get("category") == "Official safety status"
     latest_summary = latest_update.get("summary", "").lower()
     assert "all evacuation orders have been lifted" in latest_summary
-    assert "emergency shelters will close at 7:00 p.m." in latest_summary
-    assert "may 27, 2026" in latest_summary
-    assert "public information hotline" in latest_summary
+    assert "no chemical leak" in latest_summary
+    assert "no threat of explosion or fire" in latest_summary
+    assert "lampson avenue and western avenue are now open" in latest_summary
+    assert "small-business recovery" in latest_summary
+    assert "not a court finding" in latest_summary
+
+    caloes_updates = [
+        u
+        for u in data["updates"]
+        if u.get("sourceUrl")
+        == "https://www.news.caloes.ca.gov/community-resources-for-garden-grove-hazmat-incident/"
+    ]
+    assert len(caloes_updates) == 1, "Cal OES shelter-closure update should stay visible in capped feed"
+    caloes_summary = caloes_updates[0].get("summary", "").lower()
+    assert "emergency shelters will close at 7:00 p.m." in caloes_summary
+    assert "may 27, 2026" in caloes_summary
+    assert "public information hotline" in caloes_summary
 
     voice_updates = [
         u
@@ -595,14 +609,18 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     assert "do not yet know why the cooling system stopped working" in oc_register_summary
     assert "not a final finding of legal fault" in oc_register_summary
 
-    official_lift_updates = [u for u in data["updates"] if u.get("sourceUrl") == "https://ggcity.org/emergency"]
+    official_city_updates = [u for u in data["updates"] if u.get("sourceUrl") == "https://ggcity.org/emergency"]
+    assert len(official_city_updates) == 2, "City current and archived evacuation-lift updates should stay visible in capped feed"
+    official_lift_updates = [
+        u for u in official_city_updates if u.get("title") == "City says all evacuation orders were lifted effective May 26 at 7:30 p.m."
+    ]
     assert len(official_lift_updates) == 1, "City evacuation-lift update should stay visible in capped feed"
     official_summary = official_lift_updates[0].get("summary", "").lower()
     assert official_lift_updates[0].get("category") == "Official safety status"
     assert "all evacuation orders" in official_summary
     assert "no chemical leak" in official_summary
     assert "no threat of explosion or fire" in official_summary
-    assert "western avenue between chapman avenue and garden grove boulevard remains closed" in official_summary
+    assert "western avenue between chapman avenue and garden grove boulevard remained closed" in official_summary
     assert "exclusion zone" in official_summary
     oc_register_lawsuit_updates = [
         u
@@ -662,10 +680,11 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     )
     assert "reduced four-street evacuation zone" not in static_resource_and_source_text
     assert "evacuation-order lift" in static_resource_and_source_text
+    assert "street-status updates" in static_resource_and_source_text
     assert "road-closure guidance" in static_resource_and_source_text
 
     assert "setInterval(loadUpdates,300000)" in html
-    assert "data.updates.slice(0,8)" in html
+    assert "data.updates.slice(0,9)" in html
     assert "data.resources.slice(0,11)" in html
 
 

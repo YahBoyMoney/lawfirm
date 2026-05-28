@@ -1187,7 +1187,7 @@
 <div class="stage-banner" role="status" aria-label="Current Garden Grove incident status">
   <div class="stage-banner-inner">
     <span class="stage-dot" aria-hidden="true"></span>
-    <span><strong>Evacuation orders lifted</strong> effective May 26 at 7:30 p.m. (City of Garden Grove). Western Avenue between Chapman Avenue and Garden Grove Boulevard remains closed; a small exclusion zone remains for hazmat monitoring.</span>
+    <span><strong>Evacuation orders lifted</strong> effective May 26 at 7:30 p.m. (City of Garden Grove). A May 27 City street-closure update says Lampson Avenue and Western Avenue are now open; continue using official City and County pages for any remaining or future road, exclusion-zone, or monitoring instructions.</span>
     <a href="https://ggcity.org/emergency" target="_blank" rel="noopener noreferrer">Open the official City page</a>
   </div>
 </div>
@@ -1220,7 +1220,7 @@
       <dl class="hero-trust">
         <div class="trust-item">
           <dt class="label">Primary source</dt>
-          <dd class="value">City of Garden Grove emergency page</dd>
+          <dd class="value">City of Garden Grove incident page</dd>
         </div>
         <div class="trust-item">
           <dt class="label">County resource</dt>
@@ -1280,7 +1280,7 @@
       </li>
     </ol>
     <div class="news-grid" aria-label="Quick source shortcuts">
-      <a href="https://ggcity.org/emergency" target="_blank" rel="noopener noreferrer"><span class="tag">Official</span>City of Garden Grove emergency page</a>
+      <a href="https://ggcity.org/emergency" target="_blank" rel="noopener noreferrer"><span class="tag">Official</span>City of Garden Grove incident page</a>
       <a href="https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/" target="_blank" rel="noopener noreferrer"><span class="tag">News</span>ABC7 live incident updates</a>
       <a href="https://www.nbclosangeles.com/news/local/garden-grove-chemical-tank-blast-map/3894254/" target="_blank" rel="noopener noreferrer"><span class="tag">News</span>NBC Los Angeles blast-zone report</a>
       <a href="https://www.cbsnews.com/losangeles/news/garden-grove-gkn-aerospace-chemical-leak-investigation-orange-county-district-attorney-whistleblowers/" target="_blank" rel="noopener noreferrer"><span class="tag">Investigation</span>CBS Los Angeles DA report</a>
@@ -1303,9 +1303,9 @@
     <div class="resource-grid" id="resourceGrid">
       <article class="resource-card">
         <span class="resource-type">Official safety</span>
-        <h3>Garden Grove emergency page</h3>
-        <p>City update on the May 26 evacuation-order lift, the Western Avenue road-closure guidance, exclusion-zone monitoring notes, hotlines, and local alerts.</p>
-        <a class="resource-cta" href="https://ggcity.org/emergency" target="_blank" rel="noopener noreferrer">Open the official emergency page</a>
+        <h3>Garden Grove hazardous-materials incident page</h3>
+        <p>City street-status updates, public hotlines, insurance guidance, alerts, and small-business recovery resources.</p>
+        <a class="resource-cta" href="https://ggcity.org/emergency" target="_blank" rel="noopener noreferrer">Open the official incident page</a>
       </article>
       <article class="resource-card">
         <span class="resource-type">Official county</span>
@@ -1578,7 +1578,7 @@
     </div>
   </div>
   <ul class="source-list">
-    <li><a href="https://ggcity.org/emergency" target="_blank" rel="noopener noreferrer">City of Garden Grove emergency page</a>, evacuation-order lift effective May 26 at 7:30 p.m., remaining Western Avenue road-closure guidance, and monitoring exclusion-zone notes.</li>
+    <li><a href="https://ggcity.org/emergency" target="_blank" rel="noopener noreferrer">City of Garden Grove hazardous-materials incident page</a>, evacuation-order lift effective May 26 at 7:30 p.m., May 27 street-opening notice, hotlines, insurance guidance, and small-business recovery resources.</li>
     <li><a href="https://www.ocgov.com/page/garden-grove-chemical-spill-incident" target="_blank" rel="noopener noreferrer">Orange County official Garden Grove chemical spill incident page</a>, public information map, incident updates, and road-closure guidance.</li>
     <li><a href="https://www.gov.ca.gov/2026/05/23/governor-newsom-proclaims-state-of-emergency-in-orange-county-in-response-to-ongoing-chemical-incident-in-garden-grove-makes-additional-shelter-sites-available/" target="_blank" rel="noopener noreferrer">Office of the Governor of California</a>, Orange County emergency proclamation and shelter activation.</li>
     <li><a href="https://www.news.caloes.ca.gov/community-resources-for-garden-grove-hazmat-incident/" target="_blank" rel="noopener noreferrer">California Office of Emergency Services (Cal OES)</a>, Garden Grove hazmat incident community resources.</li>
@@ -1762,7 +1762,7 @@
       }).join('');
     }
     if (!feed) return;
-    var updates = Array.isArray(data.updates) ? data.updates.slice(0,8) : [];
+    var updates = Array.isArray(data.updates) ? data.updates.slice(0,9) : [];
     feed.innerHTML = updates.map(function(item){
       var d = safeDate(item.timeUtc);
       var when = d ? fmt.format(d) : 'Time pending';
