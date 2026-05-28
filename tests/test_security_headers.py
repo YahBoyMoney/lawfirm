@@ -1,4 +1,5 @@
 from pathlib import Path
+from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -56,7 +57,18 @@ def test_root_security_headers_present_and_well_formed():
     assert "connect-src 'self' https://docs.google.com" in csp
     assert "https://fonts.googleapis.com" in csp
     assert "https://fonts.gstatic.com" in csp
+    assert "object-src 'none'" in csp
+    assert "frame-src 'none'" in csp
     assert "frame-ancestors 'self'" in csp
+
+
+def test_static_html_does_not_require_framed_or_plugin_content():
+    for html_path in ROOT.rglob("*.html"):
+        if ".git" in html_path.parts:
+            continue
+        soup = BeautifulSoup(html_path.read_text(encoding="utf-8"), "html.parser")
+        for tag_name in ("iframe", "object", "embed", "applet"):
+            assert not soup.find(tag_name), f"{html_path.relative_to(ROOT)} contains <{tag_name}>"
 
 
 def test_success_page_is_header_hardened_against_indexing():
