@@ -369,6 +369,14 @@ def test_public_phone_form_fields_trigger_mobile_phone_keyboards():
             assert phone.get("inputmode") == "tel", f"{path} phone field should request the mobile phone keyboard"
 
 
+def test_public_email_form_fields_trigger_mobile_email_keyboards():
+    for path in ROOT.rglob("*.html"):
+        doc = page_doc(path)
+        for email in doc.select('input[type="email"]'):
+            assert email.get("autocomplete") == "email", f"{path} email field should preserve email autocomplete"
+            assert email.get("inputmode") == "email", f"{path} email field should request the mobile email keyboard"
+
+
 def test_public_buttons_declare_explicit_safe_type():
     for path in ROOT.rglob("*.html"):
         doc = page_doc(path)
@@ -391,7 +399,7 @@ def test_case_review_forms_expose_complete_mobile_autofill_contract():
     expected_fields = {
         "firstName": {"type": "text", "autocomplete": "given-name"},
         "lastName": {"type": "text", "autocomplete": "family-name"},
-        "email": {"type": "email", "autocomplete": "email"},
+        "email": {"type": "email", "autocomplete": "email", "inputmode": "email"},
         "phone": {"type": "tel", "autocomplete": "tel", "inputmode": "tel"},
         "county": {"type": "text", "autocomplete": "address-level2"},
     }
@@ -424,7 +432,7 @@ def test_garden_grove_form_exposes_complete_mobile_autofill_contract():
     expected_fields = {
         "firstName": {"type": "text", "autocomplete": "given-name"},
         "lastName": {"type": "text", "autocomplete": "family-name"},
-        "email": {"type": "email", "autocomplete": "email"},
+        "email": {"type": "email", "autocomplete": "email", "inputmode": "email"},
         "phone": {"type": "tel", "autocomplete": "tel", "inputmode": "tel"},
         "affectedAddress": {"type": "text"},
     }
