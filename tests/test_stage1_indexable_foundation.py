@@ -331,6 +331,20 @@ def test_public_phone_form_fields_trigger_mobile_phone_keyboards():
             assert phone.get("inputmode") == "tel", f"{path} phone field should request the mobile phone keyboard"
 
 
+def test_public_buttons_declare_explicit_safe_type():
+    for path in ROOT.rglob("*.html"):
+        doc = page_doc(path)
+        for button in doc.select("button"):
+            button_type = str(button.get("type") or "")
+            assert button_type in {"button", "submit"}, (
+                f"{path} button '{button.get_text(' ', strip=True)}' needs an explicit safe type"
+            )
+            if button_type == "submit":
+                assert button.find_parent("form") is not None, f"{path} submit button must live inside a form"
+            else:
+                assert button_type == "button", f"{path} non-submit controls should be type=button"
+
+
 def test_case_review_forms_expose_complete_mobile_autofill_contract():
     form_pages = [
         PUBLIC_PAGES["/free-case-review/"],
