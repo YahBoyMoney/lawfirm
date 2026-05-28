@@ -611,17 +611,36 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     assert feed_times == sorted(feed_times, reverse=True), "public incident feed should remain latest-first before the 8-item cap is rendered"
     assert any(u.get("category") == "Legal-action status" for u in data["updates"]), "at least one legal-action status item should remain visible in the capped public feed"
     latest_update = data["updates"][0]
-    assert latest_update.get("sourceUrl") == "https://ggcity.org/hazmat-incident/survey"
-    assert latest_update.get("category") == "Recovery / official survey"
+    assert (
+        latest_update.get("sourceUrl")
+        == "https://www.latimes.com/business/story/2026-05-28/garden-grove-chemical-leak-plant-faces-lawsuits-supply-disruption"
+    )
+    assert latest_update.get("category") == "Business / litigation impact"
     latest_summary = latest_update.get("summary", "").lower()
-    assert "hazardous-materials incident survey" in latest_summary
-    assert "residents, businesses, and community members" in latest_summary
-    assert "chemical emergency and evacuation orders" in latest_summary
-    assert "displacement, housing, business interruption" in latest_summary
-    assert "unmet needs" in latest_summary
-    assert "not a compensation promise" in latest_summary
-    assert "claim approval" in latest_summary
-    assert "berhe jones affiliation" in latest_summary
+    assert "class-action litigation" in latest_summary
+    assert "aerospace supply-chain disruption" in latest_summary
+    assert "rare supplier of fighter-jet canopies" in latest_summary
+    assert "about $182.3 million in 2025 sales" in latest_summary
+    assert "ocfa officials suspect a cooling-system failure" in latest_summary
+    assert "allegations are not findings" in latest_summary
+    assert "does not establish causation or legal liability" in latest_summary
+    assert "not claiming affiliation" in latest_summary
+
+    city_survey_updates = [
+        u for u in data["updates"] if u.get("sourceUrl") == "https://ggcity.org/hazmat-incident/survey"
+    ]
+    assert len(city_survey_updates) == 1, "City recovery-survey update should stay visible after the L.A. Times update"
+    city_survey_update = city_survey_updates[0]
+    assert city_survey_update.get("category") == "Recovery / official survey"
+    city_survey_summary = city_survey_update.get("summary", "").lower()
+    assert "hazardous-materials incident survey" in city_survey_summary
+    assert "residents, businesses, and community members" in city_survey_summary
+    assert "chemical emergency and evacuation orders" in city_survey_summary
+    assert "displacement, housing, business interruption" in city_survey_summary
+    assert "unmet needs" in city_survey_summary
+    assert "not a compensation promise" in city_survey_summary
+    assert "claim approval" in city_survey_summary
+    assert "berhe jones affiliation" in city_survey_summary
 
     abc7_updates = [
         u
@@ -708,13 +727,7 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
         if u.get("sourceUrl")
         == "https://www.ocregister.com/2026/05/26/chemical-tank-in-garden-grove-at-92-degrees-tuesday-a-m-crews-work-to-lower-it/"
     ]
-    assert len(oc_register_updates) == 1, "OC Register / OCFA cooling-system update should stay visible in capped feed"
-    assert oc_register_updates[0].get("category") == "Investigation / tank operations"
-    oc_register_summary = oc_register_updates[0].get("summary", "").lower()
-    assert "cooling system" in oc_register_summary
-    assert "facility team to call 911" in oc_register_summary
-    assert "do not yet know why the cooling system stopped working" in oc_register_summary
-    assert "not a final finding of legal fault" in oc_register_summary
+    assert len(oc_register_updates) == 0, "The newer L.A. Times business/litigation item carries the cooling-system reference, so the older OC Register / OCFA item can fall out of the 8-update cap"
 
     official_city_updates = [u for u in data["updates"] if u.get("sourceUrl") == "https://ggcity.org/emergency"]
     assert len(official_city_updates) == 0, "The newer County/City status item should replace the older City duplicate under the 8-update cap"
