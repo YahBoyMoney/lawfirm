@@ -593,21 +593,44 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     assert data["statusLabel"] == "Public-source update center"
     assert len(data["updates"]) <= 8
     assert len(data["updates"]) == 8, "public incident feed should render the full capped update set"
+    feed_times = [u.get("timeUtc") for u in data["updates"]]
+    assert feed_times == sorted(feed_times, reverse=True), "public incident feed should remain latest-first before the 8-item cap is rendered"
+    assert any(u.get("category") == "Legal-action status" for u in data["updates"]), "at least one legal-action status item should remain visible in the capped public feed"
     latest_update = data["updates"][0]
+    assert latest_update.get("sourceUrl") == "https://ggcity.org/hazmat-incident/survey"
+    assert latest_update.get("category") == "Recovery / official survey"
+    latest_summary = latest_update.get("summary", "").lower()
+    assert "hazardous-materials incident survey" in latest_summary
+    assert "residents, businesses, and community members" in latest_summary
+    assert "chemical emergency and evacuation orders" in latest_summary
+    assert "displacement, housing, business interruption" in latest_summary
+    assert "unmet needs" in latest_summary
+    assert "not a compensation promise" in latest_summary
+    assert "claim approval" in latest_summary
+    assert "berhe jones affiliation" in latest_summary
+
+    abc7_updates = [
+        u
+        for u in data["updates"]
+        if u.get("sourceUrl")
+        == "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/"
+    ]
+    assert len(abc7_updates) == 1, "ABC7 company/response item should stay visible after the City recovery-survey update"
+    abc7_update = abc7_updates[0]
     assert (
-        latest_update.get("sourceUrl")
+        abc7_update.get("sourceUrl")
         == "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/"
     )
-    assert latest_update.get("category") == "Company / response status"
-    latest_summary = latest_update.get("summary", "").lower()
-    assert "gkn aerospace released a statement" in latest_summary
-    assert "uncertainty and disruption" in latest_summary
-    assert "committed to understanding what occurred" in latest_summary
-    assert "all roads closed because of the incident had reopened" in latest_summary
-    assert "cleanup/removal planning" in latest_summary
-    assert "not an admission" in latest_summary
-    assert "not a claims process" in latest_summary
-    assert "finding of legal responsibility" in latest_summary
+    assert abc7_update.get("category") == "Company / response status"
+    abc7_summary = abc7_update.get("summary", "").lower()
+    assert "gkn aerospace released a statement" in abc7_summary
+    assert "uncertainty and disruption" in abc7_summary
+    assert "committed to understanding what occurred" in abc7_summary
+    assert "all roads closed because of the incident had reopened" in abc7_summary
+    assert "cleanup/removal planning" in abc7_summary
+    assert "not an admission" in abc7_summary
+    assert "not a claims process" in abc7_summary
+    assert "finding of legal responsibility" in abc7_summary
 
     official_status_updates = [
         u
@@ -685,14 +708,7 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
         if u.get("sourceUrl")
         == "https://www.ocregister.com/2026/05/26/70-people-suing-garden-grove-chemical-tank-owner-over-crisis-as-of-tuesday/"
     ]
-    assert len(oc_register_lawsuit_updates) == 1, "OC Register / PacerMonitor legal-action update should stay visible in capped feed"
-    assert oc_register_lawsuit_updates[0].get("category") == "Legal-action status"
-    lawsuit_summary = oc_register_lawsuit_updates[0].get("summary", "").lower()
-    assert "at least seven lawsuits" in lawsuit_summary
-    assert "about 70 plaintiffs" in lawsuit_summary
-    assert "8:26-cv-01293" in lawsuit_summary
-    assert "8:26-cv-01296" in lawsuit_summary
-    assert "not claiming affiliation" in lawsuit_summary
+    assert len(oc_register_lawsuit_updates) == 0, "City recovery-survey update can push the older OC Register / PacerMonitor legal-action item out of the 8-update cap"
 
     zimmerman_reed_updates = [
         u

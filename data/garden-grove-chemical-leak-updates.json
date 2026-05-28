@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-28T05:50:00Z",
+  "lastVerifiedUtc": "2026-05-28T07:53:07Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for any remaining road closures, exclusion zones, or monitoring instructions.",
   "updates": [
+    {
+      "timeUtc": "2026-05-28T07:53:07Z",
+      "category": "Recovery / official survey",
+      "title": "City asks impacted residents and businesses to complete recovery-needs survey",
+      "summary": "The City of Garden Grove hazardous-materials incident survey says the City is seeking information from residents, businesses, and community members impacted by the recent chemical emergency and evacuation orders tied to the methyl methacrylate tank incident. The City says the survey is meant to help it understand community impacts and unmet needs related to displacement, housing, business interruption, and other recovery-related concerns, and that respondents may be contacted by the City or partner agencies about available resources, follow-up assistance, or additional recovery support. This is an official City recovery-needs survey and resource-routing update only; it is not a compensation promise, claim approval, legal finding, or Berhe Jones affiliation with the City or any public agency.",
+      "sourceLabel": "City of Garden Grove hazardous-materials incident survey",
+      "sourceUrl": "https://ggcity.org/hazmat-incident/survey"
+    },
     {
       "timeUtc": "2026-05-28T05:17:00Z",
       "category": "Company / response status",
@@ -58,14 +66,6 @@
       "summary": "The Orange County Register reported from the May 26 evening update that OCFA officials said the hazmat response began after GKN staff noticed the tank-cooling system was no longer working. OCFA Capt. Brian Yau was quoted as saying there was a failure in that cooling system, which caused the facility team to call 911; the same report says officials do not yet know why the cooling system stopped working. The article also reported the compromised tank held about 7,000 gallons of methyl methacrylate, stayed stable after water spraying stopped, and that all agencies agreed it was safe to cancel evacuations. This is a source-attributed investigation/status update, not a final finding of legal fault.",
       "sourceLabel": "Orange County Register / OCFA briefing reporting",
       "sourceUrl": "https://www.ocregister.com/2026/05/26/chemical-tank-in-garden-grove-at-92-degrees-tuesday-a-m-crews-work-to-lower-it/"
-    },
-    {
-      "timeUtc": "2026-05-27T03:33:00Z",
-      "category": "Legal-action status",
-      "title": "Orange County Register reports at least seven state lawsuits and about 70 early plaintiffs",
-      "summary": "The Orange County Register reported that at least seven lawsuits had been filed against GKN in Orange County Superior Court by Tuesday afternoon after courthouse operations resumed, with one federal lawsuit already filed over the weekend and about 70 plaintiffs collectively included in the early lawsuits. The report says the lawsuits generally allege negligence and public nuisance tied to the compromised methyl methacrylate tank and alleged emergency-system failures. PacerMonitor also lists related federal docket entries for Page et al. v. GKN Aerospace Transparency Systems Inc. et al., No. 8:26-cv-01293, filed May 23, 2026, and Sanchez v. GKN Aerospace Transparency Systems Inc. et al., No. 8:26-cv-01296, filed May 26, 2026. This is a source-attributed legal-action update only; Berhe Jones is not claiming affiliation with any plaintiffs, class counsel, or filed action.",
-      "sourceLabel": "Orange County Register / PacerMonitor docket references",
-      "sourceUrl": "https://www.ocregister.com/2026/05/26/70-people-suing-garden-grove-chemical-tank-owner-over-crisis-as-of-tuesday/"
     }
   ],
   "resources": [
