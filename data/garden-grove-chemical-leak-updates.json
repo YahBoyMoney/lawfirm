@@ -1,13 +1,13 @@
 {
-  "lastVerifiedUtc": "2026-05-28T00:52:13Z",
+  "lastVerifiedUtc": "2026-05-28T01:23:29Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for any remaining road closures, exclusion zones, or monitoring instructions.",
   "updates": [
     {
       "timeUtc": "2026-05-28T00:03:00Z",
       "category": "Official safety status",
-      "title": "City posts May 27 street-opening and small-business resource updates",
-      "summary": "The City of Garden Grove hazardous-materials incident page says all evacuation orders have been lifted and that Unified Command had confirmed no chemical leak, no threat of explosion or fire, and no risk to the public. A later City street-closure update posted May 27 at 5:03 p.m. says Lampson Avenue and Western Avenue are now open, while the page also points residents and businesses to hotlines, insurance guidance, and Orange County Inland Empire SBDC small-business recovery resources. Those official safety statements describe the emergency status, not a court finding on property loss, economic loss, or legal liability; follow the City, County, OCFA, and public-health agencies for any remaining or future road, exclusion-zone, or monitoring instructions.",
+      "title": "City posts street-opening, SBA worksheet, and business webinar updates",
+      "summary": "The City of Garden Grove hazardous-materials incident page says all evacuation orders have been lifted and that Unified Command had confirmed no chemical leak, no threat of explosion or fire, and no risk to the public. A later City street-closure update posted May 27 at 5:03 p.m. says Lampson Avenue and Western Avenue are now open. The same City page now directs impacted businesses to complete the SBA Assistance Worksheet, submit completed worksheets to the OC Sheriff's EOC liaison address listed by the City, and attend a free Orange County/Inland Empire SBDC webinar for businesses impacted by the chemical incident on Friday, May 29, 2026 at 9:00 a.m., offered in English, Spanish, Vietnamese, and Korean, with information on federal, state, county, and local resources, business support services, and small-business recovery guidance. Those official safety and resource statements describe emergency and recovery status, not a court finding on property loss, economic loss, or legal liability; follow the City, County, OCFA, public-health agencies, and official recovery-resource providers for any remaining or future road, exclusion-zone, monitoring, insurance, or business-assistance instructions.",
       "sourceLabel": "City of Garden Grove hazardous-materials incident page",
       "sourceUrl": "https://ggcity.org/emergency"
     },

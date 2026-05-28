@@ -553,6 +553,8 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     assert "no chemical leak" in latest_summary
     assert "no threat of explosion or fire" in latest_summary
     assert "lampson avenue and western avenue are now open" in latest_summary
+    assert "sba assistance worksheet" in latest_summary
+    assert "friday, may 29, 2026 at 9:00 a.m." in latest_summary
     assert "small-business recovery" in latest_summary
     assert "not a court finding" in latest_summary
 
