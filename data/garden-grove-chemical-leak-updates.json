@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-28T14:41:01Z",
+  "lastVerifiedUtc": "2026-05-28T18:58:51Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for any remaining road closures, exclusion zones, or monitoring instructions.",
   "updates": [
+    {
+      "timeUtc": "2026-05-28T18:05:43Z",
+      "category": "Company / response status",
+      "title": "ABC7 updates EPA monitoring, cleanup planning and legal-claim status after evacuations lift",
+      "summary": "ABC7's live update, last updated May 28 at 6:05 p.m. GMT, reports there is no longer a threat of explosion, fire, or chemical leak for the damaged GKN Aerospace tank, according to OCFA, and that all evacuation orders were lifted Tuesday night so the final 16,000 residents could return home. ABC7 also reports GKN Aerospace released a statement apologizing for the uncertainty and disruption caused to Garden Grove, Stanton, and surrounding Orange County communities and saying it is committed to understanding what occurred, supporting affected communities, working with authorities, and continuing a safe path forward. The same live update reports more legal claims have been filed, all roads closed because of the incident had reopened, OCFA crews remain on standby while the tank is monitored near 90 degrees, environmental experts are preparing cleanup/removal planning, and EPA Region 9 deployed 20 monitoring devices (ABC7 also described them as 20 chemical detectors) across the affected community with no exceedances above action levels reported by EPA. This is a source-attributed company, public-safety, cleanup, and legal-status update only, not an admission, not a claims process, not a court finding, not a representation offer, and not a finding of legal responsibility; residents and businesses should continue preserving receipts, insurance communications, health/cleanup notes, and official notices.",
+      "sourceLabel": "ABC7 Los Angeles live update",
+      "sourceUrl": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/"
+    },
     {
       "timeUtc": "2026-05-28T13:00:00Z",
       "category": "Official / accountability status",
@@ -18,14 +26,6 @@
       "summary": "The City of Garden Grove hazardous-materials incident survey says the City is seeking information from residents, businesses, and community members impacted by the recent chemical emergency and evacuation orders tied to the methyl methacrylate tank incident. The City says the survey is meant to help it understand community impacts and unmet needs related to displacement, housing, business interruption, and other recovery-related concerns, and that respondents may be contacted by the City or partner agencies about available resources, follow-up assistance, or additional recovery support. This is an official City recovery-needs survey and resource-routing update only; it is not a compensation promise, claim approval, legal finding, or Berhe Jones affiliation with the City or any public agency.",
       "sourceLabel": "City of Garden Grove hazardous-materials incident survey",
       "sourceUrl": "https://ggcity.org/hazmat-incident/survey"
-    },
-    {
-      "timeUtc": "2026-05-28T05:17:00Z",
-      "category": "Company / response status",
-      "title": "ABC7 reports GKN statement, reopened roads and EPA monitoring after evacuations lift",
-      "summary": "ABC7's live update, last updated May 28 at 5:17 a.m. GMT, reports that GKN Aerospace released a statement after evacuation orders were lifted, apologizing for the uncertainty and disruption caused to Garden Grove, Stanton, and surrounding Orange County communities and saying it is committed to understanding what occurred, supporting affected communities, working with authorities, and continuing a safe path forward. The same ABC7 update reports that, according to OCFA, all roads closed because of the incident had reopened by Wednesday afternoon, while response teams continued site monitoring and cleanup/removal planning; ABC7 also reported EPA Region 9 had placed 20 monitoring devices across the affected community and said it had not seen exceedances above action levels. This is a source-attributed company, public-safety, and news update only, not an admission, not a claims process, not a representation offer, and not a finding of legal responsibility; residents and businesses should continue preserving receipts, insurance communications, health/cleanup notes, and official notices.",
-      "sourceLabel": "ABC7 Los Angeles live update",
-      "sourceUrl": "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/"
     },
     {
       "timeUtc": "2026-05-28T01:00:00Z",

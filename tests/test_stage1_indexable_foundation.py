@@ -635,23 +635,39 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     latest_update = data["updates"][0]
     assert (
         latest_update.get("sourceUrl")
-        == "https://www.latimes.com/california/story/2026-05-28/politicians-demand-accountability-from-gkn-aerospace-after-hazmat-crisis"
+        == "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/"
     )
-    assert latest_update.get("category") == "Official / accountability status"
+    assert latest_update.get("category") == "Company / response status"
     latest_summary = latest_update.get("summary", "").lower()
-    assert "orange county board of supervisors" in latest_summary
-    assert "compensate evacuated residents" in latest_summary
-    assert "robert garcia" in latest_summary
-    assert "derek tran" in latest_summary
-    assert "produce documents by june 10" in latest_summary
-    assert "facility inspections" in latest_summary
-    assert "compliance history" in latest_summary
-    assert "maintenance logs" in latest_summary
-    assert "emergency protocols" in latest_summary
-    assert "district attorney todd spitzer opened a criminal investigation" in latest_summary
-    assert "more than half a dozen orange county superior court lawsuits" in latest_summary
-    assert "not findings of liability" in latest_summary
-    assert "not claiming affiliation" in latest_summary
+    assert "last updated may 28 at 6:05 p.m. gmt" in latest_summary
+    assert "more legal claims have been filed" in latest_summary
+    assert "20 chemical detectors" in latest_summary
+    assert "no exceedances above action levels" in latest_summary
+    assert "crews remain on standby" in latest_summary
+    assert "cleanup/removal planning" in latest_summary
+    assert "not a court finding" in latest_summary
+
+    latimes_accountability_updates = [
+        u
+        for u in data["updates"]
+        if u.get("sourceUrl")
+        == "https://www.latimes.com/california/story/2026-05-28/politicians-demand-accountability-from-gkn-aerospace-after-hazmat-crisis"
+    ]
+    assert len(latimes_accountability_updates) == 1, "L.A. Times accountability item should stay visible after the newer ABC7 live update"
+    latimes_summary = latimes_accountability_updates[0].get("summary", "").lower()
+    assert "orange county board of supervisors" in latimes_summary
+    assert "compensate evacuated residents" in latimes_summary
+    assert "robert garcia" in latimes_summary
+    assert "derek tran" in latimes_summary
+    assert "produce documents by june 10" in latimes_summary
+    assert "facility inspections" in latimes_summary
+    assert "compliance history" in latimes_summary
+    assert "maintenance logs" in latimes_summary
+    assert "emergency protocols" in latimes_summary
+    assert "district attorney todd spitzer opened a criminal investigation" in latimes_summary
+    assert "more than half a dozen orange county superior court lawsuits" in latimes_summary
+    assert "not findings of liability" in latimes_summary
+    assert "not claiming affiliation" in latimes_summary
 
     older_latimes_business_updates = [
         u
