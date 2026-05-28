@@ -506,6 +506,7 @@ def test_public_pages_have_complete_social_share_metadata():
             'meta[property="og:type"]': "website",
             'meta[property="og:url"]': canonical.get("href"),
             'meta[property="og:site_name"]': "Berhe Jones LLP",
+            'meta[property="og:locale"]': "en_US",
             'meta[property="og:image"]': SOCIAL_IMAGE,
             'meta[property="og:image:width"]': "1200",
             'meta[property="og:image:height"]': "630",
