@@ -595,20 +595,37 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     latest_update = data["updates"][0]
     assert (
         latest_update.get("sourceUrl")
-        == "https://www.ocgov.com/page/garden-grove-chemical-spill-incident"
+        == "https://abc7.com/live-updates/garden-grove-chemical-tank-emergency-leaking-toxic-chemicals-orange-county-will-spill-explode-officials-say/19152918/"
     )
-    assert latest_update.get("category") == "Official safety status"
+    assert latest_update.get("category") == "Company / response status"
     latest_summary = latest_update.get("summary", "").lower()
-    assert "care & shelter locations were closed" in latest_summary
-    assert "all road closures were lifted" in latest_summary
-    assert "150 feet around the gkn facility" in latest_summary
-    assert "all evacuation orders have been lifted" in latest_summary
-    assert "no chemical leak" in latest_summary
-    assert "no threat of explosion or fire" in latest_summary
-    assert "lampson avenue and western avenue are now open" in latest_summary
-    assert "sba assistance worksheet" in latest_summary
-    assert "small-business recovery" in latest_summary
-    assert "not a court finding" in latest_summary
+    assert "gkn aerospace released a statement" in latest_summary
+    assert "uncertainty and disruption" in latest_summary
+    assert "committed to understanding what occurred" in latest_summary
+    assert "all roads closed because of the incident had reopened" in latest_summary
+    assert "cleanup/removal planning" in latest_summary
+    assert "not an admission" in latest_summary
+    assert "not a claims process" in latest_summary
+    assert "finding of legal responsibility" in latest_summary
+
+    official_status_updates = [
+        u
+        for u in data["updates"]
+        if u.get("sourceUrl")
+        == "https://www.ocgov.com/page/garden-grove-chemical-spill-incident"
+    ]
+    assert len(official_status_updates) == 1, "County/City official status item should stay visible after the company-statement update"
+    official_summary = official_status_updates[0].get("summary", "").lower()
+    assert "care & shelter locations were closed" in official_summary
+    assert "all road closures were lifted" in official_summary
+    assert "150 feet around the gkn facility" in official_summary
+    assert "all evacuation orders have been lifted" in official_summary
+    assert "no chemical leak" in official_summary
+    assert "no threat of explosion or fire" in official_summary
+    assert "lampson avenue and western avenue are now open" in official_summary
+    assert "sba assistance worksheet" in official_summary
+    assert "small-business recovery" in official_summary
+    assert "not a court finding" in official_summary
 
     caloes_updates = [
         u
@@ -616,11 +633,7 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
         if u.get("sourceUrl")
         == "https://www.news.caloes.ca.gov/community-resources-for-garden-grove-hazmat-incident/"
     ]
-    assert len(caloes_updates) == 1, "Cal OES shelter-closure update should stay visible in capped feed"
-    caloes_summary = caloes_updates[0].get("summary", "").lower()
-    assert "emergency shelters will close at 7:00 p.m." in caloes_summary
-    assert "may 27, 2026" in caloes_summary
-    assert "public information hotline" in caloes_summary
+    assert len(caloes_updates) == 0, "County/City status now carries the shelter-closure status, so Cal OES can fall out of the 8-item cap"
 
     voice_updates = [
         u
