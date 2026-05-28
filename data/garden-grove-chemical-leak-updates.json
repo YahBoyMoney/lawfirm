@@ -1,15 +1,15 @@
 {
-  "lastVerifiedUtc": "2026-05-28T01:23:29Z",
+  "lastVerifiedUtc": "2026-05-28T03:30:59Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for any remaining road closures, exclusion zones, or monitoring instructions.",
   "updates": [
     {
-      "timeUtc": "2026-05-28T00:03:00Z",
+      "timeUtc": "2026-05-28T01:00:00Z",
       "category": "Official safety status",
-      "title": "City posts street-opening, SBA worksheet, and business webinar updates",
-      "summary": "The City of Garden Grove hazardous-materials incident page says all evacuation orders have been lifted and that Unified Command had confirmed no chemical leak, no threat of explosion or fire, and no risk to the public. A later City street-closure update posted May 27 at 5:03 p.m. says Lampson Avenue and Western Avenue are now open. The same City page now directs impacted businesses to complete the SBA Assistance Worksheet, submit completed worksheets to the OC Sheriff's EOC liaison address listed by the City, and attend a free Orange County/Inland Empire SBDC webinar for businesses impacted by the chemical incident on Friday, May 29, 2026 at 9:00 a.m., offered in English, Spanish, Vietnamese, and Korean, with information on federal, state, county, and local resources, business support services, and small-business recovery guidance. Those official safety and resource statements describe emergency and recovery status, not a court finding on property loss, economic loss, or legal liability; follow the City, County, OCFA, public-health agencies, and official recovery-resource providers for any remaining or future road, exclusion-zone, monitoring, insurance, or business-assistance instructions.",
-      "sourceLabel": "City of Garden Grove hazardous-materials incident page",
-      "sourceUrl": "https://ggcity.org/emergency"
+      "title": "County says road closures and shelters are closed while a 150-foot GKN facility zone remains",
+      "summary": "Orange County's official Garden Grove chemical-spill incident page says all Care & Shelter locations were closed as of 6:00 p.m. May 27, 2026 and all road closures were lifted as of 6:00 p.m. May 27, while an evacuation zone remains for 150 feet around the GKN facility. The City of Garden Grove incident page separately says Lampson Avenue and Western Avenue are now open, all evacuation orders have been lifted, Unified Command confirmed no chemical leak, no threat of explosion or fire, and no risk to the public, and the City/County recovery pages direct impacted businesses to complete the SBA Assistance Worksheet and to official small-business recovery resources. This is an official emergency-status and recovery-resource update only, not a court finding on property loss, economic loss, personal exposure, or legal liability; residents and businesses should follow City, County, OCFA, public-health, and official recovery-resource instructions for any remaining facility perimeter, monitoring, insurance, or business-assistance steps.",
+      "sourceLabel": "Orange County official incident page / City of Garden Grove",
+      "sourceUrl": "https://www.ocgov.com/page/garden-grove-chemical-spill-incident"
     },
     {
       "timeUtc": "2026-05-27T20:45:00Z",
@@ -66,14 +66,6 @@
       "summary": "The Orange County Register reported that at least seven lawsuits had been filed against GKN in Orange County Superior Court by Tuesday afternoon after courthouse operations resumed, with one federal lawsuit already filed over the weekend and about 70 plaintiffs collectively included in the early lawsuits. The report says the lawsuits generally allege negligence and public nuisance tied to the compromised methyl methacrylate tank and alleged emergency-system failures. PacerMonitor also lists related federal docket entries for Page et al. v. GKN Aerospace Transparency Systems Inc. et al., No. 8:26-cv-01293, filed May 23, 2026, and Sanchez v. GKN Aerospace Transparency Systems Inc. et al., No. 8:26-cv-01296, filed May 26, 2026. This is a source-attributed legal-action update only; Berhe Jones is not claiming affiliation with any plaintiffs, class counsel, or filed action.",
       "sourceLabel": "Orange County Register / PacerMonitor docket references",
       "sourceUrl": "https://www.ocregister.com/2026/05/26/70-people-suing-garden-grove-chemical-tank-owner-over-crisis-as-of-tuesday/"
-    },
-    {
-      "timeUtc": "2026-05-27T02:30:00Z",
-      "category": "Official safety status",
-      "title": "City says all evacuation orders were lifted effective May 26 at 7:30 p.m.",
-      "summary": "The City of Garden Grove emergency page says that, effective May 26 at 7:30 p.m., all evacuation orders related to the hazardous materials incident were lifted. The City says Unified Command confirmed there is no chemical leak, no threat of explosion or fire, and no risk to the public, while Western Avenue between Chapman Avenue and Garden Grove Boulevard remained closed at that time and a small exclusion zone remained for hazardous-materials teams to monitor tanks out of an abundance of caution.",
-      "sourceLabel": "City of Garden Grove emergency page",
-      "sourceUrl": "https://ggcity.org/emergency"
     }
   ],
   "resources": [

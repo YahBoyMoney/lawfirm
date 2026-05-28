@@ -1763,7 +1763,7 @@
       }).join('');
     }
     if (!feed) return;
-    var updates = Array.isArray(data.updates) ? data.updates.slice(0,9) : [];
+    var updates = Array.isArray(data.updates) ? data.updates.slice(0,8) : [];
     feed.innerHTML = updates.map(function(item){
       var d = safeDate(item.timeUtc);
       var when = d ? fmt.format(d) : 'Time pending';
