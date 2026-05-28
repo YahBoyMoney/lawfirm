@@ -35,6 +35,7 @@ SUPPORT_PAGES = {
 
 SOCIAL_IMAGE = "https://berhelaw.com/images/og-berhe-jones-llp.png"
 SOCIAL_IMAGE_ALT = "Berhe Jones LLP branded social preview image for California legal services."
+APPROVED_REFERRER_POLICY = "strict-origin-when-cross-origin"
 
 PROHIBITED_PUBLIC_TERMS = [
     "noindex",
@@ -82,6 +83,19 @@ def test_stage1_pages_are_indexable_and_canonical():
         canonical = doc.select_one('link[rel="canonical"]')
         assert canonical is not None, f"{route} needs a canonical"
         assert canonical.get("href") == f"https://berhelaw.com{route}"
+
+
+def test_all_html_pages_declare_approved_referrer_policy_meta():
+    headers_text = (ROOT / "_headers").read_text(encoding="utf-8")
+    assert f"Referrer-Policy: {APPROVED_REFERRER_POLICY}" in headers_text
+
+    for path in ROOT.rglob("*.html"):
+        if ".git" in path.parts:
+            continue
+        doc = page_doc(path)
+        referrer_tags = doc.select('meta[name="referrer"]')
+        assert len(referrer_tags) == 1, f"{path} needs exactly one referrer policy meta tag"
+        assert referrer_tags[0].get("content") == APPROVED_REFERRER_POLICY
 
 
 def test_stage1_pages_are_in_sitemap_and_homepage_footer():
