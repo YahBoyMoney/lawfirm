@@ -213,6 +213,38 @@ def test_support_and_success_pages_have_named_home_links():
         assert back_home.get("aria-label") == "Back to Berhe Jones LLP home"
 
 
+def test_all_public_support_and_success_pages_show_brand_logo_in_header():
+    pages = {
+        "/": ROOT / "index.html",
+        **PUBLIC_PAGES,
+        **SUPPORT_PAGES,
+        "/success.html": ROOT / "success.html",
+    }
+    allowed_logo_paths = {
+        "/images/berhe-jones-llp-logo.png",
+        "/images/berhe-jones-llp-logo-reverse.png",
+    }
+    for route, path in pages.items():
+        doc = page_doc(path)
+        header_logo = doc.select_one("header .brand img.brand-logo")
+        assert header_logo is not None, f"{route} needs the Berhe Jones LLP logo in the header"
+        assert header_logo.get("src") in allowed_logo_paths
+        assert header_logo.get("alt") == "Berhe Jones LLP"
+        assert header_logo.get("width") == "1305"
+        assert header_logo.get("height") == "308"
+        assert header_logo.get("decoding") == "async"
+
+
+def test_html_does_not_contain_escaped_link_attributes():
+    for path in ROOT.rglob("*.html"):
+        if ".git" in path.parts:
+            continue
+        text = path.read_text(encoding="utf-8")
+        assert 'href=\\"' not in text, f"{path} contains escaped href markup"
+        assert 'target=\\"' not in text, f"{path} contains escaped target markup"
+        assert 'rel=\\"' not in text, f"{path} contains escaped rel markup"
+
+
 def test_garden_grove_incident_media_images_are_performance_safe():
     doc = page_doc(PUBLIC_PAGES["/landing/garden-grove-chemical-leak/"])
     hero_img = doc.select_one(".hero-media img")
