@@ -245,6 +245,16 @@ def test_html_does_not_contain_escaped_link_attributes():
         assert 'rel=\\"' not in text, f"{path} contains escaped rel markup"
 
 
+def test_every_input_declares_explicit_type():
+    for path in ROOT.rglob("*.html"):
+        if ".git" in path.parts:
+            continue
+        doc = page_doc(path)
+        for input_el in doc.select("input"):
+            name = input_el.get("name") or input_el.get("id") or str(input_el)[:80]
+            assert input_el.get("type"), f"{path} input {name} should declare an explicit type"
+
+
 def test_garden_grove_incident_media_images_are_performance_safe():
     doc = page_doc(PUBLIC_PAGES["/landing/garden-grove-chemical-leak/"])
     hero_img = doc.select_one(".hero-media img")
