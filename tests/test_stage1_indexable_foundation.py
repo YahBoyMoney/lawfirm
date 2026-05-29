@@ -115,14 +115,22 @@ def test_stage1_pages_are_in_sitemap_and_homepage_footer():
     sitemap_text = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
     home_doc = page_doc(ROOT / "index.html")
     footer_hrefs = {str(a.get("href")) for a in home_doc.select("footer.site a[href]")}
-    assert sitemap_text.count("<lastmod>2026-05-25</lastmod>") == 20
-    assert sitemap_text.count("<lastmod>2026-05-29</lastmod>") == 2
+    assert sitemap_text.count("<lastmod>2026-05-25</lastmod>") == 18
+    assert sitemap_text.count("<lastmod>2026-05-29</lastmod>") == 4
     assert (
         "<loc>https://berhelaw.com/</loc>\n"
         "    <lastmod>2026-05-29</lastmod>"
     ) in sitemap_text
     assert (
         "<loc>https://berhelaw.com/landing/garden-grove-chemical-leak/</loc>\n"
+        "    <lastmod>2026-05-29</lastmod>"
+    ) in sitemap_text
+    assert (
+        "<loc>https://berhelaw.com/free-case-review/</loc>\n"
+        "    <lastmod>2026-05-29</lastmod>"
+    ) in sitemap_text
+    assert (
+        "<loc>https://berhelaw.com/landing/truck-fleet-rideshare-accident-california/</loc>\n"
         "    <lastmod>2026-05-29</lastmod>"
     ) in sitemap_text
     for route in PUBLIC_PAGES:
@@ -553,6 +561,9 @@ def test_visible_public_intake_summary_fields_use_sentence_autocapitalization():
         assert form is not None, f"{route} needs the visible public intake form"
         summary = form.select_one(f"textarea#{field_id}")
         assert summary is not None, f"{route} needs its visible summary textarea"
+        assert summary.get("autocomplete") == "off", (
+            f"{route} #{field_id} should not invite browser autocomplete for conflict-safe summaries"
+        )
         assert summary.get("autocapitalize") == "sentences", (
             f"{route} #{field_id} should request sentence capitalization on mobile keyboards"
         )
