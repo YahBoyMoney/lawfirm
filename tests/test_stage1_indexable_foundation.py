@@ -555,7 +555,7 @@ def test_garden_grove_form_exposes_complete_mobile_autofill_contract():
         "lastName": {"type": "text", "autocomplete": "family-name"},
         "email": {"type": "email", "autocomplete": "email", "inputmode": "email"},
         "phone": {"type": "tel", "autocomplete": "tel", "inputmode": "tel"},
-        "affectedAddress": {"type": "text"},
+        "affectedAddress": {"type": "text", "autocomplete": "street-address"},
     }
     for field_id, attributes in expected_fields.items():
         field = form.select_one(f"#{field_id}")
