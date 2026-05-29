@@ -36,6 +36,7 @@ SUPPORT_PAGES = {
 SOCIAL_IMAGE = "https://berhelaw.com/images/og-berhe-jones-llp.png"
 SOCIAL_IMAGE_ALT = "Berhe Jones LLP branded social preview image for California legal services."
 APPROVED_REFERRER_POLICY = "strict-origin-when-cross-origin"
+GOOGLE_FONTS_STYLESHEET = "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap"
 
 PROHIBITED_PUBLIC_TERMS = [
     "noindex",
@@ -96,6 +97,18 @@ def test_all_html_pages_declare_approved_referrer_policy_meta():
         referrer_tags = doc.select('meta[name="referrer"]')
         assert len(referrer_tags) == 1, f"{path} needs exactly one referrer policy meta tag"
         assert referrer_tags[0].get("content") == APPROVED_REFERRER_POLICY
+
+
+def test_google_fonts_stylesheet_uses_no_referrer_policy():
+    for path in ROOT.rglob("*.html"):
+        if ".git" in path.parts:
+            continue
+        doc = page_doc(path)
+        fonts_links = doc.select(f'link[rel="stylesheet"][href="{GOOGLE_FONTS_STYLESHEET}"]')
+        assert len(fonts_links) == 1, f"{path} needs exactly one approved Google Fonts stylesheet link"
+        assert fonts_links[0].get("referrerpolicy") == "no-referrer", (
+            f"{path} Google Fonts stylesheet should not send a referrer"
+        )
 
 
 def test_stage1_pages_are_in_sitemap_and_homepage_footer():
