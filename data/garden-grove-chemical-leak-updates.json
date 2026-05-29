@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-28T23:28:06Z",
+  "lastVerifiedUtc": "2026-05-29T02:20:11Z",
   "statusLabel": "Public-source update center",
   "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for any remaining road closures, exclusion zones, or monitoring instructions.",
   "updates": [
+    {
+      "timeUtc": "2026-05-29T02:20:11Z",
+      "category": "Legal-action status",
+      "title": "City News Service reports broader filing count; conformed Guadarrama complaint reviewed",
+      "summary": "KFI's City News Service report dated May 28 says legal claims tied to the Garden Grove GKN Aerospace chemical incident had grown to 29 filings in Orange County Superior Court and about eight in federal court since the emergency evacuations. This check also preserved and reviewed a Zimmerman Reed-hosted conformed complaint for Guadarrama, Kang, Pateyro, and Rodriguez v. GKN Aerospace Transparency Systems Inc. et al.; the e-file stamp states Orange County Superior Court case 30-2026-01572329-CU-PO-CXC, ROA #2, electronically filed May 26, 2026 at 8:00 a.m., assigned to Judge William D. Claster in Department CX101. The complaint asserts negligence, premises liability, private nuisance, public nuisance, trespass, strict-liability, and unfair competition theories. This is a source-attributed legal-action update only: allegations and filing counts are not findings of liability, federal filing counts were not individually docket-verified in this check, and Berhe Jones is not claiming affiliation with the plaintiffs, class counsel, filed actions, or public agencies.",
+      "sourceLabel": "KFI / City News Service legal-trouble report; Zimmerman Reed conformed complaint",
+      "sourceUrl": "https://kfiam640.iheart.com/content/2026-05-28-legal-troubles-mount-for-garden-grove-aerospace-facility/"
+    },
     {
       "timeUtc": "2026-05-28T23:15:00Z",
       "category": "Recovery / business resources",
@@ -50,14 +58,6 @@
       "summary": "Orange County's official Garden Grove chemical-spill incident page says all Care & Shelter locations were closed as of 6:00 p.m. May 27, 2026 and all road closures were lifted as of 6:00 p.m. May 27, while an evacuation zone remains for 150 feet around the GKN facility. The City of Garden Grove incident page separately says Lampson Avenue and Western Avenue are now open, all evacuation orders have been lifted, Unified Command confirmed no chemical leak, no threat of explosion or fire, and no risk to the public, and the City/County recovery pages direct impacted businesses to complete the SBA Assistance Worksheet and to official small-business recovery resources. This is an official emergency-status and recovery-resource update only, not a court finding on property loss, economic loss, personal exposure, or legal liability; residents and businesses should follow City, County, OCFA, public-health, and official recovery-resource instructions for any remaining facility perimeter, monitoring, insurance, or business-assistance steps.",
       "sourceLabel": "Orange County official incident page / City of Garden Grove",
       "sourceUrl": "https://www.ocgov.com/page/garden-grove-chemical-spill-incident"
-    },
-    {
-      "timeUtc": "2026-05-27T18:58:00Z",
-      "category": "Legal-action status",
-      "title": "Zimmerman Reed announces Guadarrama state-court class-action complaint",
-      "summary": "A May 27 PRNewswire release from Zimmerman Reed reported that Orange County residents filed Guadarrama et al. v. GKN Aerospace Transparency Systems Inc. et al. in California Superior Court, County of Orange, against GKN Aerospace Transparency Systems Inc., GKN Aerospace Services Ltd., and Melrose Industries PLC. The release says the complaint names four plaintiffs and a proposed evacuated-resident class, alleges negligent storage, monitoring, and maintenance of the methyl methacrylate tank, and asserts negligence, premises liability, private nuisance, public nuisance, trespass, strict liability for ultrahazardous activity, and California Unfair Competition Law claims. This is a counsel-announced, source-attributed legal-action update; this check did not independently verify a state-court case number or complaint image, and Berhe Jones is not claiming affiliation with the plaintiffs, class counsel, or filed actions.",
-      "sourceLabel": "Zimmerman Reed / PRNewswire",
-      "sourceUrl": "https://www.prnewswire.com/news-releases/orange-county-residents-file-class-action-over-garden-grove-chemical-tank-crisis-302783544.html"
     },
     {
       "timeUtc": "2026-05-27T18:50:41Z",

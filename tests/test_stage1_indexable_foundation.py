@@ -727,18 +727,33 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     assert feed_times == sorted(feed_times, reverse=True), "public incident feed should remain latest-first before the 8-item cap is rendered"
     assert any(u.get("category") == "Legal-action status" for u in data["updates"]), "at least one legal-action status item should remain visible in the capped public feed"
     latest_update = data["updates"][0]
-    assert latest_update.get("sourceUrl") == "https://ggcity.org/hazmat-incident/business-resources"
-    assert latest_update.get("category") == "Recovery / business resources"
+    assert latest_update.get("sourceUrl") == "https://kfiam640.iheart.com/content/2026-05-28-legal-troubles-mount-for-garden-grove-aerospace-facility/"
+    assert latest_update.get("category") == "Legal-action status"
     latest_summary = latest_update.get("summary", "").lower()
-    assert "last updated may 28 at 4:15 p.m." in latest_summary
-    assert "sba assistance worksheet" in latest_summary
-    assert "orange county sheriff's eoc team" in latest_summary
-    assert "may 29, 2026 at 9:00 a.m." in latest_summary
-    assert "english, spanish, vietnamese, and korean" in latest_summary
-    assert "federal, state, county, and local resources" in latest_summary
-    assert "not a compensation promise" in latest_summary
-    assert "not a legal finding" in latest_summary
-    assert "not a representation offer" in latest_summary
+    assert "29 filings in orange county superior court" in latest_summary
+    assert "about eight in federal court" in latest_summary
+    assert "guadarrama" in latest_summary
+    assert "30-2026-01572329-cu-po-cxc" in latest_summary
+    assert "roa #2" in latest_summary
+    assert "judge william d. claster" in latest_summary
+    assert "not findings of liability" in latest_summary
+    assert "not claiming affiliation" in latest_summary
+
+    business_resource_updates = [
+        u for u in data["updates"] if u.get("sourceUrl") == "https://ggcity.org/hazmat-incident/business-resources"
+    ]
+    assert len(business_resource_updates) == 1, "City business-resource update should stay visible after the legal-action count update"
+    business_summary = business_resource_updates[0].get("summary", "").lower()
+    assert business_resource_updates[0].get("category") == "Recovery / business resources"
+    assert "last updated may 28 at 4:15 p.m." in business_summary
+    assert "sba assistance worksheet" in business_summary
+    assert "orange county sheriff's eoc team" in business_summary
+    assert "may 29, 2026 at 9:00 a.m." in business_summary
+    assert "english, spanish, vietnamese, and korean" in business_summary
+    assert "federal, state, county, and local resources" in business_summary
+    assert "not a compensation promise" in business_summary
+    assert "not a legal finding" in business_summary
+    assert "not a representation offer" in business_summary
 
     latimes_accountability_updates = [
         u
@@ -895,17 +910,30 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
         u
         for u in data["updates"]
         if u.get("sourceUrl")
-        == "https://www.prnewswire.com/news-releases/orange-county-residents-file-class-action-over-garden-grove-chemical-tank-crisis-302783544.html"
+        == "https://kfiam640.iheart.com/content/2026-05-28-legal-troubles-mount-for-garden-grove-aerospace-facility/"
     ]
-    assert len(zimmerman_reed_updates) == 1, "Zimmerman Reed state-court complaint update should stay visible in capped feed"
+    assert len(zimmerman_reed_updates) == 1, "New KFI/CNS litigation-count and Guadarrama conformed-complaint update should stay visible in capped feed"
     assert zimmerman_reed_updates[0].get("category") == "Legal-action status"
     zimmerman_summary = zimmerman_reed_updates[0].get("summary", "").lower()
     assert "guadarrama" in zimmerman_summary
     assert "zimmerman reed" in zimmerman_reed_updates[0].get("sourceLabel", "").lower()
-    assert "california superior court" in zimmerman_summary
-    assert "unfair competition law" in zimmerman_summary
-    assert "did not independently verify a state-court case number" in zimmerman_summary
+    assert "orange county superior court" in zimmerman_summary
+    assert "30-2026-01572329-cu-po-cxc" in zimmerman_summary
+    assert "electronically filed may 26, 2026 at 8:00 a.m." in zimmerman_summary
+    assert "judge william d. claster" in zimmerman_summary
+    assert "29 filings" in zimmerman_summary
+    assert "about eight in federal court" in zimmerman_summary
+    assert "unfair competition" in zimmerman_summary
+    assert "federal filing counts were not individually docket-verified" in zimmerman_summary
     assert "not claiming affiliation" in zimmerman_summary
+
+    old_zimmerman_pr_updates = [
+        u
+        for u in data["updates"]
+        if u.get("sourceUrl")
+        == "https://www.prnewswire.com/news-releases/orange-county-residents-file-class-action-over-garden-grove-chemical-tank-crisis-302783544.html"
+    ]
+    assert len(old_zimmerman_pr_updates) == 0, "The new conformed-complaint/count update should replace the older PRNewswire-only Zimmerman item under the 8-update cap"
 
     dicello_updates = [
         u
