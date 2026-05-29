@@ -498,6 +498,36 @@ def test_visible_public_intake_text_fields_have_mobile_enter_key_hints():
             )
 
 
+def test_visible_public_intake_name_fields_use_word_autocapitalization():
+    form_specs = {
+        "/": (ROOT / "index.html", "form#caseForm"),
+        "/free-case-review/": (
+            PUBLIC_PAGES["/free-case-review/"],
+            'form[name="case-review"][aria-labelledby="caseReviewTitle"]',
+        ),
+        "/landing/truck-fleet-rideshare-accident-california/": (
+            PUBLIC_PAGES["/landing/truck-fleet-rideshare-accident-california/"],
+            'form[name="case-review"][aria-labelledby="caseReviewTitle"]',
+        ),
+        "/landing/garden-grove-chemical-leak/": (
+            PUBLIC_PAGES["/landing/garden-grove-chemical-leak/"],
+            'form[name="garden-grove-case-review"][aria-labelledby="gardenGroveCaseReviewTitle"]',
+        ),
+    }
+    for route, (path, selector) in form_specs.items():
+        doc = page_doc(path)
+        form = doc.select_one(selector)
+        assert form is not None, f"{route} needs the visible public intake form"
+        for field_id, autocomplete in {"firstName": "given-name", "lastName": "family-name"}.items():
+            field = form.select_one(f"#{field_id}")
+            assert field is not None, f"{route} needs #{field_id} in its visible intake form"
+            assert field.get("type") == "text"
+            assert field.get("autocomplete") == autocomplete
+            assert field.get("autocapitalize") == "words", (
+                f"{route} #{field_id} should request word capitalization on mobile keyboards"
+            )
+
+
 def test_public_buttons_declare_explicit_safe_type():
     for path in ROOT.rglob("*.html"):
         doc = page_doc(path)
