@@ -528,6 +528,36 @@ def test_visible_public_intake_name_fields_use_word_autocapitalization():
             )
 
 
+def test_visible_public_intake_summary_fields_use_sentence_autocapitalization():
+    form_specs = {
+        "/": (ROOT / "index.html", "form#caseForm", "message"),
+        "/free-case-review/": (
+            PUBLIC_PAGES["/free-case-review/"],
+            'form[name="case-review"][aria-labelledby="caseReviewTitle"]',
+            "summary",
+        ),
+        "/landing/truck-fleet-rideshare-accident-california/": (
+            PUBLIC_PAGES["/landing/truck-fleet-rideshare-accident-california/"],
+            'form[name="case-review"][aria-labelledby="caseReviewTitle"]',
+            "summary",
+        ),
+        "/landing/garden-grove-chemical-leak/": (
+            PUBLIC_PAGES["/landing/garden-grove-chemical-leak/"],
+            'form[name="garden-grove-case-review"][aria-labelledby="gardenGroveCaseReviewTitle"]',
+            "summary",
+        ),
+    }
+    for route, (path, selector, field_id) in form_specs.items():
+        doc = page_doc(path)
+        form = doc.select_one(selector)
+        assert form is not None, f"{route} needs the visible public intake form"
+        summary = form.select_one(f"textarea#{field_id}")
+        assert summary is not None, f"{route} needs its visible summary textarea"
+        assert summary.get("autocapitalize") == "sentences", (
+            f"{route} #{field_id} should request sentence capitalization on mobile keyboards"
+        )
+
+
 def test_public_buttons_declare_explicit_safe_type():
     for path in ROOT.rglob("*.html"):
         doc = page_doc(path)
