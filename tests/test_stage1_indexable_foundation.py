@@ -308,7 +308,7 @@ def test_garden_grove_mobile_sticky_call_has_specific_accessible_name():
     sticky_call = doc.select_one('.mobile-sticky-cta a[href="tel:+19096096685"]')
     assert sticky_call is not None
     assert sticky_call.get_text(" ", strip=True) == "Call now"
-    assert sticky_call.get("aria-label") == "Call Berhe Jones LLP at 909-609-6685"
+    assert sticky_call.get("aria-label") == "Call now for Berhe Jones LLP at 909-609-6685"
 
 
 def test_homepage_mobile_intake_cta_has_specific_accessible_name():
@@ -317,6 +317,10 @@ def test_homepage_mobile_intake_cta_has_specific_accessible_name():
     assert intake_link is not None
     assert intake_link.get_text(" ", strip=True) == "Start Online Intake"
     assert intake_link.get("aria-label") == "Start Online Intake for Berhe Jones LLP case review"
+    call_link = doc.select_one('.mobile-cta-bar a.mobile-cta.call[href="tel:+19096096685"]')
+    assert call_link is not None
+    assert call_link.get_text(" ", strip=True) == "Call 909-609-6685"
+    assert call_link.get("aria-label") == "Call 909-609-6685 for Berhe Jones LLP"
 
 
 def test_homepage_consent_checkbox_has_explicit_label():
@@ -411,6 +415,10 @@ def test_public_html_has_working_phone_links_and_valid_markup_basics():
         expected_phone_href: "Call Berhe Jones LLP at 909-609-6685",
         expected_fax_href: "Fax Berhe Jones LLP at 909-890-6043",
     }
+    expected_mobile_cta_labels = {
+        "homepage_mobile_call": "Call 909-609-6685 for Berhe Jones LLP",
+        "garden_grove_mobile_call": "Call now for Berhe Jones LLP at 909-609-6685",
+    }
     redacted_tel_pattern = re.compile(r'tel:[^"\']*\*')
     for path in ROOT.rglob("*.html"):
         html = path.read_text(encoding="utf-8")
@@ -422,10 +430,31 @@ def test_public_html_has_working_phone_links_and_valid_markup_basics():
         doc = BeautifulSoup(html, "html.parser")
         for tel in doc.select('a[href^="tel:"]'):
             href = str(tel.get("href"))
+            text = tel.get_text(" ", strip=True)
             assert href in expected_tel_labels, f"{path} has unexpected tel link: {href}"
-            assert tel.get("aria-label") == expected_tel_labels[href], (
+            mobile_cta_key = None
+            classes = set(tel.get("class") or [])
+            parent_classes = set(tel.parent.get("class") or []) if tel.parent else set()
+            if path == ROOT / "index.html" and {"mobile-cta", "call"}.issubset(classes):
+                mobile_cta_key = "homepage_mobile_call"
+            elif (
+                path == PUBLIC_PAGES["/landing/garden-grove-chemical-leak/"]
+                and "mobile-sticky-cta" in parent_classes
+                and href == expected_phone_href
+            ):
+                mobile_cta_key = "garden_grove_mobile_call"
+            expected_label = (
+                expected_mobile_cta_labels[mobile_cta_key]
+                if mobile_cta_key
+                else expected_tel_labels[href]
+            )
+            assert tel.get("aria-label") == expected_label, (
                 f"{path} tel link should expose a specific accessible name: {href}"
             )
+            if mobile_cta_key:
+                assert str(tel.get("aria-label", "")).startswith(text), (
+                    f"{path} mobile CTA accessible name should start with visible text: {text}"
+                )
 
 
 def test_public_phone_form_fields_trigger_mobile_phone_keyboards():
