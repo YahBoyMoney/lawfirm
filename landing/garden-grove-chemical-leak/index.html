@@ -1518,10 +1518,10 @@
         <p class="notice" id="gardenGrovePrivacyNotice"><strong>Privacy and notice at collection:</strong> send only short screening facts. Do not include privileged documents, full medical records, Social Security numbers, account credentials, or highly sensitive details. Review the <a href="/privacy.html">Privacy Policy</a>, <a href="/disclaimer.html">Legal Disclaimer</a>, and <a href="/terms.html">Terms</a>.</p>
         <p style="position:absolute;left:-9999px" aria-hidden="true"><label>Do not fill this out if you are human: <input name="bot-field" type="text" tabindex="-1" autocomplete="off" /></label></p>
         <div class="form-grid">
-          <div class="field"><label for="firstName">First name</label><input id="firstName" name="firstName" type="text" autocomplete="given-name" required aria-required="true" /></div>
-          <div class="field"><label for="lastName">Last name</label><input id="lastName" name="lastName" type="text" autocomplete="family-name" required aria-required="true" /></div>
-          <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required aria-required="true" /></div>
-          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" required aria-required="true" /></div>
+          <div class="field"><label for="firstName">First name</label><input id="firstName" name="firstName" type="text" autocomplete="given-name" enterkeyhint="next" required aria-required="true" /></div>
+          <div class="field"><label for="lastName">Last name</label><input id="lastName" name="lastName" type="text" autocomplete="family-name" enterkeyhint="next" required aria-required="true" /></div>
+          <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" enterkeyhint="next" required aria-required="true" /></div>
+          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" enterkeyhint="next" required aria-required="true" /></div>
           <div class="field"><label for="contactMethod">Preferred contact</label>
             <select id="contactMethod" name="contactMethod">
               <option>Call</option>
@@ -1540,7 +1540,7 @@
               <option>Other nearby city</option>
             </select>
           </div>
-          <div class="field full"><label for="affectedAddress">Affected home, work, school, or business location</label><input id="affectedAddress" name="affectedAddress" type="text" placeholder="Address or nearest cross streets" /></div>
+          <div class="field full"><label for="affectedAddress">Affected home, work, school, or business location</label><input id="affectedAddress" name="affectedAddress" type="text" enterkeyhint="next" placeholder="Address or nearest cross streets" /></div>
           <div class="field"><label for="impactType">Main impact</label>
             <select id="impactType" name="impactType">
               <option>Evacuation costs</option>
@@ -1558,7 +1558,7 @@
               <option>Not sure</option>
             </select>
           </div>
-          <div class="field full"><label for="summary">Short conflict-safe summary</label><textarea id="summary" name="summary" placeholder="Briefly describe evacuation dates, symptoms, expenses, missed work or business closure, property issues, and the documents you have. Do not include privileged or highly sensitive details." required aria-required="true" aria-describedby="gardenGroveUrgentNotice gardenGrovePrivacyNotice"></textarea></div>
+          <div class="field full"><label for="summary">Short conflict-safe summary</label><textarea id="summary" name="summary" enterkeyhint="send" placeholder="Briefly describe evacuation dates, symptoms, expenses, missed work or business closure, property issues, and the documents you have. Do not include privileged or highly sensitive details." required aria-required="true" aria-describedby="gardenGroveUrgentNotice gardenGrovePrivacyNotice"></textarea></div>
         </div>
         <label class="consent" for="gardenGroveConsent">
           <input id="gardenGroveConsent" type="checkbox" name="consent" required aria-required="true" />

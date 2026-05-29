@@ -377,6 +377,68 @@ def test_public_email_form_fields_trigger_mobile_email_keyboards():
             assert email.get("inputmode") == "email", f"{path} email field should request the mobile email keyboard"
 
 
+def test_visible_public_intake_text_fields_have_mobile_enter_key_hints():
+    form_specs = {
+        "/": (
+            ROOT / "index.html",
+            "form#caseForm",
+            {
+                "firstName": "next",
+                "lastName": "next",
+                "phone": "next",
+                "email": "next",
+                "message": "send",
+            },
+        ),
+        "/free-case-review/": (
+            PUBLIC_PAGES["/free-case-review/"],
+            'form[name="case-review"][aria-labelledby="caseReviewTitle"]',
+            {
+                "firstName": "next",
+                "lastName": "next",
+                "phone": "next",
+                "email": "next",
+                "county": "next",
+                "summary": "send",
+            },
+        ),
+        "/landing/truck-fleet-rideshare-accident-california/": (
+            PUBLIC_PAGES["/landing/truck-fleet-rideshare-accident-california/"],
+            'form[name="case-review"][aria-labelledby="caseReviewTitle"]',
+            {
+                "firstName": "next",
+                "lastName": "next",
+                "phone": "next",
+                "email": "next",
+                "county": "next",
+                "summary": "send",
+            },
+        ),
+        "/landing/garden-grove-chemical-leak/": (
+            PUBLIC_PAGES["/landing/garden-grove-chemical-leak/"],
+            'form[name="garden-grove-case-review"][aria-labelledby="gardenGroveCaseReviewTitle"]',
+            {
+                "firstName": "next",
+                "lastName": "next",
+                "phone": "next",
+                "email": "next",
+                "affectedAddress": "next",
+                "summary": "send",
+            },
+        ),
+    }
+    for route, (path, selector, expected_hints) in form_specs.items():
+        doc = page_doc(path)
+        form = doc.select_one(selector)
+        assert form is not None, f"{route} needs the visible public intake form"
+        for field_id, expected_hint in expected_hints.items():
+            field = form.select_one(f"#{field_id}")
+            assert field is not None, f"{route} needs #{field_id} in its visible intake form"
+            assert field.get("enterkeyhint") == expected_hint, (
+                f"{route} #{field_id} should request the mobile {expected_hint!r} enter key"
+            )
+
+
 def test_public_buttons_declare_explicit_safe_type():
     for path in ROOT.rglob("*.html"):
         doc = page_doc(path)

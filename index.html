@@ -2724,12 +2724,12 @@
         <div class="row">
           <div class="field">
             <label for="firstName">First name<span class="req" aria-hidden="true">*</span></label>
-            <input id="firstName" name="firstName" type="text" autocomplete="given-name" required aria-required="true" aria-describedby="firstNameError" />
+            <input id="firstName" name="firstName" type="text" autocomplete="given-name" enterkeyhint="next" required aria-required="true" aria-describedby="firstNameError" />
             <p class="field-error" id="firstNameError"></p>
           </div>
           <div class="field">
             <label for="lastName">Last name<span class="req" aria-hidden="true">*</span></label>
-            <input id="lastName" name="lastName" type="text" autocomplete="family-name" required aria-required="true" aria-describedby="lastNameError" />
+            <input id="lastName" name="lastName" type="text" autocomplete="family-name" enterkeyhint="next" required aria-required="true" aria-describedby="lastNameError" />
             <p class="field-error" id="lastNameError"></p>
           </div>
         </div>
@@ -2737,12 +2737,12 @@
         <div class="row">
           <div class="field">
             <label for="phone">Phone<span class="req" aria-hidden="true">*</span></label>
-            <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(555) 555-5555" required aria-required="true" aria-describedby="phoneError" />
+            <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" enterkeyhint="next" placeholder="(555) 555-5555" required aria-required="true" aria-describedby="phoneError" />
             <p class="field-error" id="phoneError"></p>
           </div>
           <div class="field">
             <label for="email">Email<span class="req" aria-hidden="true">*</span></label>
-            <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required aria-required="true" aria-describedby="emailError" />
+            <input id="email" name="email" type="email" autocomplete="email" inputmode="email" enterkeyhint="next" required aria-required="true" aria-describedby="emailError" />
             <p class="field-error" id="emailError"></p>
           </div>
         </div>
@@ -2767,7 +2767,7 @@
 
         <div class="field">
           <label for="message">Briefly describe what happened</label>
-          <textarea id="message" name="message" rows="4" aria-describedby="msgHint formPrivacyNote" placeholder="What happened, when it happened, who is involved, and the harm or loss involved."></textarea>
+          <textarea id="message" name="message" rows="4" enterkeyhint="send" aria-describedby="msgHint formPrivacyNote" placeholder="What happened, when it happened, who is involved, and the harm or loss involved."></textarea>
           <p class="hint" id="msgHint">Share a short conflict-safe summary only. Do not include privileged documents, account credentials, full medical records, or highly sensitive details in this public form.</p>
         </div>
 
