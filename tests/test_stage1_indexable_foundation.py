@@ -669,6 +669,10 @@ def test_html_pages_have_consistent_browser_branding_metadata():
         assert len(theme_tags) == 1, f"{path} needs exactly one theme-color meta tag"
         assert theme_tags[0].get("content") == "#15212e"
 
+        color_scheme_tags = doc.select('meta[name="color-scheme"]')
+        assert len(color_scheme_tags) == 1, f"{path} needs exactly one color-scheme meta tag"
+        assert color_scheme_tags[0].get("content") == "light"
+
         icon_tags = doc.select('link[rel="icon"]')
         assert len(icon_tags) == 1, f"{path} needs exactly one favicon link"
         assert icon_tags[0].get("href") == "/favicon.ico"
