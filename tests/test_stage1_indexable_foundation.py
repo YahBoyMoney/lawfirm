@@ -723,6 +723,18 @@ def test_public_images_have_intrinsic_dimensions_and_async_decoding():
             assert img.get("decoding") == "async", f"{path} image {img.get('src')} should decode async"
 
 
+def test_all_static_post_forms_declare_utf8_accept_charset():
+    for path in ROOT.rglob("*.html"):
+        if ".git" in path.parts:
+            continue
+        doc = page_doc(path)
+        for form in doc.select('form[method="POST"], form[method="post"]'):
+            name = form.get("name") or form.get("id") or str(form)[:80]
+            assert form.get("accept-charset") in ("UTF-8", ["UTF-8"]), (
+                f"{path} POST form {name} should declare UTF-8 accept-charset"
+            )
+
+
 def test_stage1_forms_are_live_netlify_intake_without_uploads():
     form_pages = [
         (PUBLIC_PAGES["/free-case-review/"], "case-review"),
@@ -741,6 +753,7 @@ def test_stage1_forms_are_live_netlify_intake_without_uploads():
         )
         assert form.get("action") == expected_action
         assert form.get("enctype") == "application/x-www-form-urlencoded"
+        assert form.get("accept-charset") in ("UTF-8", ["UTF-8"])
         assert form.get("data-netlify") == "true"
         assert form.has_attr("netlify")
         assert doc.select_one(f'input[name="form-name"][value="{form_name}"]') is not None
@@ -777,6 +790,7 @@ def test_homepage_declares_netlify_form_detection_stubs():
         assert str(form.get("method", "")).upper() == "POST"
         assert form.get("action") == "/success.html"
         assert form.get("enctype") == "application/x-www-form-urlencoded"
+        assert form.get("accept-charset") in ("UTF-8", ["UTF-8"])
         assert form.get("data-netlify") == "true"
         assert form.has_attr("netlify")
         assert form.select_one(f'input[name="form-name"][value="{name}"]') is not None
