@@ -278,6 +278,18 @@ def test_garden_grove_footer_home_link_has_specific_accessible_name():
     assert footer_home.get_text(" ", strip=True) == "Home"
 
 
+def test_garden_grove_refresh_updates_button_names_controlled_feed():
+    doc = page_doc(PUBLIC_PAGES["/landing/garden-grove-chemical-leak/"])
+    button = doc.select_one('button#refreshUpdates[type="button"]')
+    assert button is not None, "Garden Grove feed refresh control should remain a safe non-submit button"
+    assert button.get_text(" ", strip=True) == "Refresh updates"
+    assert button.get("aria-label") == "Refresh updates in the public-source feed"
+    assert str(button.get("aria-label")).startswith(button.get_text(" ", strip=True))
+    assert button.get("aria-controls") == "updatesFeed"
+    feed = doc.select_one("ol#updatesFeed.updates-feed")
+    assert feed is not None, "Refresh control should point to the rendered update feed"
+
+
 def test_all_public_support_and_success_pages_show_brand_logo_in_header():
     pages = {
         "/": ROOT / "index.html",
