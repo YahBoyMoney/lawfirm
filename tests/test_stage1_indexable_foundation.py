@@ -271,6 +271,13 @@ def test_support_and_success_pages_have_named_home_links():
         assert back_home.get("aria-label") == "Back to Berhe Jones LLP home"
 
 
+def test_garden_grove_footer_home_link_has_specific_accessible_name():
+    doc = page_doc(PUBLIC_PAGES["/landing/garden-grove-chemical-leak/"])
+    footer_home = doc.select_one('footer.site a[href="/"][aria-label="Home for Berhe Jones LLP"]')
+    assert footer_home is not None, "Garden Grove footer Home link needs a specific programmatic name"
+    assert footer_home.get_text(" ", strip=True) == "Home"
+
+
 def test_all_public_support_and_success_pages_show_brand_logo_in_header():
     pages = {
         "/": ROOT / "index.html",
