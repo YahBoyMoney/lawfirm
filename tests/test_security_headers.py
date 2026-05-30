@@ -31,7 +31,7 @@ def test_root_security_headers_present_and_well_formed():
     assert headers.get("Strict-Transport-Security", "").startswith("max-age=31536000")
     assert headers.get("X-Content-Type-Options") == "nosniff"
     assert headers.get("Referrer-Policy") == "strict-origin-when-cross-origin"
-    assert headers.get("X-Frame-Options") == "SAMEORIGIN"
+    assert headers.get("X-Frame-Options") == "DENY"
     assert headers.get("Cross-Origin-Opener-Policy") == "same-origin"
     assert headers.get("Cross-Origin-Resource-Policy") == "same-origin"
     assert headers.get("Origin-Agent-Cluster") == "?1"
@@ -60,7 +60,7 @@ def test_root_security_headers_present_and_well_formed():
     assert "https://fonts.gstatic.com" in csp
     assert "object-src 'none'" in csp
     assert "frame-src 'none'" in csp
-    assert "frame-ancestors 'self'" in csp
+    assert "frame-ancestors 'none'" in csp
 
 
 def test_static_html_does_not_require_framed_or_plugin_content():
