@@ -27,15 +27,15 @@ def test_robots_and_sitemap_cover_public_canonical_pages_only():
     for url in expected:
         assert f"<loc>{url}</loc>" in sitemap_text
     assert sitemap_text.count("<lastmod>2026-05-25</lastmod>") == 18
-    assert sitemap_text.count("<lastmod>2026-05-29</lastmod>") == 3
-    assert sitemap_text.count("<lastmod>2026-05-30</lastmod>") == 1
+    assert sitemap_text.count("<lastmod>2026-05-29</lastmod>") == 0
+    assert sitemap_text.count("<lastmod>2026-05-30</lastmod>") == 4
     assert (
         "<loc>https://berhelaw.com/</loc>\n"
         "    <lastmod>2026-05-30</lastmod>"
     ) in sitemap_text
     assert (
         "<loc>https://berhelaw.com/landing/garden-grove-chemical-leak/</loc>\n"
-        "    <lastmod>2026-05-29</lastmod>"
+        "    <lastmod>2026-05-30</lastmod>"
     ) in sitemap_text
     assert "success.html" not in sitemap_text
 
