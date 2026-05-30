@@ -5,6 +5,7 @@
   X-Frame-Options: SAMEORIGIN
   Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=(), browsing-topics=(), payment=(), usb=(), magnetometer=(), accelerometer=(), gyroscope=()
   Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
   Origin-Agent-Cluster: ?1
   X-DNS-Prefetch-Control: on
   X-Permitted-Cross-Domain-Policies: none

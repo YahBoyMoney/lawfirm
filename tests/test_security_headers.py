@@ -33,6 +33,7 @@ def test_root_security_headers_present_and_well_formed():
     assert headers.get("Referrer-Policy") == "strict-origin-when-cross-origin"
     assert headers.get("X-Frame-Options") == "SAMEORIGIN"
     assert headers.get("Cross-Origin-Opener-Policy") == "same-origin"
+    assert headers.get("Cross-Origin-Resource-Policy") == "same-origin"
     assert headers.get("Origin-Agent-Cluster") == "?1"
     assert headers.get("X-DNS-Prefetch-Control") == "on"
     assert headers.get("X-Permitted-Cross-Domain-Policies") == "none"
