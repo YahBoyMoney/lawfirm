@@ -3380,14 +3380,19 @@
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
       btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     });
+    function closeMenu() {
+      list.classList.remove('open');
+      if (actions) actions.classList.remove('open');
+      document.body.classList.remove('menu-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Open menu');
+    }
+
     list.addEventListener('click', function (e) {
-      if (e.target.tagName === 'A' && list.classList.contains('open')) {
-        list.classList.remove('open');
-        if (actions) actions.classList.remove('open');
-        document.body.classList.remove('menu-open');
-        btn.setAttribute('aria-expanded', 'false');
-        btn.setAttribute('aria-label', 'Open menu');
-      }
+      if (e.target.tagName === 'A' && list.classList.contains('open')) closeMenu();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && list.classList.contains('open')) closeMenu();
     });
   })();
 

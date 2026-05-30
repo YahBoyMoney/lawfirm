@@ -116,10 +116,11 @@ def test_stage1_pages_are_in_sitemap_and_homepage_footer():
     home_doc = page_doc(ROOT / "index.html")
     footer_hrefs = {str(a.get("href")) for a in home_doc.select("footer.site a[href]")}
     assert sitemap_text.count("<lastmod>2026-05-25</lastmod>") == 18
-    assert sitemap_text.count("<lastmod>2026-05-29</lastmod>") == 4
+    assert sitemap_text.count("<lastmod>2026-05-29</lastmod>") == 3
+    assert sitemap_text.count("<lastmod>2026-05-30</lastmod>") == 1
     assert (
         "<loc>https://berhelaw.com/</loc>\n"
-        "    <lastmod>2026-05-29</lastmod>"
+        "    <lastmod>2026-05-30</lastmod>"
     ) in sitemap_text
     assert (
         "<loc>https://berhelaw.com/landing/garden-grove-chemical-leak/</loc>\n"
@@ -220,6 +221,38 @@ def test_external_new_tab_links_include_noopener_and_noreferrer():
                 rel_tokens = set(link.get("rel") or [])
                 assert "noopener" in rel_tokens, f"{path} external new-tab link needs noopener: {href}"
                 assert "noreferrer" in rel_tokens, f"{path} external new-tab link needs noreferrer: {href}"
+
+
+def test_mobile_navigation_toggles_have_stateful_keyboard_accessibility():
+    nav_specs = {
+        "/": {
+            "path": ROOT / "index.html",
+            "button_label": "Open menu",
+            "close_label": "Close menu",
+            "controls": "navlinks",
+        },
+        "/landing/garden-grove-chemical-leak/": {
+            "path": PUBLIC_PAGES["/landing/garden-grove-chemical-leak/"],
+            "button_label": "Open navigation menu",
+            "close_label": "Close navigation menu",
+            "controls": "primaryNavLinks",
+        },
+    }
+    for route, spec in nav_specs.items():
+        doc = page_doc(spec["path"])
+        toggle = doc.select_one("button.nav-toggle#navToggle")
+        assert toggle is not None, f"{route} needs a mobile navigation toggle"
+        assert toggle.get("type") == "button"
+        assert toggle.get("aria-expanded") == "false"
+        assert toggle.get("aria-controls") == spec["controls"]
+        assert toggle.get("aria-label") == spec["button_label"]
+
+        script_text = "\n".join(script.get_text() for script in doc.select("script"))
+        assert spec["close_label"] in script_text, f"{route} should relabel the toggle when opened"
+        assert spec["button_label"] in script_text, f"{route} should restore the open-label when closed"
+        assert "aria-expanded" in script_text, f"{route} should update aria-expanded"
+        assert "document.addEventListener('keydown'" in script_text, f"{route} should listen for keyboard Escape"
+        assert "e.key === 'Escape'" in script_text, f"{route} should close the mobile menu with Escape"
 
 
 
