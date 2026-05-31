@@ -117,14 +117,15 @@ def test_stage1_pages_are_in_sitemap_and_homepage_footer():
     footer_hrefs = {str(a.get("href")) for a in home_doc.select("footer.site a[href]")}
     assert sitemap_text.count("<lastmod>2026-05-25</lastmod>") == 18
     assert sitemap_text.count("<lastmod>2026-05-29</lastmod>") == 0
-    assert sitemap_text.count("<lastmod>2026-05-30</lastmod>") == 4
+    assert sitemap_text.count("<lastmod>2026-05-30</lastmod>") == 3
+    assert sitemap_text.count("<lastmod>2026-05-31</lastmod>") == 1
     assert (
         "<loc>https://berhelaw.com/</loc>\n"
         "    <lastmod>2026-05-30</lastmod>"
     ) in sitemap_text
     assert (
         "<loc>https://berhelaw.com/landing/garden-grove-chemical-leak/</loc>\n"
-        "    <lastmod>2026-05-30</lastmod>"
+        "    <lastmod>2026-05-31</lastmod>"
     ) in sitemap_text
     assert (
         "<loc>https://berhelaw.com/free-case-review/</loc>\n"
@@ -988,17 +989,20 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
     assert feed_times == sorted(feed_times, reverse=True), "public incident feed should remain latest-first before the 8-item cap is rendered"
     assert any(u.get("category") == "Legal-action status" for u in data["updates"]), "at least one legal-action status item should remain visible in the capped public feed"
     latest_update = data["updates"][0]
-    assert latest_update.get("sourceUrl") == "https://kfiam640.iheart.com/content/2026-05-28-legal-troubles-mount-for-garden-grove-aerospace-facility/"
-    assert latest_update.get("category") == "Legal-action status"
+    assert latest_update.get("sourceUrl") == "https://calmatters.org/environment/2026/05/gkn-aerospace-chemical-leak-california/"
+    assert latest_update.get("category") == "Regulatory / public oversight"
     latest_summary = latest_update.get("summary", "").lower()
-    assert "29 filings in orange county superior court" in latest_summary
-    assert "about eight in federal court" in latest_summary
-    assert "guadarrama" in latest_summary
-    assert "30-2026-01572329-cu-po-cxc" in latest_summary
-    assert "roa #2" in latest_summary
-    assert "judge william d. claster" in latest_summary
-    assert "not findings of liability" in latest_summary
-    assert "not claiming affiliation" in latest_summary
+    assert "methyl methacrylate is not listed" in latest_summary
+    assert "calarp" in latest_summary
+    assert "hazardous-materials business plan but no risk management plan" in latest_summary
+    assert "cal/osha did not answer" in latest_summary
+    assert "south coast aqmd" in latest_summary
+    assert "notice of violation" in latest_summary
+    assert "more than $900,000" in latest_summary
+    assert "14 alleged violations" in latest_summary
+    assert "air monitors showed pollution levels within normal ranges" in latest_summary
+    assert "not findings of causation or legal liability" in latest_summary
+    assert "claims no affiliation" in latest_summary
 
     business_resource_updates = [
         u for u in data["updates"] if u.get("sourceUrl") == "https://ggcity.org/hazmat-incident/business-resources"
@@ -1202,15 +1206,7 @@ def test_garden_grove_resource_center_keeps_public_ux_and_safety_markers():
         if u.get("sourceUrl")
         == "https://dicellolevitt.com/dicello-levitt-and-co-counsel-file-class-action-against-gkn-aerospace-over-garden-grove-chemical-emergency/"
     ]
-    assert len(dicello_updates) == 1, "DiCello Levitt Carey complaint update should stay visible in capped feed"
-    assert dicello_updates[0].get("category") == "Legal-action status"
-    dicello_summary = dicello_updates[0].get("summary", "").lower()
-    assert "courtney carey" in dicello_summary
-    assert "complaint pdf" in dicello_summary
-    assert "case no. line blank" in dicello_summary
-    assert "negligence, private nuisance, and public nuisance" in dicello_summary
-    assert "no public state-court case number was independently verified" in dicello_summary
-    assert "not claiming affiliation" in dicello_summary
+    assert len(dicello_updates) == 0, "The CalMatters regulatory-gap item can push the older DiCello complaint-release item out of the 8-update cap"
 
     assert len(data["resources"]) >= 10
     for resource in data["resources"]:

@@ -1,8 +1,16 @@
 {
-  "lastVerifiedUtc": "2026-05-29T02:20:11Z",
+  "lastVerifiedUtc": "2026-05-31T00:28:03Z",
   "statusLabel": "Public-source update center",
-  "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, and proof-preservation tools. Follow emergency officials first for any remaining road closures, exclusion zones, or monitoring instructions.",
+  "summary": "Public-source update center for the Garden Grove GKN Aerospace methyl methacrylate incident, with official emergency links, local news reports, health references, complaint routes, school-disruption information, legal-action status, regulatory-history context, and proof-preservation tools. Follow emergency officials first for any remaining road closures, exclusion zones, or monitoring instructions.",
   "updates": [
+    {
+      "timeUtc": "2026-05-30T12:00:00Z",
+      "category": "Regulatory / public oversight",
+      "title": "CalMatters reports regulatory gaps and prior air-district violations tied to the tank emergency",
+      "summary": "CalMatters reported May 30 that the Garden Grove GKN Aerospace tank emergency exposed gaps across regulatory systems: methyl methacrylate is not listed under EPA's Risk Management Program or California's CalARP accidental-release program, Orange County health officials said GKN had a hazardous-materials business plan but no risk management plan, and CalMatters reported Cal/OSHA did not answer by deadline whether high-hazard worker-safety rules applied. The report also says South Coast AQMD had treated GKN as a minor emissions source for much of the prior decade, inspected it three times in that period, and in 2021 issued a formal notice of violation after finding alleged recordkeeping, unpermitted-equipment, and permit-description problems stretching back to 2017; a late-2024 settlement required more than $900,000 without GKN admitting liability and resolved 14 alleged violations. The same report notes air monitors showed pollution levels within normal ranges, prosecutors ordered evidence preservation, and no single agency is tasked with producing one comprehensive account. This is source-attributed regulatory-history and oversight context only: alleged violations, investigations, regulatory gaps, and community concerns are not findings of causation or legal liability, and Berhe Jones claims no affiliation with GKN, regulators, prosecutors, community groups, plaintiffs, or filed actions.",
+      "sourceLabel": "CalMatters regulatory-gap report",
+      "sourceUrl": "https://calmatters.org/environment/2026/05/gkn-aerospace-chemical-leak-california/"
+    },
     {
       "timeUtc": "2026-05-29T02:20:11Z",
       "category": "Legal-action status",
@@ -58,14 +66,6 @@
       "summary": "Orange County's official Garden Grove chemical-spill incident page says all Care & Shelter locations were closed as of 6:00 p.m. May 27, 2026 and all road closures were lifted as of 6:00 p.m. May 27, while an evacuation zone remains for 150 feet around the GKN facility. The City of Garden Grove incident page separately says Lampson Avenue and Western Avenue are now open, all evacuation orders have been lifted, Unified Command confirmed no chemical leak, no threat of explosion or fire, and no risk to the public, and the City/County recovery pages direct impacted businesses to complete the SBA Assistance Worksheet and to official small-business recovery resources. This is an official emergency-status and recovery-resource update only, not a court finding on property loss, economic loss, personal exposure, or legal liability; residents and businesses should follow City, County, OCFA, public-health, and official recovery-resource instructions for any remaining facility perimeter, monitoring, insurance, or business-assistance steps.",
       "sourceLabel": "Orange County official incident page / City of Garden Grove",
       "sourceUrl": "https://www.ocgov.com/page/garden-grove-chemical-spill-incident"
-    },
-    {
-      "timeUtc": "2026-05-27T18:50:41Z",
-      "category": "Legal-action status",
-      "title": "DiCello Levitt posts Carey class-action complaint PDF against GKN Aerospace",
-      "summary": "DiCello Levitt reported May 27 that it, Miner, Barnhill & Galland, P.C., and Collins Law Group, P.C. filed Courtney Carey, Robert Carey, Jody Carey, and Christopher Carey v. GKN Aerospace Transparency Systems, Inc. in California Superior Court, County of Orange. The firm’s release links a 17-page complaint PDF; the preserved copy reviewed in this check leaves the caption’s Case No. line blank. The complaint alleges negligence tied to maintenance, inspection, testing, repair, monitoring, security, and safety controls for MMA tanks and seeks relief for property/economic losses under negligence, private nuisance, and public nuisance theories. This is a counsel-posted, source-attributed legal-action update only: allegations are not findings, no public state-court case number was independently verified in this check, and Berhe Jones is not claiming affiliation with the plaintiffs, class counsel, or filed actions.",
-      "sourceLabel": "DiCello Levitt complaint release",
-      "sourceUrl": "https://dicellolevitt.com/dicello-levitt-and-co-counsel-file-class-action-against-gkn-aerospace-over-garden-grove-chemical-emergency/"
     }
   ],
   "resources": [
