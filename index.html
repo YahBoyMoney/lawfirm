@@ -1075,6 +1075,7 @@
     body { padding-bottom: 118px; }
     body.scrolled .mobile-cta-bar { display: grid; }
     body.form-in-view .mobile-cta-bar,
+    body.command-in-view .mobile-cta-bar,
     body.footer-in-view .mobile-cta-bar,
     body.menu-open .mobile-cta-bar { display: none; }
   }
@@ -2553,6 +2554,46 @@
 
 
 .skip-link{position:fixed;left:24px;top:12px;transform:translateY(-160%);z-index:9999;background:#fff;color:#15212e;border:2px solid #9a7a2e;border-radius:4px;padding:10px 14px;font-weight:700;text-decoration:none;box-shadow:0 12px 32px -20px rgba(21,33,46,.35)}.skip-link:focus{transform:translateY(0);outline:3px solid rgba(184,150,71,.45);outline-offset:2px}
+
+/* === Homepage interaction polish (additive, 2026-06-03): visible focus, card feedback === */
+:where(a,button,input,select,textarea,summary,[tabindex]):focus-visible{outline:3px solid rgba(184,150,71,.6);outline-offset:2px;border-radius:3px}
+.area{transition:background .15s ease, box-shadow .18s ease}
+.area:hover{box-shadow:inset 3px 0 0 var(--brass)}
+.commit{transition:background .15s ease}
+.commit:hover{background:var(--paper)}
+.faq summary{transition:color .15s ease}
+.faq summary:hover{color:var(--brass)}
+.cta-strip .btn:hover, .steps-cta .btn:hover, .nav-review-cta:hover, .nav-cta:hover { transform: translateY(-1px); }
+
+/* === Case review command center (additive, 2026-06-03): visible safe-path strip near intake === */
+.command-center{background:var(--ink);color:#f3ece0;border-top:1px solid rgba(184,150,71,.30);border-bottom:1px solid rgba(184,150,71,.30);scroll-margin-top:96px}
+.command-center .cmd-inner{max-width:var(--container);margin:0 auto;padding:62px 24px}
+.cmd-head{display:grid;grid-template-columns:1.05fr .95fr;gap:22px 48px;align-items:end;margin-bottom:34px}
+.cmd-eyebrow{display:inline-flex;align-items:center;gap:10px;text-transform:uppercase;letter-spacing:.22em;font-size:12px;font-weight:700;color:var(--brass-2)}
+.cmd-eyebrow::before{content:"";width:28px;height:1px;background:var(--brass-2)}
+.cmd-head h2{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(26px,3.4vw,40px);line-height:1.12;letter-spacing:-.01em;margin:14px 0 0;color:#fff}
+.cmd-head .cmd-sub{margin:0;color:#cfc6b6;font-size:16px;max-width:54ch}
+.cmd-status{display:inline-flex;align-items:center;gap:10px;margin-top:16px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;letter-spacing:.05em;color:#cfc6b6}
+.cmd-status i{width:8px;height:8px;border-radius:50%;background:var(--brass-2);box-shadow:0 0 0 4px rgba(184,150,71,.16)}
+.cmd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:cmd}
+.cmd-card{position:relative;background:rgba(255,255,255,.035);border:1px solid rgba(184,150,71,.22);border-radius:6px;padding:22px 20px 20px;transition:border-color .18s ease,background .18s ease,transform .18s ease}
+.cmd-card:hover{border-color:rgba(184,150,71,.55);background:rgba(255,255,255,.06);transform:translateY(-2px)}
+.cmd-card .cmd-rowtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}
+.cmd-card .num{font-family:'Fraunces',Georgia,serif;font-size:17px;letter-spacing:.04em;color:var(--brass-2)}
+.cmd-card .num::before{counter-increment:cmd;content:"0" counter(cmd)}
+.cmd-card .tag{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#b6ad9c;border:1px solid rgba(184,150,71,.30);border-radius:999px;padding:4px 9px}
+.cmd-card h3{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:19px;line-height:1.2;margin:0 0 8px;color:#fff}
+.cmd-card p{margin:0;font-size:14px;line-height:1.55;color:#cfc6b6}
+.cmd-foot{margin-top:30px;padding-top:24px;border-top:1px solid rgba(184,150,71,.20);display:grid;grid-template-columns:1.15fr .85fr;gap:24px 40px;align-items:center}
+.cmd-paths{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:10px}
+.cmd-paths li{margin:0}
+.cmd-paths a{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:8px 14px;border:1px solid rgba(184,150,71,.32);border-radius:4px;color:#f3ece0;text-decoration:none;font-size:13.5px;font-weight:600;transition:border-color .15s ease,background .15s ease}
+.cmd-paths a:hover{border-color:var(--brass-2);background:rgba(184,150,71,.12);color:#fff}
+.cmd-paths a span[aria-hidden]{color:var(--brass-2)}
+.cmd-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-end}
+.cmd-note{grid-column:1/-1;margin:4px 0 0;font-size:13px;color:#b6ad9c}
+@media(max-width:980px){.cmd-head{grid-template-columns:1fr;align-items:start}.cmd-grid{grid-template-columns:repeat(2,1fr)}.cmd-foot{grid-template-columns:1fr}.cmd-actions{justify-content:flex-start}}
+@media(max-width:560px){.cmd-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -2703,6 +2744,56 @@
 
   </div>
   <a class="scroll-cue" href="#intake" aria-label="Scroll to case review form"><span class="line" aria-hidden="true"></span>Request review</a>
+</section>
+
+<!-- Case review command center -->
+<section class="command-center" aria-labelledby="commandTitle">
+  <div class="cmd-inner">
+    <div class="cmd-head">
+      <div>
+        <span class="cmd-eyebrow">The safe review path</span>
+        <h2 id="commandTitle">What a Berhe Jones LLP case review actually does, step by step.</h2>
+        <div class="cmd-status" role="status" aria-label="Review path status"><i aria-hidden="true"></i> Same screen for every intake. No obligation to retain.</div>
+      </div>
+      <p class="cmd-sub">The review is built to protect you before anything is signed. It checks timing first, takes only conflict-safe basics, weighs the record against a serious-case standard, and ends in a clear attorney decision.</p>
+    </div>
+
+    <div class="cmd-grid" role="list">
+      <article class="cmd-card" role="listitem">
+        <div class="cmd-rowtop"><span class="num" aria-hidden="true"></span><span class="tag">Urgency</span></div>
+        <h3>Deadline check first</h3>
+        <p>Government-claim windows, filing limits, and evidence that can disappear are flagged before anything else. If timing is tight, the firm asks you to call rather than wait on a form.</p>
+      </article>
+      <article class="cmd-card" role="listitem">
+        <div class="cmd-rowtop"><span class="num" aria-hidden="true"></span><span class="tag">Intake</span></div>
+        <h3>Conflict-safe facts</h3>
+        <p>Send names, dates, parties, and what happened. You do not need to send documents, account numbers, or privileged detail to start. Submitting the form does not create an attorney-client relationship.</p>
+      </article>
+      <article class="cmd-card" role="listitem">
+        <div class="cmd-rowtop"><span class="num" aria-hidden="true"></span><span class="tag">Review</span></div>
+        <h3>Proof and deadline review</h3>
+        <p>The firm weighs liability proof, documented damages, available coverage, and the limitations picture against a serious-case standard, then identifies the gaps worth closing.</p>
+      </article>
+      <article class="cmd-card" role="listitem">
+        <div class="cmd-rowtop"><span class="num" aria-hidden="true"></span><span class="tag">Decision</span></div>
+        <h3>Attorney fit decision</h3>
+        <p>Attorney Tam Berhe decides whether to accept, co-counsel, refer, or decline, with reasons stated. Any representation is set out in a signed written agreement before work begins.</p>
+      </article>
+    </div>
+
+    <div class="cmd-foot">
+      <ul class="cmd-paths" aria-label="Helpful review resources">
+        <li><a href="/resources/prepare-for-case-review/"><span aria-hidden="true">&rsaquo;</span> Prepare for your review</a></li>
+        <li><a href="/resources/deadlines-and-early-review/"><span aria-hidden="true">&rsaquo;</span> Deadlines and early review</a></li>
+        <li><a href="/referrals-co-counsel/"><span aria-hidden="true">&rsaquo;</span> Attorney referrals and co-counsel</a></li>
+      </ul>
+      <div class="cmd-actions">
+        <a class="btn btn-on-dark" href="#intake" aria-label="Start a free case review">Request a Free Case Review</a>
+        <a class="btn btn-ghost-light" href="tel:+19096096685" aria-label="Call Berhe Jones LLP at 909-609-6685">Call 909-609-6685</a>
+      </div>
+      <p class="cmd-note">No case results, ratings, or response-time promises are implied. Deadlines vary, so call if a matter is urgent or deadline-sensitive.</p>
+    </div>
+  </div>
 </section>
 
 <!-- Intake form -->
@@ -3409,15 +3500,18 @@
   (function () {
     var form = document.getElementById('caseForm');
     var intake = document.getElementById('intake');
+    var commandCenter = document.querySelector('.command-center');
     var footer = document.querySelector('footer.site');
     if (!('IntersectionObserver' in window)) return;
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.target === intake) document.body.classList.toggle('form-in-view', entry.isIntersecting);
+        if (entry.target === commandCenter) document.body.classList.toggle('command-in-view', entry.isIntersecting);
         if (entry.target === footer) document.body.classList.toggle('footer-in-view', entry.isIntersecting);
       });
     }, { threshold: 0.12 });
     if (intake) observer.observe(intake);
+    if (commandCenter) observer.observe(commandCenter);
     if (form) {
       form.addEventListener('focusin', function () { document.body.classList.add('form-in-view'); });
     }

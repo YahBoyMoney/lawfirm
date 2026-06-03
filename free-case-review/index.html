@@ -37,6 +37,32 @@ form{scroll-margin-top:190px}
 
 .skip-link{position:fixed;left:24px;top:12px;transform:translateY(-160%);z-index:9999;background:#fff;color:#15212e;border:2px solid #9a7a2e;border-radius:4px;padding:10px 14px;font-weight:700;text-decoration:none;box-shadow:0 12px 32px -20px rgba(21,33,46,.35)}.skip-link:focus{transform:translateY(0);outline:3px solid rgba(184,150,71,.45);outline-offset:2px}
 .brand{display:inline-flex;align-items:center}.brand-logo{display:block;width:clamp(168px,18vw,200px);height:auto}.footer .brand-logo{width:min(220px,70vw)}@media(max-width:760px){.brand-logo{width:164px}}
+/* === Premium uplift (additive, 2026-06-03): interaction depth, focus states, accessible motion === */
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
+:where(a,button,input,select,textarea,summary,[tabindex]):focus-visible{outline:3px solid rgba(184,150,71,.55);outline-offset:2px;border-radius:3px}
+a,.btn,.tile,.card,.submit,.field input,.field select,.field textarea,.nav-links a,.practice-nav a,.footer a,.call{transition:color .15s ease,background-color .15s ease,border-color .15s ease,box-shadow .2s ease,transform .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn.primary:hover{background:#0c1924}
+.btn.brass:hover{background:#876923;border-color:#876923}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.hero{position:relative}
+.hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(680px 300px at 2% -8%,rgba(184,150,71,.12),transparent 62%)}
+.hero>*{position:relative;z-index:1}
+.card{position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--brass),var(--brass-2));z-index:2}
+.tile{position:relative;overflow:hidden}
+.tile::after{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--brass);transform:scaleX(0);transform-origin:left;transition:transform .28s ease}
+.tile:hover{transform:translateY(-3px);box-shadow:0 22px 46px -30px rgba(21,33,46,.55);border-color:rgba(154,122,46,.5)}
+.tile:hover::after{transform:scaleX(1)}
+.proof-band .tile:hover{border-color:rgba(184,150,71,.6)}
+.field input:hover,.field select:hover,.field textarea:hover{border-color:#c3b690}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--brass);box-shadow:0 0 0 3px rgba(154,122,46,.18)}
+.consent{padding:14px 16px;border:1px solid var(--rule);border-radius:6px;background:rgba(255,255,255,.55)}
+.submit:hover{background:#0c1924}
+.submit:active{transform:translateY(1px)}
+.footer{position:relative}
+.footer::before{content:"";display:block;height:3px;background:linear-gradient(90deg,var(--brass),var(--brass-2) 55%,transparent)}
 </style>
 <script type="application/ld+json">
 {
@@ -79,6 +105,7 @@ form{scroll-margin-top:190px}
     <ul class="status-list"><li><strong>Call if urgent</strong><br>Call 909-609-6685 if your matter is urgent, deadline-sensitive, or hard to summarize online.</li><li><strong>No sensitive uploads</strong><br>The review does not request SSNs, medical records, portal credentials, privileged documents, or uploads.</li><li><strong>Public intake form</strong><br>The public form is intentionally not connected to live intake, Telegram, CRM, email automation, SMS, or analytics.</li></ul>
   </aside>
 </section>
+<section class="section alt"><div class="inner"><span class="eyebrow">What to expect</span><h2>What this review promises, and what it does not.</h2><p class="lede">Before you type anything, here is exactly how the request is handled. The goal is a safe, honest screen, not a sales funnel.</p><div class="grid"><article class="tile"><h3>The public form is safe by design</h3><p>It asks only for conflict-safe basics and does not request SSNs, medical records, portal logins, or uploads. Do not send privileged or highly sensitive details through a public form.</p></article><article class="tile"><h3>Representation is in writing</h3><p>Sending the form, calling, or emailing does not create an attorney-client relationship. Representation begins only after conflicts review and a signed written agreement that sets fees, costs, and scope.</p></article><article class="tile"><h3>No guarantee of outcome</h3><p>The firm screens for fit, deadlines, and leverage. No case result, award, rating, or response-time promise is implied, and no guarantee of outcome is made.</p></article></div><div class="notice"><strong>Deadline close?</strong> Deadlines vary, and some claims require fast action to preserve rights or evidence. Call <a href="tel:+19096096685" aria-label="Call Berhe Jones LLP at 909-609-6685">909-609-6685</a> instead of waiting to submit a long message.</div></div></section>
 <section class="section"><span class="eyebrow">Safety copy</span><h2>A first request does not create representation</h2><p>Submitting a form, calling, emailing, texting, or downloading a review checklist does not create an attorney-client relationship. Representation begins only after conflicts review and a signed written agreement.</p><p>Deadlines vary. If a matter is urgent or deadline-sensitive, call instead of waiting to submit a long message.</p></section>
 <section class="section alt"><div class="inner"><span class="eyebrow">Conflict-safe intake</span><h2 id="caseReviewTitle">Case review request</h2><form name="case-review" method="POST" action="/success.html" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8" data-netlify="true" netlify netlify-honeypot="bot-field" aria-labelledby="caseReviewTitle" aria-describedby="caseReviewPrivacyNote">
   <input type="hidden" name="form-name" value="case-review" />

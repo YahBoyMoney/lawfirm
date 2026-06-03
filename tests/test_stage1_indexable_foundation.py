@@ -115,13 +115,17 @@ def test_stage1_pages_are_in_sitemap_and_homepage_footer():
     sitemap_text = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
     home_doc = page_doc(ROOT / "index.html")
     footer_hrefs = {str(a.get("href")) for a in home_doc.select("footer.site a[href]")}
-    assert sitemap_text.count("<lastmod>2026-05-25</lastmod>") == 18
+    # Foundation, practice, resources, attorney, referrals, home, free-case-review,
+    # and the truck landing page received a 2026-06-03 visual overhaul.
+    assert sitemap_text.count("<lastmod>2026-06-03</lastmod>") == 18
     assert sitemap_text.count("<lastmod>2026-05-29</lastmod>") == 0
-    assert sitemap_text.count("<lastmod>2026-05-30</lastmod>") == 3
+    assert sitemap_text.count("<lastmod>2026-05-30</lastmod>") == 0
+    # Garden Grove feed (05-31) and the three legal pages (05-25) were not restyled.
     assert sitemap_text.count("<lastmod>2026-05-31</lastmod>") == 1
+    assert sitemap_text.count("<lastmod>2026-05-25</lastmod>") == 3
     assert (
         "<loc>https://berhelaw.com/</loc>\n"
-        "    <lastmod>2026-05-30</lastmod>"
+        "    <lastmod>2026-06-03</lastmod>"
     ) in sitemap_text
     assert (
         "<loc>https://berhelaw.com/landing/garden-grove-chemical-leak/</loc>\n"
@@ -129,11 +133,11 @@ def test_stage1_pages_are_in_sitemap_and_homepage_footer():
     ) in sitemap_text
     assert (
         "<loc>https://berhelaw.com/free-case-review/</loc>\n"
-        "    <lastmod>2026-05-30</lastmod>"
+        "    <lastmod>2026-06-03</lastmod>"
     ) in sitemap_text
     assert (
         "<loc>https://berhelaw.com/landing/truck-fleet-rideshare-accident-california/</loc>\n"
-        "    <lastmod>2026-05-30</lastmod>"
+        "    <lastmod>2026-06-03</lastmod>"
     ) in sitemap_text
     for route in PUBLIC_PAGES:
         assert f"https://berhelaw.com{route}" in sitemap_text

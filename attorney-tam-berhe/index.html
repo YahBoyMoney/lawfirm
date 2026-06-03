@@ -37,6 +37,32 @@ form{scroll-margin-top:190px}
 
 .skip-link{position:fixed;left:24px;top:12px;transform:translateY(-160%);z-index:9999;background:#fff;color:#15212e;border:2px solid #9a7a2e;border-radius:4px;padding:10px 14px;font-weight:700;text-decoration:none;box-shadow:0 12px 32px -20px rgba(21,33,46,.35)}.skip-link:focus{transform:translateY(0);outline:3px solid rgba(184,150,71,.45);outline-offset:2px}
 .brand{display:inline-flex;align-items:center}.brand-logo{display:block;width:clamp(168px,18vw,200px);height:auto}.footer .brand-logo{width:min(220px,70vw)}@media(max-width:760px){.brand-logo{width:164px}}
+/* === Premium uplift (additive, 2026-06-03): interaction depth, focus states, accessible motion === */
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
+:where(a,button,input,select,textarea,summary,[tabindex]):focus-visible{outline:3px solid rgba(184,150,71,.55);outline-offset:2px;border-radius:3px}
+a,.btn,.tile,.card,.submit,.field input,.field select,.field textarea,.nav-links a,.practice-nav a,.footer a,.call{transition:color .15s ease,background-color .15s ease,border-color .15s ease,box-shadow .2s ease,transform .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn.primary:hover{background:#0c1924}
+.btn.brass:hover{background:#876923;border-color:#876923}
+.btn.ghost:hover{background:var(--ink);color:#fff}
+.hero{position:relative}
+.hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(680px 300px at 2% -8%,rgba(184,150,71,.12),transparent 62%)}
+.hero>*{position:relative;z-index:1}
+.card{position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--brass),var(--brass-2));z-index:2}
+.tile{position:relative;overflow:hidden}
+.tile::after{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--brass);transform:scaleX(0);transform-origin:left;transition:transform .28s ease}
+.tile:hover{transform:translateY(-3px);box-shadow:0 22px 46px -30px rgba(21,33,46,.55);border-color:rgba(154,122,46,.5)}
+.tile:hover::after{transform:scaleX(1)}
+.proof-band .tile:hover{border-color:rgba(184,150,71,.6)}
+.field input:hover,.field select:hover,.field textarea:hover{border-color:#c3b690}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--brass);box-shadow:0 0 0 3px rgba(154,122,46,.18)}
+.consent{padding:14px 16px;border:1px solid var(--rule);border-radius:6px;background:rgba(255,255,255,.55)}
+.submit:hover{background:#0c1924}
+.submit:active{transform:translateY(1px)}
+.footer{position:relative}
+.footer::before{content:"";display:block;height:3px;background:linear-gradient(90deg,var(--brass),var(--brass-2) 55%,transparent)}
 </style>
 <script type="application/ld+json">
 {
