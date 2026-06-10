@@ -4,6 +4,7 @@ from playwright.sync_api import sync_playwright, expect
 
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "index.html"
+PRACTICE_AREAS = ROOT / "practice-areas" / "index.html"
 
 
 def soup():
@@ -93,6 +94,37 @@ def test_mobile_cta_pair_has_intake_and_call_and_hides_for_footer_links():
     assert any("Call 909-609-6685" in text for text in links)
     css = INDEX.read_text(encoding="utf-8")
     assert "body.footer-in-view .mobile-cta-bar" in css
+
+
+def test_fable_ux_pass_homepage_has_tightened_hero_markers():
+    doc = soup()
+    hero_locale = doc.select_one(".hero-locale")
+    assert hero_locale is not None
+    title = doc.select_one("#heroTitle")
+    assert title is not None
+    hero_text = title.get_text(" ", strip=True)
+    assert "proof goes cold" in hero_text
+    chip_text = {chip.get_text(" ", strip=True) for chip in doc.select(".conv-chips .chip")}
+    assert "Deadline screen first" in chip_text
+    assert "Proof and recovery check" in chip_text
+    css = INDEX.read_text(encoding="utf-8")
+    assert ".hero-locale" in css
+    assert "Fable 5 UX pass" in css
+
+
+def test_fable_ux_pass_practice_page_surfaces_paths_above_fold():
+    doc = BeautifulSoup(PRACTICE_AREAS.read_text(encoding="utf-8"), "html.parser")
+    hero = doc.select_one(".hero.practice-hero")
+    assert hero is not None
+    picks = hero.select(".practice-picks a")
+    assert len(picks) >= 4
+    pick_text = {pick.get_text(" ", strip=True) for pick in picks}
+    assert any("Injury and wrongful death" in text for text in pick_text)
+    assert any("Employment claims" in text for text in pick_text)
+    assert any("Civil rights matters" in text for text in pick_text)
+    assert any("Consumer and lemon law" in text for text in pick_text)
+    screen_steps = hero.select(".screen-card .screen-step")
+    assert [step.get_text(" ", strip=True) for step in screen_steps] == ["01", "02", "03"]
 
 
 def test_malformed_email_and_junk_phone_do_not_show_success():

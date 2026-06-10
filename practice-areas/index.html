@@ -63,6 +63,19 @@ a,.btn,.tile,.card,.submit,.field input,.field select,.field textarea,.nav-links
 .submit:active{transform:translateY(1px)}
 .footer{position:relative}
 .footer::before{content:"";display:block;height:3px;background:linear-gradient(90deg,var(--brass),var(--brass-2) 55%,transparent)}
+/* Fable 5 UX pass, 2026-06-10: surface practice choices above the fold and make the screening card scan faster. */
+.practice-hero{gap:42px;padding-top:58px;padding-bottom:46px}
+.practice-hero h1{font-size:clamp(36px,4.2vw,54px);max-width:12.5ch}
+.practice-picks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:20px 0 0;max-width:720px}
+.practice-picks a{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:50px;padding:12px 14px;background:#fff;border:1px solid var(--rule);border-left:3px solid var(--brass);border-radius:7px;text-decoration:none;color:var(--ink);font-weight:750;box-shadow:0 14px 32px -28px rgba(21,33,46,.45)}
+.practice-picks a span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);font-weight:800;white-space:nowrap}
+.practice-picks a:hover{border-color:var(--brass);transform:translateY(-1px);box-shadow:0 20px 42px -30px rgba(21,33,46,.55)}
+.screen-card{padding:28px 28px 26px;background:linear-gradient(180deg,#fff,#fbf7ef)}
+.screen-card .status-list{gap:14px}
+.screen-card .status-list li{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start;border-top:1px solid rgba(154,122,46,.22);padding-top:14px}
+.screen-step{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--ink);color:#f1d48d;font-family:Fraunces,serif;font-size:14px;line-height:1}
+.screen-card .status-list span:last-child{display:block;color:var(--ink-2)}
+@media(max-width:860px){.practice-picks{grid-template-columns:1fr}.practice-hero h1{max-width:none}.screen-card .status-list li{grid-template-columns:38px 1fr}}
 </style>
 <script type="application/ld+json">
 {
@@ -106,15 +119,21 @@ a,.btn,.tile,.card,.submit,.field input,.field select,.field textarea,.nav-links
 <a class="skip-link" href="#main">Skip to main content</a>
 <header class="top"><div class="top-inner"><a class="brand" href="/" aria-label="Berhe Jones LLP home"><img class="brand-logo" src="/images/berhe-jones-llp-logo-reverse.png" alt="Berhe Jones LLP" width="1305" height="308" decoding="async" /></a><div class="top-actions"><span class="pill">California case review</span><a class="call" href="tel:+19096096685" aria-label="Call Berhe Jones LLP at 909-609-6685">909-609-6685</a></div></div></header><nav class="nav" aria-label="Foundation pages"><div class="nav-inner"><strong>Explore</strong><ul class="nav-links"><li><a href="/practice-areas/" aria-current="page">Practice Areas</a></li><li><a href="/attorney-tam-berhe/">Attorney</a></li><li><a href="/case-review-process/">Process</a></li><li><a href="/free-case-review/">Case Review</a></li><li><a href="/referrals-co-counsel/">Referrals</a></li><li><a href="/resources/">Resources</a></li></ul></div></nav>
 <main id="main">
-<section class="hero">
+<section class="hero practice-hero">
   <div>
     <span class="eyebrow">Practice areas</span>
     <h1>Find the right review path for a serious California civil matter.</h1>
     <p class="lede">Berhe Jones LLP screens selected California civil matters for the details that drive strategy: deadline pressure, who is responsible, what proof exists, how the harm is documented, and whether a defendant, insurer, statute, or fee-shifting path can support action.</p>
+    <nav class="practice-picks" aria-label="Common practice paths">
+      <a href="/practice-areas/personal-injury-wrongful-death/">Injury and wrongful death <span>Start</span></a>
+      <a href="/practice-areas/employment-workplace-claims/">Employment claims <span>Start</span></a>
+      <a href="/practice-areas/civil-rights-government-accountability/">Civil rights matters <span>Start</span></a>
+      <a href="/practice-areas/consumer-protection-lemon-law/">Consumer and lemon law <span>Start</span></a>
+    </nav>
     <div class="actions"><a class="btn primary" href="/free-case-review/">Start a free case review</a><a class="btn ghost" href="tel:+19096096685" aria-label="Call Berhe Jones LLP at 909-609-6685">Call 909-609-6685</a></div>
     <p class="fine">Initial review is free. Representation begins only after conflicts review and a signed written agreement.</p>
   </div>
-  <aside class="card"><span class="eyebrow">How matters are screened</span><h2>Different case types. Same serious-case screen.</h2><ul class="status-list"><li><strong>Fit</strong><br>Does the matter match the firm’s litigation posture, contingency focus, and available resources?</li><li><strong>Proof</strong><br>What documents, witnesses, records, photos, notices, or denials support responsibility and harm?</li><li><strong>Leverage</strong><br>Is there a defendant, insurer, statute, fee-shifting claim, or remedy that can support meaningful action?</li></ul></aside>
+  <aside class="card screen-card"><span class="eyebrow">How matters are screened</span><h2>Different case types. Same serious-case screen.</h2><ul class="status-list"><li><span class="screen-step" aria-hidden="true">01</span><span><strong>Fit</strong><br>Does the matter match the firm’s litigation posture, contingency focus, and available resources?</span></li><li><span class="screen-step" aria-hidden="true">02</span><span><strong>Proof</strong><br>What documents, witnesses, records, photos, notices, or denials support responsibility and harm?</span></li><li><span class="screen-step" aria-hidden="true">03</span><span><strong>Leverage</strong><br>Is there a defendant, insurer, statute, fee-shifting claim, or remedy that can support meaningful action?</span></li></ul></aside>
 </section>
 <section class="section alt"><div class="inner"><span class="eyebrow">Plaintiff-side contingency review</span><h2>One serious-case standard, before labels and practice areas.</h2><p class="lede">Berhe Jones LLP works on the plaintiff side and reviews many accepted matters on contingency when the facts support it. Whatever the practice area, the first screen asks the same questions, so a visitor can send the right facts and the firm can see whether the matter has traction.</p><div class="grid process"><article class="tile"><h3>Timing and deadlines</h3><p>Limitations periods, government-claim windows, and evidence that can disappear are checked first. If a deadline is close, call 909-609-6685 instead of waiting on a form.</p></article><article class="tile"><h3>Liability and proof</h3><p>Who is responsible, and how clearly the records, witnesses, and documents support it. Thin proof is named early rather than glossed over.</p></article><article class="tile"><h3>Damages and recovery source</h3><p>Documented harm, plus a defendant, insurer, or statute that can actually support a recovery. Contingency work depends on a reachable source.</p></article><article class="tile"><h3>Fit and fee structure</h3><p>Whether the matter fits a serious-case contingency strategy, or is better suited to co-counsel, referral, or a different arrangement. Any representation is set in a signed written agreement, with no guarantee of outcome.</p></article></div><div class="actions"><a class="btn primary" href="/free-case-review/">Start a free case review</a><a class="btn ghost" href="/case-review-process/">See the review process</a></div></div></section>
 <div class="practice-nav" aria-label="Practice area quick links"><a href="/practice-areas/personal-injury-wrongful-death/">Personal Injury and Wrongful Death</a><a href="/practice-areas/employment-workplace-claims/">Employment and Workplace Claims</a><a href="/practice-areas/civil-rights-government-accountability/">Civil Rights and Government Accountability</a><a href="/practice-areas/consumer-protection-lemon-law/">Consumer Protection and Lemon Law</a><a href="/practice-areas/insurance-bad-faith/">Insurance Bad Faith</a><a href="/practice-areas/catastrophic-injury/">Catastrophic Injury</a><a href="/practice-areas/select-civil-litigation/">Select Civil Litigation</a><a href="/landing/truck-fleet-rideshare-accident-california/">Truck, Fleet, and Rideshare</a><a href="/referrals-co-counsel/">Co-Counsel and Referrals</a></div>
