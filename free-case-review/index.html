@@ -57,12 +57,56 @@ a,.btn,.tile,.card,.submit,.field input,.field select,.field textarea,.nav-links
 .tile:hover::after{transform:scaleX(1)}
 .proof-band .tile:hover{border-color:rgba(184,150,71,.6)}
 .field input:hover,.field select:hover,.field textarea:hover{border-color:#c3b690}
+.req{display:inline-block;margin-left:6px;color:var(--brass);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--brass);box-shadow:0 0 0 3px rgba(154,122,46,.18)}
 .consent{padding:14px 16px;border:1px solid var(--rule);border-radius:6px;background:rgba(255,255,255,.55)}
 .submit:hover{background:#0c1924}
 .submit:active{transform:translateY(1px)}
 .footer{position:relative}
 .footer::before{content:"";display:block;height:3px;background:linear-gradient(90deg,var(--brass),var(--brass-2) 55%,transparent)}
+
+/* === Quality lead conversion pass, 2026-06-10 === */
+.review-hero{padding-top:58px;gap:38px;align-items:stretch}
+.review-hero h1{font-size:clamp(38px,5.2vw,64px);letter-spacing:-.035em;max-width:11.5em}
+.review-hero .lede{font-size:clamp(17px,1.7vw,20px);max-width:58ch}
+.review-kicker{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 4px;padding:0;list-style:none}
+.review-kicker li{border:1px solid rgba(154,122,46,.26);background:rgba(255,255,255,.62);border-radius:999px;padding:7px 11px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.review-panel{display:grid;gap:18px;background:linear-gradient(180deg,#fff,#faf6ed);border:1px solid rgba(216,207,188,.95);border-radius:12px;box-shadow:0 24px 60px -34px rgba(21,33,46,.42);padding:28px;position:relative;overflow:hidden}
+.review-panel:before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,var(--brass),var(--brass-2),rgba(184,150,71,.16))}
+.review-step{display:grid;grid-template-columns:auto 1fr;gap:13px;align-items:start;padding-top:14px;border-top:1px solid var(--rule)}
+.review-step:first-of-type{border-top:0;padding-top:0}
+.review-step b{display:grid;place-items:center;width:38px;height:38px;border-radius:999px;background:var(--ink);color:#fff;font-family:Fraunces,serif;font-size:17px;font-weight:500}
+.review-step h3{margin:0 0 3px;font-family:Fraunces,serif;font-size:22px;font-weight:500}
+.review-step p{margin:0;color:var(--ink-2);font-size:15px;line-height:1.55}
+.review-signal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:var(--container);margin:0 auto;padding:0 24px 52px}
+.review-signal{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:18px 18px 17px;box-shadow:0 18px 44px -34px rgba(21,33,46,.45)}
+.review-signal strong{display:block;font-family:Fraunces,serif;font-size:21px;font-weight:500;margin-bottom:4px}
+.review-signal span{display:block;color:var(--ink-soft);font-size:14px;line-height:1.48}
+.review-two{display:grid;grid-template-columns:.92fr 1.08fr;gap:28px;align-items:start}
+.fit-card{background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:24px}
+.fit-card h3{font-family:Fraunces,serif;font-size:25px;font-weight:500;margin:0 0 10px}
+.fit-list{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px}
+.fit-list li{position:relative;padding-left:24px;color:var(--ink-2)}
+.fit-list li:before{content:"";position:absolute;left:0;top:.72em;width:8px;height:8px;border-radius:999px;background:var(--brass)}
+.form-shell{display:grid;grid-template-columns:.82fr 1.18fr;gap:24px;align-items:start}
+.form-aside{background:var(--ink);color:#fff;border-radius:12px;padding:24px;box-shadow:var(--shadow)}
+.form-aside h3{font-family:Fraunces,serif;font-size:27px;font-weight:500;line-height:1.14;margin:0 0 12px;color:#fff}
+.form-aside p,.form-aside li{color:#e9dfcc}
+.form-aside ul{margin:14px 0 0;padding-left:19px;display:grid;gap:9px}
+.form-card{background:#fff;border:1px solid var(--rule);border-radius:12px;padding:26px;box-shadow:0 24px 60px -34px rgba(21,33,46,.45)}
+.urgent-note{border-left:4px solid var(--danger);background:#fff8f1;color:var(--ink);padding:14px 16px;margin:0 0 16px;border-radius:0 8px 8px 0}
+.form-note{border-left:4px solid var(--brass);background:#faf6ed;color:var(--ink);padding:14px 16px;margin:0 0 18px;border-radius:0 8px 8px 0}
+.review-faq{display:grid;grid-template-columns:.7fr 1.3fr;gap:28px;align-items:start}
+.faq-list{display:grid;gap:12px}
+.faq-list details{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:0;box-shadow:0 14px 34px -30px rgba(21,33,46,.45)}
+.faq-list summary{cursor:pointer;list-style:none;padding:18px 20px;font-weight:800;color:var(--ink)}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary:after{content:"+";float:right;color:var(--brass);font-size:20px;line-height:1}
+.faq-list details[open] summary:after{content:"–"}
+.faq-list p{margin:0;padding:0 20px 20px;color:var(--ink-2)}
+@media(max-width:960px){.review-signal-grid{grid-template-columns:repeat(2,1fr)}.review-two,.form-shell,.review-faq{grid-template-columns:1fr}.review-hero h1{max-width:none}}
+@media(max-width:620px){.review-hero{padding-top:38px}.review-signal-grid{grid-template-columns:1fr;padding-bottom:36px}.review-panel,.form-card,.form-aside,.fit-card{padding:20px}.review-step{grid-template-columns:1fr}.review-step b{width:34px;height:34px}.review-kicker li{font-size:11px}.hero .actions .btn{width:100%}}
+
 </style>
 <script type="application/ld+json">
 {
@@ -84,6 +128,63 @@ a,.btn,.tile,.card,.submit,.field input,.field select,.field textarea,.nav-links
   ]
 }
 </script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does a case review cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The initial case review is free. If Berhe Jones LLP accepts a matter, fees, costs, and scope are governed by a written agreement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What makes a matter a strong contingency fit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Strong reviews usually have a clear deadline, responsible party, proof, meaningful harm or loss, and a practical recovery source such as insurance, assets, a policy, or another collectible route."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What should I include in the first message?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Include the date, location, people or companies involved, what happened, injuries or losses, known deadlines, and what proof exists. Keep it short and conflict-safe."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I send documents or photos?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "List the documents or photos that exist, but do not upload sensitive records through the first public form. The firm can request specific records after the initial screen."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if I am not sure whether my case fits?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Send the essentials. The firm screens for fit, deadlines, proof, damages, and recovery source, then identifies whether the matter may be accepted, needs documents, should be referred, or is not a fit."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if a deadline is close?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If a government claim window, filing deadline, hearing, denial letter, evidence issue, or other time-sensitive event is close, call instead of waiting on a form submission."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -91,38 +192,58 @@ a,.btn,.tile,.card,.submit,.field input,.field select,.field textarea,.nav-links
 <nav class="nav" aria-label="Foundation pages"><div class="nav-inner"><strong>Explore</strong><ul class="nav-links"><li><a href="/attorney-tam-berhe/">Attorney</a></li><li><a href="/case-review-process/">Process</a></li><li><a href="/free-case-review/" aria-current="page">Case Review</a></li><li><a href="/referrals-co-counsel/">Referrals</a></li><li><a href="/landing/truck-fleet-rideshare-accident-california/">Truck/Fleet Review</a></li><li><a href="/resources/">Resources</a></li></ul></div></nav>
 
 <main id="main">
-<section class="hero">
+<section class="hero review-hero" aria-labelledby="caseReviewHeroTitle">
   <div>
     <span class="eyebrow">Free case review</span>
-    <h1>Request a <em>free case review</em> for a serious California matter.</h1>
-    <p class="lede">Send the essential facts of a serious California matter, and Attorney Tam Berhe screens requests the same way: deadline first, then liability, proof, damages, and a recovery source worth pursuing. If the deadline is close, call. If the story is complicated, send the essentials first so the firm can evaluate the right next step.</p>
+    <h1 id="caseReviewHeroTitle">Get the right case screen before proof goes cold.</h1>
+    <p class="lede">Send a short, conflict-safe summary of a serious California matter. The review starts with deadline pressure, then fit, proof, harm, and whether there is a practical recovery source worth pursuing.</p>
+    <ul class="review-kicker" aria-label="Case review priorities">
+      <li>Deadline first</li>
+      <li>Fit and proof</li>
+      <li>Recovery source</li>
+    </ul>
     <div class="actions"><a class="btn primary" href="#caseReviewTitle">Start the Free Case Review</a><a class="btn ghost" href="tel:+19096096685" aria-label="Call Berhe Jones LLP at 909-609-6685">Call 909-609-6685</a></div>
-    <p class="fine">Berhe Jones is a DBA of The Berhe Law Firm. Initial case review is free. If the firm accepts a matter, fees, costs, and scope are governed by a written agreement.</p>
+    <p class="fine">Initial case review is free. If Berhe Jones LLP accepts a matter, fees, costs, and scope are governed by a written agreement.</p>
   </div>
-  <aside class="card">
-    <span class="eyebrow">How a request is handled</span>
-    <h2>Deadline first. Then fit, proof, and the next move.</h2>
-    <ul class="status-list"><li><strong>Deadline is screened first</strong><br>If a government-claim window, filing deadline, or hearing is near, call 909-609-6685. Timing is checked before anything else.</li><li><strong>Send the essentials, not your file</strong><br>Names, dates, who is responsible, and the harm or loss are enough to start. Documents come later, only if the firm asks for them.</li><li><strong>You get a practical path</strong><br>Every request is screened toward a practical path: accept, request documents, schedule a call, refer or co-counsel, or decline when it is not a fit.</li></ul>
+  <aside class="review-panel" aria-label="How the case review is screened">
+    <div class="review-step"><b>1</b><div><h3>Timing</h3><p>Government claim windows, filing deadlines, hearings, denials, and evidence issues are screened first.</p></div></div>
+    <div class="review-step"><b>2</b><div><h3>Fit</h3><p>The firm checks whether the matter matches selected serious California civil work and whether conflicts need review.</p></div></div>
+    <div class="review-step"><b>3</b><div><h3>Proof and leverage</h3><p>The screen looks for records, witnesses, photos, notices, treatment, wage loss, policy coverage, or another recovery route.</p></div></div>
   </aside>
 </section>
-<section class="section alt"><div class="inner"><span class="eyebrow">What to send</span><h2>What makes a matter stronger to review.</h2><p class="lede">A good first request is short and factual. The more of these the firm can see early, the faster it can tell you where the matter is strong and where it needs work. You do not need all of them to start.</p><div class="grid"><article class="tile"><h3>Timing and deadlines</h3><p>When it happened, and any notice, hearing, claim window, or filing deadline you know about. Timing often decides whether a matter can move at all.</p></article><article class="tile"><h3>Who is responsible</h3><p>The person, company, agency, or insurer involved, and how the harm happened. Naming the responsible party early helps the firm check conflicts and coverage.</p></article><article class="tile"><h3>Proof and records</h3><p>Treatment or loss records, photos, witnesses, notices, denial letters, insurance or policy details, and anything that documents the harm. List what exists; do not attach it yet.</p></article></div><div class="notice"><strong>If the deadline is close, call.</strong> Some claims, especially those involving public entities, employers, agencies, or insurers, require fast action to preserve rights or evidence. Call <a href="tel:+19096096685" aria-label="Call Berhe Jones LLP at 909-609-6685">909-609-6685</a> rather than waiting to write a long message.</div></div></section>
-<section class="section"><span class="eyebrow">What happens next</span><h2>Every request is screened toward a practical path.</h2><p class="lede">This first screen is not a sales funnel. It is a fit, deadline, evidence, and recovery-source screen, designed to identify the next practical route.</p><div class="grid process"><article class="tile"><h3>Accept or ask for documents</h3><p>If the matter fits, the firm accepts it under a signed written agreement, or asks for the specific records it needs to decide.</p></article><article class="tile"><h3>Schedule a call</h3><p>When the facts are promising but incomplete, the firm sets up a direct conversation to fill the gaps before committing.</p></article><article class="tile"><h3>Refer, co-counsel, or decline</h3><p>If another firm is a better fit, Berhe Jones LLP can evaluate referral or co-counsel. If it is not viable for the practice, the firm may decline after review.</p></article></div><p class="fine">Submitting this form, calling, or emailing does not create an attorney-client relationship, and no public form is private or privileged before representation. Representation begins only after conflicts review and a signed written agreement. The firm screens for fit, deadlines, and leverage; no case result, award, rating, or response-time is promised, and there is no guarantee of outcome.</p></section>
-<section class="section alt"><div class="inner"><span class="eyebrow">Start the review</span><h2 id="caseReviewTitle">Case review request</h2><p class="lede">Send the basics below. A few clear sentences are enough to start a screen. If your matter is urgent or hard to summarize, call 909-609-6685 instead.</p><form name="case-review" method="POST" action="/success.html" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8" data-netlify="true" netlify netlify-honeypot="bot-field" aria-labelledby="caseReviewTitle" aria-describedby="caseReviewPrivacyNote">
+
+<section class="review-signal-grid" aria-label="What helps the firm screen a matter">
+  <article class="review-signal"><strong>Date and deadline</strong><span>When it happened, and any claim window, hearing, denial, or filing date.</span></article>
+  <article class="review-signal"><strong>Responsible party</strong><span>The person, company, public entity, employer, agency, insurer, or product involved.</span></article>
+  <article class="review-signal"><strong>Harm and loss</strong><span>Injuries, treatment, missed work, property loss, rights violation, denial, or other damage.</span></article>
+  <article class="review-signal"><strong>Proof that exists</strong><span>Photos, videos, records, witnesses, notices, policies, correspondence, or reports.</span></article>
+</section>
+
+<section class="section alt"><div class="inner review-two"><div><span class="eyebrow">Quality lead screen</span><h2>What makes the first review useful.</h2><p class="lede">The best first message is not long. It is organized. The goal is to give the firm enough to check urgency, fit, proof, and whether the matter can realistically move.</p></div><div class="fit-card"><h3>Good-fit details to include</h3><ul class="fit-list"><li>Dates, locations, and the county or court if known.</li><li>Names of companies, agencies, insurers, employers, or other parties involved.</li><li>The injury, loss, denial, workplace issue, civil-rights concern, or consumer problem.</li><li>Any deadline, government claim, hearing, lawsuit, denial letter, or preservation issue.</li><li>What proof exists, such as photos, treatment records, wage records, notices, witnesses, or insurance information.</li></ul></div></div></section>
+
+<section class="section"><div class="form-shell"><aside class="form-aside"><span class="eyebrow">What happens next</span><h3>The form is the start of a focused screen.</h3><p>After the request is received, the matter is reviewed for practical next steps. The result may be acceptance under a written agreement, a request for records, a call to clarify facts, a referral or co-counsel path, or a decline if the matter is not a fit.</p><ul><li>Do not send full medical records or highly sensitive details in the first form.</li><li>List documents and photos instead of uploading them here.</li><li>If a deadline is close, call now instead of waiting on the form.</li></ul></aside><div class="form-card"><span class="eyebrow">Start the review</span><h2 id="caseReviewTitle">Case review request</h2><p class="lede">Send the essentials below. A few clear sentences are enough to begin the screen.</p><form id="caseReviewForm" name="case-review" method="POST" action="/success.html" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8" data-netlify="true" netlify netlify-honeypot="bot-field" aria-labelledby="caseReviewTitle" aria-describedby="caseReviewUrgentNote caseReviewPrivacyNote">
   <input type="hidden" name="form-name" value="case-review" />
-  <p class="notice" id="caseReviewPrivacyNote"><strong>Privacy note:</strong> send a short conflict-safe summary only. Do not include privileged documents, full medical records, Social Security numbers, account credentials, or highly sensitive details through this public form. If your matter is urgent or deadline-sensitive, call instead.</p>
-  <p style="position:absolute;left:-9999px" aria-hidden="true"><label>Do not fill this out if you are human: <input name="bot-field" type="text" tabindex="-1" autocomplete="off" /></label></p>
+  <p class="urgent-note" id="caseReviewUrgentNote"><strong>If the deadline is close:</strong> call <a href="tel:+19096096685" aria-label="Call Berhe Jones LLP at 909-609-6685">909-609-6685</a> instead of waiting on a form submission.</p>
+  <p class="form-note" id="caseReviewPrivacyNote"><strong>Privacy note:</strong> send a short conflict-safe summary only. Do not include privileged documents, full medical records, Social Security numbers, account credentials, or highly sensitive details through this public form.</p>
+  <p style="position:absolute;left:-9999px" aria-hidden="true" data-honeypot-wrapper><label>Do not fill this out if you are human: <input name="bot-field" type="text" tabindex="-1" autocomplete="off" /></label></p>
   <div class="form-grid">
-    <div class="field"><label for="firstName">First name</label><input id="firstName" name="firstName" type="text" autocomplete="given-name" autocapitalize="words" enterkeyhint="next" required aria-required="true" /></div>
-    <div class="field"><label for="lastName">Last name</label><input id="lastName" name="lastName" type="text" autocomplete="family-name" autocapitalize="words" enterkeyhint="next" required aria-required="true" /></div>
-    <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" enterkeyhint="next" required aria-required="true" /></div>
-    <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" enterkeyhint="next" required aria-required="true" /></div>
-    <div class="field"><label for="contactMethod">Preferred contact</label><select id="contactMethod" name="contactMethod"><option>Call</option><option>Text</option><option>Email</option></select></div>
-    <div class="field"><label for="county">City and county</label><input id="county" name="county" type="text" autocomplete="address-level2" autocapitalize="words" enterkeyhint="next" /></div>
-    <div class="field full"><label for="summary">Short conflict-safe summary</label><textarea id="summary" name="summary" autocomplete="off" autocapitalize="sentences" spellcheck="true" enterkeyhint="send" placeholder="Briefly describe the general issue, parties involved, and timing. Do not include privileged or highly sensitive details yet." required aria-required="true" aria-describedby="caseReviewPrivacyNote"></textarea></div>
+    <div class="field"><label for="firstName">First name <span class="req">Required</span></label><input id="firstName" name="firstName" type="text" autocomplete="given-name" autocapitalize="words" enterkeyhint="next" required aria-required="true" /></div>
+    <div class="field"><label for="lastName">Last name <span class="req">Required</span></label><input id="lastName" name="lastName" type="text" autocomplete="family-name" autocapitalize="words" enterkeyhint="next" required aria-required="true" /></div>
+    <div class="field"><label for="phone">Phone <span class="req">Required</span></label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" enterkeyhint="next" required aria-required="true" /></div>
+    <div class="field"><label for="email">Email <span class="req">Required</span></label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" enterkeyhint="next" required aria-required="true" /></div>
+    <div class="field"><label for="caseType">Type of matter</label><select id="caseType" name="caseType"><option value="">Select if known</option><option>Injury or wrongful death</option><option>Employment or workplace claim</option><option>Civil rights or government accountability</option><option>Consumer, lemon law, or insurance issue</option><option>Other serious civil matter</option></select></div>
+    <div class="field"><label for="contactMethod">Preferred contact</label><select id="contactMethod" name="contactMethod"><option>No preference</option><option>Call</option><option>Text</option><option>Email</option></select></div>
+    <div class="field"><label for="county">City and county of issue</label><input id="county" name="county" type="text" autocomplete="address-level2" autocapitalize="words" enterkeyhint="next" /></div>
+    <div class="field"><label for="deadline">Known deadline</label><input id="deadline" name="deadline" type="text" autocomplete="off" autocapitalize="sentences" enterkeyhint="next" placeholder="Ex: hearing or filing date" /></div>
+    <div class="field full"><label for="summary">Short conflict-safe summary <span class="req">Required</span></label><textarea id="summary" name="summary" autocomplete="off" autocapitalize="sentences" spellcheck="true" enterkeyhint="send" placeholder="Briefly describe what happened, when, who was involved, the harm or loss, and what proof exists. Do not include privileged or highly sensitive details yet." required aria-required="true" aria-describedby="caseReviewUrgentNote caseReviewPrivacyNote"></textarea></div>
   </div>
   <label class="consent" for="consent"><input id="consent" type="checkbox" name="consent" required aria-required="true" /> <span>I understand that submitting information does not create an attorney-client relationship. Representation begins only after conflicts review and a signed written agreement.</span></label>
   <button class="submit" type="submit">Request a Free Case Review</button>
-</form></div></section>
+</form></div></div></section>
+
+<section class="section alt"><div class="inner review-faq"><div><span class="eyebrow">Case review FAQ</span><h2>Answers before you send the form.</h2><p class="lede">These points help keep the first contact useful, safe, and focused on whether the matter can move.</p></div><div class="faq-list"><details><summary>How much does a case review cost?</summary><p>The initial case review is free. If the firm accepts a matter, fees, costs, and scope are governed by a written agreement.</p></details><details><summary>What makes a matter a strong contingency fit?</summary><p>Strong reviews usually have a clear deadline, responsible party, proof, meaningful harm or loss, and a practical recovery source such as insurance, assets, a policy, or another collectible route.</p></details><details><summary>What should I include in the first message?</summary><p>Include the date, location, people or companies involved, what happened, injuries or losses, known deadlines, and what proof exists. Keep it short and conflict-safe.</p></details><details><summary>Can I send documents or photos?</summary><p>List the documents or photos that exist, but do not upload sensitive records through the first public form. The firm can request specific records after the initial screen.</p></details><details><summary>What if I am not sure whether my case fits?</summary><p>Send the essentials. The firm screens for fit, deadlines, proof, damages, and recovery source, then identifies whether the matter may be accepted, needs documents, should be referred, or is not a fit.</p></details><details><summary>What if a deadline is close?</summary><p>If a government claim window, filing deadline, hearing, denial letter, evidence issue, or other time-sensitive event is close, call instead of waiting on a form submission.</p></details></div></div></section>
+
+<section class="section"><span class="eyebrow">Legal notice</span><h2>Submitting a request does not create representation.</h2><p class="lede">A form, call, email, or text does not create an attorney-client relationship. Representation begins only after conflicts review and a signed written agreement. Deadlines vary. Do not send privileged, highly sensitive, or urgent information through public forms. No outcome is guaranteed.</p></section>
 </main>
 <footer class="footer"><div class="footer-inner"><div><a class="brand" href="/" aria-label="Berhe Jones LLP home"><img class="brand-logo" src="/images/berhe-jones-llp-logo-reverse.png" alt="Berhe Jones LLP" width="1305" height="308" decoding="async" /></a><p class="identity-note">Berhe Jones is a DBA of The Berhe Law Firm.</p><p>Attorney-supervised screening for selected serious California civil matters. This page is for general information only.</p></div><div><h4>Foundation pages</h4><ul><li><a href="/attorney-tam-berhe/">Attorney profile</a></li><li><a href="/case-review-process/">Case review process</a></li><li><a href="/free-case-review/" aria-current="page">Free case review</a></li><li><a href="/referrals-co-counsel/">Referrals &amp; co-counsel</a></li></ul></div><div><h4>Legal</h4><p><a href="/privacy.html">Privacy</a> · <a href="/disclaimer.html">Disclaimer</a> · <a href="/terms.html">Terms</a></p><p><a href="/landing/truck-fleet-rideshare-accident-california/">Truck/fleet/rideshare accidents</a></p></div></div><p class="disclaimer">Attorney advertising. General information only; not legal advice. A form, call, email, text, or public checklist request does not create an attorney-client relationship. Representation begins only after conflicts review and a signed written agreement. Deadlines vary. Do not send privileged, highly sensitive, or urgent information through public or public forms. No guarantee of outcome.</p></footer>
 </body>

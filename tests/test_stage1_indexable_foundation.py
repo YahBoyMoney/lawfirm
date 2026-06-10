@@ -729,8 +729,13 @@ def test_case_review_forms_expose_complete_mobile_autofill_contract():
         assert form.select_one('label.consent[for="consent"]') is not None, f"{path} consent checkbox needs an explicit label"
         summary = form.select_one('textarea#summary[name="summary"]')
         assert summary is not None, f"{path} summary textarea needs a stable id/name"
-        assert summary.get("aria-describedby") == "caseReviewPrivacyNote", (
-            f"{path} summary textarea should reference the visible privacy notice"
+        expected_description = (
+            "caseReviewUrgentNote caseReviewPrivacyNote"
+            if path.name == "index.html" and path.parent.name == "free-case-review"
+            else "caseReviewPrivacyNote"
+        )
+        assert summary.get("aria-describedby") == expected_description, (
+            f"{path} summary textarea should reference the visible privacy and urgency notices when present"
         )
 
 
@@ -813,16 +818,67 @@ def test_stage1_forms_are_live_netlify_intake_without_uploads():
         assert "do not include privileged" in text
         assert "attorney-client relationship" in text
         if form_name == "case-review":
+            expected_description = (
+                "caseReviewUrgentNote caseReviewPrivacyNote"
+                if path.name == "index.html" and path.parent.name == "free-case-review"
+                else "caseReviewPrivacyNote"
+            )
             assert form.get("aria-labelledby") == "caseReviewTitle"
-            assert form.get("aria-describedby") == "caseReviewPrivacyNote"
+            assert form.get("aria-describedby") == expected_description
             assert doc.select_one("#caseReviewTitle") is not None
-            assert doc.select_one("#caseReviewPrivacyNote.notice") is not None
+            assert doc.select_one("#caseReviewPrivacyNote") is not None
+            if path.name == "index.html" and path.parent.name == "free-case-review":
+                assert doc.select_one("#caseReviewUrgentNote.urgent-note") is not None
+                assert doc.select_one("#caseReviewPrivacyNote.form-note") is not None
+            else:
+                assert doc.select_one("#caseReviewPrivacyNote.notice") is not None
         if form_name == "garden-grove-case-review":
             assert form.get("aria-labelledby") == "gardenGroveCaseReviewTitle"
             assert form.get("aria-describedby") == "gardenGroveUrgentNotice gardenGrovePrivacyNotice"
             assert doc.select_one("#gardenGroveCaseReviewTitle") is not None
             assert doc.select_one("#gardenGrovePrivacyNotice.notice") is not None
             assert doc.select_one("#gardenGroveUrgentNotice.notice") is not None
+
+
+def test_free_case_review_quality_lead_conversion_markers_and_faq_schema():
+    path = PUBLIC_PAGES["/free-case-review/"]
+    doc = page_doc(path)
+    page_text = doc.get_text(" ", strip=True)
+
+    hero = doc.select_one(".hero.review-hero")
+    assert hero is not None
+    assert "Get the right case screen before proof goes cold" in page_text
+    assert [item.get_text(" ", strip=True) for item in doc.select(".review-kicker li")] == [
+        "Deadline first",
+        "Fit and proof",
+        "Recovery source",
+    ]
+    assert len(doc.select(".review-signal-grid .review-signal")) == 4
+    assert "Good-fit details to include" in page_text
+    assert "Do not send full medical records" in page_text
+    assert "Quality lead conversion pass" in path.read_text(encoding="utf-8")
+
+    form = doc.select_one('form#caseReviewForm[name="case-review"]')
+    assert form is not None
+    assert doc.select_one("#caseType") is not None
+    assert doc.select_one("#deadline") is not None
+    assert doc.select_one("#caseReviewUrgentNote.urgent-note") is not None
+    assert doc.select_one("#caseReviewPrivacyNote.form-note") is not None
+
+    faqs = doc.select(".faq-list details")
+    assert len(faqs) == 6
+    faq_text = set()
+    for faq in faqs:
+        summary = faq.select_one("summary")
+        assert summary is not None
+        faq_text.add(summary.get_text(" ", strip=True))
+    assert "How much does a case review cost?" in faq_text
+    assert "What if a deadline is close?" in faq_text
+
+    schema_blocks = [json.loads(script.string) for script in doc.select('script[type="application/ld+json"]') if script.string]
+    faq_schema = next(block for block in schema_blocks if block.get("@type") == "FAQPage")
+    assert len(faq_schema["mainEntity"]) == 6
+    assert {item["name"] for item in faq_schema["mainEntity"]} == faq_text
 
 
 def test_homepage_declares_netlify_form_detection_stubs():

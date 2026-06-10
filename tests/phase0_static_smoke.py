@@ -5,6 +5,7 @@ from playwright.sync_api import sync_playwright, expect
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "index.html"
 PRACTICE_AREAS = ROOT / "practice-areas" / "index.html"
+CASE_REVIEW = ROOT / "free-case-review" / "index.html"
 
 
 def soup():
@@ -27,13 +28,14 @@ def test_robots_and_sitemap_cover_public_canonical_pages_only():
     }
     for url in expected:
         assert f"<loc>{url}</loc>" in sitemap_text
-    assert sitemap_text.count("<lastmod>2026-05-25</lastmod>") == 18
+    assert sitemap_text.count("<lastmod>2026-05-25</lastmod>") == 3
     assert sitemap_text.count("<lastmod>2026-05-29</lastmod>") == 0
-    assert sitemap_text.count("<lastmod>2026-05-30</lastmod>") == 3
+    assert sitemap_text.count("<lastmod>2026-05-30</lastmod>") == 0
     assert sitemap_text.count("<lastmod>2026-05-31</lastmod>") == 1
+    assert sitemap_text.count("<lastmod>2026-06-03</lastmod>") == 18
     assert (
         "<loc>https://berhelaw.com/</loc>\n"
-        "    <lastmod>2026-05-30</lastmod>"
+        "    <lastmod>2026-06-03</lastmod>"
     ) in sitemap_text
     assert (
         "<loc>https://berhelaw.com/landing/garden-grove-chemical-leak/</loc>\n"
@@ -125,6 +127,60 @@ def test_fable_ux_pass_practice_page_surfaces_paths_above_fold():
     assert any("Consumer and lemon law" in text for text in pick_text)
     screen_steps = hero.select(".screen-card .screen-step")
     assert [step.get_text(" ", strip=True) for step in screen_steps] == ["01", "02", "03"]
+
+
+def test_quality_lead_case_review_page_has_guided_conversion_markers():
+    doc = BeautifulSoup(CASE_REVIEW.read_text(encoding="utf-8"), "html.parser")
+    text = doc.get_text(" ", strip=True)
+    hero = doc.select_one(".hero.review-hero")
+    assert hero is not None
+    assert "Get the right case screen before proof goes cold" in text
+    assert [li.get_text(" ", strip=True) for li in doc.select(".review-kicker li")] == [
+        "Deadline first",
+        "Fit and proof",
+        "Recovery source",
+    ]
+    assert len(doc.select(".review-signal-grid .review-signal")) == 4
+    assert "Good-fit details to include" in text
+    assert "What happens next" in text
+    assert "Do not send full medical records" in text
+    assert "Quality lead conversion pass" in CASE_REVIEW.read_text(encoding="utf-8")
+
+
+def test_quality_lead_case_review_form_and_faq_schema_are_safe():
+    import json
+
+    doc = BeautifulSoup(CASE_REVIEW.read_text(encoding="utf-8"), "html.parser")
+    form = doc.select_one('form#caseReviewForm[name="case-review"]')
+    assert form is not None
+    assert form.get("action") == "/success.html"
+    assert form.get("method") == "POST"
+    assert form.has_attr("data-netlify")
+    assert form.get("netlify-honeypot") == "bot-field"
+    assert form.get("aria-labelledby") == "caseReviewTitle"
+    assert form.get("aria-describedby") == "caseReviewUrgentNote caseReviewPrivacyNote"
+    summary = doc.select_one("#summary")
+    assert summary is not None
+    assert summary.get("aria-describedby") == "caseReviewUrgentNote caseReviewPrivacyNote"
+    assert doc.select_one("#caseType") is not None
+    assert doc.select_one("#deadline") is not None
+    assert doc.select_one('button.submit[type="submit"]') is not None
+    assert doc.select_one('[data-honeypot-wrapper][aria-hidden="true"] input[name="bot-field"][tabindex="-1"]') is not None
+
+    faqs = doc.select(".faq-list details")
+    assert len(faqs) == 6
+    faq_text = set()
+    for faq in faqs:
+        summary_tag = faq.select_one("summary")
+        assert summary_tag is not None
+        faq_text.add(summary_tag.get_text(" ", strip=True))
+    assert "How much does a case review cost?" in faq_text
+    assert "What if a deadline is close?" in faq_text
+
+    schema_blocks = [json.loads(script.string) for script in doc.select('script[type="application/ld+json"]') if script.string]
+    faq_schema = next(block for block in schema_blocks if block.get("@type") == "FAQPage")
+    assert len(faq_schema["mainEntity"]) == 6
+    assert {item["name"] for item in faq_schema["mainEntity"]} == faq_text
 
 
 def test_malformed_email_and_junk_phone_do_not_show_success():
