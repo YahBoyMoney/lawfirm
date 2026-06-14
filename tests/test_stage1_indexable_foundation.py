@@ -356,28 +356,42 @@ def test_garden_grove_incident_media_images_are_performance_safe():
         assert str(img.get("alt") or "").strip(), "incident images need factual alt text"
 
 
-def test_garden_grove_mobile_sticky_call_has_specific_accessible_name():
-    doc = page_doc(PUBLIC_PAGES["/landing/garden-grove-chemical-leak/"])
-    sticky_screening = doc.select_one('.mobile-sticky-cta a[href="#case-review"]')
-    assert sticky_screening is not None
-    assert sticky_screening.get_text(" ", strip=True) == "Start screening"
-    assert sticky_screening.get("aria-label") == "Start screening for Garden Grove chemical incident case review"
-    sticky_call = doc.select_one('.mobile-sticky-cta a[href="tel:+19096096685"]')
-    assert sticky_call is not None
-    assert sticky_call.get_text(" ", strip=True) == "Call now"
-    assert sticky_call.get("aria-label") == "Call now for Berhe Jones LLP at 909-609-6685"
+def test_public_pages_have_mobile_conversion_bar():
+    pages = {"/": ROOT / "index.html", **PUBLIC_PAGES}
+    for route, path in pages.items():
+        doc = page_doc(path)
+        bar = doc.select_one('.mobile-conversion-bar[aria-label="Quick case review actions"]')
+        assert bar is not None, f"{route} needs the Phase 1 mobile conversion bar"
+        call = bar.select_one('a.mobile-conversion-call[href="tel:+19096096685"]')
+        review = bar.select_one('a.mobile-conversion-review')
+        assert call is not None, f"{route} needs a sticky Call Now action"
+        assert call.get_text(" ", strip=True) == "Call Now"
+        assert call.get("aria-label") == "Call Now for Berhe Jones LLP at 909-609-6685"
+        assert review is not None, f"{route} needs a sticky case-review action"
+        assert review.get_text(" ", strip=True) == "Free Case Review"
+        assert review.get("aria-label") == "Request a free case review"
+        href = str(review.get("href"))
+        if route == "/":
+            assert href == "#intake"
+        elif route == "/landing/garden-grove-chemical-leak/":
+            assert href == "#case-review"
+        elif doc.select_one('#caseReviewTitle') is not None:
+            assert href == "#caseReviewTitle"
+        else:
+            assert href == "/free-case-review/#caseReviewTitle"
+        text = path.read_text(encoding="utf-8")
+        assert "Phase 1 mobile conversion bar" in text
+        assert "mobile-form-focus" in text
 
 
-def test_homepage_mobile_intake_cta_has_specific_accessible_name():
-    doc = page_doc(ROOT / "index.html")
-    intake_link = doc.select_one('.mobile-cta-bar a.mobile-cta.intake[href="#intake"]')
-    assert intake_link is not None
-    assert intake_link.get_text(" ", strip=True) == "Start Online Intake"
-    assert intake_link.get("aria-label") == "Start Online Intake for Berhe Jones LLP case review"
-    call_link = doc.select_one('.mobile-cta-bar a.mobile-cta.call[href="tel:+19096096685"]')
-    assert call_link is not None
-    assert call_link.get_text(" ", strip=True) == "Call 909-609-6685"
-    assert call_link.get("aria-label") == "Call 909-609-6685 for Berhe Jones LLP"
+def test_public_cta_language_uses_free_case_review():
+    for path in ROOT.rglob("*.html"):
+        if ".git" in path.parts:
+            continue
+        text = path.read_text(encoding="utf-8")
+        assert "Get a free case screen" not in text
+        assert "Start screening" not in text
+        assert "Request free screening" not in text
 
 
 def test_homepage_consent_checkbox_has_explicit_label():
@@ -473,8 +487,7 @@ def test_public_html_has_working_phone_links_and_valid_markup_basics():
         expected_fax_href: "Fax Berhe Jones LLP at 909-890-6043",
     }
     expected_mobile_cta_labels = {
-        "homepage_mobile_call": "Call 909-609-6685 for Berhe Jones LLP",
-        "garden_grove_mobile_call": "Call now for Berhe Jones LLP at 909-609-6685",
+        "mobile_conversion_call": "Call Now for Berhe Jones LLP at 909-609-6685",
     }
     redacted_tel_pattern = re.compile(r'tel:[^"\']*\*')
     for path in ROOT.rglob("*.html"):
@@ -492,14 +505,8 @@ def test_public_html_has_working_phone_links_and_valid_markup_basics():
             mobile_cta_key = None
             classes = set(tel.get("class") or [])
             parent_classes = set(tel.parent.get("class") or []) if tel.parent else set()
-            if path == ROOT / "index.html" and {"mobile-cta", "call"}.issubset(classes):
-                mobile_cta_key = "homepage_mobile_call"
-            elif (
-                path == PUBLIC_PAGES["/landing/garden-grove-chemical-leak/"]
-                and "mobile-sticky-cta" in parent_classes
-                and href == expected_phone_href
-            ):
-                mobile_cta_key = "garden_grove_mobile_call"
+            if "mobile-conversion-call" in classes:
+                mobile_cta_key = "mobile_conversion_call"
             expected_label = (
                 expected_mobile_cta_labels[mobile_cta_key]
                 if mobile_cta_key

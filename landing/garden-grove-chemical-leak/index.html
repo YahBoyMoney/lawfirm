@@ -1138,7 +1138,19 @@
       *, *::before, *::after { transition: none !important; animation: none !important; }
       html { scroll-behavior: auto; }
     }
-  </style>
+
+/* ---------- Phase 1 mobile conversion bar ---------- */
+.mobile-conversion-bar{display:none}
+@media(max-width:720px){
+  body{padding-bottom:calc(82px + env(safe-area-inset-bottom,0px))}
+  body.mobile-form-focus .mobile-conversion-bar{display:none}
+  .mobile-conversion-bar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:90;display:grid;grid-template-columns:.9fr 1.1fr;gap:10px;padding:10px;border:1px solid rgba(246,241,232,.22);border-radius:18px;background:rgba(21,33,46,.96);box-shadow:0 20px 44px -18px rgba(0,0,0,.48);backdrop-filter:blur(12px) saturate(1.1)}
+  .mobile-conversion-bar a{min-height:48px;display:inline-flex;align-items:center;justify-content:center;text-align:center;border-radius:12px;text-decoration:none;font-weight:800;font-size:.9rem;letter-spacing:.01em}
+  .mobile-conversion-call{background:#fff;color:var(--ink,#15212e)}
+  .mobile-conversion-review{background:var(--brass,#9a7a2e);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
+}
+
+</style>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://berhelaw.com/"},{"@type":"ListItem","position":2,"name":"Garden Grove Chemical Leak Updates and Screening","item":"https://berhelaw.com/landing/garden-grove-chemical-leak/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"LegalService","name":"Berhe Jones LLP","url":"https://berhelaw.com/landing/garden-grove-chemical-leak/","telephone":"+19096096685","areaServed":"California","description":"Free conflict-safe screening for selected California civil matters related to the Garden Grove GKN Aerospace chemical incident. No attorney-client relationship is created without conflicts review and a signed written agreement."}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I request screening if I evacuated but did not go to a doctor?","acceptedAnswer":{"@type":"Answer","text":"Yes. Evacuation-only claims may be lower value than documented medical or business-loss claims, but receipts, shelter records, hotel costs, gas, childcare, pet boarding, missed work, address proof, and alert screenshots can still matter."}},{"@type":"Question","name":"What should I preserve after the Garden Grove chemical incident?","acceptedAnswer":{"@type":"Answer","text":"Preserve screenshots of evacuation alerts, receipts, photos, symptom notes, medical visit summaries, wage records, business closure notes, customer messages, cleanup invoices, and property records. Do not send sensitive records through the public form."}}]}</script>
@@ -1214,7 +1226,7 @@
         A civil resource for residents, workers, parents, renters, schools, and businesses near the Garden Grove tank emergency. Track cited updates from the City of Garden Grove, Orange County, Cal OES, OCFA, OCDE, and Los Angeles-area news. Preserve evidence with the proof checklist. Request a short, attorney-supervised screening when you are ready.
       </p>
       <div class="hero-actions">
-        <a class="btn btn-brass" href="#case-review">Request free screening</a>
+        <a class="btn btn-brass" href="#case-review">Request a Free Case Review</a>
         <a class="btn btn-ghost" href="#updates">View public updates</a>
         <a class="btn btn-primary" href="tel:+19096096685" aria-label="Call Berhe Jones LLP at 909-609-6685">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -1301,7 +1313,7 @@
         <p class="lede">Every card is one verified next step. The list pulls from the public update feed when available and falls back to a static, fact-checked grid so the page is useful even if the feed is offline.</p>
       </div>
       <div class="actions">
-        <a class="btn btn-ghost" href="#case-review">Screen my situation</a>
+        <a class="btn btn-ghost" href="#case-review">Request a Free Case Review</a>
       </div>
     </div>
     <div class="resource-grid" id="resourceGrid">
@@ -1357,7 +1369,7 @@
         <span class="resource-type">Legal screening</span>
         <h3>Free Berhe Jones screening</h3>
         <p>Send a short conflict-safe summary for attorney-supervised review. Keep privileged or sensitive records aside for secure follow-up.</p>
-        <a class="resource-cta" href="#case-review">Start the Free Case Review</a>
+        <a class="resource-cta" href="#case-review">Request a Free Case Review</a>
       </article>
     </div>
   </div>
@@ -1654,10 +1666,6 @@
   <p class="disclaimer">Attorney advertising. General information only, not legal advice. A form, call, email, text, checklist request, or public message does not create an attorney-client relationship. Representation begins only after conflicts review and a signed written agreement. Deadlines vary. Do not send privileged, highly sensitive, or urgent information through public forms. No guarantee of outcome. Berhe Jones is not claiming affiliation with emergency officials, GKN Aerospace, or any class action counsel.</p>
 </footer>
 
-<div class="mobile-sticky-cta" aria-label="Quick actions">
-  <a href="#case-review" aria-label="Start screening for Garden Grove chemical incident case review">Start screening</a>
-  <a href="tel:+19096096685" aria-label="Call now for Berhe Jones LLP at 909-609-6685">Call now</a>
-</div>
 
 <script>
 (function(){
@@ -1812,5 +1820,36 @@
     <input name="consent" type="checkbox" />
   </form>
 </div>
+
+<div class="mobile-conversion-bar" aria-label="Quick case review actions">
+  <a class="mobile-conversion-call" href="tel:+19096096685" aria-label="Call Now for Berhe Jones LLP at 909-609-6685">Call Now</a>
+  <a class="mobile-conversion-review" href="#case-review" aria-label="Request a free case review">Free Case Review</a>
+</div>
+
+<script>
+(function(){
+  document.addEventListener('focusin', function(event){
+    if (event.target && event.target.closest && event.target.closest('form')) document.body.classList.add('mobile-form-focus');
+  });
+  document.addEventListener('focusout', function(){
+    setTimeout(function(){
+      if (!document.activeElement || !document.activeElement.closest || !document.activeElement.closest('form')) document.body.classList.remove('mobile-form-focus');
+    }, 80);
+  });
+  document.querySelectorAll('a[href^="#"], a[href*="/#"]').forEach(function(link){
+    link.addEventListener('click', function(){
+      var raw = link.getAttribute('href') || '';
+      var hash = raw.indexOf('#') >= 0 ? raw.slice(raw.indexOf('#')) : '';
+      if (!hash || raw.indexOf('/') === 0) return;
+      setTimeout(function(){
+        var target = document.querySelector(hash);
+        var focusable = target && (target.matches('form') ? target : (target.closest('section') || target)).querySelector('input:not([type="hidden"]), textarea, select, button, [tabindex]');
+        if (focusable && hash !== '#main') focusable.focus({preventScroll:true});
+      }, 450);
+    });
+  });
+})();
+</script>
+
 </body>
 </html>

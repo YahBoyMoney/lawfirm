@@ -63,6 +63,18 @@ a,.btn,.tile,.card,.submit,.field input,.field select,.field textarea,.nav-links
 .submit:active{transform:translateY(1px)}
 .footer{position:relative}
 .footer::before{content:"";display:block;height:3px;background:linear-gradient(90deg,var(--brass),var(--brass-2) 55%,transparent)}
+
+/* ---------- Phase 1 mobile conversion bar ---------- */
+.mobile-conversion-bar{display:none}
+@media(max-width:720px){
+  body{padding-bottom:calc(82px + env(safe-area-inset-bottom,0px))}
+  body.mobile-form-focus .mobile-conversion-bar{display:none}
+  .mobile-conversion-bar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:90;display:grid;grid-template-columns:.9fr 1.1fr;gap:10px;padding:10px;border:1px solid rgba(246,241,232,.22);border-radius:18px;background:rgba(21,33,46,.96);box-shadow:0 20px 44px -18px rgba(0,0,0,.48);backdrop-filter:blur(12px) saturate(1.1)}
+  .mobile-conversion-bar a{min-height:48px;display:inline-flex;align-items:center;justify-content:center;text-align:center;border-radius:12px;text-decoration:none;font-weight:800;font-size:.9rem;letter-spacing:.01em}
+  .mobile-conversion-call{background:#fff;color:var(--ink,#15212e)}
+  .mobile-conversion-review{background:var(--brass,#9a7a2e);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
+}
+
 </style>
 <script type="application/ld+json">
 {
@@ -116,5 +128,36 @@ a,.btn,.tile,.card,.submit,.field input,.field select,.field textarea,.nav-links
 <section class="section"><span class="eyebrow">Start now</span><h2>Request a free review for this insurance bad faith matter.</h2><p>Use a short summary with dates, parties, the type of harm, and any urgent deadline. This page is general information only and does not guarantee acceptance, representation, or outcome.</p><div class="actions"><a class="btn primary" href="/free-case-review/">Request case review</a><a class="btn ghost" href="tel:+19096096685" aria-label="Call Berhe Jones LLP at 909-609-6685">Call 909-609-6685</a></div></section>
 </main>
 <footer class="footer"><div class="footer-inner"><div><a class="brand" href="/" aria-label="Berhe Jones LLP home"><img class="brand-logo" src="/images/berhe-jones-llp-logo-reverse.png" alt="Berhe Jones LLP" width="1305" height="308" decoding="async" /></a><p class="identity-note">Berhe Jones is a DBA of The Berhe Law Firm.</p><p>Attorney-supervised screening for serious California civil matters. This page is for general information only.</p></div><div><h4>Practice areas</h4><ul><li><a href="/practice-areas/personal-injury-wrongful-death/">Personal Injury and Wrongful Death</a></li><li><a href="/practice-areas/employment-workplace-claims/">Employment and Workplace Claims</a></li><li><a href="/practice-areas/civil-rights-government-accountability/">Civil Rights and Government Accountability</a></li><li><a href="/practice-areas/consumer-protection-lemon-law/">Consumer Protection and Lemon Law</a></li><li><a href="/practice-areas/insurance-bad-faith/" aria-current="page">Insurance Bad Faith</a></li><li><a href="/practice-areas/catastrophic-injury/">Catastrophic Injury</a></li><li><a href="/practice-areas/select-civil-litigation/">Select Civil Litigation</a></li><li><a href="/landing/truck-fleet-rideshare-accident-california/">Truck, Fleet, and Rideshare Accidents</a></li></ul></div><div><h4>Firm</h4><ul><li><a href="/attorney-tam-berhe/">Attorney profile</a></li><li><a href="/case-review-process/">Case review process</a></li><li><a href="/free-case-review/">Free case review</a></li><li><a href="/referrals-co-counsel/">Referrals and co-counsel</a></li><li><a href="/resources/prepare-for-case-review/">Prepare for case review</a></li></ul><p><a href="/privacy.html">Privacy</a> · <a href="/disclaimer.html">Disclaimer</a> · <a href="/terms.html">Terms</a></p></div></div><p class="disclaimer">Attorney advertising. General information only; not legal advice. A form, call, email, text, or public checklist request does not create an attorney-client relationship. Representation begins only after conflicts review and a signed written agreement. Deadlines vary. Do not send privileged, highly sensitive, or urgent information through public forms. No guarantee of outcome.</p></footer>
+
+<div class="mobile-conversion-bar" aria-label="Quick case review actions">
+  <a class="mobile-conversion-call" href="tel:+19096096685" aria-label="Call Now for Berhe Jones LLP at 909-609-6685">Call Now</a>
+  <a class="mobile-conversion-review" href="/free-case-review/#caseReviewTitle" aria-label="Request a free case review">Free Case Review</a>
+</div>
+
+<script>
+(function(){
+  document.addEventListener('focusin', function(event){
+    if (event.target && event.target.closest && event.target.closest('form')) document.body.classList.add('mobile-form-focus');
+  });
+  document.addEventListener('focusout', function(){
+    setTimeout(function(){
+      if (!document.activeElement || !document.activeElement.closest || !document.activeElement.closest('form')) document.body.classList.remove('mobile-form-focus');
+    }, 80);
+  });
+  document.querySelectorAll('a[href^="#"], a[href*="/#"]').forEach(function(link){
+    link.addEventListener('click', function(){
+      var raw = link.getAttribute('href') || '';
+      var hash = raw.indexOf('#') >= 0 ? raw.slice(raw.indexOf('#')) : '';
+      if (!hash || raw.indexOf('/') === 0) return;
+      setTimeout(function(){
+        var target = document.querySelector(hash);
+        var focusable = target && (target.matches('form') ? target : (target.closest('section') || target)).querySelector('input:not([type="hidden"]), textarea, select, button, [tabindex]');
+        if (focusable && hash !== '#main') focusable.focus({preventScroll:true});
+      }, 450);
+    });
+  });
+})();
+</script>
+
 </body>
 </html>

@@ -2633,6 +2633,18 @@
   .hero .lede{order:7;margin-top:14px;font-size:15px}
   .conv-chips .chip{width:100%;justify-content:flex-start}
 }
+
+/* ---------- Phase 1 mobile conversion bar ---------- */
+.mobile-conversion-bar{display:none}
+@media(max-width:720px){
+  body{padding-bottom:calc(82px + env(safe-area-inset-bottom,0px))}
+  body.mobile-form-focus .mobile-conversion-bar{display:none}
+  .mobile-conversion-bar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:90;display:grid;grid-template-columns:.9fr 1.1fr;gap:10px;padding:10px;border:1px solid rgba(246,241,232,.22);border-radius:18px;background:rgba(21,33,46,.96);box-shadow:0 20px 44px -18px rgba(0,0,0,.48);backdrop-filter:blur(12px) saturate(1.1)}
+  .mobile-conversion-bar a{min-height:48px;display:inline-flex;align-items:center;justify-content:center;text-align:center;border-radius:12px;text-decoration:none;font-weight:800;font-size:.9rem;letter-spacing:.01em}
+  .mobile-conversion-call{background:#fff;color:var(--ink,#15212e)}
+  .mobile-conversion-review{background:var(--brass,#9a7a2e);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
+}
+
 </style>
 </head>
 <body>
@@ -2698,7 +2710,7 @@
         Berhe Jones LLP screens serious California injury, employment, civil rights, consumer, insurance, and select civil claims around five practical questions: responsibility, proof, harm, deadline pressure, and whether a recovery source is worth pursuing.
       </p>
       <div class="hero-actions">
-        <a class="btn btn-call" href="#intake" aria-label="Start a free case review">
+        <a class="btn btn-call" href="#intake" aria-label="Request a Free Case Review">
           Request a Free Case Review
         </a>
         <a class="btn btn-ghost" href="tel:+19096096685" aria-label="Call Berhe Jones LLP at 909-609-6685">
@@ -2805,7 +2817,7 @@
         <li><a href="/referrals-co-counsel/"><span aria-hidden="true">&rsaquo;</span> Attorney referrals and co-counsel</a></li>
       </ul>
       <div class="cmd-actions">
-        <a class="btn btn-on-dark" href="#intake" aria-label="Start a free case review">Request a Free Case Review</a>
+        <a class="btn btn-on-dark" href="#intake" aria-label="Request a Free Case Review">Request a Free Case Review</a>
         <a class="btn btn-ghost-light" href="tel:+19096096685" aria-label="Call Berhe Jones LLP at 909-609-6685">Call 909-609-6685</a>
       </div>
       <p class="cmd-note">No outcomes, ratings, or response-time promises are implied. If a deadline is close, call before relying on the form.</p>
@@ -3449,16 +3461,6 @@
   </p>
 </footer>
 
-<div class="mobile-cta-bar" aria-label="Mobile quick actions">
-  <a class="mobile-cta intake" href="#intake" aria-label="Start Online Intake for Berhe Jones LLP case review">Start Online Intake</a>
-  <a class="mobile-cta call" href="tel:+19096096685" aria-label="Call 909-609-6685 for Berhe Jones LLP">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.92z"/>
-    </svg>
-    Call 909-609-6685
-  </a>
-</div>
-
 <script>
   // Mobile nav toggle
   (function () {
@@ -3746,6 +3748,37 @@
     <input name="updatesConsent" type="checkbox" />
   </form>
 </div>
+
+
+<div class="mobile-conversion-bar" aria-label="Quick case review actions">
+  <a class="mobile-conversion-call" href="tel:+19096096685" aria-label="Call Now for Berhe Jones LLP at 909-609-6685">Call Now</a>
+  <a class="mobile-conversion-review" href="#intake" aria-label="Request a free case review">Free Case Review</a>
+</div>
+
+<script>
+(function(){
+  document.addEventListener('focusin', function(event){
+    if (event.target && event.target.closest && event.target.closest('form')) document.body.classList.add('mobile-form-focus');
+  });
+  document.addEventListener('focusout', function(){
+    setTimeout(function(){
+      if (!document.activeElement || !document.activeElement.closest || !document.activeElement.closest('form')) document.body.classList.remove('mobile-form-focus');
+    }, 80);
+  });
+  document.querySelectorAll('a[href^="#"], a[href*="/#"]').forEach(function(link){
+    link.addEventListener('click', function(){
+      var raw = link.getAttribute('href') || '';
+      var hash = raw.indexOf('#') >= 0 ? raw.slice(raw.indexOf('#')) : '';
+      if (!hash || raw.indexOf('/') === 0) return;
+      setTimeout(function(){
+        var target = document.querySelector(hash);
+        var focusable = target && (target.matches('form') ? target : (target.closest('section') || target)).querySelector('input:not([type="hidden"]), textarea, select, button, [tabindex]');
+        if (focusable && hash !== '#main') focusable.focus({preventScroll:true});
+      }, 450);
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
