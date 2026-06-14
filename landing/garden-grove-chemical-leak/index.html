@@ -1502,7 +1502,7 @@
           <li>No recovery, referral, representation, settlement amount, or outcome is guaranteed.</li>
         </ul>
       </div>
-      <form class="form-card" id="gardenGroveCaseForm" name="garden-grove-case-review" method="POST" action="https://docs.google.com/forms/d/e/1FAIpQLSeqsUsCXzzYV482zQLpw23RYZHnQqvX_EgK0Jjj4PjJMvDJaQ/formResponse" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8" data-netlify="true" netlify netlify-honeypot="bot-field" aria-labelledby="gardenGroveCaseReviewTitle" aria-describedby="gardenGroveUrgentNotice gardenGrovePrivacyNotice">
+      <form class="form-card" id="gardenGroveCaseForm" name="garden-grove-case-review" method="POST" action="https://admin.berhelaw.com/api/leads/case-review" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8" data-netlify="true" netlify netlify-honeypot="bot-field" aria-labelledby="gardenGroveCaseReviewTitle" aria-describedby="gardenGroveUrgentNotice gardenGrovePrivacyNotice">
         <input type="hidden" name="form-name" value="garden-grove-case-review" />
         <input type="hidden" name="matterType" value="Garden Grove chemical incident" />
         <input type="hidden" name="entry.1078640570" data-google-entry="firstName" />
@@ -1702,7 +1702,7 @@
   var status = document.getElementById('screeningStatus');
   var submit = form.querySelector('button[type="submit"]');
   var originalText = submit ? submit.textContent : 'Send screening request';
-  var endpoint = 'https://docs.google.com/forms/d/e/1FAIpQLSeqsUsCXzzYV482zQLpw23RYZHnQqvX_EgK0Jjj4PjJMvDJaQ/formResponse';
+  var endpoint = 'https://admin.berhelaw.com/api/leads/case-review';
   var consentText = 'I agree to be contacted and understand this does not create an attorney-client relationship.';
   function setStatus(kind, html){
     if (!status) return;
@@ -1726,8 +1726,7 @@
     event.preventDefault();
     if (submit) { submit.disabled = true; submit.textContent = 'Sending screening...'; }
     try {
-      var payload = new URLSearchParams();
-      form.querySelectorAll('[name^="entry."]').forEach(function(field){ payload.append(field.name, field.value || ''); });
+      var payload = new URLSearchParams(new FormData(form));
       await fetch(endpoint, { method: 'POST', mode: 'no-cors', body: payload });
       if (submit) { submit.textContent = 'Screening received'; submit.style.background = '#2f5b3a'; }
       setStatus('success', '<strong>Screening received.</strong> The intake team reads each submission and runs a conflicts check before any follow-up contact. If your matter is urgent or deadline-sensitive, call <a href="tel:+19096096685" aria-label="Call Berhe Jones LLP at 909-609-6685">909-609-6685</a> now.');
@@ -1796,7 +1795,7 @@
 })();
 </script>
 <div hidden aria-hidden="true">
-  <form name="garden-grove-case-review" method="POST" action="/success.html" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8" data-netlify="true" netlify netlify-honeypot="bot-field">
+  <form name="garden-grove-case-review" method="POST" action="https://admin.berhelaw.com/api/leads/case-review" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8" data-netlify="true" netlify netlify-honeypot="bot-field">
     <input type="hidden" name="form-name" value="garden-grove-case-review" />
     <input name="bot-field" type="text" tabindex="-1" autocomplete="off" />
     <input name="matterType" type="text" />
