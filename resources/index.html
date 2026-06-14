@@ -65,7 +65,7 @@ a,.btn,.tile,.card,.submit,.field input,.field select,.field textarea,.nav-links
 @media(max-width:720px){
   body{padding-bottom:calc(82px + env(safe-area-inset-bottom,0px))}
   body.mobile-form-focus .mobile-conversion-bar{display:none}
-  .mobile-conversion-bar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:90;display:grid;grid-template-columns:.9fr 1.1fr;gap:10px;padding:10px;border:1px solid rgba(246,241,232,.22);border-radius:18px;background:rgba(21,33,46,.96);box-shadow:0 20px 44px -18px rgba(0,0,0,.48);backdrop-filter:blur(12px) saturate(1.1)}
+  body.cta-ready .mobile-conversion-bar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:90;display:grid;grid-template-columns:.9fr 1.1fr;gap:10px;padding:10px;border:1px solid rgba(246,241,232,.22);border-radius:18px;background:rgba(21,33,46,.96);box-shadow:0 20px 44px -18px rgba(0,0,0,.48);backdrop-filter:blur(12px) saturate(1.1)}
   .mobile-conversion-bar a{min-height:48px;display:inline-flex;align-items:center;justify-content:center;text-align:center;border-radius:12px;text-decoration:none;font-weight:800;font-size:.9rem;letter-spacing:.01em}
   .mobile-conversion-call{background:#fff;color:var(--ink,#15212e)}
   .mobile-conversion-review{background:var(--brass,#9a7a2e);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
@@ -160,6 +160,11 @@ a,.btn,.tile,.card,.submit,.field input,.field select,.field textarea,.nav-links
       if (!document.activeElement || !document.activeElement.closest || !document.activeElement.closest('form')) document.body.classList.remove('mobile-form-focus');
     }, 80);
   });
+  function updateCtaReady(){
+    document.body.classList.toggle('cta-ready', window.scrollY > 420);
+  }
+  updateCtaReady();
+  window.addEventListener('scroll', updateCtaReady, {passive:true});
   document.querySelectorAll('a[href^="#"], a[href*="/#"]').forEach(function(link){
     link.addEventListener('click', function(){
       var raw = link.getAttribute('href') || '';
