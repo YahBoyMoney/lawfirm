@@ -108,6 +108,16 @@ a,.btn,.tile,.card,.submit,.field input,.field select,.field textarea,.nav-links
 @media(max-width:620px){.review-hero{padding-top:38px}.review-signal-grid{grid-template-columns:1fr;padding-bottom:36px}.review-panel,.form-card,.form-aside,.fit-card{padding:20px}.review-step{grid-template-columns:1fr}.review-step b{width:34px;height:34px}.review-kicker li{font-size:11px}.hero .actions .btn{width:100%}}
 
 
+
+/* ---------- Phase 2 attorney trust strip ---------- */
+.phase2-trust{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;margin:18px 0;padding:14px;border:1px solid rgba(184,150,71,.28);border-radius:16px;background:rgba(255,250,240,.95);box-shadow:0 16px 32px -28px rgba(21,33,46,.35)}
+.phase2-trust img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid rgba(184,150,71,.5)}
+.phase2-trust strong{display:block;color:var(--ink,#15212e);font-family:Fraunces,Georgia,serif;font-size:1rem;line-height:1.15}
+.phase2-trust span{display:block;color:var(--ink-soft,#4a5663);font-size:.88rem;line-height:1.45;margin-top:3px}
+.phase2-trust .trust-mini{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.phase2-trust .trust-mini b{font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--brass,#9a7a2e);background:rgba(184,150,71,.12);border-radius:999px;padding:4px 7px}
+@media(max-width:720px){.phase2-trust{margin:14px 0;padding:12px;grid-template-columns:56px 1fr}.phase2-trust img{width:56px;height:56px}.phase2-trust span{font-size:.84rem}.phase2-trust .trust-mini b{font-size:.66rem}}
+
 /* ---------- Phase 1 mobile conversion bar ---------- */
 .mobile-conversion-bar{display:none}
 @media(max-width:720px){
@@ -216,6 +226,16 @@ a,.btn,.tile,.card,.submit,.field input,.field select,.field textarea,.nav-links
     </ul>
     <div class="actions"><a class="btn primary" href="#caseReviewTitle">Request a Free Case Review</a><a class="btn ghost" href="tel:+19096096685" aria-label="Call Berhe Jones LLP at 909-609-6685">Call 909-609-6685</a></div>
     <p class="fine">Initial case review is free. If Berhe Jones LLP accepts a matter, fees, costs, and scope are governed by a written agreement.</p>
+
+    <aside class="phase2-trust" aria-label="Attorney-led intake guardrails">
+      <img src="/images/tam-berhe.jpg" width="200" height="200" alt="Attorney Tam Berhe" decoding="async" />
+      <div>
+        <strong>Reviewed through an attorney-led fit screen.</strong>
+        <span>The first pass looks for deadlines, conflicts, responsible parties, proof, harm, and a realistic recovery route. No representation starts until conflicts clear and a written agreement is signed.</span>
+        <div class="trust-mini" aria-label="Case-review checks"><b>Deadline</b><b>Proof</b><b>Recovery source</b></div>
+      </div>
+    </aside>
+
   </div>
   <aside class="review-panel" aria-label="How the case review is screened">
     <div class="review-step"><b>1</b><div><h3>Timing</h3><p>Government claim windows, filing deadlines, hearings, denials, and evidence issues are screened first.</p></div></div>
@@ -287,6 +307,39 @@ a,.btn,.tile,.card,.submit,.field input,.field select,.field textarea,.nav-links
     });
   });
 })();
+
+  // Phase 2 CTA tracking. No cookies, no PII; dashboard stores aggregate CTA/page metadata.
+  (function(){
+    var endpoint = 'https://admin.berhelaw.com/api/events/cta';
+    function track(link){
+      try {
+        var payload = new URLSearchParams();
+        payload.set('event', 'cta_click');
+        payload.set('label', (link.getAttribute('aria-label') || link.textContent || '').trim().slice(0, 120));
+        payload.set('href', link.getAttribute('href') || '');
+        payload.set('page_url', window.location.href);
+        payload.set('referrer', document.referrer || '');
+        if (navigator.sendBeacon) {
+          navigator.sendBeacon(endpoint, payload);
+        } else {
+          fetch(endpoint, {method:'POST', mode:'no-cors', body: payload, keepalive: true});
+        }
+      } catch(e) {}
+    }
+    document.querySelectorAll('a.mobile-conversion-call,a.mobile-conversion-review,a.nav-review-cta,.hero-actions a,.actions a.btn').forEach(function(link){
+      link.addEventListener('click', function(){ track(link); }, {passive:true});
+    });
+    document.querySelectorAll('form[action*="/api/leads/case-review"]').forEach(function(form){
+      form.addEventListener('submit', function(){
+        if (!form.querySelector('input[name="page_url"]')) {
+          var page = document.createElement('input'); page.type='hidden'; page.name='page_url'; page.value=window.location.href; form.appendChild(page);
+        }
+        if (!form.querySelector('input[name="referrer"]')) {
+          var ref = document.createElement('input'); ref.type='hidden'; ref.name='referrer'; ref.value=document.referrer || ''; form.appendChild(ref);
+        }
+      });
+    });
+  })();
 </script>
 
 </body>

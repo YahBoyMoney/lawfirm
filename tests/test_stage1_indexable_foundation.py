@@ -394,6 +394,25 @@ def test_public_cta_language_uses_free_case_review():
         assert "Request free screening" not in text
 
 
+def test_phase2_attorney_trust_and_tracking_are_present():
+    expected = {
+        ROOT / "index.html": "Attorney-supervised screening by Tam Berhe.",
+        PUBLIC_PAGES["/free-case-review/"]: "Reviewed through an attorney-led fit screen.",
+    }
+    for path, heading in expected.items():
+        doc = page_doc(path)
+        trust = doc.select_one(".phase2-trust")
+        assert trust is not None, f"{path} needs the Phase 2 attorney trust strip"
+        assert heading in trust.get_text(" ", strip=True)
+        img = trust.select_one('img[src="/images/tam-berhe.jpg"][alt="Attorney Tam Berhe"]')
+        assert img is not None
+        assert img.get("width") == "200" and img.get("height") == "200"
+        text = path.read_text(encoding="utf-8")
+        assert "https://admin.berhelaw.com/api/events/cta" in text
+        assert "Phase 2 CTA tracking" in text
+        assert "page_url" in text and "referrer" in text
+
+
 def test_homepage_consent_checkbox_has_explicit_label():
     doc = page_doc(ROOT / "index.html")
     form = doc.select_one("#caseForm")
