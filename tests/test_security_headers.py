@@ -54,8 +54,8 @@ def test_root_security_headers_present_and_well_formed():
         assert directive in permissions_policy, f"Permissions-Policy missing {directive}"
 
     csp = headers.get("Content-Security-Policy", "")
-    assert "form-action 'self' https://docs.google.com" in csp
-    assert "connect-src 'self' https://docs.google.com" in csp
+    assert "form-action 'self' https://admin.berhelaw.com" in csp
+    assert "connect-src 'self' https://admin.berhelaw.com" in csp
     assert "https://fonts.googleapis.com" in csp
     assert "https://fonts.gstatic.com" in csp
     assert "object-src 'none'" in csp
