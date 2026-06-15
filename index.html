@@ -2644,6 +2644,233 @@
 .phase2-trust .trust-mini b{font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--brass,#9a7a2e);background:rgba(184,150,71,.12);border-radius:999px;padding:4px 7px}
 @media(max-width:720px){.phase2-trust{margin:12px 0;padding:10px;grid-template-columns:48px 1fr}.phase2-trust img{width:48px;height:48px}.phase2-trust span{font-size:.82rem;line-height:1.35}.phase2-trust .trust-mini{gap:4px;margin-top:6px}.phase2-trust .trust-mini b{font-size:.62rem;padding:3px 6px}.hero .phase2-trust{order:8}.phase2-trust.phase2-compact span{display:none}.phase2-trust.phase2-compact .trust-mini{margin-top:5px}}
 
+/* ---------- Phase 3 visual command panel: real photos + legal-tech motion, no fake claims ---------- */
+.hero-visual{
+  align-self:center;
+  position:relative;
+  scroll-margin-top:96px;
+  min-height:560px;
+  border:1px solid rgba(239,227,194,.28);
+  border-radius:24px;
+  padding:16px;
+  background:
+    linear-gradient(180deg,rgba(7,21,37,.78),rgba(7,21,37,.92)),
+    radial-gradient(320px 240px at 86% 10%,rgba(226,184,104,.22),transparent 66%);
+  box-shadow:0 34px 90px -42px rgba(0,0,0,.74),inset 0 1px 0 rgba(255,255,255,.1);
+  overflow:hidden;
+  isolation:isolate;
+}
+.hero-visual::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(to right,rgba(255,255,255,.045) 1px,transparent 1px),
+    linear-gradient(to bottom,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:38px 38px;
+  mask-image:linear-gradient(180deg,rgba(0,0,0,.72),transparent 82%);
+  -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.72),transparent 82%);
+  pointer-events:none;
+  z-index:-1;
+}
+.hero-visual::after{
+  content:"";
+  position:absolute;
+  left:-40%;
+  right:-40%;
+  top:34%;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(226,184,104,.76),transparent);
+  animation:bj-scanline 4.8s ease-in-out infinite;
+  opacity:.86;
+  pointer-events:none;
+}
+@keyframes bj-scanline{
+  0%,100%{transform:translateY(-126px)}
+  50%{transform:translateY(212px)}
+}
+.visual-top{
+  display:grid;
+  grid-template-columns:86px 1fr;
+  gap:14px;
+  align-items:center;
+  margin-bottom:14px;
+}
+.visual-portrait{
+  width:86px;
+  height:86px;
+  border-radius:20px;
+  object-fit:cover;
+  border:2px solid rgba(226,184,104,.62);
+  box-shadow:0 18px 34px rgba(0,0,0,.32);
+}
+.visual-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:7px;
+  font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  font-size:10px;
+  letter-spacing:.18em;
+  color:#e7c57f;
+  text-transform:uppercase;
+}
+.visual-kicker::before{
+  content:"";
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#68d08d;
+  box-shadow:0 0 0 5px rgba(104,208,141,.13);
+}
+.visual-title{
+  margin:0;
+  color:#fff;
+  font-family:'Fraunces',Georgia,serif;
+  font-size:clamp(25px,2.3vw,33px);
+  line-height:1.02;
+  font-weight:500;
+}
+.visual-sub{
+  margin:7px 0 0;
+  color:#d8cdbc;
+  font-size:13.5px;
+  line-height:1.45;
+}
+.visual-dossier{
+  position:relative;
+  display:grid;
+  gap:12px;
+}
+.dossier-panel,
+.case-route-panel{
+  border:1px solid rgba(239,227,194,.22);
+  border-radius:18px;
+  background:rgba(5,17,30,.72);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 18px 42px -30px rgba(0,0,0,.84);
+  overflow:hidden;
+}
+.dossier-head{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  padding:13px 14px;
+  border-bottom:1px solid rgba(239,227,194,.16);
+  color:#e9dcc3;
+  font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  font-size:10px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.dossier-head .status{color:#81dfa0}
+.dossier-metrics{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1px;
+  background:rgba(239,227,194,.12);
+}
+.metric-tile{
+  min-height:96px;
+  padding:15px;
+  background:rgba(7,21,37,.9);
+}
+.metric-tile span{
+  display:block;
+  margin-bottom:10px;
+  color:#a99b85;
+  font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.metric-tile strong{
+  display:block;
+  color:#fff;
+  font-family:'Fraunces',Georgia,serif;
+  font-size:21px;
+  line-height:1.05;
+  font-weight:500;
+}
+.metric-tile small{display:block;margin-top:7px;color:#cfc3ae;line-height:1.35}
+.case-route-panel{padding:15px}
+.route-label{
+  margin:0 0 12px;
+  color:#e7c57f;
+  font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  font-size:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.route-track{display:grid;gap:10px;position:relative}
+.route-track::before{
+  content:"";
+  position:absolute;
+  left:13px;
+  top:20px;
+  bottom:20px;
+  width:1px;
+  background:linear-gradient(180deg,#e2b868,rgba(226,184,104,.12));
+}
+.route-step{
+  display:grid;
+  grid-template-columns:28px 1fr auto;
+  gap:10px;
+  align-items:center;
+  position:relative;
+  color:#f7efe1;
+}
+.route-step b{
+  position:relative;
+  z-index:1;
+  width:28px;
+  height:28px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:#e2b868;
+  color:#071525;
+  font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  font-size:11px;
+}
+.route-step span{font-weight:700;font-size:13.5px}
+.route-step small{color:#a99b85;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.visual-photo-strip{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.visual-photo-strip figure{
+  margin:0;
+  position:relative;
+  min-height:126px;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid rgba(239,227,194,.18);
+  background:#061426;
+}
+.visual-photo-strip img{width:100%;height:100%;object-fit:cover;filter:saturate(.96) contrast(1.05);transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.visual-photo-strip figure:hover img{transform:scale(1.05)}
+.visual-photo-strip figcaption{
+  position:absolute;
+  left:10px;
+  right:10px;
+  bottom:10px;
+  color:#fff;
+  font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  font-size:9.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  text-shadow:0 2px 10px rgba(0,0,0,.75);
+}
+@media(max-width:1180px){.hero-visual{min-height:520px}.metric-tile{min-height:86px}}
+@media(max-width:980px){.hero-visual{max-width:680px;min-height:auto}.hero-grid{grid-template-columns:1fr}}
+@media(max-width:560px){
+  .hero-visual{margin-top:8px;padding:12px;border-radius:18px}
+  .visual-top{grid-template-columns:62px 1fr}.visual-portrait{width:62px;height:62px;border-radius:16px}.visual-title{font-size:23px}.visual-sub{font-size:12.5px}
+  .dossier-metrics,.visual-photo-strip{grid-template-columns:repeat(2,1fr)}.metric-tile{min-height:112px;padding:12px}.metric-tile strong{font-size:18px}.metric-tile small{font-size:12px}.route-step{grid-template-columns:28px 1fr}.route-step small{display:none}.visual-photo-strip figure{min-height:92px}
+}
+@media(prefers-reduced-motion:reduce){.hero-visual::after{animation:none}.visual-photo-strip img{transition:none}}
+
 /* ---------- Phase 1 mobile conversion bar ---------- */
 .mobile-conversion-bar{display:none}
 @media(max-width:720px){
@@ -2790,6 +3017,49 @@
         </div>
       </figure>
     </div>
+
+    <aside class="hero-visual reveal from-right" aria-label="Visual case review command panel">
+      <div class="visual-top">
+        <img class="visual-portrait" src="/images/tam-berhe.jpg" alt="Attorney Tam Berhe" width="200" height="200" decoding="async" />
+        <div>
+          <span class="visual-kicker">Live review framework</span>
+          <h2 class="visual-title">Real attorney screening, not a generic intake funnel.</h2>
+          <p class="visual-sub">Deadline, proof, harm, recovery source, and fit are checked before any representation begins.</p>
+        </div>
+      </div>
+
+      <div class="visual-dossier">
+        <div class="dossier-panel" aria-label="Attorney case screen dashboard">
+          <div class="dossier-head"><span>Case screen dashboard</span><span class="status">Active framework</span></div>
+          <div class="dossier-metrics">
+            <div class="metric-tile"><span>01 · Timing</span><strong>Deadline first</strong><small>Government windows, filing dates, preservation risk.</small></div>
+            <div class="metric-tile"><span>02 · Proof</span><strong>Evidence path</strong><small>Photos, records, witnesses, notices, policies.</small></div>
+            <div class="metric-tile"><span>03 · Harm</span><strong>Documentable loss</strong><small>Medical, wage, property, civil, or financial impact.</small></div>
+            <div class="metric-tile"><span>04 · Leverage</span><strong>Recovery source</strong><small>Insurance, responsible party, statutory fee path.</small></div>
+          </div>
+        </div>
+
+        <div class="case-route-panel" aria-label="Review route timeline">
+          <p class="route-label">Intake route</p>
+          <div class="route-track">
+            <div class="route-step"><b>1</b><span>Conflict-safe facts</span><small>Start</small></div>
+            <div class="route-step"><b>2</b><span>Attorney fit screen</span><small>Review</small></div>
+            <div class="route-step"><b>3</b><span>Accept, request records, refer, or decline</span><small>Decision</small></div>
+          </div>
+        </div>
+
+        <div class="visual-photo-strip" aria-label="Berhe Jones firm photo tiles">
+          <figure>
+            <picture><source srcset="/images/case-fit-team.webp" type="image/webp" /><img src="/images/case-fit-team.jpg" alt="Berhe Jones LLP team standing in the firm lobby" width="960" height="720" decoding="async" /></picture>
+            <figcaption>Firm presence</figcaption>
+          </figure>
+          <figure>
+            <picture><source srcset="/images/berhe-jones-hero-team.webp" type="image/webp" /><img src="/images/berhe-jones-hero-team.jpg" alt="Berhe Jones LLP team photo used for the homepage hero" width="1280" height="720" decoding="async" /></picture>
+            <figcaption>California matters</figcaption>
+          </figure>
+        </div>
+      </div>
+    </aside>
 
   </div>
   <a class="scroll-cue" href="#intake" aria-label="Scroll to case review form"><span class="line" aria-hidden="true"></span>Request review</a>

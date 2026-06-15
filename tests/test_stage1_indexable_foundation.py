@@ -413,6 +413,22 @@ def test_phase2_attorney_trust_and_tracking_are_present():
         assert "page_url" in text and "referrer" in text
 
 
+def test_phase3_homepage_visual_command_panel_uses_real_assets_and_safe_copy():
+    doc = page_doc(ROOT / "index.html")
+    visual = doc.select_one(".hero-visual")
+    assert visual is not None, "homepage hero needs the Phase 3 visual command panel"
+    assert "Real attorney screening, not a generic intake funnel." in visual.get_text(" ", strip=True)
+    assert visual.select_one('img.visual-portrait[src="/images/tam-berhe.jpg"][alt="Attorney Tam Berhe"]') is not None
+    assert visual.select_one('img[src="/images/case-fit-team.jpg"][alt="Berhe Jones LLP team standing in the firm lobby"]') is not None
+    assert visual.select_one('img[src="/images/berhe-jones-hero-team.jpg"][alt="Berhe Jones LLP team photo used for the homepage hero"]') is not None
+    text = visual.get_text(" ", strip=True).lower()
+    assert "result" not in text and "guarantee" not in text and "testimonial" not in text
+    style = "\n".join(style_tag.get_text() for style_tag in doc.select("style"))
+    assert "Phase 3 visual command panel" in style
+    assert "bj-scanline" in style
+    assert "prefers-reduced-motion:reduce" in style
+
+
 def test_homepage_consent_checkbox_has_explicit_label():
     doc = page_doc(ROOT / "index.html")
     form = doc.select_one("#caseForm")
