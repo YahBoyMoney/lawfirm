@@ -10,6 +10,7 @@ PUBLIC_PAGES = {
     "/attorney-tam-berhe/": ROOT / "attorney-tam-berhe" / "index.html",
     "/case-review-process/": ROOT / "case-review-process" / "index.html",
     "/free-case-review/": ROOT / "free-case-review" / "index.html",
+    "/living-trust/": ROOT / "living-trust" / "index.html",
     "/referrals-co-counsel/": ROOT / "referrals-co-counsel" / "index.html",
     "/landing/truck-fleet-rideshare-accident-california/": ROOT / "landing" / "truck-fleet-rideshare-accident-california" / "index.html",
     "/landing/garden-grove-chemical-leak/": ROOT / "landing" / "garden-grove-chemical-leak" / "index.html",
@@ -358,9 +359,19 @@ def test_garden_grove_incident_media_images_are_performance_safe():
 
 def test_public_pages_have_mobile_conversion_bar():
     pages = {"/": ROOT / "index.html", **PUBLIC_PAGES}
+    special_specs = {
+        "/living-trust/": {
+            "label": "Quick living trust actions",
+            "text": "Living Trust Guide",
+            "aria": "Request the living trust starter guide",
+            "href": "#caseReviewTitle",
+        },
+    }
     for route, path in pages.items():
         doc = page_doc(path)
-        bar = doc.select_one('.mobile-conversion-bar[aria-label="Quick case review actions"]')
+        special = special_specs.get(route)
+        expected_bar_label = special["label"] if special else "Quick case review actions"
+        bar = doc.select_one(f'.mobile-conversion-bar[aria-label="{expected_bar_label}"]')
         assert bar is not None, f"{route} needs the Phase 1 mobile conversion bar"
         call = bar.select_one('a.mobile-conversion-call[href="tel:+19096096685"]')
         review = bar.select_one('a.mobile-conversion-review')
@@ -368,10 +379,14 @@ def test_public_pages_have_mobile_conversion_bar():
         assert call.get_text(" ", strip=True) == "Call Now"
         assert call.get("aria-label") == "Call Now for Berhe Jones LLP at 909-609-6685"
         assert review is not None, f"{route} needs a sticky case-review action"
-        assert review.get_text(" ", strip=True) == "Free Case Review"
-        assert review.get("aria-label") == "Request a free case review"
+        expected_review_text = special["text"] if special else "Free Case Review"
+        expected_review_aria = special["aria"] if special else "Request a free case review"
+        assert review.get_text(" ", strip=True) == expected_review_text
+        assert review.get("aria-label") == expected_review_aria
         href = str(review.get("href"))
-        if route == "/":
+        if special:
+            assert href == special["href"]
+        elif route == "/":
             assert href == "#intake"
         elif route == "/landing/garden-grove-chemical-leak/":
             assert href == "#case-review"
@@ -471,6 +486,10 @@ def test_visible_public_intake_required_fields_expose_aria_required():
             PUBLIC_PAGES["/free-case-review/"],
             'form[name="case-review"][aria-labelledby="caseReviewTitle"]',
         ),
+        "/living-trust/": (
+            PUBLIC_PAGES["/living-trust/"],
+            'form[name="living-trust-guide"][aria-labelledby="caseReviewTitle"]',
+        ),
         "/landing/truck-fleet-rideshare-accident-california/": (
             PUBLIC_PAGES["/landing/truck-fleet-rideshare-accident-california/"],
             'form[name="case-review"][aria-labelledby="caseReviewTitle"]',
@@ -483,6 +502,7 @@ def test_visible_public_intake_required_fields_expose_aria_required():
     expected_required_names = {
         "/": {"firstName", "lastName", "phone", "email", "consent"},
         "/free-case-review/": {"firstName", "lastName", "phone", "email", "summary", "consent"},
+        "/living-trust/": {"firstName", "lastName", "phone", "email", "summary", "consent"},
         "/landing/truck-fleet-rideshare-accident-california/": {
             "firstName",
             "lastName",
@@ -597,6 +617,18 @@ def test_visible_public_intake_text_fields_have_mobile_enter_key_hints():
                 "summary": "send",
             },
         ),
+        "/living-trust/": (
+            PUBLIC_PAGES["/living-trust/"],
+            'form[name="living-trust-guide"][aria-labelledby="caseReviewTitle"]',
+            {
+                "firstName": "next",
+                "lastName": "next",
+                "phone": "next",
+                "email": "next",
+                "county": "next",
+                "summary": "send",
+            },
+        ),
         "/landing/truck-fleet-rideshare-accident-california/": (
             PUBLIC_PAGES["/landing/truck-fleet-rideshare-accident-california/"],
             'form[name="case-review"][aria-labelledby="caseReviewTitle"]',
@@ -641,6 +673,10 @@ def test_visible_public_intake_name_fields_use_word_autocapitalization():
             PUBLIC_PAGES["/free-case-review/"],
             'form[name="case-review"][aria-labelledby="caseReviewTitle"]',
         ),
+        "/living-trust/": (
+            PUBLIC_PAGES["/living-trust/"],
+            'form[name="living-trust-guide"][aria-labelledby="caseReviewTitle"]',
+        ),
         "/landing/truck-fleet-rideshare-accident-california/": (
             PUBLIC_PAGES["/landing/truck-fleet-rideshare-accident-california/"],
             'form[name="case-review"][aria-labelledby="caseReviewTitle"]',
@@ -670,6 +706,11 @@ def test_visible_public_intake_summary_fields_use_sentence_autocapitalization():
         "/free-case-review/": (
             PUBLIC_PAGES["/free-case-review/"],
             'form[name="case-review"][aria-labelledby="caseReviewTitle"]',
+            "summary",
+        ),
+        "/living-trust/": (
+            PUBLIC_PAGES["/living-trust/"],
+            'form[name="living-trust-guide"][aria-labelledby="caseReviewTitle"]',
             "summary",
         ),
         "/landing/truck-fleet-rideshare-accident-california/": (
