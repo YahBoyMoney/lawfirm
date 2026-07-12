@@ -435,20 +435,13 @@
   ],
   "assertions": [
     {
-      "name": "hero--home controlled desktop sizing",
+      "name": "home-hero controlled desktop sizing",
       "passed": true,
       "details": {
         "marker": true,
-        "fontSize": 54.719997,
-        "bottom": 723.078125,
-        "objectPosition": "100% 50%"
-      }
-    },
-    {
-      "name": "hero--home deliberate image crop",
-      "passed": true,
-      "details": {
-        "objectPosition": "100% 50%"
+        "fontSize": 72,
+        "bottom": 927.203125,
+        "objectPosition": null
       }
     },
     {
@@ -474,7 +467,7 @@
       "details": {
         "suppressed": "true",
         "visibility": "hidden",
-        "secondaryBottom": 776.6875,
+        "secondaryBottom": 646.921875,
         "viewportHeight": 844
       }
     },

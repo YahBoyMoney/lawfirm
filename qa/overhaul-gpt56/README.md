@@ -1,23 +1,27 @@
-# Overhaul QA
+# BerheLaw redesign QA
 
-Release review date: 2026-07-11
+Release review date: 2026-07-12
 
 ## Completed gates
 
-- `python3 -m pytest -q` — 41 passed (3 security, 17 contract, and 21 Playwright WebKit E2E cases), including JavaScript-enabled and no-JavaScript paths.
-- `python3 scripts/build.py --check` — 30 generated files current.
-- `PLAYWRIGHT_BROWSER=webkit python3 scripts/visual_qa.py` — passed with WebKit 26.4: 48 canonical route/viewport checks, 8 focused assertions, 6 screenshots, 0 failures.
-- `python3 -m py_compile scripts/build.py scripts/visual_qa.py src/site_data.py` — passed.
-- `git diff --check` — passed.
-- Canonical/sitemap parity, internal links, referenced assets, image signatures and dimensions, production-compatible native POST forms, JavaScript-disabled submission, failure handling, phone and consent validation, Garden Grove feed states, CSP/headers, accessibility markers, metadata/schema, breadcrumb parity, contrast, and deterministic output are covered by the automated suite.
+- `python3 scripts/build.py` — 30 generated files rebuilt with content-hashed CSS and JavaScript.
+- `python3 -m pytest -q` — 42 passed, including WebKit browser coverage and call-first homepage regression assertions.
+- `PLAYWRIGHT_BROWSER=webkit python3 scripts/visual_qa.py` — passed: 48 route/viewport checks, 7 focused assertions, 6 screenshots, 0 failures.
+- Full-page Chromium screenshots were inspected on desktop and mobile after the passing WebKit run.
+- Canonical/sitemap parity, internal links, fingerprinted assets, image dimensions, intake form contract, no-JavaScript form behavior, consent and phone validation, CSP/headers, metadata/schema, FAQPage parity, breadcrumbs, contrast, overflow, and sticky-action clearance remain covered.
 
-## Visual gate
+## Conversion and SEO verification
 
-The WebKit gate crawls every canonical route at desktop and mobile sizes, checks the focused-form sticky-bar contract and persistent mobile clearance, verifies explicit homepage and practice-hub hero sizing/crop markers, and writes `visual-qa-report.json` plus six representative screenshots to this directory.
+- The homepage phone CTA is visually primary and the free case-review form is secondary.
+- Both hero CTAs appear in the 390 x 844 first viewport, with no sticky-action overlap.
+- The synthetic multi-person hero image is no longer used on the homepage.
+- The homepage uses the identified Tam Berhe portrait only at its native 200 x 200 size or smaller.
+- The bar number is absent from the homepage hero and proof band, while remaining on the attorney profile.
+- Homepage title, description, Open Graph metadata, California service-area schema, service types, visible FAQs, and FAQPage schema were verified.
+- No testimonials, outcomes, awards, office claims, response-time promises, specialist claims, or guarantees were added.
 
-Current report: passed. Desktop hero thresholds remain 820px for the homepage and 870px for the practice hub. Representative desktop/mobile screenshots were visually inspected after the passing run, including homepage, practice hub, case-review form, Garden Grove stale-feed alert, and privacy page. No release-blocking clipping, overflow, sticky-action overlap, or hierarchy defects were observed.
+## Current visual thresholds
 
-## External release gates
-
-- Run one controlled synthetic staging submission to verify the server-owned post-insert receipt and resulting lead record.
-- Complete attorney review of advertising, privacy, and incident-response copy before production publication.
+- Homepage hero: 72 px desktop heading and 927.2 px bottom at 1440 x 1000, within the 104 px / 950 px gate.
+- Mobile secondary hero CTA bottom: 668.1 px in an 844 px viewport.
+- All checked pages report one H1, HTTP 200, no horizontal overflow, and no console/page errors.

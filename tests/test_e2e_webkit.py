@@ -112,12 +112,13 @@ def test_wide_desktop_hero_copy_never_collapses(webkit_browser):
     install_routes(context)
     page = context.new_page()
     page.goto(f"{ORIGIN}/")
-    headline = page.locator(".hero-copy h1")
-    copy = page.locator(".hero-copy")
+    headline = page.locator(".home-hero-copy h1")
+    copy = page.locator(".home-hero-copy")
+    attorney_card = page.locator(".home-attorney-card")
     assert headline.is_visible()
-    assert headline.bounding_box()["width"] >= 320
+    assert headline.bounding_box()["width"] >= 480
     assert copy.evaluate("element => parseFloat(getComputedStyle(element).paddingLeft)") <= 64
-    assert page.locator(".hero-media").bounding_box()["x"] >= headline.bounding_box()["x"] + headline.bounding_box()["width"]
+    assert attorney_card.bounding_box()["x"] >= headline.bounding_box()["x"] + headline.bounding_box()["width"]
     context.close()
 
 

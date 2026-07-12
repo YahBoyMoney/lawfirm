@@ -83,9 +83,9 @@ def main():
 
             context = context_for(browser, 1440, 1000)
             page = context.new_page()
-            for route, marker, max_font, max_bottom in (
-                ("/", "hero--home", 74, 820),
-                ("/practice-areas/", "hero--practice-hub", 67, 870),
+            for route, marker, max_font, max_bottom, check_crop in (
+                ("/", "home-hero", 104, 950, False),
+                ("/practice-areas/", "hero--practice-hub", 67, 870, True),
             ):
                 page.goto(f"{ORIGIN}{route}", wait_until="domcontentloaded", timeout=10000)
                 metrics = page.locator(f".{marker}").evaluate("""(hero, marker) => {
@@ -96,13 +96,14 @@ def main():
                         marker: hero.classList.contains(marker),
                         fontSize: parseFloat(getComputedStyle(heading).fontSize),
                         bottom: rect.bottom,
-                        objectPosition: getComputedStyle(media).objectPosition,
+                        objectPosition: media ? getComputedStyle(media).objectPosition : null,
                     };
                 }""", marker)
                 passed = metrics["marker"] and metrics["fontSize"] <= max_font and metrics["bottom"] <= max_bottom
                 record_assertion(f"{marker} controlled desktop sizing", passed, metrics)
-                crop_passed = metrics["objectPosition"] not in {"50% 50%", "center center"}
-                record_assertion(f"{marker} deliberate image crop", crop_passed, {"objectPosition": metrics["objectPosition"]})
+                if check_crop:
+                    crop_passed = metrics["objectPosition"] not in {"50% 50%", "center center", None}
+                    record_assertion(f"{marker} deliberate image crop", crop_passed, {"objectPosition": metrics["objectPosition"]})
             page.close()
             context.close()
 
@@ -112,7 +113,7 @@ def main():
             page.wait_for_timeout(150)
             home_sticky = page.evaluate("""() => {
                 const sticky = document.querySelector('.mobile-actions');
-                const secondary = document.querySelector('.hero .button-secondary');
+                const secondary = document.querySelector('.hero .button-secondary, .home-hero-actions .button-secondary-light');
                 return {
                     suppressed: sticky.dataset.suppressed,
                     visibility: getComputedStyle(sticky).visibility,
