@@ -107,6 +107,20 @@ def test_mobile_navigation_remains_available_without_javascript(webkit_browser):
     context.close()
 
 
+def test_wide_desktop_hero_copy_never_collapses(webkit_browser):
+    context = webkit_browser.new_context(viewport={"width": 2560, "height": 1440})
+    install_routes(context)
+    page = context.new_page()
+    page.goto(f"{ORIGIN}/")
+    headline = page.locator(".hero-copy h1")
+    copy = page.locator(".hero-copy")
+    assert headline.is_visible()
+    assert headline.bounding_box()["width"] >= 320
+    assert copy.evaluate("element => parseFloat(getComputedStyle(element).paddingLeft)") <= 64
+    assert page.locator(".hero-media").bounding_box()["x"] >= headline.bounding_box()["x"] + headline.bounding_box()["width"]
+    context.close()
+
+
 def test_valid_form_post_gets_only_controlled_server_acknowledgement(webkit_browser):
     captured = {}
 
