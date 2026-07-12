@@ -102,13 +102,24 @@ def schema(route, title, description, body, kind="WebPage"):
         "isPartOf": {"@id": "https://berhelaw.com/#website"},
     }
     if route == "/":
-        return json.dumps({
-            "@context": "https://schema.org", "@graph": [
-                {"@type": "WebSite", "@id": "https://berhelaw.com/#website", "url": "https://berhelaw.com/", "name": "Berhe Jones LLP"},
-                {"@type": "LegalService", "@id": "https://berhelaw.com/#firm", "name": "Berhe Jones LLP", "alternateName": "The Berhe Law Firm", "url": "https://berhelaw.com/", "telephone": "+1-909-609-6685", "image": "https://berhelaw.com/images/og-berhe-jones-llp.png"},
-                page,
-            ]
-        }, separators=(",", ":"))
+        faq_entities = [
+            {"@type": "Question", "name": html.unescape(re.sub(r"<[^>]+>", "", question)), "acceptedAnswer": {"@type": "Answer", "text": html.unescape(re.sub(r"<[^>]+>", "", answer))}}
+            for question, answer in re.findall(r'<details class="faq-item"><summary>(.*?)</summary><p>(.*?)</p></details>', body)
+        ]
+        firm = {
+            "@type": "LegalService", "@id": "https://berhelaw.com/#firm", "name": "Berhe Jones LLP",
+            "alternateName": "The Berhe Law Firm", "url": "https://berhelaw.com/", "telephone": "+1-909-609-6685",
+            "image": "https://berhelaw.com/images/og-berhe-jones-llp.png", "areaServed": {"@type": "State", "name": "California"},
+            "serviceType": ["Personal injury law", "Wrongful death law", "Employment law", "Civil rights law", "Consumer protection law", "Insurance bad faith litigation"],
+        }
+        graph = [
+            {"@type": "WebSite", "@id": "https://berhelaw.com/#website", "url": "https://berhelaw.com/", "name": "Berhe Jones LLP"},
+            firm,
+            page,
+        ]
+        if faq_entities:
+            graph.append({"@type": "FAQPage", "@id": "https://berhelaw.com/#frequently-asked-questions", "mainEntity": faq_entities})
+        return json.dumps({"@context": "https://schema.org", "@graph": graph}, separators=(",", ":"))
     graph = [
         page,
         {"@type": "LegalService", "@id": "https://berhelaw.com/#firm", "name": "Berhe Jones LLP", "alternateName": "The Berhe Law Firm", "url": "https://berhelaw.com/", "telephone": "+1-909-609-6685"},
@@ -157,7 +168,7 @@ def hero(h1, lead, eyebrow="California civil counsel", image="hero", primary="Re
 
 
 def proof_band():
-    return '''<aside class="proof-band" aria-label="Firm review facts"><div class="inner"><span><strong>Attorney</strong>Tam Berhe</span><span><strong>California Bar</strong>No. 298992</span><span><strong>Review</strong>Attorney supervised</span><span><strong>Framework</strong>Deadline · proof · damages · recovery</span></div></aside>'''
+    return f'''<aside class="proof-band" aria-label="Firm review facts"><div class="inner"><span><strong>Free first review</strong>No fee to tell us what happened</span><span><strong>Attorney-led</strong>Serious matters reviewed by counsel</span><span><strong>California matters</strong>Injury, work, rights, insurance, consumer</span><span><strong>Talk to the firm</strong><a href="{PHONE_HREF}" aria-label="Call Berhe Jones LLP at {PHONE_DISPLAY}">{PHONE_DISPLAY}</a></span></div></aside>'''
 
 
 def editorial(items):
@@ -177,13 +188,28 @@ def intake_form(form_id="case-review", matter="General civil matter", campaign="
 
 
 def homepage():
-    practice_items = [(p["name"], p["lead"], f'/practice-areas/{p["slug"]}/') for p in PRACTICES]
-    body = '<main id="main">' + hero("Serious case? Start with the facts that determine whether it can move.", "Berhe Jones LLP screens serious California civil matters through deadlines, proof, damages, and a realistic recovery source.", marker="home") + proof_band()
-    body += f'''<section class="section"><div class="section-inner split"><div><span class="eyebrow">A disciplined first screen</span><h2>Real attorney review, built around decisions.</h2></div><div><p class="section-intro">The first request does not need every record. It needs enough reliable information to identify the parties, timing, harm, available proof, and practical path.</p>{editorial([("Deadline first","Some claims, notices, and evidence require prompt action. The firm identifies urgency without offering a one-size-fits-all deadline.","/resources/deadlines-and-early-review/"),("Proof and causation","Documents, witnesses, medical records, communications, and a clear chronology make responsibility and harm easier to evaluate.","/resources/prepare-for-case-review/"),("Damages and recovery","A serious review considers measurable harm together with insurance, assets, statutory remedies, and collectability.","/case-review-process/")])}</div></div></section>'''
-    body += f'<section class="section paper"><div class="section-inner"><span class="eyebrow">Practice index</span><h2>Choose the path closest to the problem.</h2><p class="section-intro">Labels come after the core screen. Each page explains the facts and records that matter for that category.</p>{editorial(practice_items)}</div></section>'
-    body += f'''<section class="section"><div class="section-inner split"><div class="portrait"><img src="/images/tam-berhe.jpg" alt="Tam Berhe, California attorney" width="200" height="200" decoding="async" loading="lazy"></div><div><span class="eyebrow">Attorney profile</span><h2>Tam Berhe</h2><p class="section-intro">Tamerat S. Berhe, State Bar of California No. 298992, reviews selected serious civil inquiries for fit, conflicts, deadlines, evidence, and next steps.</p><div class="actions"><a class="button button-primary" href="/attorney-tam-berhe/">Read the attorney profile</a><a class="button button-secondary" href="/case-review-process/">See the review process</a></div></div></div></section>'''
-    body += f'<section class="section deep"><div class="section-inner intake-wrap"><div><span class="eyebrow">Begin carefully</span><h2>Send the essentials, not the whole file.</h2><p class="section-intro">Name the parties, key dates, what happened, the harm, and any deadline you know about. Hold privileged and highly sensitive records for an approved follow-up channel.</p></div>{intake_form("home-review", source_route="/")}</div></section></main>'
-    return document("/", "Berhe Jones LLP | California Trial and Contingency Counsel", "Berhe Jones LLP represents Californians in serious injury, wrongful death, employment, civil rights, and consumer protection matters. Call 909-609-6685.", body)
+    practice_cards = "".join(
+        f'''<article class="home-practice-card"><span class="home-practice-number">{index:02d}</span><h3><a href="/practice-areas/{p["slug"]}/">{esc(p["name"])}</a></h3><p>{esc(p["lead"])}</p><a class="text-link" href="/practice-areas/{p["slug"]}/">See how we review these cases <span aria-hidden="true">→</span></a></article>'''
+        for index, p in enumerate(PRACTICES, 1)
+    )
+    faqs = [
+        ("How much does it cost to call about my case?", "There is no fee to tell the firm what happened and request an initial case review. If representation is offered, fees, costs, and scope are explained in a written agreement before representation begins."),
+        ("What kinds of cases does Berhe Jones LLP review?", "The firm reviews serious California personal injury and wrongful death, employment, civil rights, consumer and Lemon Law, insurance bad faith, catastrophic injury, and select civil litigation matters."),
+        ("Why should I call instead of waiting?", "Some claims involve short notice periods, filing deadlines, disappearing video, changing accident scenes, unavailable witnesses, or records that can be overwritten. A prompt call helps identify whether timing or preservation needs immediate attention."),
+        ("What should I have ready when I call?", "Be ready to identify the people and organizations involved, key dates, what happened, the harm or loss, any treatment or written notices, and any deadline you know about. You do not need to organize the entire file before calling."),
+        ("Does a call or form submission make the firm my lawyer?", "No. Contact does not create an attorney-client relationship. Representation begins only after conflicts review and a signed written agreement."),
+    ]
+    faq_html = "".join(f'<details class="faq-item"><summary>{esc(question)}</summary><p>{esc(answer)}</p></details>' for question, answer in faqs)
+    body = f'''<main id="main">
+<section class="home-hero"><div class="home-hero-inner"><div class="home-hero-copy"><span class="eyebrow">California civil law firm</span><h1>When something serious has happened, your next move matters.</h1><p class="home-hero-lead">Injured. Wrongfully terminated. Denied by an insurer. Harmed by misconduct. Berhe Jones LLP helps Californians take the first step toward answers, accountability, and a practical path forward.</p><div class="home-hero-actions"><a class="button button-call" href="{PHONE_HREF}" aria-label="Call Berhe Jones LLP now at {PHONE_DISPLAY}"><span>Call now</span><strong>{PHONE_DISPLAY}</strong></a><a class="button button-secondary-light" href="/free-case-review/">Start a free case review</a></div><p class="home-hero-urgency"><strong>Deadlines and evidence do not wait.</strong> If the matter is urgent, call now. A call does not create an attorney-client relationship.</p></div><aside class="home-attorney-card" aria-label="Attorney-led case review"><img src="/images/tam-berhe.jpg" alt="Tam Berhe, California attorney" width="200" height="200" decoding="async"><div><span class="eyebrow">Attorney-led review</span><h2>Tell us what happened.</h2><p>Start with the event, the people or organizations involved, the harm, and any deadline. You do not need every document before you call.</p><a class="text-link text-link-light" href="/attorney-tam-berhe/">Meet Tam Berhe <span aria-hidden="true">→</span></a></div></aside></div></section>
+{proof_band()}
+<section class="section home-stakes"><div class="section-inner"><div class="home-section-heading"><div><span class="eyebrow">Serious problems. Focused legal review.</span><h2>When the stakes are high, start here.</h2></div><p>People usually call because something has already changed their health, work, family, finances, or freedom. Choose the issue closest to yours, or call if you are not sure where it fits.</p></div><div class="home-practice-grid">{practice_cards}</div><div class="home-inline-cta"><p><strong>Not sure which category fits?</strong> Tell us what happened. The first conversation starts with your facts, not a legal label.</p><a class="button button-primary" href="{PHONE_HREF}">Call {PHONE_DISPLAY}</a></div></div></section>
+<section class="home-urgency"><div class="section-inner home-urgency-grid"><div><span class="eyebrow">Why call now</span><h2>The facts can stay the same while your options get smaller.</h2></div><div class="home-reasons"><article><strong>Deadlines can be short</strong><p>Government claims, agency matters, insurance notices, and court deadlines may require action sooner than expected.</p></article><article><strong>Evidence can disappear</strong><p>Video can be overwritten. Vehicles can be repaired. Scenes change. Witnesses become harder to locate.</p></article><article><strong>Early choices matter</strong><p>Recorded statements, releases, workplace responses, and insurer communications can affect what happens next.</p></article><a class="button button-call button-call-wide" href="{PHONE_HREF}" aria-label="Call Berhe Jones LLP now at {PHONE_DISPLAY}"><span>Talk to the firm</span><strong>{PHONE_DISPLAY}</strong></a></div></div></section>
+<section class="section home-advocate"><div class="section-inner home-advocate-grid"><div class="home-portrait"><img src="/images/tam-berhe.jpg" alt="Tam Berhe, California attorney" width="200" height="200" decoding="async" loading="lazy"></div><div><span class="eyebrow">Your first step is attorney-led</span><h2>A serious matter deserves more than a generic intake script.</h2><p class="section-intro">Tam Berhe reviews selected California civil matters for conflicts, urgency, legal fit, available proof, and the next practical move. The goal of the first review is clarity: what matters now, what should be preserved, and whether the firm may be able to help.</p><div class="actions"><a class="button button-primary" href="{PHONE_HREF}">Call {PHONE_DISPLAY}</a><a class="button button-secondary" href="/attorney-tam-berhe/">Attorney profile</a></div></div></div></section>
+<section class="section paper home-faq"><div class="section-inner"><div class="home-section-heading"><div><span class="eyebrow">Before you call</span><h2>Questions people ask at the beginning.</h2></div><p>You do not need to know the legal name of your claim. Start with what happened and what changed because of it.</p></div><div class="faq-list">{faq_html}</div></div></section>
+<section class="section deep"><div class="section-inner intake-wrap"><div><span class="eyebrow">Prefer to start online?</span><h2>Send a short summary for a free case review.</h2><p class="section-intro">Name the parties, key dates, what happened, the harm, and any deadline you know about. Do not send privileged or highly sensitive records through this public form. If time may matter, call {PHONE_DISPLAY} instead.</p><a class="home-form-call" href="{PHONE_HREF}">Call now: {PHONE_DISPLAY}</a></div>{intake_form("home-review", heading="Request a free case review", source_route="/")}</div></section>
+</main>'''
+    return document("/", "California Personal Injury & Civil Rights Lawyer | Berhe Jones LLP", "Injured, mistreated at work, denied insurance, or harmed by misconduct? Call Berhe Jones LLP at 909-609-6685 for a free California case review.", body)
 
 
 def practice_page(p):

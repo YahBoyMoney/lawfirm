@@ -259,8 +259,26 @@ def test_forms_have_mobile_and_accessibility_contract():
 def test_visual_qa_markers_and_mobile_sticky_contract():
     home = soup(ROOT / "index.html")
     practice_hub = soup(ROOT / "practice-areas" / "index.html")
-    assert home.select_one("section.hero.hero--home")
+    assert home.select_one("section.home-hero")
     assert practice_hub.select_one("section.hero.hero--practice-hub.hero--fit-image")
+
+    hero_text = home.select_one(".home-hero-copy").get_text(" ", strip=True)
+    assert "When something serious has happened, your next move matters." in hero_text
+    primary_call = home.select_one('.home-hero-actions a.button-call[href^="tel:"]')
+    assert primary_call and "Call now" in primary_call.get_text(" ", strip=True)
+    assert home.select_one('.home-hero-actions a[href="/free-case-review/"]')
+    assert "298992" not in home.select_one(".home-hero").get_text(" ", strip=True)
+    assert "298992" not in home.select_one(".proof-band").get_text(" ", strip=True)
+    assert len(home.select(".faq-item")) >= 5
+
+    metadata = json.loads(home.select_one('script[type="application/ld+json"]').string)
+    faq_nodes = [node for node in metadata.get("@graph", []) if node.get("@type") == "FAQPage"]
+    assert len(faq_nodes) == 1 and len(faq_nodes[0]["mainEntity"]) >= 5
+    firm = next(node for node in metadata["@graph"] if node.get("@id") == "https://berhelaw.com/#firm")
+    assert firm["areaServed"]["name"] == "California"
+    assert "Personal injury law" in firm["serviceType"]
+    assert home.title.get_text(strip=True) == "California Personal Injury & Civil Rights Lawyer | Berhe Jones LLP"
+    assert "free California case review" in home.select_one('meta[name="description"]')["content"]
 
     css = next((ROOT / "assets" / "css").glob("site.*.css")).read_text(encoding="utf-8")
     assert "--mobile-action-height:3.5rem" in css

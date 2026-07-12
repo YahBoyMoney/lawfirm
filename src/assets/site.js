@@ -36,7 +36,7 @@
       else suppressionReasons.delete(reason);
       renderMobileActions();
     };
-    const heroActions = document.querySelector('.hero .actions');
+    const heroActions = document.querySelector('.hero .actions, .home-hero-actions');
     if (heroActions && 'IntersectionObserver' in window) {
       setSuppressed('hero-actions-visible', true);
       const observer = new IntersectionObserver(([entry]) => {
