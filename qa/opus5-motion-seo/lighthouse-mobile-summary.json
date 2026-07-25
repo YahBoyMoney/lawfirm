@@ -1,0 +1,32 @@
+{
+  "testedUrl": "http://127.0.0.1:4191/",
+  "lighthouseVersion": "13.4.1",
+  "categories": {
+    "performance": 95,
+    "accessibility": 100,
+    "best-practices": 100,
+    "seo": 100
+  },
+  "metrics": {
+    "first-contentful-paint": {
+      "displayValue": "1.2\u00a0s",
+      "score": 0.99
+    },
+    "largest-contentful-paint": {
+      "displayValue": "2.9\u00a0s",
+      "score": 0.82
+    },
+    "cumulative-layout-shift": {
+      "displayValue": "0",
+      "score": 1
+    },
+    "total-blocking-time": {
+      "displayValue": "0\u00a0ms",
+      "score": 1
+    },
+    "speed-index": {
+      "displayValue": "1.3\u00a0s",
+      "score": 1
+    }
+  }
+}

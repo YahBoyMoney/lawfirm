@@ -10,10 +10,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from site_data import DBA, DISCLAIMER, GARDEN_SOURCES, PHONE_DISPLAY, PHONE_HREF, PRACTICES, ROUTES
+from site_data import (
+    DBA, DISCLAIMER, GARDEN_SOURCES, PHONE_DISPLAY, PHONE_HREF, PRACTICES,
+    RESOURCE_GUIDES, ROUTES,
+)
 
 ADMIN_ACTION = "https://admin.berhelaw.com/api/leads/case-review"
-RELEASE_DATE = "2026-07-11"
+RELEASE_DATE = "2026-07-24"
+REVIEW_LABEL = "Reviewed July 24, 2026"
 outputs = {}
 
 
@@ -48,6 +52,18 @@ NAV = [
     ("Referrals", "/referrals-co-counsel/"), ("Case review", "/free-case-review/"),
 ]
 
+# Address provenance: the existing privacy, terms, and disclaimer contact copy
+# below already used this responsible firm address before this footer/schema fix.
+RESPONSIBLE_FIRM_ADDRESS_TEXT = "The Berhe Law Firm, APC, 901 Via Piemonte, Suite 230, Ontario, CA 91764-8500"
+RESPONSIBLE_FIRM_POSTAL_ADDRESS = {
+    "@type": "PostalAddress",
+    "streetAddress": "901 Via Piemonte, Suite 230",
+    "addressLocality": "Ontario",
+    "addressRegion": "CA",
+    "postalCode": "91764-8500",
+    "addressCountry": "US",
+}
+
 
 def active(route, href):
     if href == "/practice-areas/" and route.startswith("/practice-areas/"):
@@ -61,22 +77,22 @@ def header(route):
         for label, href in NAV
     )
     return f'''<a class="skip-link" href="#main">Skip to main content</a>
-<header class="site-header"><div class="header-inner">
+<header class="site-header"><div class="scroll-progress" aria-hidden="true"><span class="scroll-progress-bar"></span></div><div class="header-inner">
   <a class="brand" href="/" aria-label="Berhe Jones LLP home"{' aria-current="page"' if route == '/' else ''}><img class="brand-logo" src="/images/berhe-jones-llp-logo-reverse.png" alt="Berhe Jones LLP" width="1305" height="308" decoding="async"></a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Open menu">Menu</button>
   <nav class="site-nav" id="site-navigation" aria-label="Primary navigation" data-open="false"><ul>{links}</ul></nav>
-  <a class="header-call" href="{PHONE_HREF}" aria-label="Call Berhe Jones LLP at {PHONE_DISPLAY}">{PHONE_DISPLAY}</a>
+  <a class="header-call" href="{PHONE_HREF}">{PHONE_DISPLAY}</a>
 </div></header>'''
 
 
 def footer():
     practices = "".join(f'<li><a href="/practice-areas/{p["slug"]}/">{esc(p["name"])}</a></li>' for p in PRACTICES)
     return f'''<footer class="site-footer"><div class="footer-grid">
-  <div><a class="brand" href="/" aria-label="Berhe Jones LLP home"><img class="brand-logo" src="/images/berhe-jones-llp-logo-reverse.png" alt="Berhe Jones LLP" width="1305" height="308" decoding="async"></a><p>{DBA}</p><p>Attorney-supervised screening for serious California civil matters.</p><p><a href="{PHONE_HREF}" aria-label="Call Berhe Jones LLP at {PHONE_DISPLAY}">{PHONE_DISPLAY}</a></p></div>
+  <div><a class="brand" href="/" aria-label="Berhe Jones LLP home"><img class="brand-logo" src="/images/berhe-jones-llp-logo-reverse.png" alt="Berhe Jones LLP" width="1305" height="308" decoding="async"></a><p>{DBA}</p><p>Attorney-supervised screening for serious California civil matters.</p><p>Responsible firm address: {esc(RESPONSIBLE_FIRM_ADDRESS_TEXT)}</p><p><a href="{PHONE_HREF}">{PHONE_DISPLAY}</a></p></div>
   <div><h2 class="eyebrow">Practice areas</h2><ul>{practices}<li><a href="/landing/truck-fleet-rideshare-accident-california/">Commercial vehicle matters</a></li></ul></div>
   <div><h2 class="eyebrow">Firm and resources</h2><ul><li><a href="/attorney-tam-berhe/">Tam Berhe</a></li><li><a href="/case-review-process/">Case review process</a></li><li><a href="/resources/">Resource library</a></li><li><a href="/living-trust/">Living trust planning</a></li><li><a href="/privacy.html">Privacy</a></li><li><a href="/disclaimer.html">Disclaimer</a></li><li><a href="/terms.html">Terms</a></li></ul></div>
 </div><p class="legal-note">{DISCLAIMER}</p></footer>
-<div class="mobile-actions" aria-label="Contact options"><a href="{PHONE_HREF}" aria-label="Call Berhe Jones LLP at {PHONE_DISPLAY}">Call now</a><a href="/free-case-review/">Case review</a></div>'''
+<div class="mobile-actions" aria-label="Contact options"><a href="{PHONE_HREF}">Call now</a><a href="/free-case-review/">Case review</a></div>'''
 
 
 def visible_breadcrumbs(body, route):
@@ -93,6 +109,35 @@ def visible_breadcrumbs(body, route):
     return items
 
 
+FAQ_PATTERN = r'<details class="faq-item"[^>]*><summary>(.*?)</summary><p>(.*?)</p></details>'
+
+
+def plain(value):
+    return html.unescape(re.sub(r"<[^>]+>", "", value))
+
+
+def faq_entities(body):
+    return [
+        {"@type": "Question", "name": plain(question), "acceptedAnswer": {"@type": "Answer", "text": plain(answer)}}
+        for question, answer in re.findall(FAQ_PATTERN, body)
+    ]
+
+
+def legalservice_schema(*, home=False):
+    node = {
+        "@type": "LegalService", "@id": "https://berhelaw.com/#firm", "name": "The Berhe Law Firm, APC",
+        "alternateName": ["Berhe Jones", "Berhe Jones LLP"], "url": "https://berhelaw.com/", "telephone": "+1-909-609-6685",
+        "address": RESPONSIBLE_FIRM_POSTAL_ADDRESS,
+    }
+    if home:
+        node.update({
+            "image": "https://berhelaw.com/images/og-berhe-jones-llp.png",
+            "areaServed": {"@type": "State", "name": "California"},
+            "serviceType": ["Personal injury law", "Wrongful death law", "Employment law", "Civil rights law", "Consumer protection law", "Insurance bad faith litigation"],
+        })
+    return node
+
+
 def schema(route, title, description, body, kind="WebPage"):
     page = {
         "@context": "https://schema.org", "@type": kind,
@@ -101,29 +146,33 @@ def schema(route, title, description, body, kind="WebPage"):
         "publisher": {"@id": "https://berhelaw.com/#firm"},
         "isPartOf": {"@id": "https://berhelaw.com/#website"},
     }
+    if kind == "LegalService":
+        page["address"] = RESPONSIBLE_FIRM_POSTAL_ADDRESS
+    if kind == "Article":
+        page.update({
+            "headline": title,
+            "author": {"@id": "https://berhelaw.com/#firm"},
+            "image": "https://berhelaw.com/images/og-berhe-jones-llp.png",
+            "datePublished": RELEASE_DATE,
+            "dateModified": RELEASE_DATE,
+            "mainEntityOfPage": {"@id": f"https://berhelaw.com{route}"},
+        })
+    questions = faq_entities(body)
     if route == "/":
-        faq_entities = [
-            {"@type": "Question", "name": html.unescape(re.sub(r"<[^>]+>", "", question)), "acceptedAnswer": {"@type": "Answer", "text": html.unescape(re.sub(r"<[^>]+>", "", answer))}}
-            for question, answer in re.findall(r'<details class="faq-item"><summary>(.*?)</summary><p>(.*?)</p></details>', body)
-        ]
-        firm = {
-            "@type": "LegalService", "@id": "https://berhelaw.com/#firm", "name": "Berhe Jones LLP",
-            "alternateName": "The Berhe Law Firm", "url": "https://berhelaw.com/", "telephone": "+1-909-609-6685",
-            "image": "https://berhelaw.com/images/og-berhe-jones-llp.png", "areaServed": {"@type": "State", "name": "California"},
-            "serviceType": ["Personal injury law", "Wrongful death law", "Employment law", "Civil rights law", "Consumer protection law", "Insurance bad faith litigation"],
-        }
         graph = [
             {"@type": "WebSite", "@id": "https://berhelaw.com/#website", "url": "https://berhelaw.com/", "name": "Berhe Jones LLP"},
-            firm,
+            legalservice_schema(home=True),
             page,
         ]
-        if faq_entities:
-            graph.append({"@type": "FAQPage", "@id": "https://berhelaw.com/#frequently-asked-questions", "mainEntity": faq_entities})
+        if questions:
+            graph.append({"@type": "FAQPage", "@id": "https://berhelaw.com/#frequently-asked-questions", "mainEntity": questions})
         return json.dumps({"@context": "https://schema.org", "@graph": graph}, separators=(",", ":"))
     graph = [
         page,
-        {"@type": "LegalService", "@id": "https://berhelaw.com/#firm", "name": "Berhe Jones LLP", "alternateName": "The Berhe Law Firm", "url": "https://berhelaw.com/", "telephone": "+1-909-609-6685"},
+        legalservice_schema(),
     ]
+    if questions:
+        graph.append({"@type": "FAQPage", "@id": f"https://berhelaw.com{route}#faq", "mainEntity": questions})
     breadcrumb_items = visible_breadcrumbs(body, route)
     if breadcrumb_items:
         graph.append({"@type": "BreadcrumbList", "@id": f"https://berhelaw.com{route}#breadcrumbs", "itemListElement": [
@@ -134,15 +183,16 @@ def schema(route, title, description, body, kind="WebPage"):
 
 
 def document(route, title, description, body, *, robots="index, follow", kind="WebPage"):
+    og_type = "article" if kind == "Article" else "website"
+    article_meta = (f'<meta property="article:published_time" content="{RELEASE_DATE}"><meta property="article:modified_time" content="{RELEASE_DATE}">' if kind == "Article" else "")
     return f'''<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="BerheLaw static builder"><meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="robots" content="{robots}"><title>{esc(title)}</title><meta name="description" content="{esc(description)}">
 <link rel="canonical" href="https://berhelaw.com{route}"><link rel="icon" href="/favicon.ico"><meta name="theme-color" content="#0b151d">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;family=Inter:wght@400;500;600;700&amp;display=swap" referrerpolicy="no-referrer">
-<link rel="stylesheet" href="{CSS}"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(description)}"><meta property="og:url" content="https://berhelaw.com{route}"><meta property="og:type" content="website"><meta property="og:site_name" content="Berhe Jones LLP"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://berhelaw.com/images/og-berhe-jones-llp.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Berhe Jones LLP branded social preview image for California legal services."><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{esc(title)}"><meta name="twitter:description" content="{esc(description)}"><meta name="twitter:image" content="https://berhelaw.com/images/og-berhe-jones-llp.png"><meta name="twitter:image:alt" content="Berhe Jones LLP branded social preview image for California legal services.">
+<link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{CSS}"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(description)}"><meta property="og:url" content="https://berhelaw.com{route}"><meta property="og:type" content="{og_type}">{article_meta}<meta property="og:site_name" content="Berhe Jones LLP"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://berhelaw.com/images/og-berhe-jones-llp.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Berhe Jones LLP branded social preview image for California legal services."><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{esc(title)}"><meta name="twitter:description" content="{esc(description)}"><meta name="twitter:image" content="https://berhelaw.com/images/og-berhe-jones-llp.png"><meta name="twitter:image:alt" content="Berhe Jones LLP branded social preview image for California legal services.">
 <script type="application/ld+json">{schema(route, title, description, body, kind)}</script>
 </head><body id="top">{header(route)}{body}{footer()}<script src="{SITE_JS}" defer></script><script src="{INTAKE_JS}" defer></script></body></html>'''
 
@@ -156,23 +206,95 @@ def breadcrumbs(items):
     return f'<nav class="breadcrumbs" aria-label="Breadcrumb"><ol>{rendered}</ol></nav>'
 
 
-def picture(name="hero", alt="Berhe Jones LLP team in a professional office setting"):
-    if name == "fit":
-        return '<picture><source srcset="/images/case-fit-team.webp" type="image/webp"><img src="/images/case-fit-team.jpg" alt="Berhe Jones LLP team working together" width="960" height="720" decoding="async" fetchpriority="high"></picture>'
-    return '<picture><source media="(max-width:600px)" srcset="/images/berhe-jones-hero-team-mobile.webp" type="image/webp"><source srcset="/images/berhe-jones-hero-team.webp" type="image/webp"><source media="(max-width:600px)" srcset="/images/berhe-jones-hero-team-mobile.jpg"><img src="/images/berhe-jones-hero-team.jpg" alt="'+esc(alt)+'" width="1280" height="720" decoding="async" fetchpriority="high"></picture>'
+CASE_ART_ALT = (
+    "Case files, folders, a brass chronology rule, and mapping lines arranged on a dark surface."
+)
 
 
-def hero(h1, lead, eyebrow="California civil counsel", image="hero", primary="Request a case review", primary_href="/free-case-review/", marker=""):
-    classes = "hero" + (f" hero--{marker}" if marker else "") + (" hero--fit-image" if image == "fit" else "")
-    return f'''<section class="{classes}"><div class="hero-grid"><div class="hero-copy"><span class="eyebrow">{esc(eyebrow)}</span><h1>{esc(h1)}</h1><p class="lead">{esc(lead)}</p><div class="actions"><a class="button button-primary" href="{primary_href}">{esc(primary)}</a><a class="button button-secondary" href="{PHONE_HREF}" aria-label="Call Berhe Jones LLP at {PHONE_DISPLAY}">Call {PHONE_DISPLAY}</a></div></div><div class="hero-media">{picture(image)}</div></div></section>'''
+def picture(name="case", alt=CASE_ART_ALT):
+    return ('<picture><source media="(max-width:600px)" srcset="/images/case-intelligence-hero-mobile.webp" type="image/webp">'
+            '<source srcset="/images/case-intelligence-hero.webp" type="image/webp">'
+            f'<img src="/images/case-intelligence-hero.jpg" alt="{esc(alt or CASE_ART_ALT)}" width="1672" height="940" decoding="async" fetchpriority="high"></picture>')
+
+
+def hero(h1, lead, eyebrow="California civil counsel", image="case", primary="Request a case review", primary_href="/free-case-review/", marker=""):
+    classes = "hero" + (f" hero--{marker}" if marker else "") + " hero--case-art"
+    return f'''<section class="{classes}" data-hero><div class="hero-grid"><div class="hero-copy"><span class="eyebrow">{esc(eyebrow)}</span><h1>{esc(h1)}</h1><p class="lead">{esc(lead)}</p><div class="actions"><a class="button button-primary" href="{primary_href}">{esc(primary)}</a><a class="button button-secondary" href="{PHONE_HREF}">Call {PHONE_DISPLAY}</a></div></div><div class="hero-media">{picture(image)}</div></div></section>'''
 
 
 def proof_band():
-    return f'''<aside class="proof-band" aria-label="Firm review facts"><div class="inner"><span><strong>Free first review</strong>No fee to tell us what happened</span><span><strong>Attorney-led</strong>Serious matters reviewed by counsel</span><span><strong>California matters</strong>Injury, work, rights, insurance, consumer</span><span><strong>Talk to the firm</strong><a href="{PHONE_HREF}" aria-label="Call Berhe Jones LLP at {PHONE_DISPLAY}">{PHONE_DISPLAY}</a></span></div></aside>'''
+    return f'''<aside class="proof-band" aria-label="Firm review facts"><div class="inner"><span><strong>Free first review</strong>No fee to tell us what happened</span><span><strong>Attorney-led</strong>Serious matters reviewed by counsel</span><span><strong>California matters</strong>Injury, work, rights, insurance, consumer</span><span><strong>Talk to the firm</strong><a href="{PHONE_HREF}">{PHONE_DISPLAY}</a></span></div></aside>'''
 
 
 def editorial(items):
-    return '<div class="editorial-list">' + ''.join(f'<article class="editorial-item"><h3>{esc(title)}</h3><div><p>{esc(text)}</p>{f"<a href={esc(href)!r}>Read more</a>" if href else ""}</div></article>' for title, text, href in items) + '</div>'
+    def entry(title, text, href):
+        link = f'<a class="text-link" href="{esc(href)}">Read more <span aria-hidden="true">→</span></a>' if href else ""
+        return f'<article class="editorial-item" data-reveal><h3>{esc(title)}</h3><div><p>{esc(text)}</p>{link}</div></article>'
+
+    return '<div class="editorial-list" data-reveal-group>' + ''.join(entry(*item) for item in items) + '</div>'
+
+
+def faq_block(faqs, heading="Questions people ask before they call.", eyebrow="Common questions", intro=""):
+    items = "".join(
+        f'<details class="faq-item" data-reveal><summary>{esc(question)}</summary><p>{esc(answer)}</p></details>'
+        for question, answer in faqs
+    )
+    lead = f'<p class="section-intro">{esc(intro)}</p>' if intro else ""
+    return (f'<div class="faq-panel" id="faq-panel"><span class="eyebrow">{esc(eyebrow)}</span><h2>{esc(heading)}</h2>{lead}'
+            f'<div class="faq-list" data-reveal-group>{items}</div></div>')
+
+
+def checklist(items, title, note=""):
+    entries = "".join(f'<li data-reveal>{esc(item)}</li>' for item in items)
+    footer = f'<p class="checklist-note">{esc(note)}</p>' if note else ""
+    return (f'<div class="checklist"><h3>{esc(title)}</h3><ul class="checklist-items" data-reveal-group>{entries}</ul>{footer}</div>')
+
+
+def expect_block(items, heading="What the first review actually does.", eyebrow="What to expect"):
+    entries = "".join(
+        f'<li data-reveal><strong>{esc(label)}</strong><p>{esc(text)}</p></li>' for label, text in items
+    )
+    return (f'<div class="expect-block"><span class="eyebrow">{esc(eyebrow)}</span><h2>{esc(heading)}</h2>'
+            f'<ol class="expect-list" data-reveal-group>{entries}</ol></div>')
+
+
+def related_block(links, heading="Keep reading"):
+    if not links:
+        return ""
+    items = "".join(f'<li data-reveal><a href="{esc(href)}">{esc(label)}<span aria-hidden="true">→</span></a></li>' for label, href in links)
+    return f'<nav class="related-links" aria-label="{esc(heading)}"><h2>{esc(heading)}</h2><ul data-reveal-group>{items}</ul></nav>'
+
+
+def cta_band(heading, text, *, secondary_label="Start a free case review", secondary_href="/free-case-review/", tone="paper"):
+    return f'''<aside class="cta-band cta-band--{tone}" data-reveal><div class="cta-band-copy"><h2>{esc(heading)}</h2><p>{esc(text)}</p></div><div class="cta-band-actions"><a class="button button-call" href="{PHONE_HREF}"><span>Call now</span><strong>{PHONE_DISPLAY}</strong></a><a class="button button-secondary" href="{esc(secondary_href)}">{esc(secondary_label)}</a></div></aside>'''
+
+
+CASE_TIMELINE = [
+    ("First call and conflicts screen",
+     "You describe what happened, who is involved, and any date you already know about. Parties are identified first, because a conflicts check controls whether a closer review is even possible.",
+     "Bring: the names of everyone involved, the event date, and any notice you have received."),
+    ("Preservation triage",
+     "Video, vehicles, devices, logs, scenes, and personnel access run on their own clocks. What may disappear first is identified before anyone starts drafting anything.",
+     "Bring: what physical items still exist, and who is holding the records you cannot reach."),
+    ("Chronology and records",
+     "A date-indexed record is built from what you already have. The goal is a sequence another person can follow and verify, with the gaps marked instead of hidden.",
+     "Bring: your date list, the documents you hold, and the exports you can still pull."),
+    ("Responsibility, harm, and coverage",
+     "Three questions get tested together: who may be responsible, what the harm actually is in documents, and whether an insurance layer, an organization, or another realistic recovery source exists.",
+     "Bring: medical, pay, repair, or accounting records, plus every insurer letter."),
+    ("Written next step",
+     "Possible next steps include an engagement discussion, a request for specific information, a referral, co-counsel review, or a decline. Contact alone is not acceptance, so keep pursuing your options unless and until a written agreement is signed.",
+     "Bring: your questions. The review is designed to clarify the available next step."),
+]
+
+
+def case_timeline(eyebrow="How a case review runs", heading="Five stages that organize the first review.",
+                  intro="Nothing here is a promise about a result. These stages show the questions that guide a first review before you pick up the phone."):
+    steps = "".join(
+        f'''<li class="case-step" data-timeline-step data-step="{index}"><span class="case-step-dot" aria-hidden="true"></span><div class="case-step-body"><span class="case-step-index">Stage {index:02d}</span><h3>{esc(title)}</h3><p>{esc(text)}</p><p class="case-step-bring">{esc(bring)}</p></div></li>'''
+        for index, (title, text, bring) in enumerate(CASE_TIMELINE, 1)
+    )
+    return f'''<section class="section case-review-timeline" id="how-review-works" data-timeline><div class="section-inner"><div class="home-section-heading" data-reveal><div><span class="eyebrow">{esc(eyebrow)}</span><h2>{esc(heading)}</h2></div><p>{esc(intro)}</p></div><div class="case-track"><div class="case-track-rail" aria-hidden="true"><span class="case-track-fill"></span></div><ol class="case-steps">{steps}</ol></div></div></section>'''
 
 
 def intake_form(form_id="case-review", matter="General civil matter", campaign="general", heading="Case review request", extra="", source_route="/"):
@@ -189,8 +311,18 @@ def intake_form(form_id="case-review", matter="General civil matter", campaign="
 
 def homepage():
     practice_cards = "".join(
-        f'''<article class="home-practice-card"><span class="home-practice-number">{index:02d}</span><h3><a href="/practice-areas/{p["slug"]}/">{esc(p["name"])}</a></h3><p>{esc(p["lead"])}</p><a class="text-link" href="/practice-areas/{p["slug"]}/">See how we review these cases <span aria-hidden="true">→</span></a></article>'''
+        f'''<article class="home-practice-card" data-reveal><span class="home-practice-number">{index:02d}</span><h3><a href="/practice-areas/{p["slug"]}/">{esc(p["name"])}</a></h3><p>{esc(p["card"])}</p><a class="text-link" href="/practice-areas/{p["slug"]}/">How this review works <span aria-hidden="true">→</span></a></article>'''
         for index, p in enumerate(PRACTICES, 1)
+    )
+    preserve_cards = [
+        ("Photograph what still exists", "Vehicles, property, injuries, work areas, and damaged items change fast. Photograph them now, keep the original files, and do not crop or edit them.", "/resources/after-a-collision-first-steps/", "First steps after a crash"),
+        ("Write the chronology today", "A dated list of what happened, who said what, and what changed afterward gives the reviewer a practical starting point.", "/resources/prepare-for-case-review/", "Prepare for a case review"),
+        ("Keep every letter and request", "Denials, estimates, notices, separation paperwork, and requests to sign something are the documents a review turns on. Save them exactly as received.", "/resources/insurance-claim-communication/", "Before you talk to an adjuster"),
+        ("Save what you may lose access to", "Work accounts, portals, app histories, and company records can close without warning. Export or print your own records while you still can.", "/resources/workplace-documentation/", "Document a workplace problem"),
+    ]
+    preserve_html = "".join(
+        f'<article class="preserve-card" data-reveal><h3>{esc(title)}</h3><p>{esc(text)}</p><a class="text-link" href="{href}">{esc(label)} <span aria-hidden="true">→</span></a></article>'
+        for title, text, href, label in preserve_cards
     )
     faqs = [
         ("How much does it cost to call about my case?", "There is no fee to tell the firm what happened and request an initial case review. If representation is offered, fees, costs, and scope are explained in a written agreement before representation begins."),
@@ -198,18 +330,30 @@ def homepage():
         ("Why should I call instead of waiting?", "Some claims involve short notice periods, filing deadlines, disappearing video, changing accident scenes, unavailable witnesses, or records that can be overwritten. A prompt call helps identify whether timing or preservation needs immediate attention."),
         ("What should I have ready when I call?", "Be ready to identify the people and organizations involved, key dates, what happened, the harm or loss, any treatment or written notices, and any deadline you know about. You do not need to organize the entire file before calling."),
         ("Does a call or form submission make the firm my lawyer?", "No. Contact does not create an attorney-client relationship. Representation begins only after conflicts review and a signed written agreement."),
+        ("What happens after the first review?", "Possible next steps include an engagement discussion, a request for specific information, a referral, co-counsel review, or a decline. Contact alone is not acceptance, and no response time is promised, so keep pursuing your options unless and until a written agreement is signed."),
+        ("Where does the firm handle matters?", "Berhe Jones LLP is a California civil practice and reviews matters connected to California. Matters outside the firm's practice may be referred or declined after review."),
+        ("What if I already have an attorney for this matter?", "Say so at the start. If you are represented, the firm will not step between you and your current counsel. Attorney-to-attorney referral and co-counsel questions go through the referrals page."),
     ]
-    faq_html = "".join(f'<details class="faq-item"><summary>{esc(question)}</summary><p>{esc(answer)}</p></details>' for question, answer in faqs)
     body = f'''<main id="main">
-<section class="home-hero"><div class="home-hero-inner"><div class="home-hero-copy"><span class="eyebrow">California civil law firm</span><h1>When something serious has happened, your next move matters.</h1><p class="home-hero-lead">Injured. Wrongfully terminated. Denied by an insurer. Harmed by misconduct. Berhe Jones LLP helps Californians take the first step toward answers, accountability, and a practical path forward.</p><div class="home-hero-actions"><a class="button button-call" href="{PHONE_HREF}" aria-label="Call Berhe Jones LLP now at {PHONE_DISPLAY}"><span>Call now</span><strong>{PHONE_DISPLAY}</strong></a><a class="button button-secondary-light" href="/free-case-review/">Start a free case review</a></div><p class="home-hero-urgency"><strong>Deadlines and evidence do not wait.</strong> If the matter is urgent, call now. A call does not create an attorney-client relationship.</p></div><aside class="home-attorney-card" aria-label="Attorney-led case review"><img src="/images/tam-berhe.jpg" alt="Tam Berhe, California attorney" width="200" height="200" decoding="async"><div><span class="eyebrow">Attorney-led review</span><h2>Tell us what happened.</h2><p>Start with the event, the people or organizations involved, the harm, and any deadline. You do not need every document before you call.</p><a class="text-link text-link-light" href="/attorney-tam-berhe/">Meet Tam Berhe <span aria-hidden="true">→</span></a></div></aside></div></section>
+<section class="home-hero" data-hero><div class="home-hero-art" aria-hidden="true">{picture("case")}</div><div class="home-hero-inner"><div class="home-hero-copy"><span class="eyebrow">California civil law firm</span><h1>Something serious happened. What you do next can shape what you can prove.</h1><p class="home-hero-lead">Injured. Fired after you spoke up. Denied by an insurer. Harmed by a company or an agency that will not answer. The first review with Berhe Jones LLP is free and attorney-led, and it starts with two things that can change quickly: your deadlines and your evidence.</p><div class="home-hero-actions"><a class="button button-call" href="{PHONE_HREF}"><span>Call now</span><strong>{PHONE_DISPLAY}</strong></a><a class="button button-secondary-light" href="/free-case-review/">Start a free case review</a></div><p class="home-hero-urgency"><strong>Deadlines and evidence do not wait.</strong> If the matter is urgent, call now. A call does not create an attorney-client relationship.</p></div><aside class="home-attorney-card" aria-label="Attorney-led case review"><img src="/images/tam-berhe.jpg" alt="Tam Berhe, California attorney" width="200" height="200" decoding="async"><div><span class="eyebrow">Attorney-led review</span><h2>Tell us what happened.</h2><p>Start with the event, the people or organizations involved, the harm, and any deadline. You do not need every document before you call.</p><a class="text-link text-link-light" href="/attorney-tam-berhe/">Meet Tam Berhe <span aria-hidden="true">→</span></a></div></aside></div></section>
 {proof_band()}
-<section class="section home-stakes"><div class="section-inner"><div class="home-section-heading"><div><span class="eyebrow">Serious problems. Focused legal review.</span><h2>When the stakes are high, start here.</h2></div><p>People usually call because something has already changed their health, work, family, finances, or freedom. Choose the issue closest to yours, or call if you are not sure where it fits.</p></div><div class="home-practice-grid">{practice_cards}</div><div class="home-inline-cta"><p><strong>Not sure which category fits?</strong> Tell us what happened. The first conversation starts with your facts, not a legal label.</p><a class="button button-primary" href="{PHONE_HREF}">Call {PHONE_DISPLAY}</a></div></div></section>
-<section class="home-urgency"><div class="section-inner home-urgency-grid"><div><span class="eyebrow">Why call now</span><h2>The facts can stay the same while your options get smaller.</h2></div><div class="home-reasons"><article><strong>Deadlines can be short</strong><p>Government claims, agency matters, insurance notices, and court deadlines may require action sooner than expected.</p></article><article><strong>Evidence can disappear</strong><p>Video can be overwritten. Vehicles can be repaired. Scenes change. Witnesses become harder to locate.</p></article><article><strong>Early choices matter</strong><p>Recorded statements, releases, workplace responses, and insurer communications can affect what happens next.</p></article><a class="button button-call button-call-wide" href="{PHONE_HREF}" aria-label="Call Berhe Jones LLP now at {PHONE_DISPLAY}"><span>Talk to the firm</span><strong>{PHONE_DISPLAY}</strong></a></div></div></section>
-<section class="section home-advocate"><div class="section-inner home-advocate-grid"><div class="home-portrait"><img src="/images/tam-berhe.jpg" alt="Tam Berhe, California attorney" width="200" height="200" decoding="async" loading="lazy"></div><div><span class="eyebrow">Your first step is attorney-led</span><h2>A serious matter deserves more than a generic intake script.</h2><p class="section-intro">Tam Berhe reviews selected California civil matters for conflicts, urgency, legal fit, available proof, and the next practical move. The goal of the first review is clarity: what matters now, what should be preserved, and whether the firm may be able to help.</p><div class="actions"><a class="button button-primary" href="{PHONE_HREF}">Call {PHONE_DISPLAY}</a><a class="button button-secondary" href="/attorney-tam-berhe/">Attorney profile</a></div></div></div></section>
-<section class="section paper home-faq"><div class="section-inner"><div class="home-section-heading"><div><span class="eyebrow">Before you call</span><h2>Questions people ask at the beginning.</h2></div><p>You do not need to know the legal name of your claim. Start with what happened and what changed because of it.</p></div><div class="faq-list">{faq_html}</div></div></section>
-<section class="section deep"><div class="section-inner intake-wrap"><div><span class="eyebrow">Prefer to start online?</span><h2>Send a short summary for a free case review.</h2><p class="section-intro">Name the parties, key dates, what happened, the harm, and any deadline you know about. Do not send privileged or highly sensitive records through this public form. If time may matter, call {PHONE_DISPLAY} instead.</p><a class="home-form-call" href="{PHONE_HREF}">Call now: {PHONE_DISPLAY}</a></div>{intake_form("home-review", heading="Request a free case review", source_route="/")}</div></section>
+<section class="section home-stakes"><div class="section-inner"><div class="home-section-heading" data-reveal><div><span class="eyebrow">Start with the problem, not the label</span><h2>What happened to you, and what it is costing.</h2></div><p>People call because something already changed their health, their income, their record, or their family. Choose the situation closest to yours. If none of them fit, call and describe it in your own words.</p></div><div class="home-practice-grid" data-reveal-group>{practice_cards}</div><div class="home-inline-cta" data-reveal><p><strong>Not sure which one fits?</strong> That is normal, and it is not your job to know. Describe what happened and the category gets sorted out during the review.</p><a class="button button-primary" href="{PHONE_HREF}">Call {PHONE_DISPLAY}</a></div></div></section>
+<section class="home-urgency"><div class="section-inner home-urgency-grid"><div data-reveal><span class="eyebrow">Why timing matters</span><h2>The facts may stay the same while proof becomes harder to recover.</h2><p class="section-intro">Waiting can make a matter harder to evaluate because records, video, devices, scenes, and memories can change or disappear.</p></div><div class="home-reasons" data-reveal-group><article data-reveal><strong>Deadlines can run early</strong><p>Matters involving public entities, agencies, insurance notices, and courts can require action sooner than people expect, and some require a step before any lawsuit.</p></article><article data-reveal><strong>Evidence expires quietly</strong><p>Video is overwritten on a retention schedule. Vehicles get repaired. Scenes get cleaned. App and telematics data cycles out. Witnesses move.</p></article><article data-reveal><strong>Early choices stick</strong><p>Recorded statements, signed releases, medical authorizations, severance paperwork, and insurer correspondence shape what is still possible months later.</p></article><a class="button button-call button-call-wide" href="{PHONE_HREF}"><span>Talk to the firm</span><strong>{PHONE_DISPLAY}</strong></a></div></div></section>
+{case_timeline()}
+<section class="section paper home-preserve"><div class="section-inner"><div class="home-section-heading" data-reveal><div><span class="eyebrow">Useful first steps</span><h2>Four ways to build a record while details are still available.</h2></div><p>These general documentation steps may help preserve a usable record. Each one links to a guide that goes deeper.</p></div><div class="preserve-grid" data-reveal-group>{preserve_html}</div><div class="home-inline-cta" data-reveal><p><strong>Working through a specific situation?</strong> The resource library covers crashes, adjuster calls, workplace records, commercial-vehicle evidence, and deadline questions.</p><a class="button button-secondary" href="/resources/">Open the resource library</a></div></div></section>
+<section class="section home-advocate"><div class="section-inner home-advocate-grid"><div class="home-portrait" data-reveal><img src="/images/tam-berhe.jpg" alt="Tam Berhe, California attorney" width="200" height="200" decoding="async" loading="lazy"></div><div data-reveal><span class="eyebrow">Your first step is attorney-led</span><h2>A serious matter deserves more than a generic intake script.</h2><p class="section-intro">Tam Berhe reviews selected California civil matters for conflicts, urgency, legal fit, available proof, and the next practical move. The goal of the first review is clarity: what matters now, what should be preserved, and whether the firm may be able to help.</p><div class="actions"><a class="button button-primary" href="{PHONE_HREF}">Call {PHONE_DISPLAY}</a><a class="button button-secondary" href="/attorney-tam-berhe/">Attorney profile</a></div></div></div></section>
+<section class="section home-faq"><div class="section-inner">{faq_block(faqs, heading="Questions people ask at the beginning.", eyebrow="Before you call", intro="You do not need to know the legal name of your claim. Start with what happened and what changed because of it.")}</div></section>
+<section class="section deep"><div class="section-inner intake-wrap"><div data-reveal><span class="eyebrow">Prefer to start online?</span><h2>Send a short summary for a free case review.</h2><p class="section-intro">Name the parties, key dates, what happened, the harm, and any deadline you know about. Do not send privileged or highly sensitive records through this public form. If time may matter, call {PHONE_DISPLAY} instead.</p><a class="home-form-call" href="{PHONE_HREF}">Call now: {PHONE_DISPLAY}</a></div>{intake_form("home-review", heading="Request a free case review", source_route="/")}</div></section>
 </main>'''
     return document("/", "California Personal Injury & Civil Rights Lawyer | Berhe Jones LLP", "Injured, mistreated at work, denied insurance, or harmed by misconduct? Call Berhe Jones LLP at 909-609-6685 for a free California case review.", body)
+
+
+PRACTICE_EXPECT = [
+    ("Conflicts and parties first", "Everyone on every side is identified before a closer review, because a conflict controls whether the firm can look at the matter at all."),
+    ("A timing screen, not a deadline calculation", "Known dates, notices, and procedural steps are reviewed against your facts. No web page and no first call can promise you a filing date."),
+    ("A preservation list", "What may disappear first is identified early, including records held by an employer, an insurer, an agency, or a company."),
+    ("A next step you can act on", "Engagement discussion, a request for specific information, a referral, co-counsel review, or a decline. No acceptance, outcome, or response time is promised."),
+]
 
 
 def practice_page(p):
@@ -217,19 +361,30 @@ def practice_page(p):
     evaluation_items = editorial([(item, "The weight of this factor depends on the complete facts, available law, and recoverable proof.", None) for item in p["evaluation"]])
     resource_href = p["resource"]
     matter_slug = p["slug"]
+    stakes = "".join(f'<li data-reveal>{esc(item)}</li>' for item in p["stakes"])
     body = f'<main id="main">{breadcrumbs([("Practice areas","/practice-areas/"),(p["name"],route)])}{hero(p["h1"],p["lead"],p["name"]) }{proof_band()}'
-    body += f'<section class="section"><div class="section-inner split"><div><span class="eyebrow">When this may fit</span><h2>Start with a fact pattern, not a conclusion.</h2><p class="section-intro">A page cannot decide whether a claim exists. These are the kinds of facts that help the firm decide whether a closer review is appropriate.</p></div><div>{editorial([(item,"",None) for item in p["fit"]])}</div></div></section>'
-    body += f'<section class="section paper"><div class="section-inner"><span class="eyebrow">Evidence to preserve</span><h2>Keep the records that make the chronology testable.</h2>{editorial([(item,"Preserve the original, note where it came from, and keep a simple date index. Do not send sensitive records through a public form.",None) for item in p["evidence"]])}</div></section>'
-    body += f'<section class="section"><div class="section-inner split"><div><span class="eyebrow">Evaluation</span><h2>How the first review tests the matter.</h2></div><div>{evaluation_items}<p class="notice">Deadlines vary by claim, party, forum, and facts. This page does not calculate a filing or notice deadline. If timing may matter, call promptly.</p><a class="button button-secondary" href="{resource_href}">Open the related preparation guide</a></div></div></section>'
-    body += f'<section class="section deep"><div class="section-inner"><span class="eyebrow">First review</span><h2>Send a short chronology and the parties involved.</h2><p class="section-intro">The firm may accept, refer, co-counsel, or decline a matter after conflicts and fit review. Contact alone is not representation.</p><div class="actions"><a class="button button-primary" href="/free-case-review/?matter={matter_slug}">Request case review</a><a class="button button-secondary" href="{PHONE_HREF}">Call {PHONE_DISPLAY}</a></div></div></section></main>'
+    body += f'<section class="section"><div class="section-inner split"><div data-reveal><span class="eyebrow">What is at stake</span><h2>Why this cannot sit on a shelf.</h2><p class="section-intro">{esc(p["card"])}</p></div><div><ul class="stakes-list" data-reveal-group>{stakes}</ul>{cta_band("If a date may already be running, call.", f"A public form does not stop a deadline and does not create an attorney-client relationship. If timing may matter, call {PHONE_DISPLAY} and keep pursuing your own options promptly.", secondary_label="Send a short summary", secondary_href=f"/free-case-review/?matter={matter_slug}#general-review")}</div></div></section>'
+    body += f'<section class="section paper"><div class="section-inner split"><div data-reveal><span class="eyebrow">When this may fit</span><h2>Start with a fact pattern, not a conclusion.</h2><p class="section-intro">A page cannot decide whether a claim exists. These are the kinds of facts that help the firm decide whether a closer review is appropriate.</p></div><div>{editorial([(item,"",None) for item in p["fit"]])}</div></div></section>'
+    body += f'<section class="section"><div class="section-inner"><span class="eyebrow">Evidence to preserve</span><h2>Keep the records that make the chronology testable.</h2>{editorial([(item,"Preserve the original, note where it came from, and keep a simple date index. Do not send sensitive records through a public form.",None) for item in p["evidence"]])}</div></section>'
+    body += f'<section class="section paper"><div class="section-inner split"><div data-reveal><span class="eyebrow">Evaluation</span><h2>How the first review tests the matter.</h2></div><div>{evaluation_items}<p class="notice">Deadlines vary by claim, party, forum, and facts. This page does not calculate a filing or notice deadline. If timing may matter, call promptly.</p><a class="button button-secondary" href="{resource_href}">Open the related preparation guide</a></div></div></section>'
+    faq_heading = f'{p["name"]} questions.'
+    body += f'<section class="section"><div class="section-inner split">{expect_block(PRACTICE_EXPECT)}<div>{faq_block(p["faqs"], heading=faq_heading, eyebrow="Frequently asked")}{related_block(p["related"])}</div></div></section>'
+    body += f'<section class="section deep"><div class="section-inner" data-reveal><span class="eyebrow">First review</span><h2>Send a short chronology and the parties involved.</h2><p class="section-intro">The firm may accept, refer, co-counsel, or decline a matter after conflicts and fit review. Contact alone is not representation.</p><div class="actions"><a class="button button-primary" href="/free-case-review/?matter={matter_slug}#general-review">Request case review</a><a class="button button-secondary" href="{PHONE_HREF}">Call {PHONE_DISPLAY}</a></div></div></section></main>'
     return document(route, p["title"], p["description"], body, kind="LegalService")
 
 
 def practice_hub():
-    items = [(p["name"], p["lead"], f'/practice-areas/{p["slug"]}/') for p in PRACTICES]
-    body = '<main id="main">' + breadcrumbs([("Practice areas","/practice-areas/")]) + hero("Find the right review path for a serious California civil matter.", "Different problems require different proof. Every first review still asks the same four questions: timing, responsibility, harm, and a realistic recovery source.", "Practice areas", "fit", marker="practice-hub") + proof_band()
-    body += f'<section class="section"><div class="section-inner"><span class="eyebrow">Client problem index</span><h2>Choose the page closest to your facts.</h2>{editorial(items)}</div></section>'
-    body += f'<section class="section paper"><div class="section-inner split"><div><h2>May fit.</h2><p>Specific conduct, documented harm, identifiable parties, usable evidence, and a viable recovery path support closer review.</p></div><div><h2>May not fit.</h2><p>Minor or undocumented harm, no identifiable responsible party, no practical recovery source, or a mismatch with the firm may lead to referral or decline.</p><p class="notice">Act promptly when a deadline, government entity, disappearing evidence, release, claim notice, or pending agency process may be involved.</p></div></div></section></main>'
+    items = [(p["name"], p["card"], f'/practice-areas/{p["slug"]}/') for p in PRACTICES]
+    hub_faqs = [
+        ("My situation covers more than one of these categories. Which page do I use?", "Use the one closest to the harm, or call and describe it plainly. Matters frequently involve more than one lane, and sorting the category is part of the review rather than something you need to solve first."),
+        ("Does the firm handle every kind of California case?", "No. The practice is limited to the areas listed here, and matters are accepted selectively. Possible next steps include referral or decline, but contact alone is not acceptance and no response time is promised."),
+        ("What makes a matter more likely to fit?", "Specific conduct, documented harm, identifiable parties, evidence that still exists, and a realistic recovery source. What is missing matters as much as what is present."),
+    ]
+    body = '<main id="main">' + breadcrumbs([("Practice areas","/practice-areas/")]) + hero("Find the right review path for a serious California civil matter.", "Different problems require different proof. Most first reviews start with four questions: timing, responsibility, harm, and a realistic recovery source.", "Practice areas", "fit", marker="practice-hub") + proof_band()
+    body += f'<section class="section"><div class="section-inner"><div class="home-section-heading" data-reveal><div><span class="eyebrow">Client problem index</span><h2>Choose the page closest to your facts.</h2></div><p>Each page sets out what is at stake, the evidence that helps evaluate it, how the first review tests the matter, and the questions people ask most in that lane.</p></div>{editorial(items)}</div></section>'
+    body += '<section class="section paper"><div class="section-inner split"><div data-reveal><h2>May fit.</h2><p>Specific conduct, documented harm, identifiable parties, usable evidence, and a viable recovery path support closer review.</p><p>Two paths sit outside this index. Commercial-vehicle collisions follow a separate evidence route because carriers, platforms, and telematics records are involved, and living trust planning is a distinct estate-planning service rather than a case review.</p><ul class="stakes-list" data-reveal-group><li data-reveal><a href="/landing/truck-fleet-rideshare-accident-california/">Truck, fleet, delivery, and rideshare collisions</a></li><li data-reveal><a href="/living-trust/">California living trust planning</a></li><li data-reveal><a href="/referrals-co-counsel/">Attorney referrals and co-counsel</a></li></ul></div><div data-reveal><h2>May not fit.</h2><p>Minor or undocumented harm, no identifiable responsible party, no practical recovery source, or a mismatch with the firm may lead to referral or decline.</p><p class="notice">Act promptly when a deadline, government entity, disappearing evidence, release, claim notice, or pending agency process may be involved.</p></div></div></section>'
+    body += f'<section class="section"><div class="section-inner split">{expect_block(PRACTICE_EXPECT)}<div>{faq_block(hub_faqs, heading="Choosing a practice area.", eyebrow="Frequently asked")}{related_block([("What to prepare before a case review", "/resources/prepare-for-case-review/"), ("Deadlines and early case review", "/resources/deadlines-and-early-review/"), ("How the case review process works", "/case-review-process/")])}</div></div></section>'
+    body += f'<section class="section deep"><div class="section-inner">{cta_band("Not sure where your matter belongs?", f"Describe what happened in your own words. Call {PHONE_DISPLAY} or send a short, conflict-safe summary, and the category gets sorted during the review.", tone="deep")}</div></section></main>'
     return document("/practice-areas/", "California Civil Trial Practice Areas | Berhe Jones LLP", "Berhe Jones LLP reviews California civil matters: injury, wrongful death, employment, civil rights, consumer, insurance, and litigation. Call 909-609-6685.", body, kind="CollectionPage")
 
 
@@ -242,29 +397,99 @@ def attorney():
 
 def process_page():
     steps = [("Deadline and conflicts screen","The firm first identifies parties, adverse relationships, known dates, and whether urgent independent action may be needed."),("Fit, evidence, and damages review","The attorney screen considers responsibility, available proof, documented harm, and a practical recovery source."),("Focused information request","If a closer look is appropriate, the firm may request specific records through an approved channel. Do not send a full file through the public form."),("Clear next-step decision","The matter may proceed to an engagement discussion, referral, co-counsel review, a request for more information, or decline. No response-time or acceptance promise is made.")]
-    body = '<main id="main">' + breadcrumbs([("Case review process","/case-review-process/")]) + hero("A clear path from first facts to the next move.", "The review is designed to surface urgency, conflicts, evidence, damages, and fit before anyone treats contact as representation.", "Case review process", "fit") + proof_band()
-    body += '<section class="section"><div class="section-inner split"><div><span class="eyebrow">Four stages</span><h2>The same order, for every matter.</h2><p class="section-intro">Channel and next-step details depend on the matter. The firm does not promise a response time or outcome.</p></div><ol class="steps">' + ''.join(f'<li><div><h3>{esc(t)}</h3><p>{esc(d)}</p></div></li>' for t,d in steps) + '</ol></div></section>'
+    body = '<main id="main">' + breadcrumbs([("Case review process","/case-review-process/")]) + hero("A clear path from first facts to the next move.", "The review is designed to surface urgency, conflicts, evidence, damages, and fit before anyone treats contact as representation.", "Case review process", "case") + proof_band()
+    body += '<section class="section"><div class="section-inner split"><div><span class="eyebrow">Four stages</span><h2>Four questions that organize the review.</h2><p class="section-intro">The order and next-step details depend on the matter. The firm does not promise a response time or outcome.</p></div><ol class="steps">' + ''.join(f'<li><div><h3>{esc(t)}</h3><p>{esc(d)}</p></div></li>' for t,d in steps) + '</ol></div></section>'
     body += f'<section class="section deep"><div class="section-inner"><h2>If a deadline may be close, do not wait on a form.</h2><p class="section-intro">Call {PHONE_DISPLAY} and consider contacting another qualified attorney promptly. A submission is not representation and does not stop a deadline.</p><div class="actions"><a class="button button-primary" href="/resources/prepare-for-case-review/">Prepare the first facts</a><a class="button button-secondary" href="{PHONE_HREF}">Call now</a></div></div></section></main>'
     return document("/case-review-process/", "How Our California Case Review Works | Berhe Jones LLP", "What happens after you contact Berhe Jones LLP: conflict-safe intake, deadline and evidence screen, fit review, and a clear written next step.", body)
 
 
 def free_review():
     extra = '''<div class="field-grid"><div class="field"><label for="general-matter">Matter type</label><select id="general-matter" name="caseType" required aria-required="true"><option value="">Choose one</option><option>Personal injury or wrongful death</option><option>Employment or workplace</option><option>Civil rights or government accountability</option><option>Consumer protection or Lemon Law</option><option>Insurance bad faith</option><option>Catastrophic injury</option><option>Select civil litigation</option><option>Commercial vehicle accident</option><option>Other</option></select></div><div class="field"><label for="general-contact">Preferred contact</label><select id="general-contact" name="preferred_contact"><option>Phone</option><option>Email</option><option>Either</option></select></div></div><div class="field-grid"><div class="field"><label for="general-county">California county</label><input type="text" id="general-county" name="county" autocomplete="address-level2" autocapitalize="words"></div><div class="field"><label for="general-deadline">Known deadline or urgent date</label><input type="text" id="general-deadline" name="knownDeadline" placeholder="If known"></div></div>'''
-    body = '<main id="main">' + breadcrumbs([("Free case review","/free-case-review/")]) + hero("Get the right case screen before proof goes cold.", "Send the parties, key dates, what happened, the documented harm, and any known deadline. Keep the first message short and conflict-safe.", "Canonical intake") + proof_band()
+    body = '<main id="main">' + breadcrumbs([("Free case review","/free-case-review/")]) + hero("Get the right case screen before proof goes cold.", "Send the parties, key dates, what happened, the documented harm, and any known deadline. Keep the first message short and conflict-safe.", "Canonical intake", "case", "Go to the review form", "/free-case-review/#general-review") + proof_band()
     body += f'<section class="section"><div class="section-inner intake-wrap"><div><span class="eyebrow">Before you submit</span><h2>The essentials are enough to begin.</h2>{editorial([("Timing","Include the event date and every known notice, hearing, agency, claim, or filing date.",None),("Parties","Name the people, employers, agencies, insurers, companies, or other organizations involved.",None),("Proof","Describe the strongest documents, witnesses, medical records, communications, or video without uploading sensitive material.",None),("Harm and recovery","Summarize the injury, loss, employment impact, business loss, or other damages and any known insurance or recovery source.",None)])}</div>{intake_form("general-review", extra=extra, source_route="/free-case-review/")}</div></section></main>'
     return document("/free-case-review/", "Free California Case Review | Berhe Jones LLP", "Free, attorney-led case review for serious California injury, employment, civil rights, consumer, and select civil litigation matters. Call 909-609-6685.", body)
 
 
-def resource(route, title, description, h1, lead, sections):
-    content = ''.join(f'<h2 id="{esc(anchor)}">{esc(heading)}</h2><p>{esc(intro)}</p><ul>' + ''.join(f'<li>{esc(item)}</li>' for item in items) + '</ul>' for anchor,heading,intro,items in sections)
-    body = f'<main id="main">{breadcrumbs([("Resources","/resources/"),(h1,route)])}{hero(h1,lead,"Reviewed resource", "fit", "Request case review") }<section class="section"><article class="section-inner prose"><p class="eyebrow">Reviewed July 11, 2026 · Berhe Jones LLP</p><p class="notice">General information only. This guide is not legal advice, does not calculate a deadline, and does not create an attorney-client relationship. Representation begins only after conflicts review and a signed written agreement.</p>{content}<h2>Keep the first message short and conflict-safe.</h2><p>Use a date list, party list, concise event summary, and description of the records you have. Do not send privileged, highly sensitive, or urgent information through a public form.</p><div class="actions"><a class="button button-primary" href="/free-case-review/">Request case review</a><a class="button button-secondary" href="/practice-areas/">Find a practice area</a></div></article></section></main>'
-    return document(route,title,description,body,kind="Article")
+GUIDE_NOTICE = (
+    "General information only. This guide is not legal advice, does not calculate a deadline, "
+    "and does not create an attorney-client relationship. Representation begins only after "
+    "conflicts review and a signed written agreement."
+)
+
+
+def resource(guide):
+    route = f'/resources/{guide["slug"]}/'
+    toc = "".join(
+        f'<li><a href="#{esc(anchor)}">{esc(heading)}</a></li>' for anchor, heading, _, _ in guide["sections"]
+    ) + '<li><a href="#preserve">What to preserve now</a></li><li><a href="#faq-panel">Common questions</a></li>'
+    intro = "".join(f'<p>{esc(paragraph)}</p>' for paragraph in guide["intro"])
+    content = "".join(
+        f'<section class="guide-section" id="{esc(anchor)}" data-reveal><h2>{esc(heading)}</h2><p>{esc(lead)}</p><ul class="checklist-items">'
+        + "".join(f'<li>{esc(item)}</li>' for item in items)
+        + '</ul></section>'
+        for anchor, heading, lead, items in guide["sections"]
+    )
+    preserve = checklist(guide["preserve"], "Preserve these before anything else",
+                         "Keep originals intact, work from copies, and do not send sensitive records through a public form.")
+    aside = (f'<aside class="guide-aside"><nav class="guide-toc" aria-label="On this page"><h2>On this page</h2><ol>{toc}</ol></nav>'
+             f'<div class="guide-aside-cta"><p><strong>Timing may matter.</strong> A guide cannot calculate your deadline. If a date may be close, call.</p>'
+             f'<a class="button button-call" href="{PHONE_HREF}"><span>Call now</span><strong>{PHONE_DISPLAY}</strong></a>'
+             f'<a class="button button-secondary" href="/free-case-review/">Free case review</a></div></aside>')
+    body = f'<main id="main">{breadcrumbs([("Resources", "/resources/"), (guide["name"], route)])}'
+    body += hero(guide["h1"], guide["lead"], "Client resource", "case", "Request a free case review")
+    body += (f'<section class="section"><div class="section-inner guide-layout">{aside}'
+             f'<article class="prose guide-body"><p class="eyebrow">{REVIEW_LABEL} · Berhe Jones LLP</p>'
+             f'<p class="notice">{esc(GUIDE_NOTICE)}</p>{intro}{content}'
+             f'<section class="guide-section" id="preserve" data-reveal>{preserve}</section></article></div></section>')
+    body += (f'<section class="section paper"><div class="section-inner split">{expect_block(guide["expect"])}'
+             f'<div>{faq_block(guide["faqs"], heading="Common questions about this guide.", eyebrow="Frequently asked")}'
+             f'{related_block(guide["related"])}</div></div></section>')
+    body += (f'<section class="section deep"><div class="section-inner" data-reveal><span class="eyebrow">Next step</span>'
+             f'<h2>Keep the first message short and conflict-safe.</h2>'
+             f'<p class="section-intro">Use a date list, a party list, a concise event summary, and a description of the records you have. '
+             f'Do not send privileged, highly sensitive, or urgent information through a public form. If time may matter, call {PHONE_DISPLAY} instead.</p>'
+             f'<div class="actions"><a class="button button-primary" href="/free-case-review/">Request a free case review</a>'
+             f'<a class="button button-secondary" href="/practice-areas/">Find your practice area</a></div></div></section></main>')
+    return document(route, guide["title"], guide["description"], body, kind="Article")
 
 
 def resources_hub():
-    items=[("What to prepare before a case review","Organize parties, dates, documents, harm, and the question you need reviewed.","/resources/prepare-for-case-review/"),("Commercial-vehicle accident evidence checklist","Preserve scene, vehicle, company, app, insurance, witness, medical, and deadline-sensitive information.","/resources/commercial-vehicle-evidence-checklist/"),("Deadlines and early case review","Understand why public entities, agencies, insurance communications, and disappearing evidence can make early review important.","/resources/deadlines-and-early-review/")]
-    body='<main id="main">'+breadcrumbs([("Resources","/resources/")])+hero("Prepare the facts that make a case review stronger.","Short, organized information helps an attorney identify timing, responsibility, proof, harm, and a practical recovery path.","Editorial resource library","fit")+f'<section class="section"><div class="section-inner"><span class="eyebrow">Reviewed July 11, 2026</span><h2>Resource library</h2>{editorial(items)}<p class="notice">These guides provide general information, not individualized legal advice or a limitation calculation. Contact does not create an attorney-client relationship. Representation begins only after conflicts review and a signed written agreement.</p></div></section></main>'
-    return document("/resources/","California Case Review Resource Guides | Berhe Jones LLP","Free guides from Berhe Jones LLP on California case review preparation, commercial-vehicle evidence, and deadline-aware early review. Not legal advice.",body,kind="CollectionPage")
+    items = [(guide["name"], guide["summary"], f'/resources/{guide["slug"]}/') for guide in RESOURCE_GUIDES]
+    hub_faqs = [
+        ("Are these guides legal advice?", "No. They are general information about organizing facts, preserving records, and understanding common requests. They do not calculate a deadline, evaluate a claim, or create an attorney-client relationship."),
+        ("Can I use these guides if another firm represents me?", "Yes. Nothing here is firm-specific. If you are already represented, raise anything time-sensitive with your own counsel rather than acting on a public checklist."),
+        ("What if my situation is not covered here?", "Start with the guide on preparing for a case review, then call and describe what happened. The practice area index lists the kinds of matters the firm reviews."),
+    ]
+    starts = [
+        ("It just happened.", "Document the scene, the injuries, and the vehicles before anything changes.", "/resources/after-a-collision-first-steps/", "First steps after a crash"),
+        ("An insurer is calling.", "Know what a recorded statement, a medical authorization, and a release actually do.", "/resources/insurance-claim-communication/", "Before you talk to an adjuster"),
+        ("Work is going wrong.", "Build the record while you still have access to the accounts that hold it.", "/resources/workplace-documentation/", "Document a workplace problem"),
+        ("A date may be running.", "Learn which categories of timing tend to apply, and why waiting costs proof.", "/resources/deadlines-and-early-review/", "Deadlines and early review"),
+    ]
+    start_items = "".join(
+        f'<li data-reveal><strong>{esc(label)}</strong> {esc(text)} <a href="{href}">{esc(link_label)}</a></li>'
+        for label, text, href, link_label in starts
+    )
+    body = '<main id="main">' + breadcrumbs([("Resources", "/resources/")])
+    body += hero("Prepare the facts that make a case review stronger.", "Short, organized information helps an attorney identify timing, responsibility, proof, harm, and a practical recovery path.", "Client resource library", "case")
+    body += (f'<section class="section"><div class="section-inner"><div class="home-section-heading" data-reveal>'
+             f'<div><span class="eyebrow">{REVIEW_LABEL}</span><h2>Resource library</h2></div>'
+             f'<p>Six practical guides for the moments that decide a case: the first days after a crash, the adjuster call, '
+             f'the workplace paper trail, commercial-vehicle evidence, deadline questions, and the case review itself.</p></div>'
+             f'{editorial(items)}<p class="notice">These guides provide general information, not individualized legal advice or a '
+             f'limitation calculation. Contact does not create an attorney-client relationship. Representation begins only after '
+             f'conflicts review and a signed written agreement.</p></div></section>')
+    body += (f'<section class="section paper"><div class="section-inner split"><div data-reveal><span class="eyebrow">Where to start</span>'
+             f'<h2>Pick the guide that matches the moment you are in.</h2>'
+             f'<p class="section-intro">Most people arrive in one of four situations, and each one has a different first move.</p></div>'
+             f'<div><ul class="stakes-list" data-reveal-group>{start_items}</ul></div></div></section>')
+    body += (f'<section class="section"><div class="section-inner split">{expect_block(PRACTICE_EXPECT)}'
+             f'<div>{faq_block(hub_faqs, heading="About these guides.", eyebrow="Frequently asked")}'
+             f'{related_block([("Practice areas", "/practice-areas/"), ("How the case review process works", "/case-review-process/"), ("Free case review", "/free-case-review/")])}</div></div></section>')
+    body += (f'<section class="section deep"><div class="section-inner">'
+             f'{cta_band("Reading is not the same as review.", f"A guide cannot tell you what your deadline is or whether you have a claim. Call {PHONE_DISPLAY} or send a short summary and have the facts reviewed by an attorney.", tone="deep")}'
+             f'</div></section></main>')
+    return document("/resources/", "California Case Review Resource Guides | Berhe Jones LLP", "Free guides from Berhe Jones LLP on California case review preparation, crash first steps, adjuster calls, workplace records, and deadline-aware early review.", body, kind="CollectionPage")
 
 
 def truck_page():
@@ -278,7 +503,7 @@ def truck_page():
 
 def living_trust():
     extra='''<div class="field-grid"><div class="field"><label for="trust-county">California county</label><input type="text" id="trust-county" name="county" autocomplete="address-level2" autocapitalize="words"></div><div class="field"><label for="trust-property">California real property</label><select id="trust-property" name="real_property"><option>Yes</option><option>No</option><option>Not sure</option></select></div></div><div class="field"><label for="trust-timeline">Planning timeline</label><select id="trust-timeline" name="timeline"><option>Exploring</option><option>Ready to begin</option><option>Existing plan needs review</option></select></div>'''
-    body='<main id="main">'+breadcrumbs([("Living trust planning","/living-trust/")])+hero("Protect the plan before life gets complicated.","Attorney-led California living trust planning begins with family, property, decision-maker, and transfer goals—not a one-size-fits-all document.","Estate planning service","fit","Request the Starter Guide","#trust-request")
+    body='<main id="main">'+breadcrumbs([("Living trust planning","/living-trust/")])+hero("Protect the plan before life gets complicated.","Attorney-led California living trust planning begins with family, property, decision-maker, and transfer goals, not a one-size-fits-all document.","Estate planning service","fit","Request the Starter Guide","#trust-request")
     body+=f'<section class="section"><div class="section-inner"><span class="eyebrow">Planning scope</span><h2>A trust is part of an organized transfer plan.</h2>{editorial([("Trust agreement","A revocable living trust can organize ownership and instructions, subject to the approved scope of engagement.",None),("Supporting documents","A planning package may involve related incapacity and transfer documents based on the attorney-approved scope.",None),("Funding work","A signed trust must be coordinated with asset ownership. A funding checklist is guidance, not proof every asset was transferred.",None),("Planning process","Guide request, conflict-safe screen, intake, drafting, review, signing, and funding steps are addressed in sequence.",None)])}<p class="notice">This is a distinct estate-planning service, not a contingency case review. Fees and scope are provided only through an approved written agreement. No public fee amount is stated here.</p></div></section>'
     body+=f'<section class="section paper" id="trust-request"><div class="section-inner intake-wrap"><div><span class="eyebrow">Starter Guide</span><h2>Request the Living Trust Starter Guide.</h2><p class="section-intro">The request starts a conflict-safe planning screen and asks the firm to provide its introductory planning guide. It does not create representation or guarantee that a planning engagement will be offered.</p></div>{intake_form("trust-guide","Living trust planning","living-trust", "Living Trust Starter Guide request",extra,"/living-trust/")}</div></section></main>'
     return document("/living-trust/","California Living Trust Planning | Berhe Jones LLP","Attorney-led California living trust planning. Request the Living Trust Starter Guide and a conflict-safe estate planning screen from Berhe Jones LLP.",body,kind="LegalService")
@@ -405,21 +630,8 @@ def build_pages():
     for practice in PRACTICES:
         outputs[route_path(f'/practice-areas/{practice["slug"]}/')] = practice_page(practice)
     outputs[route_path("/resources/")] = resources_hub()
-    outputs[route_path("/resources/prepare-for-case-review/")] = resource(
-        "/resources/prepare-for-case-review/", "What to Prepare Before a Case Review | Berhe Jones LLP",
-        "Conflict-safe checklist from Berhe Jones LLP for preparing a California civil matter: organize parties, dates, documents, and harm. General information only.",
-        "What to prepare before a case review.", "Organize the facts that let an attorney see timing, responsibility, harm, evidence, and a practical recovery route.",
-        [("basic-facts","The basic facts to organize","A useful first request is specific and short.",["Who is involved and who may be adverse","What happened, where, and on what dates","What changed afterward and what harm resulted","What documents, witnesses, photographs, video, or records exist","What deadlines, notices, hearings, or agency dates may exist","What question or outcome you want reviewed"]),("hold-back","What not to send through a public form","Keep sensitive material for an approved follow-up channel.",["Do not send a full records dump","Do not send passwords, credentials, Social Security numbers, or financial account details","Do not send privileged communications or rely on a form for urgent action"])])
-    outputs[route_path("/resources/commercial-vehicle-evidence-checklist/")] = resource(
-        "/resources/commercial-vehicle-evidence-checklist/", "Commercial Vehicle Accident Evidence Checklist | Berhe Jones LLP",
-        "Evidence checklist from Berhe Jones LLP for California truck, fleet, delivery, and rideshare crashes: scene records, app data, witnesses, and preservation steps.",
-        "Commercial-vehicle accident evidence checklist.", "Commercial vehicle evidence can be distributed across a driver, carrier, platform, owner, maintenance provider, insurers, devices, and nearby cameras.",
-        [("scene","Crash scene and vehicle proof","Preserve what identifies the event and every involved entity.",["Scene, vehicle, cargo, road, damage, and visible-company photographs or video","License plates, DOT numbers, company markings, driver information, app or trip details","Witness names, report number, responding agency, nearby businesses, and camera locations"]),("records","Company, insurance, and medical organization","Build a date-indexed record without altering originals.",["Insurance communications and requests for statements or releases","Treatment timeline, restrictions, bills, wage impact, and follow-up plans","Dispatch, app, GPS, event-recorder, log, maintenance, inspection, and preservation concerns","Known government, claim, insurer, or court dates"])])
-    outputs[route_path("/resources/deadlines-and-early-review/")] = resource(
-        "/resources/deadlines-and-early-review/", "Deadlines and Early Case Review | Berhe Jones LLP",
-        "Why early review matters in serious California civil matters: government-claim notices, evidence preservation, insurance requests, and filing windows.",
-        "Why early review can matter when deadlines are unclear.", "No general guide can calculate an individualized deadline. Early organization helps counsel identify which dates and procedures need immediate attention.",
-        [("timing","Situations where timing can matter","Different facts can trigger different notices, agency steps, contracts, or filing rules.",["Public entities, government actors, or government claim procedures","Employment complaints, administrative agencies, internal notices, or right-to-sue processes","Insurance notices, examinations, proofs of loss, releases, or claim communications","Video, app data, logs, surveillance, messages, physical evidence, or witnesses that may disappear"]),("organize","How to organize timing facts","Create a record another person can verify.",["Build a date list from the event through the present","Save dated notices, letters, envelopes, emails, texts, filings, and agency records","List who contacted you, when, how, and what was requested","Flag anything signed and every date someone told you to respond"])])
+    for guide in RESOURCE_GUIDES:
+        outputs[route_path(f'/resources/{guide["slug"]}/')] = resource(guide)
     outputs[route_path("/landing/truck-fleet-rideshare-accident-california/")] = truck_page()
     outputs[route_path("/landing/garden-grove-chemical-leak/")] = garden()
     outputs[route_path("/living-trust/")] = living_trust()
@@ -453,9 +665,12 @@ def infrastructure():
   X-DNS-Prefetch-Control: on
   X-Permitted-Cross-Domain-Policies: none
   Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=(), browsing-topics=(), payment=(), usb=(), magnetometer=(), accelerometer=(), gyroscope=()
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://admin.berhelaw.com; form-action https://admin.berhelaw.com; object-src 'none'; frame-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self' https://admin.berhelaw.com; form-action https://admin.berhelaw.com; object-src 'none'; frame-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests
 
 /assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
 /images/*
@@ -489,9 +704,19 @@ The endpoint does not require cross-origin JavaScript because forms use native b
 
 The Garden Grove local feed is fresh for 14 days after `lastVerifiedUtc`. After that window, or when the feed is malformed or unavailable, the page displays a prominent alert with the last verified date when available and directs visitors to the cited official City and County sources.
 
+## Motion contract
+
+Scroll motion is native CSS and JavaScript with no library. `site.js` adds the `motion` class to
+`<html>` only when IntersectionObserver, requestAnimationFrame, and a no-preference reduced-motion
+setting are all present, and that class is the only thing that hides or offsets content. Without
+JavaScript, on any failure, or under `prefers-reduced-motion: reduce`, every page renders in its
+finished state: reveals are visible, the case-review timeline is fully drawn, and the decorative
+scroll-progress bar is hidden. Motion animates transform and opacity only, never intercepts the
+scroller, and is covered by `tests/test_motion_seo_contract.py` and the WebKit motion tests.
+
 ## Content guardrails
 
-Do not add outcomes, testimonials, ratings, awards, locations, response-time promises, specialist claims, imagery, or professional facts without written provenance. Preserve the DBA disclosure, advertising disclaimer, conflict-review language, signed-written-agreement requirement, and Garden Grove citations. `success.html` remains excluded from the sitemap and noindexed/no-store in `_headers`.
+Do not add outcomes, testimonials, ratings, awards, locations, response-time promises, specialist claims, privilege or confidentiality promises, dollar figures, em dashes, imagery, or professional facts without written provenance. Preserve the DBA disclosure, advertising disclaimer, conflict-review language, signed-written-agreement requirement, and Garden Grove citations. `success.html` remains excluded from the sitemap and noindexed/no-store in `_headers`.
 '''
 
 

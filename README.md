@@ -22,6 +22,16 @@ The endpoint does not require cross-origin JavaScript because forms use native b
 
 The Garden Grove local feed is fresh for 14 days after `lastVerifiedUtc`. After that window, or when the feed is malformed or unavailable, the page displays a prominent alert with the last verified date when available and directs visitors to the cited official City and County sources.
 
+## Motion contract
+
+Scroll motion is native CSS and JavaScript with no library. `site.js` adds the `motion` class to
+`<html>` only when IntersectionObserver, requestAnimationFrame, and a no-preference reduced-motion
+setting are all present, and that class is the only thing that hides or offsets content. Without
+JavaScript, on any failure, or under `prefers-reduced-motion: reduce`, every page renders in its
+finished state: reveals are visible, the case-review timeline is fully drawn, and the decorative
+scroll-progress bar is hidden. Motion animates transform and opacity only, never intercepts the
+scroller, and is covered by `tests/test_motion_seo_contract.py` and the WebKit motion tests.
+
 ## Content guardrails
 
-Do not add outcomes, testimonials, ratings, awards, locations, response-time promises, specialist claims, imagery, or professional facts without written provenance. Preserve the DBA disclosure, advertising disclaimer, conflict-review language, signed-written-agreement requirement, and Garden Grove citations. `success.html` remains excluded from the sitemap and noindexed/no-store in `_headers`.
+Do not add outcomes, testimonials, ratings, awards, locations, response-time promises, specialist claims, privilege or confidentiality promises, dollar figures, em dashes, imagery, or professional facts without written provenance. Preserve the DBA disclosure, advertising disclaimer, conflict-review language, signed-written-agreement requirement, and Garden Grove citations. `success.html` remains excluded from the sitemap and noindexed/no-store in `_headers`.

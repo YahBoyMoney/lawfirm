@@ -41,9 +41,12 @@ EXPECTED_ROUTES = {
     "/privacy.html",
     "/referrals-co-counsel/",
     "/resources/",
+    "/resources/after-a-collision-first-steps/",
     "/resources/commercial-vehicle-evidence-checklist/",
     "/resources/deadlines-and-early-review/",
+    "/resources/insurance-claim-communication/",
     "/resources/prepare-for-case-review/",
+    "/resources/workplace-documentation/",
     "/terms.html",
 }
 
@@ -260,10 +263,10 @@ def test_visual_qa_markers_and_mobile_sticky_contract():
     home = soup(ROOT / "index.html")
     practice_hub = soup(ROOT / "practice-areas" / "index.html")
     assert home.select_one("section.home-hero")
-    assert practice_hub.select_one("section.hero.hero--practice-hub.hero--fit-image")
+    assert practice_hub.select_one("section.hero.hero--practice-hub.hero--case-art")
 
     hero_text = home.select_one(".home-hero-copy").get_text(" ", strip=True)
-    assert "When something serious has happened, your next move matters." in hero_text
+    assert "Something serious happened. What you do next can shape what you can prove." in hero_text
     primary_call = home.select_one('.home-hero-actions a.button-call[href^="tel:"]')
     assert primary_call and "Call now" in primary_call.get_text(" ", strip=True)
     assert home.select_one('.home-hero-actions a[href="/free-case-review/"]')
@@ -341,7 +344,9 @@ def test_csp_and_cache_headers_are_strict():
     headers = (ROOT / "_headers").read_text(encoding="utf-8")
     assert "'unsafe-inline'" not in headers
     assert "script-src 'self'" in headers
-    assert "style-src 'self' https://fonts.googleapis.com" in headers
+    assert "style-src 'self'" in headers
+    assert "font-src 'self'" in headers
+    assert "fonts.googleapis.com" not in headers and "fonts.gstatic.com" not in headers
     assert "form-action https://admin.berhelaw.com" in headers
     assert "/assets/*" in headers and "immutable" in headers
     assert "/success.html" in headers

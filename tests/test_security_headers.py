@@ -56,8 +56,10 @@ def test_root_security_headers_present_and_well_formed():
     csp = headers.get("Content-Security-Policy", "")
     assert "form-action https://admin.berhelaw.com" in csp
     assert "connect-src 'self' https://admin.berhelaw.com" in csp
-    assert "https://fonts.googleapis.com" in csp
-    assert "https://fonts.gstatic.com" in csp
+    assert "style-src 'self'" in csp
+    assert "font-src 'self'" in csp
+    assert "https://fonts.googleapis.com" not in csp
+    assert "https://fonts.gstatic.com" not in csp
     assert "object-src 'none'" in csp
     assert "frame-src 'none'" in csp
     assert "frame-ancestors 'none'" in csp
