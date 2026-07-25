@@ -72,23 +72,33 @@ def active(route, href):
 
 
 def header(route):
+    """Editorial masthead: wordmark left, centred index, solid call control right.
+
+    The homepage variant sits flush on the paper opening and grows a thin oxblood
+    bottom rule once the opening leaves the viewport. Both states are paper, so the
+    bar stays readable with JavaScript disabled.
+    """
+    home = route == "/"
     links = "".join(
         f'<li><a href="{href}"' + (' aria-current="page"' if active(route, href) else '') + f'>{label}</a></li>'
         for label, href in NAV
     )
+    logo = "/images/berhe-jones-llp-logo.png"
+    variant = " site-header--overlay" if home else ""
+    lifted = ' data-lifted="false"' if home else ""
     return f'''<a class="skip-link" href="#main">Skip to main content</a>
-<header class="site-header"><div class="scroll-progress" aria-hidden="true"><span class="scroll-progress-bar"></span></div><div class="header-inner">
-  <a class="brand" href="/" aria-label="Berhe Jones LLP home"{' aria-current="page"' if route == '/' else ''}><img class="brand-logo" src="/images/berhe-jones-llp-logo-reverse.png" alt="Berhe Jones LLP" width="1305" height="308" decoding="async"></a>
+<header class="site-header{variant}"{lifted}><div class="scroll-progress" aria-hidden="true"><span class="scroll-progress-bar"></span></div><div class="header-inner">
+  <a class="brand" href="/" aria-label="Berhe Jones LLP home"{' aria-current="page"' if home else ''}><img class="brand-logo" src="{logo}" alt="Berhe Jones LLP" width="1305" height="308" decoding="async"></a>
   <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Open menu">Menu</button>
   <nav class="site-nav" id="site-navigation" aria-label="Primary navigation" data-open="false"><ul>{links}</ul></nav>
-  <a class="header-call" href="{PHONE_HREF}">{PHONE_DISPLAY}</a>
+  <a class="header-call" href="{PHONE_HREF}"><span>Call</span><strong>{PHONE_DISPLAY}</strong></a>
 </div></header>'''
 
 
 def footer():
     practices = "".join(f'<li><a href="/practice-areas/{p["slug"]}/">{esc(p["name"])}</a></li>' for p in PRACTICES)
     return f'''<footer class="site-footer"><div class="footer-grid">
-  <div><a class="brand" href="/" aria-label="Berhe Jones LLP home"><img class="brand-logo" src="/images/berhe-jones-llp-logo-reverse.png" alt="Berhe Jones LLP" width="1305" height="308" decoding="async"></a><p>{DBA}</p><p>Attorney-supervised screening for serious California civil matters.</p><p>Responsible firm address: {esc(RESPONSIBLE_FIRM_ADDRESS_TEXT)}</p><p><a href="{PHONE_HREF}">{PHONE_DISPLAY}</a></p></div>
+  <div><a class="brand" href="/" aria-label="Berhe Jones LLP home"><img class="brand-logo" src="/images/berhe-jones-llp-logo.png" alt="Berhe Jones LLP" width="1305" height="308" decoding="async"></a><p>{DBA}</p><p>Attorney-supervised screening for serious California civil matters.</p><p>Responsible firm address: {esc(RESPONSIBLE_FIRM_ADDRESS_TEXT)}</p><p><a href="{PHONE_HREF}">{PHONE_DISPLAY}</a></p></div>
   <div><h2 class="eyebrow">Practice areas</h2><ul>{practices}<li><a href="/landing/truck-fleet-rideshare-accident-california/">Commercial vehicle matters</a></li></ul></div>
   <div><h2 class="eyebrow">Firm and resources</h2><ul><li><a href="/attorney-tam-berhe/">Tam Berhe</a></li><li><a href="/case-review-process/">Case review process</a></li><li><a href="/resources/">Resource library</a></li><li><a href="/living-trust/">Living trust planning</a></li><li><a href="/privacy.html">Privacy</a></li><li><a href="/disclaimer.html">Disclaimer</a></li><li><a href="/terms.html">Terms</a></li></ul></div>
 </div><p class="legal-note">{DISCLAIMER}</p></footer>
@@ -109,7 +119,8 @@ def visible_breadcrumbs(body, route):
     return items
 
 
-FAQ_PATTERN = r'<details class="faq-item"[^>]*><summary>(.*?)</summary><p>(.*?)</p></details>'
+FAQ_DETAILS_PATTERN = r'<details class="faq-item"[^>]*><summary>(.*?)</summary><p>(.*?)</p></details>'
+FAQ_RECORD_PATTERN = r'<article class="faq-item record-question"[^>]*><h3 class="faq-question">(.*?)</h3><p>(.*?)</p></article>'
 
 
 def plain(value):
@@ -117,9 +128,13 @@ def plain(value):
 
 
 def faq_entities(body):
+    entries = [
+        *re.findall(FAQ_DETAILS_PATTERN, body),
+        *re.findall(FAQ_RECORD_PATTERN, body),
+    ]
     return [
         {"@type": "Question", "name": plain(question), "acceptedAnswer": {"@type": "Answer", "text": plain(answer)}}
-        for question, answer in re.findall(FAQ_PATTERN, body)
+        for question, answer in entries
     ]
 
 
@@ -190,11 +205,11 @@ def document(route, title, description, body, *, robots="index, follow", kind="W
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="BerheLaw static builder"><meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="robots" content="{robots}"><title>{esc(title)}</title><meta name="description" content="{esc(description)}">
-<link rel="canonical" href="https://berhelaw.com{route}"><link rel="icon" href="/favicon.ico"><meta name="theme-color" content="#0b151d">
-<link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="canonical" href="https://berhelaw.com{route}"><link rel="icon" href="/favicon.ico"><meta name="theme-color" content="#8c2f25">
+<link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/ibm-plex-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{CSS}"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(description)}"><meta property="og:url" content="https://berhelaw.com{route}"><meta property="og:type" content="{og_type}">{article_meta}<meta property="og:site_name" content="Berhe Jones LLP"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://berhelaw.com/images/og-berhe-jones-llp.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Berhe Jones LLP branded social preview image for California legal services."><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{esc(title)}"><meta name="twitter:description" content="{esc(description)}"><meta name="twitter:image" content="https://berhelaw.com/images/og-berhe-jones-llp.png"><meta name="twitter:image:alt" content="Berhe Jones LLP branded social preview image for California legal services.">
 <script type="application/ld+json">{schema(route, title, description, body, kind)}</script>
-</head><body id="top">{header(route)}{body}{footer()}<script src="{SITE_JS}" defer></script><script src="{INTAKE_JS}" defer></script></body></html>'''
+</head><body id="top" class="{'home-page' if route == '/' else 'inner-page'}">{header(route)}{body}{footer()}<script src="{SITE_JS}" defer></script><script src="{INTAKE_JS}" defer></script></body></html>'''
 
 
 def breadcrumbs(items):
@@ -209,6 +224,22 @@ def breadcrumbs(items):
 CASE_ART_ALT = (
     "Case files, folders, a brass chronology rule, and mapping lines arranged on a dark surface."
 )
+
+
+EVIDENCE_ART_ALT = (
+    "Layered archival paper, chronology rules, and a brass channel photographed against a dark field."
+)
+
+
+def opening_picture():
+    """Exposed cinematic plate. The art is never glazed over: it closes the opening at full strength."""
+    return ('<picture><source media="(max-width:600px)" srcset="/images/evidence-architecture-hero-mobile.webp" type="image/webp">'
+            '<source srcset="/images/evidence-architecture-hero.webp" type="image/webp">'
+            f'<img src="/images/evidence-architecture-hero.jpg" alt="{esc(EVIDENCE_ART_ALT)}" width="1536" height="864" decoding="async" fetchpriority="high"></picture>')
+
+
+def call_bar(label="Call"):
+    return f'<a class="call-bar" href="{PHONE_HREF}"><span>{esc(label)}</span><strong>{PHONE_DISPLAY}</strong></a>'
 
 
 def picture(name="case", alt=CASE_ART_ALT):
@@ -242,6 +273,17 @@ def faq_block(faqs, heading="Questions people ask before they call.", eyebrow="C
     lead = f'<p class="section-intro">{esc(intro)}</p>' if intro else ""
     return (f'<div class="faq-panel" id="faq-panel"><span class="eyebrow">{esc(eyebrow)}</span><h2>{esc(heading)}</h2>{lead}'
             f'<div class="faq-list" data-reveal-group>{items}</div></div>')
+
+
+def faq_record(faqs, heading, eyebrow, intro):
+    """Render the homepage questions as an always-visible editorial ledger."""
+    items = "".join(
+        f'<article class="faq-item record-question" data-reveal><h3 class="faq-question">{esc(question)}</h3><p>{esc(answer)}</p></article>'
+        for question, answer in faqs
+    )
+    return (f'<div class="faq-panel faq-panel--record" id="faq-panel"><span class="eyebrow">{esc(eyebrow)}</span>'
+            f'<h2>{esc(heading)}</h2><p class="section-intro">{esc(intro)}</p>'
+            f'<div class="faq-list question-ledger" data-reveal-group>{items}</div></div>')
 
 
 def checklist(items, title, note=""):
@@ -288,13 +330,14 @@ CASE_TIMELINE = [
 ]
 
 
-def case_timeline(eyebrow="How a case review runs", heading="Five stages that organize the first review.",
+def case_timeline(folio="Section 05 / Five chapters", eyebrow="How a case review runs", heading="Five stages that organize the first review.",
                   intro="Nothing here is a promise about a result. These stages show the questions that guide a first review before you pick up the phone."):
+    """Five Chapters. Giant sticky numerals and ruled annotations. No dots, no connected rail."""
     steps = "".join(
-        f'''<li class="case-step" data-timeline-step data-step="{index}"><span class="case-step-dot" aria-hidden="true"></span><div class="case-step-body"><span class="case-step-index">Stage {index:02d}</span><h3>{esc(title)}</h3><p>{esc(text)}</p><p class="case-step-bring">{esc(bring)}</p></div></li>'''
+        f'''<li class="case-step" data-timeline-step data-step="{index}"><span class="case-step-number" aria-hidden="true">{index:02d}</span><div class="case-step-body"><span class="case-step-index">Chapter {index:02d} of 05</span><h3>{esc(title)}</h3><p>{esc(text)}</p><p class="case-step-bring">{esc(bring)}</p></div></li>'''
         for index, (title, text, bring) in enumerate(CASE_TIMELINE, 1)
     )
-    return f'''<section class="section case-review-timeline" id="how-review-works" data-timeline><div class="section-inner"><div class="home-section-heading" data-reveal><div><span class="eyebrow">{esc(eyebrow)}</span><h2>{esc(heading)}</h2></div><p>{esc(intro)}</p></div><div class="case-track"><div class="case-track-rail" aria-hidden="true"><span class="case-track-fill"></span></div><ol class="case-steps">{steps}</ol></div></div></section>'''
+    return f'''<section class="band band--paper case-review-timeline" id="how-review-works" data-timeline><div class="band-head" data-reveal><div><span class="folio">{esc(folio)}</span><span class="eyebrow">{esc(eyebrow)}</span><h2>{esc(heading)}</h2></div><p>{esc(intro)}</p></div><div class="case-track"><div class="case-track-rail" aria-hidden="true"><span class="case-track-fill"></span></div><ol class="case-steps">{steps}</ol></div></section>'''
 
 
 def intake_form(form_id="case-review", matter="General civil matter", campaign="general", heading="Case review request", extra="", source_route="/"):
@@ -309,10 +352,34 @@ def intake_form(form_id="case-review", matter="General civil matter", campaign="
 <button class="button button-primary" type="submit">Send request</button><p class="form-status" data-form-status role="status" aria-live="polite" tabindex="-1"></p></form>'''
 
 
+CLOCK_STATEMENTS = [
+    ("Deadlines can run ", "early", "",
+     "Matters involving public entities, agencies, insurance notices, and courts can require action sooner than people expect, and some require a step before any lawsuit."),
+    ("Evidence ", "expires", " quietly",
+     "Video is overwritten on a retention schedule. Vehicles get repaired. Scenes get cleaned. App and telematics data cycles out. Witnesses move."),
+    ("Early choices ", "stick", "",
+     "Recorded statements, signed releases, medical authorizations, severance paperwork, and insurer correspondence shape what is still possible months later."),
+]
+
+
 def homepage():
-    practice_cards = "".join(
-        f'''<article class="home-practice-card" data-reveal><span class="home-practice-number">{index:02d}</span><h3><a href="/practice-areas/{p["slug"]}/">{esc(p["name"])}</a></h3><p>{esc(p["card"])}</p><a class="text-link" href="/practice-areas/{p["slug"]}/">How this review works <span aria-hidden="true">→</span></a></article>'''
+    docket_questions = [
+        ("Who is involved?", "Identify the people, companies, insurers, employers, agencies, and other organizations on every side."),
+        ("What date matters?", "Start with the event date, then add every notice, hearing, claim, agency, response, or filing date you know."),
+        ("What proof still exists?", "List the records, video, photographs, messages, devices, property, witnesses, and accounts that may still be preserved."),
+        ("What harm changed life, work, or property?", "Describe the injury, income loss, job impact, property damage, business loss, or other documented change."),
+    ]
+    docket_html = "".join(
+        f'<li class="docket-question" data-reveal><span class="docket-number" aria-hidden="true">{index:02d}</span><h3>{esc(question)}</h3><p>{esc(answer)}</p></li>'
+        for index, (question, answer) in enumerate(docket_questions, 1)
+    )
+    index_rows = "".join(
+        f'''<li class="index-row" data-reveal><a class="index-row-link" href="/practice-areas/{p["slug"]}/"><span class="index-row-number" aria-hidden="true">{index:02d}</span><span class="index-row-title">{esc(p["name"])}</span><span class="index-row-copy">{esc(p["card"])}</span><span class="index-row-mark">How this review works</span></a></li>'''
         for index, p in enumerate(PRACTICES, 1)
+    )
+    clock_statements = "".join(
+        f'''<li class="clock-statement" data-clock-step="{index}"><strong>{esc(prefix)}<em>{esc(word)}</em>{esc(suffix)}</strong><p>{esc(text)}</p></li>'''
+        for index, (prefix, word, suffix, text) in enumerate(CLOCK_STATEMENTS, 1)
     )
     preserve_cards = [
         ("Photograph what still exists", "Vehicles, property, injuries, work areas, and damaged items change fast. Photograph them now, keep the original files, and do not crop or edit them.", "/resources/after-a-collision-first-steps/", "First steps after a crash"),
@@ -321,8 +388,8 @@ def homepage():
         ("Save what you may lose access to", "Work accounts, portals, app histories, and company records can close without warning. Export or print your own records while you still can.", "/resources/workplace-documentation/", "Document a workplace problem"),
     ]
     preserve_html = "".join(
-        f'<article class="preserve-card" data-reveal><h3>{esc(title)}</h3><p>{esc(text)}</p><a class="text-link" href="{href}">{esc(label)} <span aria-hidden="true">→</span></a></article>'
-        for title, text, href, label in preserve_cards
+        f'<li class="preserve-band" data-reveal><span class="preserve-index" aria-hidden="true">{index:02d}</span><h3>{esc(title)}</h3><div><p>{esc(text)}</p><a class="preserve-link" href="{href}">{esc(label)}</a></div></li>'
+        for index, (title, text, href, label) in enumerate(preserve_cards, 1)
     )
     faqs = [
         ("How much does it cost to call about my case?", "There is no fee to tell the firm what happened and request an initial case review. If representation is offered, fees, costs, and scope are explained in a written agreement before representation begins."),
@@ -335,15 +402,15 @@ def homepage():
         ("What if I already have an attorney for this matter?", "Say so at the start. If you are represented, the firm will not step between you and your current counsel. Attorney-to-attorney referral and co-counsel questions go through the referrals page."),
     ]
     body = f'''<main id="main">
-<section class="home-hero" data-hero><div class="home-hero-art" aria-hidden="true">{picture("case")}</div><div class="home-hero-inner"><div class="home-hero-copy"><span class="eyebrow">California civil law firm</span><h1>Something serious happened. What you do next can shape what you can prove.</h1><p class="home-hero-lead">Injured. Fired after you spoke up. Denied by an insurer. Harmed by a company or an agency that will not answer. The first review with Berhe Jones LLP is free and attorney-led, and it starts with two things that can change quickly: your deadlines and your evidence.</p><div class="home-hero-actions"><a class="button button-call" href="{PHONE_HREF}"><span>Call now</span><strong>{PHONE_DISPLAY}</strong></a><a class="button button-secondary-light" href="/free-case-review/">Start a free case review</a></div><p class="home-hero-urgency"><strong>Deadlines and evidence do not wait.</strong> If the matter is urgent, call now. A call does not create an attorney-client relationship.</p></div><aside class="home-attorney-card" aria-label="Attorney-led case review"><img src="/images/tam-berhe.jpg" alt="Tam Berhe, California attorney" width="200" height="200" decoding="async"><div><span class="eyebrow">Attorney-led review</span><h2>Tell us what happened.</h2><p>Start with the event, the people or organizations involved, the harm, and any deadline. You do not need every document before you call.</p><a class="text-link text-link-light" href="/attorney-tam-berhe/">Meet Tam Berhe <span aria-hidden="true">→</span></a></div></aside></div></section>
-{proof_band()}
-<section class="section home-stakes"><div class="section-inner"><div class="home-section-heading" data-reveal><div><span class="eyebrow">Start with the problem, not the label</span><h2>What happened to you, and what it is costing.</h2></div><p>People call because something already changed their health, their income, their record, or their family. Choose the situation closest to yours. If none of them fit, call and describe it in your own words.</p></div><div class="home-practice-grid" data-reveal-group>{practice_cards}</div><div class="home-inline-cta" data-reveal><p><strong>Not sure which one fits?</strong> That is normal, and it is not your job to know. Describe what happened and the category gets sorted out during the review.</p><a class="button button-primary" href="{PHONE_HREF}">Call {PHONE_DISPLAY}</a></div></div></section>
-<section class="home-urgency"><div class="section-inner home-urgency-grid"><div data-reveal><span class="eyebrow">Why timing matters</span><h2>The facts may stay the same while proof becomes harder to recover.</h2><p class="section-intro">Waiting can make a matter harder to evaluate because records, video, devices, scenes, and memories can change or disappear.</p></div><div class="home-reasons" data-reveal-group><article data-reveal><strong>Deadlines can run early</strong><p>Matters involving public entities, agencies, insurance notices, and courts can require action sooner than people expect, and some require a step before any lawsuit.</p></article><article data-reveal><strong>Evidence expires quietly</strong><p>Video is overwritten on a retention schedule. Vehicles get repaired. Scenes get cleaned. App and telematics data cycles out. Witnesses move.</p></article><article data-reveal><strong>Early choices stick</strong><p>Recorded statements, signed releases, medical authorizations, severance paperwork, and insurer correspondence shape what is still possible months later.</p></article><a class="button button-call button-call-wide" href="{PHONE_HREF}"><span>Talk to the firm</span><strong>{PHONE_DISPLAY}</strong></a></div></div></section>
+<section class="opening" id="opening-statement" data-hero data-opening><div class="opening-field"><p class="folio" aria-hidden="true"><span>Case file 01</span><span>California civil law firm</span><span>California matters</span></p><h1 class="opening-headline"><span class="mask mask--i0"><span class="mask-line">Something serious happened.</span></span><span class="mask mask--i1"><span class="mask-line">What you do next</span></span><span class="mask mask--i2"><span class="mask-line">can shape</span></span><span class="mask mask--i3"><span class="mask-line mask-line--marked">what you can prove.</span></span></h1></div><div class="opening-lead-band"><p class="opening-lead">Injured. Fired after you spoke up. Denied by an insurer. Harmed by a company or an agency that will not answer. The first review with Berhe Jones LLP is free and attorney-led, and it starts with two things that can change quickly: your deadlines and your evidence.</p></div><div class="opening-dock-band"><div class="opening-dock-inner"><div class="opening-dock">{call_bar()}<a class="dock-link" href="/free-case-review/">Start a free case review</a></div><p class="opening-note"><strong>Free first review. Deadlines and evidence do not wait.</strong> If the matter is urgent, call now. A call does not create an attorney-client relationship.</p></div></div><div class="opening-plate">{opening_picture()}</div></section>
+<section class="band docket" id="first-review-docket" aria-labelledby="docket-heading"><div class="docket-head" data-reveal><span class="folio">Section 02 / First review docket</span><h2 id="docket-heading">Four questions before any claim label.</h2><p>Start with the facts another person can identify, date, preserve, and document.</p></div><ol class="docket-questions" data-reveal-group>{docket_html}</ol></section>
+<section class="band band--paper case-index" id="case-index"><div class="band-head" data-reveal><div><span class="folio">Section 03 / Case index</span><span class="eyebrow">Start with the problem, not the label</span><h2>What happened to you, and what it is costing.</h2></div><p>People call because something already changed their health, their income, their record, or their family. Choose the situation closest to yours. If none of them fit, call and describe it in your own words.</p></div><ol class="index-rows" data-reveal-group>{index_rows}</ol><p class="margin-note" data-reveal><strong>Not sure which one fits?</strong> That is normal, and it is not your job to know. Describe what happened and the category gets sorted out during the review. <a href="{PHONE_HREF}">Call {PHONE_DISPLAY}</a></p></section>
+<section class="band band--ink clock" id="clock" data-clock><div class="clock-stage"><div class="clock-anchor"><span class="folio">Section 04 / The clock starts quietly</span><h2>The facts may stay the same while proof becomes harder to recover.</h2><p class="section-intro">Waiting can make a matter harder to evaluate because records, video, devices, scenes, and memories can change or disappear.</p><p class="clock-meter" aria-hidden="true"><span><b data-clock-count="03">01</b>/03</span><span class="clock-meter-rail"><span class="clock-meter-fill"></span></span></p></div><ol class="clock-statements">{clock_statements}</ol></div><div class="clock-close" data-reveal>{call_bar("Talk to the firm")}</div></section>
 {case_timeline()}
-<section class="section paper home-preserve"><div class="section-inner"><div class="home-section-heading" data-reveal><div><span class="eyebrow">Useful first steps</span><h2>Four ways to build a record while details are still available.</h2></div><p>These general documentation steps may help preserve a usable record. Each one links to a guide that goes deeper.</p></div><div class="preserve-grid" data-reveal-group>{preserve_html}</div><div class="home-inline-cta" data-reveal><p><strong>Working through a specific situation?</strong> The resource library covers crashes, adjuster calls, workplace records, commercial-vehicle evidence, and deadline questions.</p><a class="button button-secondary" href="/resources/">Open the resource library</a></div></div></section>
-<section class="section home-advocate"><div class="section-inner home-advocate-grid"><div class="home-portrait" data-reveal><img src="/images/tam-berhe.jpg" alt="Tam Berhe, California attorney" width="200" height="200" decoding="async" loading="lazy"></div><div data-reveal><span class="eyebrow">Your first step is attorney-led</span><h2>A serious matter deserves more than a generic intake script.</h2><p class="section-intro">Tam Berhe reviews selected California civil matters for conflicts, urgency, legal fit, available proof, and the next practical move. The goal of the first review is clarity: what matters now, what should be preserved, and whether the firm may be able to help.</p><div class="actions"><a class="button button-primary" href="{PHONE_HREF}">Call {PHONE_DISPLAY}</a><a class="button button-secondary" href="/attorney-tam-berhe/">Attorney profile</a></div></div></div></section>
-<section class="section home-faq"><div class="section-inner">{faq_block(faqs, heading="Questions people ask at the beginning.", eyebrow="Before you call", intro="You do not need to know the legal name of your claim. Start with what happened and what changed because of it.")}</div></section>
-<section class="section deep"><div class="section-inner intake-wrap"><div data-reveal><span class="eyebrow">Prefer to start online?</span><h2>Send a short summary for a free case review.</h2><p class="section-intro">Name the parties, key dates, what happened, the harm, and any deadline you know about. Do not send privileged or highly sensitive records through this public form. If time may matter, call {PHONE_DISPLAY} instead.</p><a class="home-form-call" href="{PHONE_HREF}">Call now: {PHONE_DISPLAY}</a></div>{intake_form("home-review", heading="Request a free case review", source_route="/")}</div></section>
+<section class="band band--archive preserve" id="preserve"><div class="band-head" data-reveal><div><span class="folio">Section 06 / Preserve this</span><span class="eyebrow">Useful first steps</span><h2>Four ways to build a record while details are still available.</h2></div><p>These general documentation steps may help preserve a usable record. Each one links to a guide that goes deeper.</p></div><ol class="preserve-bands" data-reveal-group>{preserve_html}</ol><p class="margin-note" data-reveal><strong>Working through a specific situation?</strong> The resource library covers crashes, adjuster calls, workplace records, commercial-vehicle evidence, and deadline questions. <a href="/resources/">Open the resource library</a></p></section>
+<section class="band band--paper counsel" id="counsel"><div class="counsel-grid"><figure class="counsel-portrait" data-reveal><img src="/images/tam-berhe.jpg" alt="Tam Berhe, California attorney" width="200" height="200" decoding="async" loading="lazy"><figcaption>Attorney-led. Serious matters reviewed by counsel.</figcaption></figure><div class="counsel-copy" data-reveal><span class="folio">Section 07 / Reviewed by counsel</span><span class="eyebrow">Your first step is attorney-led</span><h2>A serious matter deserves more than a generic intake script.</h2><p class="section-intro">Tam Berhe reviews selected California civil matters for conflicts, urgency, legal fit, available proof, and the next practical move. The goal of the first review is clarity: what matters now, what should be preserved, and whether the firm may be able to help.</p><div class="counsel-actions"><a class="button button-primary" href="{PHONE_HREF}">Call {PHONE_DISPLAY}</a><a class="button button-secondary" href="/attorney-tam-berhe/">Attorney profile</a></div></div></div></section>
+<section class="band band--paper home-faq" id="questions"><div class="band-inner"><span class="folio">Section 08 / Questions at the beginning</span>{faq_record(faqs, heading="Questions people ask at the beginning.", eyebrow="Before you call", intro="You do not need to know the legal name of your claim. Start with what happened and what changed because of it.")}</div></section>
+<section class="band intake-field" id="start-with-the-facts"><div class="intake-grid"><div data-reveal><span class="folio">Section 09 / Start with the facts</span><p class="call-first">If timing may matter, call.</p>{call_bar()}<h2>Send a short summary for a free case review.</h2><p class="section-intro">Name the parties, key dates, what happened, the harm, and any deadline you know about. Do not send privileged or highly sensitive records through this public form. If time may matter, call {PHONE_DISPLAY} instead.</p></div>{intake_form("home-review", heading="Request a free case review", source_route="/")}</div></section>
 </main>'''
     return document("/", "California Personal Injury & Civil Rights Lawyer | Berhe Jones LLP", "Injured, mistreated at work, denied insurance, or harmed by misconduct? Call Berhe Jones LLP at 909-609-6685 for a free California case review.", body)
 
@@ -704,15 +771,34 @@ The endpoint does not require cross-origin JavaScript because forms use native b
 
 The Garden Grove local feed is fresh for 14 days after `lastVerifiedUtc`. After that window, or when the feed is malformed or unavailable, the page displays a prominent alert with the last verified date when available and directs visitors to the cited official City and County sources.
 
+## Visual system
+
+The public site uses THE RECORD art direction: paper `#F4EFE6`, ink `#121816`, restrained oxblood
+`#8C2F25`, archive `#C9BDA8`, and muted ink `#5D655F`. Gold is retired as an action colour. Display
+type is self-hosted Newsreader, body and controls are IBM Plex Sans, and indexes and metadata are
+IBM Plex Mono. Corners are square, rules are editorial hairlines, and folio numerals carry the
+hierarchy. No glass, gradients, floating cards, shadow stacks, generic legal icons, or stock imagery.
+
+The homepage is a record, not a landing page: a full-screen Opening Statement on paper with a
+staggered headline and one oxblood conversion band, an exposed evidence-architecture plate, a
+seven-row Case Index, the sticky ink chapter The Clock Starts Quietly, Five Chapters with giant
+sticky numerals, four Preserve This bands on archive, a Reviewed by Counsel chapter carrying the
+native 200px portrait, ruled FAQ rows, an unboxed intake surface, and a paper footer under a thick
+oxblood rule. `tests/test_visual_v2_departure.py` fails the build if the rejected first screen
+returns, and it measures blurred grayscale structural similarity against the prior screenshots with
+a ceiling of 0.55 at both 1440x1000 and 390x844.
+
 ## Motion contract
 
 Scroll motion is native CSS and JavaScript with no library. `site.js` adds the `motion` class to
 `<html>` only when IntersectionObserver, requestAnimationFrame, and a no-preference reduced-motion
 setting are all present, and that class is the only thing that hides or offsets content. Without
 JavaScript, on any failure, or under `prefers-reduced-motion: reduce`, every page renders in its
-finished state: reveals are visible, the case-review timeline is fully drawn, and the decorative
-scroll-progress bar is hidden. Motion animates transform and opacity only, never intercepts the
-scroller, and is covered by `tests/test_motion_seo_contract.py` and the WebKit motion tests.
+finished state: reveals are visible, headline masks are open, index row rules are drawn, clock
+statements are active, the chapter meter is full, and the decorative scroll-progress bar is hidden.
+Reduced motion also drops sticky chapter staging back to normal document flow. Motion animates
+transform and opacity only, never intercepts the scroller, and is covered by
+`tests/test_motion_seo_contract.py` and the WebKit motion tests.
 
 ## Content guardrails
 

@@ -8,9 +8,10 @@ from urllib.parse import urlparse
 from playwright.sync_api import Error as PlaywrightError, sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-QA = ROOT / "qa" / "opus5-motion-seo"
+QA = ROOT / "qa" / "visual-v2"
 ORIGIN = "http://berhelaw.test"
 VIEWPORTS = (
+    (320, 568, "tiny-mobile"),
     (320, 720, "small-mobile"),
     (390, 844, "mobile"),
     (768, 1024, "tablet"),
@@ -90,27 +91,58 @@ def main():
 
             context = context_for(browser, 1440, 1000)
             page = context.new_page()
-            for route, marker, max_font, max_bottom, check_crop in (
-                ("/", "home-hero", 104, 950, False),
-                ("/practice-areas/", "hero--practice-hub", 67, 870, True),
-            ):
-                page.goto(f"{ORIGIN}{route}", wait_until="domcontentloaded", timeout=10000)
-                metrics = page.locator(f".{marker}").evaluate("""(hero, marker) => {
-                    const heading = hero.querySelector('h1');
-                    const media = hero.querySelector('.hero-media img');
-                    const rect = hero.getBoundingClientRect();
-                    return {
-                        marker: hero.classList.contains(marker),
-                        fontSize: parseFloat(getComputedStyle(heading).fontSize),
-                        bottom: rect.bottom,
-                        objectPosition: media ? getComputedStyle(media).objectPosition : null,
-                    };
-                }""", marker)
-                passed = metrics["marker"] and metrics["fontSize"] <= max_font and metrics["bottom"] <= max_bottom
-                record_assertion(f"{marker} controlled desktop sizing", passed, metrics)
-                if check_crop:
-                    crop_passed = metrics["objectPosition"] not in {"50% 50%", "center center", None}
-                    record_assertion(f"{marker} deliberate image crop", crop_passed, {"objectPosition": metrics["objectPosition"]})
+            page.goto(f"{ORIGIN}/", wait_until="domcontentloaded", timeout=10000)
+            opening = page.locator(".opening").evaluate("""(section) => {
+                const heading = section.querySelector('h1');
+                const plate = section.querySelector('.opening-plate img');
+                const rect = section.getBoundingClientRect();
+                const plateRect = plate ? plate.getBoundingClientRect() : null;
+                const dock = section.querySelector('.opening-dock');
+                return {
+                    fontSize: parseFloat(getComputedStyle(heading).fontSize),
+                    fontFamily: getComputedStyle(heading).fontFamily,
+                    height: rect.height,
+                    viewport: innerHeight,
+                    dockBottom: dock.getBoundingClientRect().bottom,
+                    plateVisible: plateRect ? Math.max(0, Math.min(plateRect.bottom, innerHeight) - Math.max(plateRect.top, 0)) : 0,
+                    plateOverlays: section.querySelectorAll('.opening-plate :not(picture):not(source):not(img)').length,
+                    background: getComputedStyle(section).backgroundColor,
+                };
+            }""")
+            record_assertion(
+                "opening statement fills the first desktop viewport with an exposed plate",
+                opening["height"] >= opening["viewport"] * 0.97
+                and 72 <= opening["fontSize"] <= 130
+                and "Newsreader" in opening["fontFamily"]
+                and "Fraunces" not in opening["fontFamily"]
+                and opening["plateVisible"] >= opening["viewport"] * 0.8
+                and opening["plateOverlays"] == 0
+                and opening["dockBottom"] <= opening["viewport"]
+                and opening["background"] == "rgb(244, 239, 230)",
+                opening,
+            )
+            page.goto(f"{ORIGIN}/practice-areas/", wait_until="domcontentloaded", timeout=10000)
+            metrics = page.locator(".hero--practice-hub").evaluate("""(hero) => {
+                const heading = hero.querySelector('h1');
+                const media = hero.querySelector('.hero-media img');
+                const rect = hero.getBoundingClientRect();
+                return {
+                    marker: hero.classList.contains('hero--practice-hub'),
+                    fontSize: parseFloat(getComputedStyle(heading).fontSize),
+                    bottom: rect.bottom,
+                    objectPosition: media ? getComputedStyle(media).objectPosition : null,
+                };
+            }""")
+            record_assertion(
+                "hero--practice-hub controlled desktop sizing",
+                metrics["marker"] and metrics["fontSize"] <= 67 and metrics["bottom"] <= 900,
+                metrics,
+            )
+            record_assertion(
+                "hero--practice-hub deliberate image crop",
+                metrics["objectPosition"] not in {"50% 50%", "center center", None},
+                {"objectPosition": metrics["objectPosition"]},
+            )
             page.close()
             context.close()
 
@@ -120,7 +152,7 @@ def main():
             page.wait_for_timeout(150)
             home_sticky = page.evaluate("""() => {
                 const sticky = document.querySelector('.mobile-actions');
-                const secondary = document.querySelector('.hero .button-secondary, .home-hero-actions .button-secondary-light');
+                const secondary = document.querySelector('.opening-dock .dock-link');
                 return {
                     suppressed: sticky.dataset.suppressed,
                     visibility: getComputedStyle(sticky).visibility,
@@ -171,25 +203,60 @@ def main():
             page.close()
             context.close()
 
-            for width in (320, 390):
-                context = context_for(browser, width, 844, reduced=False)
+            # Conversion gates. 320x568 must show the primary call bar; 390x844 must show call and review together.
+            for width, height, both in ((320, 568, False), (320, 720, False), (390, 844, True)):
+                context = context_for(browser, width, height, reduced=False)
                 page = context.new_page()
                 page.goto(f"{ORIGIN}/", wait_until="domcontentloaded", timeout=10000)
                 page.wait_for_timeout(900)
                 fold = page.evaluate("""() => {
-                    const call = document.querySelector('.home-hero-actions a.button-call');
-                    const review = document.querySelector('.home-hero-actions a[href="/free-case-review/"]');
+                    const call = document.querySelector('.opening-dock a.call-bar');
+                    const review = document.querySelector('.opening-dock a.dock-link');
                     const box = (element) => {
                         const rect = element.getBoundingClientRect();
-                        return {bottom: rect.bottom, top: rect.top, opacity: parseFloat(getComputedStyle(element).opacity)};
+                        return {bottom: rect.bottom, top: rect.top, height: rect.height, opacity: parseFloat(getComputedStyle(element).opacity)};
                     };
-                    return {call: box(call), review: box(review), viewport: innerHeight};
+                    return {call: box(call), review: box(review), viewport: innerHeight, overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1};
+                }""")
+                passed = (
+                    fold["call"]["bottom"] <= fold["viewport"] and fold["call"]["top"] >= 0
+                    and fold["call"]["opacity"] == 1 and fold["call"]["height"] >= 44 and not fold["overflow"]
+                )
+                if both:
+                    passed = passed and fold["review"]["bottom"] <= fold["viewport"] and fold["review"]["opacity"] == 1
+                record_assertion(
+                    f"primary call{' and case review' if both else ''} fit the first {width}x{height} viewport",
+                    passed,
+                    fold,
+                )
+                page.close()
+                context.close()
+
+            # Tonal gate. The first viewport must not repeat the rejected dark field.
+            for width, height in ((1440, 1000), (390, 844)):
+                context = context_for(browser, width, height, reduced=False)
+                page = context.new_page()
+                page.goto(f"{ORIGIN}/", wait_until="domcontentloaded", timeout=10000)
+                page.wait_for_timeout(1000)
+                exposure = page.evaluate("""() => {
+                    const plate = document.querySelector('.opening-plate img');
+                    const rect = plate.getBoundingClientRect();
+                    const visible = Math.max(0, Math.min(rect.bottom, innerHeight) - Math.max(rect.top, 0))
+                        * Math.max(0, Math.min(rect.right, innerWidth) - Math.max(rect.left, 0));
+                    return {
+                        artShare: visible / (innerWidth * innerHeight),
+                        openingBackground: getComputedStyle(document.querySelector('.opening')).backgroundColor,
+                        dockBackground: getComputedStyle(document.querySelector('.opening-dock-band')).backgroundColor,
+                        glazed: document.querySelectorAll('.opening-plate :not(picture):not(source):not(img)').length,
+                    };
                 }""")
                 record_assertion(
-                    f"primary call and case review fit the first {width}x844 viewport",
-                    fold["call"]["bottom"] <= fold["viewport"] and fold["review"]["bottom"] <= fold["viewport"]
-                    and fold["call"]["top"] >= 0 and fold["call"]["opacity"] == 1 and fold["review"]["opacity"] == 1,
-                    fold,
+                    f"first {width}x{height} viewport exposes art without a dark glaze",
+                    exposure["glazed"] == 0
+                    and exposure["openingBackground"] == "rgb(244, 239, 230)"
+                    and exposure["dockBackground"] == "rgb(140, 47, 37)"
+                    and exposure["artShare"] >= (0.30 if width > 900 else 0.10),
+                    exposure,
                 )
                 page.close()
                 context.close()
@@ -204,6 +271,7 @@ def main():
                     step,
                 )
                 page.wait_for_timeout(220)
+            page.wait_for_timeout(700)  # let the final reveal transition finish before sampling
             motion_state = page.evaluate("""() => {
                 const styles = getComputedStyle(document.documentElement);
                 const timeline = document.querySelector('[data-timeline]');
@@ -254,14 +322,30 @@ def main():
             context.close()
 
             captures = [
-                ("/", 320, 720, None, "home-hero-320.png"),
-                ("/", 390, 844, None, "home-hero-390.png"),
-                ("/", 768, 1024, None, "home-hero-768.png"),
+                # Opening statement, captured at the exact baseline geometry for the structural-departure gate.
                 ("/", 1440, 1000, None, "home-hero-1440.png"),
+                ("/", 390, 844, None, "home-hero-390.png"),
+                ("/", 320, 568, None, "home-hero-320x568.png"),
+                ("/", 320, 720, None, "home-hero-320.png"),
+                ("/", 768, 1024, None, "home-hero-768.png"),
                 ("/", 2560, 1440, None, "home-hero-2560.png"),
+                # Deep scroll stages through every record chapter.
+                ("/", 1440, 1000, ".opening-plate", "home-plate-1440.png"),
+                ("/", 1440, 1000, ".docket", "home-docket-1440.png"),
+                ("/", 390, 844, ".docket", "home-docket-390.png"),
+                ("/", 1440, 1000, ".case-index", "home-case-index-1440.png"),
+                ("/", 390, 844, ".case-index", "home-case-index-390.png"),
+                ("/", 1440, 1000, "[data-clock]", "home-clock-1440.png"),
+                ("/", 390, 844, "[data-clock]", "home-clock-390.png"),
                 ("/", 1440, 1000, "[data-timeline]", "home-case-timeline-1440.png"),
                 ("/", 390, 844, "[data-timeline]", "home-case-timeline-390.png"),
-                ("/", 1440, 1000, ".home-preserve", "home-preserve-1440.png"),
+                ("/", 1440, 1000, ".preserve", "home-preserve-1440.png"),
+                ("/", 1440, 1000, ".counsel", "home-counsel-1440.png"),
+                ("/", 1440, 1000, ".home-faq", "home-questions-1440.png"),
+                ("/", 1440, 1000, ".intake-field", "home-intake-1440.png"),
+                ("/", 390, 844, ".intake-field", "home-intake-390.png"),
+                ("/", 1440, 1000, ".site-footer", "home-footer-1440.png"),
+                ("/", 390, 844, ".js-open-menu", "home-menu-390.png"),
                 ("/practice-areas/personal-injury-wrongful-death/", 1440, 1000, ".stakes-list", "practice-stakes-1440.png"),
                 ("/practice-areas/", 1440, 1000, None, "practice-hub-desktop.png"),
                 ("/resources/", 1440, 1000, ".editorial-list", "resource-hub-1440.png"),
@@ -281,7 +365,10 @@ def main():
                         "document.querySelector('#updates-status')?.dataset.feedState",
                         timeout=5000,
                     )
-                if selector:
+                if selector == ".js-open-menu":
+                    page.locator(".nav-toggle").click()
+                    page.wait_for_timeout(400)
+                elif selector:
                     page.locator(selector).scroll_into_view_if_needed()
                     page.wait_for_timeout(900)
                 target = QA / filename

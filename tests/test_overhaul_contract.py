@@ -139,7 +139,7 @@ def test_shared_accessibility_and_legal_markers():
         assert doc.select_one('button.nav-toggle[type="button"][aria-expanded="false"]')
         assert doc.select_one('nav#site-navigation[aria-label="Primary navigation"]')
         assert doc.select_one("footer.site-footer")
-        assert doc.select_one('meta[name="theme-color"][content="#0b151d"]')
+        assert doc.select_one('meta[name="theme-color"][content="#8c2f25"]')
         text = doc.get_text(" ", strip=True).lower()
         if path.name == "success.html":
             continue
@@ -262,16 +262,15 @@ def test_forms_have_mobile_and_accessibility_contract():
 def test_visual_qa_markers_and_mobile_sticky_contract():
     home = soup(ROOT / "index.html")
     practice_hub = soup(ROOT / "practice-areas" / "index.html")
-    assert home.select_one("section.home-hero")
+    assert home.select_one("section.opening[data-hero][data-opening]")
     assert practice_hub.select_one("section.hero.hero--practice-hub.hero--case-art")
 
-    hero_text = home.select_one(".home-hero-copy").get_text(" ", strip=True)
-    assert "Something serious happened. What you do next can shape what you can prove." in hero_text
-    primary_call = home.select_one('.home-hero-actions a.button-call[href^="tel:"]')
-    assert primary_call and "Call now" in primary_call.get_text(" ", strip=True)
-    assert home.select_one('.home-hero-actions a[href="/free-case-review/"]')
-    assert "298992" not in home.select_one(".home-hero").get_text(" ", strip=True)
-    assert "298992" not in home.select_one(".proof-band").get_text(" ", strip=True)
+    headline = home.select_one(".opening-headline").get_text(" ", strip=True)
+    assert headline == "Something serious happened. What you do next can shape what you can prove."
+    primary_call = home.select_one('.opening-dock a.call-bar[href^="tel:"]')
+    assert primary_call and "909-609-6685" in primary_call.get_text(" ", strip=True)
+    assert home.select_one('.opening-dock a.dock-link[href="/free-case-review/"]')
+    assert "298992" not in home.select_one(".opening").get_text(" ", strip=True)
     assert len(home.select(".faq-item")) >= 5
 
     metadata = json.loads(home.select_one('script[type="application/ld+json"]').string)
@@ -285,7 +284,6 @@ def test_visual_qa_markers_and_mobile_sticky_contract():
 
     css = next((ROOT / "assets" / "css").glob("site.*.css")).read_text(encoding="utf-8")
     assert "--mobile-action-height:3.5rem" in css
-    assert ".hero--home h1" in css
     assert ".hero--practice-hub h1" in css
     assert ".hero-media picture{position:absolute;inset:0;display:block}" in css
     assert ".mobile-actions[data-suppressed=true]" in css
@@ -297,31 +295,59 @@ def test_visual_qa_markers_and_mobile_sticky_contract():
     assert "aria-hidden" in site_js
 
 
-def test_light_surface_accent_tokens_meet_wcag_contrast():
+def relative_luminance(color):
+    channels = [int(color[index:index + 2], 16) / 255 for index in (1, 3, 5)]
+    channels = [value / 12.92 if value <= 0.04045 else ((value + 0.055) / 1.055) ** 2.4 for value in channels]
+    return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2]
+
+
+def contrast(first, second):
+    lighter, darker = sorted((relative_luminance(first), relative_luminance(second)), reverse=True)
+    return (lighter + 0.05) / (darker + 0.05)
+
+
+def record_tokens():
     css = (ROOT / "src/assets/site.css").read_text(encoding="utf-8")
+    tokens = dict(re.findall(r"--([a-z-]+):(#[0-9a-fA-F]{6})", css))
+    return css, tokens
 
-    def relative_luminance(color):
-        channels = [int(color[index:index + 2], 16) / 255 for index in (1, 3, 5)]
-        channels = [value / 12.92 if value <= 0.04045 else ((value + 0.055) / 1.055) ** 2.4 for value in channels]
-        return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2]
 
-    def contrast(first, second):
-        lighter, darker = sorted((relative_luminance(first), relative_luminance(second)), reverse=True)
-        return (lighter + 0.05) / (darker + 0.05)
+def test_record_palette_tokens_meet_wcag_contrast():
+    """The Record palette replaces gold. Every text pairing that ships must still clear WCAG AA."""
+    css, tokens = record_tokens()
+    required = {"paper", "ink", "oxblood", "oxblood-on-ink", "archive", "muted", "cream", "muted-on-ink"}
+    assert required <= set(tokens), sorted(required - set(tokens))
+    paper, ink, oxblood = tokens["paper"], tokens["ink"], tokens["oxblood"]
+    archive, cream = tokens["archive"], tokens["cream"]
 
-    brass_match = re.search(r"--brass:(#[0-9a-fA-F]{6})", css)
-    dark_brass_match = re.search(r"--brass-on-dark:(#[0-9a-fA-F]{6})", css)
-    focus_match = re.search(r":focus-visible\{outline:3px solid (#[0-9a-fA-F]{6})", css)
-    assert brass_match and dark_brass_match and focus_match
-    brass = brass_match.group(1)
-    focus = focus_match.group(1)
-    dark_brass = dark_brass_match.group(1)
-    assert contrast(brass, "#fcfaf6") >= 4.5
-    assert contrast(brass, "#f5f0e7") >= 4.5
-    assert contrast(focus, "#fcfaf6") >= 3
-    assert contrast(focus, "#f5f0e7") >= 3
-    assert contrast(dark_brass, "#0b151d") >= 4.5
-    assert ".site-header :focus-visible,.deep :focus-visible,.site-footer :focus-visible{outline-color:var(--brass-on-dark)}" in css
+    assert contrast(ink, paper) >= 7            # body and headline ink on paper
+    assert contrast(tokens["muted"], paper) >= 4.5   # supporting copy on paper
+    assert contrast(oxblood, paper) >= 4.5      # folios, indexes and links on paper
+    assert contrast(cream, oxblood) >= 4.5      # call bar and note on the oxblood conversion band
+    assert contrast(ink, cream) >= 7            # call bar label on the cream bar
+    assert contrast(ink, archive) >= 4.5        # preservation bands
+    assert contrast(cream, ink) >= 7            # ink chapters
+    assert contrast(tokens["muted-on-ink"], ink) >= 4.5
+    assert contrast(tokens["oxblood-on-ink"], ink) >= 4.5   # highlighted operative words
+
+    focus = re.search(r":focus-visible\{outline:3px solid var\(--([a-z-]+)\)", css)
+    assert focus and focus.group(1) == "oxblood"
+    assert contrast(oxblood, paper) >= 3
+    assert ".deep :focus-visible,.band--ink :focus-visible,.intake-field :focus-visible{outline-color:var(--cream)}" in css
+    assert ".opening-dock-band{order:2}" in css   # the conversion band rises directly under the mobile headline
+
+
+def test_gold_is_gone_from_the_action_system():
+    """The rejected release used brass and gold as its dominant action colour. It must not survive."""
+    css, tokens = record_tokens()
+    for retired in ("--brass", "--brass-on-dark", "--deep:", "--clean:", "--stone:"):
+        assert retired not in css, f"{retired} is a rejected token"
+    for gold in ("#d4b66d", "#e1c883", "#74520b", "#a67f16", "#f2e2b4", "#735500"):
+        assert gold not in css.lower(), f"{gold} is a rejected gold value"
+    # nothing in the shipped homepage renders a gold call button
+    home = (ROOT / "index.html").read_text(encoding="utf-8")
+    assert "button-call" not in home
+    assert "button-secondary-light" not in home
 
 
 def test_garden_grove_preserves_feed_resources_and_source_citations():
