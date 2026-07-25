@@ -8,8 +8,15 @@ from urllib.parse import urlparse
 from playwright.sync_api import Error as PlaywrightError, sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-QA = ROOT / "qa" / "overhaul-gpt56"
+QA = ROOT / "qa" / "opus5-motion-seo"
 ORIGIN = "http://berhelaw.test"
+VIEWPORTS = (
+    (320, 720, "small-mobile"),
+    (390, 844, "mobile"),
+    (768, 1024, "tablet"),
+    (1440, 1000, "desktop"),
+    (2560, 1440, "wide"),
+)
 
 
 def routes():
@@ -61,7 +68,7 @@ def main():
                 launch_options["executable_path"] = executable
             browser = engine.launch(**launch_options)
             report["browser"] = executable or engine.executable_path
-            for width, height, label in ((1440, 1000, "desktop"), (390, 844, "mobile")):
+            for width, height, label in VIEWPORTS:
                 context = context_for(browser, width, height)
                 for route in routes():
                     page = context.new_page()
@@ -164,10 +171,102 @@ def main():
             page.close()
             context.close()
 
+            for width in (320, 390):
+                context = context_for(browser, width, 844, reduced=False)
+                page = context.new_page()
+                page.goto(f"{ORIGIN}/", wait_until="domcontentloaded", timeout=10000)
+                page.wait_for_timeout(900)
+                fold = page.evaluate("""() => {
+                    const call = document.querySelector('.home-hero-actions a.button-call');
+                    const review = document.querySelector('.home-hero-actions a[href="/free-case-review/"]');
+                    const box = (element) => {
+                        const rect = element.getBoundingClientRect();
+                        return {bottom: rect.bottom, top: rect.top, opacity: parseFloat(getComputedStyle(element).opacity)};
+                    };
+                    return {call: box(call), review: box(review), viewport: innerHeight};
+                }""")
+                record_assertion(
+                    f"primary call and case review fit the first {width}x844 viewport",
+                    fold["call"]["bottom"] <= fold["viewport"] and fold["review"]["bottom"] <= fold["viewport"]
+                    and fold["call"]["top"] >= 0 and fold["call"]["opacity"] == 1 and fold["review"]["opacity"] == 1,
+                    fold,
+                )
+                page.close()
+                context.close()
+
+            context = context_for(browser, 1440, 1000, reduced=False)
+            page = context.new_page()
+            page.goto(f"{ORIGIN}/", wait_until="domcontentloaded", timeout=10000)
+            page.wait_for_timeout(400)
+            for step in range(1, 9):  # scroll the way a visitor does, so reveals fire in order
+                page.evaluate(
+                    "step => window.scrollTo({top: document.documentElement.scrollHeight * step / 8, behavior: 'instant'})",
+                    step,
+                )
+                page.wait_for_timeout(220)
+            motion_state = page.evaluate("""() => {
+                const styles = getComputedStyle(document.documentElement);
+                const timeline = document.querySelector('[data-timeline]');
+                const inViewport = (element) => {
+                    const rect = element.getBoundingClientRect();
+                    return rect.bottom > 0 && rect.top < innerHeight;
+                };
+                const hidden = [...document.querySelectorAll('[data-reveal]')]
+                    .filter((element) => inViewport(element)
+                        && parseFloat(getComputedStyle(element).opacity) < 1).length;
+                return {
+                    motion: document.documentElement.classList.contains('motion'),
+                    scrollProgress: parseFloat(styles.getPropertyValue('--scroll-progress')),
+                    timelineProgress: parseFloat(getComputedStyle(timeline).getPropertyValue('--timeline-progress')),
+                    activeSteps: [...document.querySelectorAll('[data-timeline-step]')]
+                        .filter((step) => step.dataset.active === 'true').length,
+                    hiddenInView: hidden,
+                    progressAriaHidden: document.querySelector('.scroll-progress').getAttribute('aria-hidden'),
+                };
+            }""")
+            record_assertion(
+                "scroll motion advances and never strands visible content",
+                motion_state["motion"] and motion_state["scrollProgress"] > 0.9
+                and motion_state["timelineProgress"] == 1 and motion_state["activeSteps"] == 5
+                and motion_state["hiddenInView"] == 0 and motion_state["progressAriaHidden"] == "true",
+                motion_state,
+            )
+            page.close()
+            context.close()
+
+            context = context_for(browser, 1440, 1000, reduced=True)
+            page = context.new_page()
+            page.goto(f"{ORIGIN}/", wait_until="domcontentloaded", timeout=10000)
+            page.wait_for_timeout(300)
+            reduced_state = page.evaluate("""() => ({
+                motion: document.documentElement.classList.contains('motion'),
+                hidden: [...document.querySelectorAll('[data-reveal]')]
+                    .filter((element) => parseFloat(getComputedStyle(element).opacity) < 1).length,
+                progressDisplay: getComputedStyle(document.querySelector('.scroll-progress')).display,
+            })""")
+            record_assertion(
+                "reduced motion renders the finished page with no motion layer",
+                not reduced_state["motion"] and reduced_state["hidden"] == 0
+                and reduced_state["progressDisplay"] == "none",
+                reduced_state,
+            )
+            page.close()
+            context.close()
+
             captures = [
-                ("/", 1440, 1000, None, "home-desktop.png"),
-                ("/", 390, 844, None, "home-mobile.png"),
+                ("/", 320, 720, None, "home-hero-320.png"),
+                ("/", 390, 844, None, "home-hero-390.png"),
+                ("/", 768, 1024, None, "home-hero-768.png"),
+                ("/", 1440, 1000, None, "home-hero-1440.png"),
+                ("/", 2560, 1440, None, "home-hero-2560.png"),
+                ("/", 1440, 1000, "[data-timeline]", "home-case-timeline-1440.png"),
+                ("/", 390, 844, "[data-timeline]", "home-case-timeline-390.png"),
+                ("/", 1440, 1000, ".home-preserve", "home-preserve-1440.png"),
+                ("/practice-areas/personal-injury-wrongful-death/", 1440, 1000, ".stakes-list", "practice-stakes-1440.png"),
                 ("/practice-areas/", 1440, 1000, None, "practice-hub-desktop.png"),
+                ("/resources/", 1440, 1000, ".editorial-list", "resource-hub-1440.png"),
+                ("/resources/after-a-collision-first-steps/", 1440, 1000, ".guide-layout", "resource-guide-1440.png"),
+                ("/resources/insurance-claim-communication/", 390, 844, ".guide-body", "resource-guide-390.png"),
                 ("/free-case-review/", 390, 844, "#general-review", "case-review-form-mobile.png"),
                 ("/landing/garden-grove-chemical-leak/", 390, 844, "#updates-status", "garden-grove-updates-mobile.png"),
                 ("/privacy.html", 390, 844, "main", "privacy-mobile.png"),
@@ -176,7 +275,7 @@ def main():
                 context = context_for(browser, width, height, reduced=False)
                 page = context.new_page()
                 page.goto(f"{ORIGIN}{route}", wait_until="domcontentloaded", timeout=10000)
-                page.wait_for_timeout(150)
+                page.wait_for_timeout(1200)
                 if selector == "#updates-status":
                     page.wait_for_function(
                         "document.querySelector('#updates-status')?.dataset.feedState",
@@ -184,7 +283,7 @@ def main():
                     )
                 if selector:
                     page.locator(selector).scroll_into_view_if_needed()
-                    page.wait_for_timeout(250)
+                    page.wait_for_timeout(900)
                 target = QA / filename
                 page.screenshot(path=str(target), full_page=False)
                 report["screenshots"].append(str(target.relative_to(ROOT)))

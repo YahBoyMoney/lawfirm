@@ -9,9 +9,12 @@
   X-DNS-Prefetch-Control: on
   X-Permitted-Cross-Domain-Policies: none
   Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=(), browsing-topics=(), payment=(), usb=(), magnetometer=(), accelerometer=(), gyroscope=()
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://admin.berhelaw.com; form-action https://admin.berhelaw.com; object-src 'none'; frame-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self' https://admin.berhelaw.com; form-action https://admin.berhelaw.com; object-src 'none'; frame-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests
 
 /assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
 /images/*

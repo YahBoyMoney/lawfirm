@@ -125,3 +125,131 @@
     render();
   }
 })();
+
+/*
+ * Native scroll motion. Content is fully visible before this runs and stays visible
+ * if it never runs: the `motion` class on <html> is the only thing that hides or
+ * offsets anything, and it is added only when IntersectionObserver, requestAnimationFrame,
+ * and a no-preference reduced-motion setting are all present. Any failure removes the
+ * class and restores the final state. Scrolling is never intercepted.
+ */
+(() => {
+  const root = document.documentElement;
+  const OBSERVER_FALLBACK_MS = 1600;
+
+  const revealEverything = () => {
+    document.querySelectorAll('[data-reveal]').forEach((element) => {
+      element.dataset.revealed = 'true';
+    });
+    document.querySelectorAll('[data-timeline-step]').forEach((step) => {
+      step.dataset.active = 'true';
+    });
+    document.querySelectorAll('[data-timeline]').forEach((section) => {
+      section.style.setProperty('--timeline-progress', '1');
+    });
+  };
+
+  const failOpen = () => {
+    root.classList.remove('motion');
+    revealEverything();
+  };
+
+  try {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const capable = 'IntersectionObserver' in window && typeof window.requestAnimationFrame === 'function';
+    if (!capable) return;
+
+    const reveals = [...document.querySelectorAll('[data-reveal]')];
+    const heroes = [...document.querySelectorAll('[data-hero]')];
+    const timelines = [...document.querySelectorAll('[data-timeline]')];
+    let running = false;
+    let ticking = false;
+    let observer = null;
+
+    const clamp = (value) => Math.min(1, Math.max(0, value));
+
+    const update = () => {
+      ticking = false;
+      if (!running) return;
+      const scrollable = root.scrollHeight - window.innerHeight;
+      const offset = window.scrollY || window.pageYOffset || 0;
+      root.style.setProperty('--scroll-progress', (scrollable > 0 ? clamp(offset / scrollable) : 0).toFixed(4));
+      heroes.forEach((hero) => {
+        const rect = hero.getBoundingClientRect();
+        const shift = rect.bottom > 0 ? Math.min(52, Math.max(0, -rect.top) * 0.11) : 52;
+        hero.style.setProperty('--hero-parallax', `${shift.toFixed(2)}px`);
+      });
+      timelines.forEach((section) => {
+        const track = section.querySelector('.case-track');
+        if (!track) return;
+        const rect = track.getBoundingClientRect();
+        const anchor = window.innerHeight * 0.62;
+        section.style.setProperty('--timeline-progress', clamp((anchor - rect.top) / Math.max(1, rect.height)).toFixed(4));
+        section.querySelectorAll('[data-timeline-step]').forEach((step) => {
+          step.dataset.active = String(step.getBoundingClientRect().top + 24 <= anchor);
+        });
+      });
+    };
+
+    const onScroll = () => {
+      if (ticking || !running) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    };
+
+    const start = () => {
+      if (running) return;
+      running = true;
+      root.classList.add('motion');
+      document.querySelectorAll('[data-reveal-group]').forEach((group) => {
+        [...group.children].forEach((child, index) => {
+          const target = child.matches('[data-reveal]') ? child : child.querySelector('[data-reveal]');
+          if (target) target.dataset.stagger = String(Math.min(index + 1, 6));
+        });
+      });
+      observer = new IntersectionObserver((entries, self) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.dataset.revealed = 'true';
+          self.unobserve(entry.target);
+        });
+      }, {rootMargin: '0px 0px -6% 0px', threshold: 0.04});
+      reveals.forEach((element) => observer.observe(element));
+      window.addEventListener('scroll', onScroll, {passive: true});
+      window.addEventListener('resize', onScroll, {passive: true});
+      window.addEventListener('orientationchange', onScroll, {passive: true});
+      update();
+      if (reveals.length) {
+        window.setTimeout(() => {
+          if (!running) return;
+          const missedVisibleTarget = reveals.some((element) => {
+            if (element.dataset.revealed === 'true') return false;
+            const rect = element.getBoundingClientRect();
+            return rect.top < window.innerHeight && rect.bottom > 0;
+          });
+          if (missedVisibleTarget) failOpen();
+        }, OBSERVER_FALLBACK_MS);
+      }
+    };
+
+    const stop = () => {
+      running = false;
+      if (observer) observer.disconnect();
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      window.removeEventListener('orientationchange', onScroll);
+      failOpen();
+    };
+
+    const applyPreference = () => {
+      if (reduceMotion.matches) stop();
+      else start();
+    };
+
+    if (typeof reduceMotion.addEventListener === 'function') reduceMotion.addEventListener('change', applyPreference);
+    else if (typeof reduceMotion.addListener === 'function') reduceMotion.addListener(applyPreference);
+    applyPreference();
+  } catch (error) {
+    failOpen();
+  }
+})();

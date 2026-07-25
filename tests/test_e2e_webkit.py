@@ -338,3 +338,164 @@ def test_garden_grove_stale_state_is_visible_without_javascript(webkit_browser):
     assert "last verified may 31, 2026" in status.inner_text().lower()
     assert "official city and county sources" in status.inner_text().lower()
     context.close()
+
+
+def motion_context(webkit_browser, *, reduced=False, javascript=True, width=1280, height=900, break_observer=False):
+    context = webkit_browser.new_context(
+        viewport={"width": width, "height": height},
+        reduced_motion="reduce" if reduced else "no-preference",
+        java_script_enabled=javascript,
+    )
+    if break_observer:
+        context.add_init_script("delete window.IntersectionObserver;")
+    install_routes(context)
+    return context
+
+
+REVEAL_OPACITY = """() => [...document.querySelectorAll('[data-reveal]')]
+    .map((element) => parseFloat(getComputedStyle(element).opacity))"""
+
+
+def test_every_revealed_section_is_visible_without_javascript(webkit_browser):
+    context = motion_context(webkit_browser, javascript=False)
+    page = context.new_page()
+    page.goto(f"{ORIGIN}/")
+    assert not page.evaluate("document.documentElement.classList.contains('motion')")
+    opacities = page.evaluate(REVEAL_OPACITY)
+    assert opacities and all(value == 1 for value in opacities)
+    assert page.locator(".scroll-progress").evaluate("element => getComputedStyle(element).display") == "none"
+    assert page.locator(".case-track-fill").evaluate(
+        "element => new DOMMatrixReadOnly(getComputedStyle(element).transform).d"
+    ) == 1
+    assert page.locator("[data-timeline-step]").last.is_visible()
+    context.close()
+
+
+def test_reduced_motion_preference_disables_the_motion_layer(webkit_browser):
+    context = motion_context(webkit_browser, reduced=True)
+    page = context.new_page()
+    page.goto(f"{ORIGIN}/")
+    page.wait_for_timeout(200)
+    assert not page.evaluate("document.documentElement.classList.contains('motion')")
+    assert all(value == 1 for value in page.evaluate(REVEAL_OPACITY))
+    assert page.locator(".scroll-progress").evaluate("element => getComputedStyle(element).display") == "none"
+    assert page.locator("[data-timeline-step]").last.evaluate("element => element.dataset.active") == "true"
+    context.close()
+
+
+def test_motion_fails_open_when_intersection_observer_is_missing(webkit_browser):
+    context = motion_context(webkit_browser, break_observer=True)
+    page = context.new_page()
+    page.goto(f"{ORIGIN}/")
+    page.wait_for_timeout(250)
+    assert not page.evaluate("document.documentElement.classList.contains('motion')")
+    assert all(value == 1 for value in page.evaluate(REVEAL_OPACITY))
+    context.close()
+
+
+def test_scroll_progress_is_decorative_and_tracks_the_document(webkit_browser):
+    context = motion_context(webkit_browser)
+    page = context.new_page()
+    page.goto(f"{ORIGIN}/")
+    page.wait_for_timeout(250)
+    assert page.evaluate("document.documentElement.classList.contains('motion')")
+    bar = page.locator(".scroll-progress")
+    assert bar.get_attribute("aria-hidden") == "true"
+    assert bar.evaluate("element => element.getAttribute('role')") is None
+    read = "() => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--scroll-progress'))"
+    assert page.evaluate(read) < 0.05
+    page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+    page.wait_for_timeout(200)
+    assert page.evaluate(read) > 0.9
+    assert page.evaluate("() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1")
+    context.close()
+
+
+def test_case_timeline_advances_as_the_section_scrolls(webkit_browser):
+    context = motion_context(webkit_browser)
+    page = context.new_page()
+    page.goto(f"{ORIGIN}/")
+    page.wait_for_timeout(200)
+    read = """() => parseFloat(getComputedStyle(document.querySelector('[data-timeline]'))
+        .getPropertyValue('--timeline-progress'))"""
+    active = """() => [...document.querySelectorAll('[data-timeline-step]')]
+        .filter((step) => step.dataset.active === 'true').length"""
+    assert page.evaluate(read) == 0
+    page.locator("[data-timeline]").scroll_into_view_if_needed()
+    page.wait_for_timeout(250)
+    partway = page.evaluate(read)
+    partway_active = page.evaluate(active)
+    page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+    page.wait_for_timeout(250)
+    assert page.evaluate(read) > partway
+    assert page.evaluate(read) == 1
+    assert page.evaluate(active) == 5 > partway_active
+    context.close()
+
+
+def test_below_fold_content_reveals_when_scrolled_into_view(webkit_browser):
+    context = motion_context(webkit_browser)
+    page = context.new_page()
+    page.goto(f"{ORIGIN}/resources/after-a-collision-first-steps/")
+    page.wait_for_timeout(250)
+    last = page.locator("[data-reveal]").last
+    assert last.evaluate("element => parseFloat(getComputedStyle(element).opacity)") < 1
+    last.scroll_into_view_if_needed()
+    page.wait_for_timeout(900)
+    assert last.evaluate("element => element.dataset.revealed") == "true"
+    assert last.evaluate("element => parseFloat(getComputedStyle(element).opacity)") == 1
+    context.close()
+
+
+@pytest.mark.parametrize("width", [320, 390])
+def test_hero_call_and_case_review_fit_the_first_mobile_viewport(webkit_browser, width):
+    context = motion_context(webkit_browser, width=width, height=844)
+    page = context.new_page()
+    page.goto(f"{ORIGIN}/")
+    page.wait_for_timeout(900)
+    call = page.locator('.home-hero-actions a.button-call')
+    review = page.locator('.home-hero-actions a[href="/free-case-review/"]')
+    for action in (call, review):
+        box = action.bounding_box()
+        assert box["y"] >= 0 and box["y"] + box["height"] <= 844, box
+        assert action.evaluate("element => parseFloat(getComputedStyle(element).opacity)") == 1
+    assert call.get_attribute("href") == "tel:+19096096685"
+    assert page.evaluate("() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1")
+    context.close()
+
+def test_practice_page_deadline_callout_keeps_readable_width(webkit_browser):
+    context = motion_context(webkit_browser, width=1440, height=1000)
+    page = context.new_page()
+    page.goto(f"{ORIGIN}/practice-areas/personal-injury-wrongful-death/")
+    page.locator(".stakes-list").scroll_into_view_if_needed()
+    page.wait_for_timeout(250)
+    callout = page.locator(".section-inner.split .cta-band").first
+    heading = callout.locator("h2")
+    assert callout.bounding_box()["width"] >= 600
+    assert heading.bounding_box()["width"] >= 300
+    assert callout.bounding_box()["height"] < 500
+    assert page.evaluate("() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1")
+    context.close()
+
+def test_practice_matter_query_prefills_case_type_and_targets_form(webkit_browser):
+    context = motion_context(webkit_browser, width=390, height=844)
+    page = context.new_page()
+    page.goto(f"{ORIGIN}/free-case-review/?matter=personal-injury-wrongful-death#general-review")
+    page.wait_for_timeout(200)
+    assert page.locator("#general-matter").input_value() == "Personal injury or wrongful death"
+    assert page.locator(".hero .button-primary").get_attribute("href") == "/free-case-review/#general-review"
+    page.goto(f"{ORIGIN}/free-case-review/?matter=unknown#general-review")
+    page.wait_for_timeout(100)
+    assert page.locator("#general-matter").input_value() == ""
+    context.close()
+
+def test_motion_remains_active_while_mobile_visitor_reads_the_hero(webkit_browser):
+    context = motion_context(webkit_browser, width=390, height=844)
+    page = context.new_page()
+    page.goto(f"{ORIGIN}/")
+    page.wait_for_timeout(1900)
+    assert page.evaluate("document.documentElement.classList.contains('motion')")
+    page.locator("[data-reveal]").first.scroll_into_view_if_needed()
+    page.wait_for_timeout(400)
+    assert page.locator("[data-reveal]").first.get_attribute("data-revealed") == "true"
+    context.close()

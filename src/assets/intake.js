@@ -1,5 +1,16 @@
 (() => {
   const forms = document.querySelectorAll('form[data-intake-form]');
+  const matterLabels = {
+    'personal-injury-wrongful-death': 'Personal injury or wrongful death',
+    'employment-workplace-claims': 'Employment or workplace',
+    'civil-rights-government-accountability': 'Civil rights or government accountability',
+    'consumer-protection-lemon-law': 'Consumer protection or Lemon Law',
+    'insurance-bad-faith': 'Insurance bad faith',
+    'catastrophic-injury': 'Catastrophic injury',
+    'select-civil-litigation': 'Select civil litigation',
+    'commercial-vehicle-accident': 'Commercial vehicle accident'
+  };
+  const requestedMatter = new URLSearchParams(window.location.search).get('matter');
   const setStatus = (form, message, state) => {
     const status = form.querySelector('[data-form-status]');
     if (!status) return;
@@ -9,6 +20,11 @@
   };
 
   forms.forEach((form) => {
+    const caseType = form.querySelector('select[name="caseType"]');
+    const requestedLabel = requestedMatter ? matterLabels[requestedMatter] : '';
+    if (caseType && requestedLabel && [...caseType.options].some((option) => option.value === requestedLabel)) {
+      caseType.value = requestedLabel;
+    }
     const phone = form.querySelector('input[type="tel"]');
     const phoneError = form.querySelector('[data-phone-error]');
     const validatePhone = () => {
