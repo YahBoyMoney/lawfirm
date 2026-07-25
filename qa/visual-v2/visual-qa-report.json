@@ -1,0 +1,1668 @@
+{
+  "routes": [
+    {
+      "route": "/",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/attorney-tam-berhe/",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/case-review-process/",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/free-case-review/",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/living-trust/",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/referrals-co-counsel/",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/landing/truck-fleet-rideshare-accident-california/",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/landing/garden-grove-chemical-leak/",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/personal-injury-wrongful-death/",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/employment-workplace-claims/",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/civil-rights-government-accountability/",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/consumer-protection-lemon-law/",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/insurance-bad-faith/",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/catastrophic-injury/",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/select-civil-litigation/",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/prepare-for-case-review/",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/commercial-vehicle-evidence-checklist/",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/deadlines-and-early-review/",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/after-a-collision-first-steps/",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/insurance-claim-communication/",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/workplace-documentation/",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/privacy.html",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/terms.html",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/disclaimer.html",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/success.html?reference=QA-20260711",
+      "viewport": "tiny-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/attorney-tam-berhe/",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/case-review-process/",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/free-case-review/",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/living-trust/",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/referrals-co-counsel/",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/landing/truck-fleet-rideshare-accident-california/",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/landing/garden-grove-chemical-leak/",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/personal-injury-wrongful-death/",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/employment-workplace-claims/",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/civil-rights-government-accountability/",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/consumer-protection-lemon-law/",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/insurance-bad-faith/",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/catastrophic-injury/",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/select-civil-litigation/",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/prepare-for-case-review/",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/commercial-vehicle-evidence-checklist/",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/deadlines-and-early-review/",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/after-a-collision-first-steps/",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/insurance-claim-communication/",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/workplace-documentation/",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/privacy.html",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/terms.html",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/disclaimer.html",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/success.html?reference=QA-20260711",
+      "viewport": "small-mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/attorney-tam-berhe/",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/case-review-process/",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/free-case-review/",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/living-trust/",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/referrals-co-counsel/",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/landing/truck-fleet-rideshare-accident-california/",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/landing/garden-grove-chemical-leak/",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/personal-injury-wrongful-death/",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/employment-workplace-claims/",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/civil-rights-government-accountability/",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/consumer-protection-lemon-law/",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/insurance-bad-faith/",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/catastrophic-injury/",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/select-civil-litigation/",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/prepare-for-case-review/",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/commercial-vehicle-evidence-checklist/",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/deadlines-and-early-review/",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/after-a-collision-first-steps/",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/insurance-claim-communication/",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/workplace-documentation/",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/privacy.html",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/terms.html",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/disclaimer.html",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/success.html?reference=QA-20260711",
+      "viewport": "mobile",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/attorney-tam-berhe/",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/case-review-process/",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/free-case-review/",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/living-trust/",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/referrals-co-counsel/",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/landing/truck-fleet-rideshare-accident-california/",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/landing/garden-grove-chemical-leak/",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/personal-injury-wrongful-death/",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/employment-workplace-claims/",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/civil-rights-government-accountability/",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/consumer-protection-lemon-law/",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/insurance-bad-faith/",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/catastrophic-injury/",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/select-civil-litigation/",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/prepare-for-case-review/",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/commercial-vehicle-evidence-checklist/",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/deadlines-and-early-review/",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/after-a-collision-first-steps/",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/insurance-claim-communication/",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/workplace-documentation/",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/privacy.html",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/terms.html",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/disclaimer.html",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/success.html?reference=QA-20260711",
+      "viewport": "tablet",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/attorney-tam-berhe/",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/case-review-process/",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/free-case-review/",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/living-trust/",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/referrals-co-counsel/",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/landing/truck-fleet-rideshare-accident-california/",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/landing/garden-grove-chemical-leak/",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/personal-injury-wrongful-death/",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/employment-workplace-claims/",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/civil-rights-government-accountability/",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/consumer-protection-lemon-law/",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/insurance-bad-faith/",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/catastrophic-injury/",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/select-civil-litigation/",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/prepare-for-case-review/",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/commercial-vehicle-evidence-checklist/",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/deadlines-and-early-review/",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/after-a-collision-first-steps/",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/insurance-claim-communication/",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/workplace-documentation/",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/privacy.html",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/terms.html",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/disclaimer.html",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/success.html?reference=QA-20260711",
+      "viewport": "desktop",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/attorney-tam-berhe/",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/case-review-process/",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/free-case-review/",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/living-trust/",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/referrals-co-counsel/",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/landing/truck-fleet-rideshare-accident-california/",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/landing/garden-grove-chemical-leak/",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/personal-injury-wrongful-death/",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/employment-workplace-claims/",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/civil-rights-government-accountability/",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/consumer-protection-lemon-law/",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/insurance-bad-faith/",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/catastrophic-injury/",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/practice-areas/select-civil-litigation/",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/prepare-for-case-review/",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/commercial-vehicle-evidence-checklist/",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/deadlines-and-early-review/",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/after-a-collision-first-steps/",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/insurance-claim-communication/",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/resources/workplace-documentation/",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/privacy.html",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/terms.html",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/disclaimer.html",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "route": "/success.html?reference=QA-20260711",
+      "viewport": "wide",
+      "status": 200,
+      "h1": 1,
+      "overflow": false,
+      "consoleErrors": [],
+      "pageErrors": []
+    }
+  ],
+  "assertions": [
+    {
+      "name": "opening statement fills the first desktop viewport with an exposed plate",
+      "passed": true,
+      "details": {
+        "fontSize": 80.639999,
+        "fontFamily": "Newsreader, \"Times New Roman\", Times, serif",
+        "height": 1000,
+        "viewport": 1000,
+        "dockBottom": 908.75,
+        "plateVisible": 965.109375,
+        "plateOverlays": 0,
+        "background": "rgb(244, 239, 230)"
+      }
+    },
+    {
+      "name": "hero--practice-hub controlled desktop sizing",
+      "passed": true,
+      "details": {
+        "marker": true,
+        "fontSize": 56.16,
+        "bottom": 683.375,
+        "objectPosition": "66% 78%"
+      }
+    },
+    {
+      "name": "hero--practice-hub deliberate image crop",
+      "passed": true,
+      "details": {
+        "objectPosition": "66% 78%"
+      }
+    },
+    {
+      "name": "mobile hero actions are not covered by sticky bar",
+      "passed": true,
+      "details": {
+        "suppressed": "true",
+        "visibility": "hidden",
+        "secondaryBottom": 462.515625,
+        "viewportHeight": 844
+      }
+    },
+    {
+      "name": "mobile form focus hides sticky bar and keeps persistent clearance",
+      "passed": true,
+      "details": {
+        "suppressed": "true",
+        "ariaHidden": "true",
+        "visibility": "hidden",
+        "bodyClearance": 56,
+        "stickyHeight": 56
+      }
+    },
+    {
+      "name": "/privacy.html reserves mobile sticky clearance",
+      "passed": true,
+      "details": {
+        "bodyClearance": 56,
+        "stickyHeight": 56
+      }
+    },
+    {
+      "name": "/landing/garden-grove-chemical-leak/ reserves mobile sticky clearance",
+      "passed": true,
+      "details": {
+        "bodyClearance": 56,
+        "stickyHeight": 56
+      }
+    },
+    {
+      "name": "primary call fit the first 320x568 viewport",
+      "passed": true,
+      "details": {
+        "call": {
+          "bottom": 407.1259460449219,
+          "top": 349.5321960449219,
+          "height": 57.59375,
+          "opacity": 1
+        },
+        "review": {
+          "bottom": 447.1103210449219,
+          "top": 421.5165710449219,
+          "height": 25.59375,
+          "opacity": 1
+        },
+        "viewport": 568,
+        "overflow": false
+      }
+    },
+    {
+      "name": "primary call fit the first 320x720 viewport",
+      "passed": true,
+      "details": {
+        "call": {
+          "bottom": 407.13531494140625,
+          "top": 349.54156494140625,
+          "height": 57.59375,
+          "opacity": 1
+        },
+        "review": {
+          "bottom": 447.11968994140625,
+          "top": 421.52593994140625,
+          "height": 25.59375,
+          "opacity": 1
+        },
+        "viewport": 720,
+        "overflow": false
+      }
+    },
+    {
+      "name": "primary call and case review fit the first 390x844 viewport",
+      "passed": true,
+      "details": {
+        "call": {
+          "bottom": 430.47332763671875,
+          "top": 370.59832763671875,
+          "height": 59.875,
+          "opacity": 1
+        },
+        "review": {
+          "bottom": 470.45770263671875,
+          "top": 444.86395263671875,
+          "height": 25.59375,
+          "opacity": 1
+        },
+        "viewport": 844,
+        "overflow": false
+      }
+    },
+    {
+      "name": "first 1440x1000 viewport exposes art without a dark glaze",
+      "passed": true,
+      "details": {
+        "artShare": 0.40534384307861326,
+        "openingBackground": "rgb(244, 239, 230)",
+        "dockBackground": "rgb(140, 47, 37)",
+        "glazed": 0
+      }
+    },
+    {
+      "name": "first 390x844 viewport exposes art without a dark glaze",
+      "passed": true,
+      "details": {
+        "artShare": 0.12507405213270142,
+        "openingBackground": "rgb(244, 239, 230)",
+        "dockBackground": "rgb(140, 47, 37)",
+        "glazed": 0
+      }
+    },
+    {
+      "name": "scroll motion advances and never strands visible content",
+      "passed": true,
+      "details": {
+        "motion": true,
+        "scrollProgress": 1,
+        "timelineProgress": 1,
+        "activeSteps": 5,
+        "hiddenInView": 0,
+        "progressAriaHidden": "true"
+      }
+    },
+    {
+      "name": "reduced motion renders the finished page with no motion layer",
+      "passed": true,
+      "details": {
+        "motion": false,
+        "hidden": 0,
+        "progressDisplay": "none"
+      }
+    }
+  ],
+  "screenshots": [
+    "qa/visual-v2/home-hero-1440.png",
+    "qa/visual-v2/home-hero-390.png",
+    "qa/visual-v2/home-hero-320x568.png",
+    "qa/visual-v2/home-hero-320.png",
+    "qa/visual-v2/home-hero-768.png",
+    "qa/visual-v2/home-hero-2560.png",
+    "qa/visual-v2/home-plate-1440.png",
+    "qa/visual-v2/home-docket-1440.png",
+    "qa/visual-v2/home-docket-390.png",
+    "qa/visual-v2/home-case-index-1440.png",
+    "qa/visual-v2/home-case-index-390.png",
+    "qa/visual-v2/home-clock-1440.png",
+    "qa/visual-v2/home-clock-390.png",
+    "qa/visual-v2/home-case-timeline-1440.png",
+    "qa/visual-v2/home-case-timeline-390.png",
+    "qa/visual-v2/home-preserve-1440.png",
+    "qa/visual-v2/home-counsel-1440.png",
+    "qa/visual-v2/home-questions-1440.png",
+    "qa/visual-v2/home-intake-1440.png",
+    "qa/visual-v2/home-intake-390.png",
+    "qa/visual-v2/home-footer-1440.png",
+    "qa/visual-v2/home-menu-390.png",
+    "qa/visual-v2/practice-stakes-1440.png",
+    "qa/visual-v2/practice-hub-desktop.png",
+    "qa/visual-v2/resource-hub-1440.png",
+    "qa/visual-v2/resource-guide-1440.png",
+    "qa/visual-v2/resource-guide-390.png",
+    "qa/visual-v2/case-review-form-mobile.png",
+    "qa/visual-v2/garden-grove-updates-mobile.png",
+    "qa/visual-v2/privacy-mobile.png"
+  ],
+  "browser": "/root/.cache/ms-playwright/webkit-2287/pw_run.sh",
+  "passed": true,
+  "failures": []
+}

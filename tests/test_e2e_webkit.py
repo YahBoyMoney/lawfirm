@@ -107,18 +107,116 @@ def test_mobile_navigation_remains_available_without_javascript(webkit_browser):
     context.close()
 
 
-def test_wide_desktop_hero_copy_never_collapses(webkit_browser):
+def test_wide_desktop_opening_stays_type_led_with_no_side_card(webkit_browser):
     context = webkit_browser.new_context(viewport={"width": 2560, "height": 1440})
     install_routes(context)
     page = context.new_page()
     page.goto(f"{ORIGIN}/")
-    headline = page.locator(".home-hero-copy h1")
-    copy = page.locator(".home-hero-copy")
-    attorney_card = page.locator(".home-attorney-card")
+    opening = page.locator("section.opening")
+    headline = page.locator(".opening-headline")
     assert headline.is_visible()
-    assert headline.bounding_box()["width"] >= 480
-    assert copy.evaluate("element => parseFloat(getComputedStyle(element).paddingLeft)") <= 64
-    assert attorney_card.bounding_box()["x"] >= headline.bounding_box()["x"] + headline.bounding_box()["width"]
+    assert headline.bounding_box()["width"] >= 700
+    # the opening fills the viewport and nothing floats beside the headline
+    assert opening.bounding_box()["height"] >= 1400
+    assert page.locator(".opening aside, .opening .card, .opening-field img").count() == 0
+    assert page.evaluate("() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1")
+    context.close()
+
+
+REJECTED_HOME_SELECTORS = (
+    ".hero-grid", ".home-hero", ".home-hero-inner", ".home-hero-copy", ".home-hero-actions",
+    ".home-hero-art", ".home-hero-urgency", ".home-attorney-card", ".proof-band",
+    ".home-practice-grid", ".home-practice-card", ".preserve-grid", ".preserve-card",
+    ".home-urgency", ".home-advocate", ".home-portrait", ".case-step-dot", ".case-track-rail ~ .case-step-dot",
+    ".button-call", ".button-secondary-light", ".home-form-call", ".home-inline-cta",
+)
+
+
+def test_rejected_first_screen_composition_is_gone(webkit_browser):
+    context = webkit_browser.new_context(viewport={"width": 1440, "height": 1000})
+    install_routes(context)
+    page = context.new_page()
+    page.goto(f"{ORIGIN}/")
+    present = page.evaluate(
+        "selectors => selectors.filter((selector) => document.querySelector(selector))",
+        list(REJECTED_HOME_SELECTORS),
+    )
+    assert present == [], present
+    # and the replacements are all live
+    for selector in (
+        "header.site-header--overlay", "section.opening[data-hero][data-opening]",
+        ".opening-headline .mask-line--marked", ".opening-dock-band a.call-bar", ".opening-dock a.dock-link",
+        ".opening-plate img", ".case-index .index-rows .index-row", "[data-clock] [data-clock-step]",
+        "[data-clock] .clock-meter-fill", "[data-timeline] .case-step-number",
+        ".preserve .preserve-bands .preserve-band", ".counsel .counsel-portrait img",
+        ".intake-field .call-first", "footer.site-footer",
+    ):
+        assert page.locator(selector).count() >= 1, selector
+    assert page.locator(".case-index .index-row").count() == 7
+    assert page.locator("[data-clock] [data-clock-step]").count() == 3
+    assert page.locator("[data-timeline] .case-step").count() == 5
+    assert page.locator(".preserve .preserve-band").count() == 4
+    context.close()
+
+
+def test_opening_is_a_paper_and_oxblood_field_not_a_dark_navy_split(webkit_browser):
+    context = webkit_browser.new_context(viewport={"width": 1440, "height": 1000})
+    install_routes(context)
+    page = context.new_page()
+    page.goto(f"{ORIGIN}/")
+    page.wait_for_timeout(300)
+    state = page.evaluate("""() => {
+        const opening = document.querySelector('.opening');
+        const plate = document.querySelector('.opening-plate img');
+        const rect = plate.getBoundingClientRect();
+        return {
+            background: getComputedStyle(opening).backgroundColor,
+            dockBackground: getComputedStyle(document.querySelector('.opening-dock-band')).backgroundColor,
+            headlineFont: getComputedStyle(document.querySelector('.opening-headline')).fontFamily,
+            bodyBackground: getComputedStyle(document.body).backgroundColor,
+            plateVisible: Math.max(0, Math.min(rect.bottom, innerHeight) - Math.max(rect.top, 0)),
+            plateOverlays: document.querySelectorAll('.opening-plate :not(picture):not(source):not(img)').length,
+            openingHeight: opening.getBoundingClientRect().height,
+        };
+    }""")
+    assert state["background"] == "rgb(244, 239, 230)"        # paper field, not a navy split
+    assert state["dockBackground"] == "rgb(140, 47, 37)"      # one oxblood conversion band
+    assert state["bodyBackground"] == "rgb(244, 239, 230)"
+    assert "Newsreader" in state["headlineFont"]
+    assert "Fraunces" not in state["headlineFont"] and "Georgia" not in state["headlineFont"]
+    assert state["plateVisible"] >= 120                       # exposed art inside the first viewport
+    assert state["plateOverlays"] == 0                        # never glazed
+    assert 970 <= state["openingHeight"] <= 1120              # full screen opening statement
+    context.close()
+
+
+@pytest.mark.parametrize("width,height", [(320, 568), (320, 720), (390, 844), (768, 1024), (1440, 1000), (2560, 1440)])
+def test_no_horizontal_overflow_at_any_tested_viewport(webkit_browser, width, height):
+    context = webkit_browser.new_context(viewport={"width": width, "height": height})
+    install_routes(context)
+    page = context.new_page()
+    page.goto(f"{ORIGIN}/")
+    page.wait_for_timeout(250)
+    assert page.evaluate("() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1")
+    page.evaluate("() => window.scrollTo(0, document.body.scrollHeight)")
+    page.wait_for_timeout(250)
+    assert page.evaluate("() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1")
+    context.close()
+
+
+def test_mobile_menu_opens_as_a_paper_sheet(webkit_browser):
+    context = webkit_browser.new_context(viewport={"width": 390, "height": 844})
+    install_routes(context)
+    page = context.new_page()
+    page.goto(f"{ORIGIN}/")
+    page.locator(".nav-toggle").click()
+    page.wait_for_timeout(200)
+    sheet = page.locator("#site-navigation")
+    assert sheet.evaluate("element => getComputedStyle(element).backgroundColor") == "rgb(244, 239, 230)"
+    assert sheet.evaluate("element => getComputedStyle(element).position") == "fixed"
+    first_link = page.locator("#site-navigation a").first
+    assert first_link.evaluate("element => getComputedStyle(element).color") == "rgb(18, 24, 22)"
+    assert first_link.bounding_box()["height"] >= 44
     context.close()
 
 
@@ -447,20 +545,96 @@ def test_below_fold_content_reveals_when_scrolled_into_view(webkit_browser):
     context.close()
 
 
-@pytest.mark.parametrize("width", [320, 390])
-def test_hero_call_and_case_review_fit_the_first_mobile_viewport(webkit_browser, width):
-    context = motion_context(webkit_browser, width=width, height=844)
+@pytest.mark.parametrize(
+    ("width", "height", "both"),
+    [(320, 568, False), (320, 720, True), (390, 844, True)],
+)
+def test_conversion_dock_fits_the_first_mobile_viewport(webkit_browser, width, height, both):
+    """320x568 must show the dominant call bar. 390x844 must also show the free review link."""
+    context = motion_context(webkit_browser, width=width, height=height)
     page = context.new_page()
     page.goto(f"{ORIGIN}/")
     page.wait_for_timeout(900)
-    call = page.locator('.home-hero-actions a.button-call')
-    review = page.locator('.home-hero-actions a[href="/free-case-review/"]')
-    for action in (call, review):
+    call = page.locator(".opening-dock a.call-bar")
+    review = page.locator(".opening-dock a.dock-link")
+    actions = [call, review] if both else [call]
+    for action in actions:
         box = action.bounding_box()
-        assert box["y"] >= 0 and box["y"] + box["height"] <= 844, box
+        assert box["y"] >= 0 and box["y"] + box["height"] <= height, (box, height)
         assert action.evaluate("element => parseFloat(getComputedStyle(element).opacity)") == 1
+    assert call.bounding_box()["height"] >= 44
     assert call.get_attribute("href") == "tel:+19096096685"
+    assert review.get_attribute("href") == "/free-case-review/"
+    # the dock is one dominant bar plus a text link, never a paired button row
+    assert call.bounding_box()["height"] > review.bounding_box()["height"]
     assert page.evaluate("() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1")
+    context.close()
+
+
+def test_opening_and_chapters_are_complete_without_javascript(webkit_browser):
+    context = motion_context(webkit_browser, javascript=False, width=390, height=844)
+    page = context.new_page()
+    page.goto(f"{ORIGIN}/")
+    assert page.locator(".opening-headline").is_visible()
+    assert page.locator(".opening-dock a.call-bar").is_visible()
+    assert page.locator(".opening-dock a.dock-link").is_visible()
+    # the masthead stays solid paper without JavaScript so it is readable over every chapter
+    assert page.locator("header.site-header").evaluate(
+        "element => getComputedStyle(element).backgroundColor"
+    ) == "rgb(244, 239, 230)"
+    opacities = page.evaluate(
+        """() => [...document.querySelectorAll('.index-row, .clock-statement, .case-step, .preserve-band')]
+            .map((element) => parseFloat(getComputedStyle(element).opacity))"""
+    )
+    assert opacities and all(value == 1 for value in opacities)
+    assert page.locator(".clock-statement").last.is_visible()
+    assert page.locator(".preserve-band").last.is_visible()
+    context.close()
+
+
+def test_reduced_motion_renders_every_chapter_in_document_flow(webkit_browser):
+    context = motion_context(webkit_browser, reduced=True, width=1440, height=1000)
+    page = context.new_page()
+    page.goto(f"{ORIGIN}/")
+    page.wait_for_timeout(250)
+    assert not page.evaluate("document.documentElement.classList.contains('motion')")
+    state = page.evaluate("""() => ({
+        anchor: getComputedStyle(document.querySelector('.clock-anchor')).position,
+        numeral: getComputedStyle(document.querySelector('.case-step-number')).position,
+        maskOverflow: getComputedStyle(document.querySelector('.opening-headline .mask')).overflow,
+        clockHidden: [...document.querySelectorAll('.clock-statement')]
+            .filter((element) => parseFloat(getComputedStyle(element).opacity) < 1).length,
+        rowRules: [...document.querySelectorAll('.index-row')]
+            .map((row) => new DOMMatrixReadOnly(getComputedStyle(row, ':before').transform).a),
+    })""")
+    assert state["anchor"] == "static" and state["numeral"] == "static"
+    assert state["maskOverflow"] == "visible"
+    assert state["clockHidden"] == 0
+    assert state["rowRules"] and all(value == 1 for value in state["rowRules"])
+    context.close()
+
+
+def test_sticky_chapters_activate_while_scrolling(webkit_browser):
+    context = motion_context(webkit_browser, width=1440, height=1000)
+    page = context.new_page()
+    page.goto(f"{ORIGIN}/")
+    page.wait_for_timeout(300)
+    read_clock = """() => ({
+        progress: parseFloat(getComputedStyle(document.querySelector('[data-clock]')).getPropertyValue('--clock-progress')),
+        active: [...document.querySelectorAll('[data-clock-step]')].filter((step) => step.dataset.active === 'true').length,
+        meter: document.querySelector('[data-clock-count]').textContent,
+    })"""
+    assert page.evaluate(read_clock)["active"] == 0
+    page.evaluate("() => window.scrollTo(0, document.querySelector('[data-clock]').offsetTop)")
+    page.wait_for_timeout(300)
+    partway = page.evaluate(read_clock)
+    assert 0 < partway["active"] < 3, partway
+    page.evaluate("() => window.scrollTo(0, document.body.scrollHeight)")
+    page.wait_for_timeout(400)
+    finished = page.evaluate(read_clock)
+    assert finished["active"] == 3
+    assert finished["progress"] == 1
+    assert finished["meter"] == "03"
     context.close()
 
 def test_practice_page_deadline_callout_keeps_readable_width(webkit_browser):

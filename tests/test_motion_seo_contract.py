@@ -75,7 +75,10 @@ def test_no_css_rule_hides_content_unless_scoped_to_the_motion_class():
         if selector in {"from", "to"} or re.fullmatch(r"[\d.]+%", selector):
             continue
         targets_motion_content = any(
-            hook in selector for hook in ("[data-reveal]", "[data-hero]", "case-step", "case-track-fill")
+            hook in selector for hook in (
+                "[data-reveal]", "[data-hero]", "case-step", "case-track-fill",
+                "mask-line", "index-row", "clock-statement", "clock-meter-fill",
+            )
         )
         if targets_motion_content and hides_content(declarations) and ".motion" not in selector:
             if "!important" in declarations:  # reduced-motion and print overrides restore state
@@ -159,18 +162,20 @@ def test_reduced_motion_fallback_covers_every_motion_surface():
 
 # --- conversion surfaces ----------------------------------------------------
 
-def test_home_hero_leads_with_call_and_case_review_before_anything_else():
+def test_opening_statement_leads_with_call_and_case_review_before_anything_else():
     home = soup(ROOT / "index.html")
-    hero = home.select_one("section.home-hero[data-hero]")
-    assert hero
-    actions = hero.select_one(".home-hero-actions")
-    call, review = actions.select("a")[:2]
+    opening = home.select_one("section.opening[data-hero][data-opening]")
+    assert opening
+    dock = opening.select_one(".opening-dock")
+    call, review = dock.select("a")[:2]
     assert call["href"] == "tel:+19096096685"
-    assert "Call now" in call.get_text(" ", strip=True)
+    assert "class" in call.attrs and "call-bar" in call["class"]
     assert review["href"] == "/free-case-review/"
-    # both actions precede every other section in document order
+    assert "dock-link" in review["class"]
+    # the dock is the only conversion surface in the opening, and it precedes every other section
     body_html = str(home)
-    assert body_html.index('class="home-hero-actions"') < body_html.index('class="proof-band"')
+    assert body_html.index('class="opening-dock"') < body_html.index('class="band docket"')
+    assert len(opening.select("a")) == 2
 
 
 def test_all_pages_use_case_artwork_and_no_synthetic_team_photography():
@@ -179,19 +184,24 @@ def test_all_pages_use_case_artwork_and_no_synthetic_team_photography():
         for synthetic in ("berhe-jones-hero-team", "case-fit-team"):
             assert synthetic not in markup, f"{synthetic} is synthetic personnel imagery in {path}"
     home = soup(ROOT / "index.html")
-    art = home.select_one(".home-hero-art picture")
+    art = home.select_one(".opening-plate picture")
     assert art is not None
     sources = art.select('source[type="image/webp"]')
     assert len(sources) == 2
-    assert sources[0]["srcset"] == "/images/case-intelligence-hero-mobile.webp"
+    assert sources[0]["srcset"] == "/images/evidence-architecture-hero-mobile.webp"
     assert sources[0]["media"] == "(max-width:600px)"
-    assert sources[1]["srcset"] == "/images/case-intelligence-hero.webp"
+    assert sources[1]["srcset"] == "/images/evidence-architecture-hero.webp"
     image = art.select_one("img")
-    assert image["src"] == "/images/case-intelligence-hero.jpg"
+    assert image["src"] == "/images/evidence-architecture-hero.jpg"
     assert image["fetchpriority"] == "high" and image["decoding"] == "async"
-    assert home.select_one(".home-hero-art")["aria-hidden"] == "true"
-    portraits = {img["src"] for img in home.select("img")} - {"/images/case-intelligence-hero.jpg"}
-    assert portraits <= {"/images/tam-berhe.jpg", "/images/berhe-jones-llp-logo-reverse.png"}
+    # the plate is exposed art, not a glazed backdrop: no overlay element sits on top of it
+    assert not home.select(".opening-plate [aria-hidden]")
+    portraits = {img["src"] for img in home.select("img")} - {"/images/evidence-architecture-hero.jpg"}
+    assert portraits <= {
+        "/images/tam-berhe.jpg",
+        "/images/berhe-jones-llp-logo-reverse.png",
+        "/images/berhe-jones-llp-logo.png",
+    }
 
 
 def test_case_evaluation_timeline_is_present_and_complete_without_javascript():
@@ -304,7 +314,9 @@ def test_faq_schema_matches_visible_questions_on_every_page():
         if not visible:
             continue
         pages_with_faq += 1
-        questions = [item.select_one("summary").get_text(" ", strip=True) for item in visible]
+        question_nodes = [item.select_one("summary") or item.select_one(".faq-question") for item in visible]
+        assert all(question_nodes), route
+        questions = [node.get_text(" ", strip=True) for node in question_nodes if node]
         answers = [item.select_one("p").get_text(" ", strip=True) for item in visible]
         entities = faq_nodes[0]["mainEntity"]
         assert [entity["name"] for entity in entities] == questions, route
@@ -453,11 +465,28 @@ def test_build_module_stays_deterministic_and_content_hashed():
     assert re.search(r'/assets/css/site\.[0-9a-f]{12}\.css', first)
     assert re.search(r'/assets/js/site\.[0-9a-f]{12}\.js', first)
 
+RECORD_FONTS = ("newsreader-latin.woff2", "ibm-plex-sans-latin.woff2", "ibm-plex-mono-latin.woff2")
+
+
 def test_fonts_are_self_hosted_and_mobile_art_is_optimized():
-    for path in (ROOT / "fonts/fraunces-latin.woff2", ROOT / "fonts/inter-latin.woff2", ROOT / "images/case-intelligence-hero-mobile.webp"):
+    for name in RECORD_FONTS:
+        path = ROOT / "fonts" / name
         assert path.is_file() and path.stat().st_size > 1000, path
-    assert "fonts.googleapis.com" not in (ROOT / "index.html").read_text(encoding="utf-8")
+        assert f"/fonts/{name}" in CSS_SOURCE
+    for path in (ROOT / "images/evidence-architecture-hero-mobile.webp", ROOT / "images/case-intelligence-hero-mobile.webp"):
+        assert path.is_file() and path.stat().st_size > 1000, path
+    home = (ROOT / "index.html").read_text(encoding="utf-8")
+    for host in ("fonts.googleapis.com", "fonts.gstatic.com", "use.typekit.net", "//fonts."):
+        assert host not in home, host
     assert "font-display:optional" in CSS_SOURCE
-    assert "/fonts/fraunces-latin.woff2" in CSS_SOURCE
-    assert "/fonts/inter-latin.woff2" in CSS_SOURCE
+    # the display face is preloaded and swapped so the opening headline never falls back
+    assert "font-display:swap" in CSS_SOURCE
+    assert '<link rel="preload" href="/fonts/newsreader-latin.woff2"' in home
+    assert (ROOT / "images/evidence-architecture-hero-mobile.webp").stat().st_size < (ROOT / "images/evidence-architecture-hero.webp").stat().st_size
     assert (ROOT / "images/case-intelligence-hero-mobile.webp").stat().st_size < (ROOT / "images/case-intelligence-hero.webp").stat().st_size
+
+
+def test_open_font_licences_ship_with_the_self_hosted_faces():
+    for name in ("Newsreader-OFL.txt", "IBM-Plex-Sans-OFL.txt", "IBM-Plex-Mono-OFL.txt"):
+        licence = ROOT / "fonts" / name
+        assert licence.is_file() and licence.stat().st_size > 500, licence

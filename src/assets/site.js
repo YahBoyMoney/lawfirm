@@ -36,7 +36,7 @@
       else suppressionReasons.delete(reason);
       renderMobileActions();
     };
-    const heroActions = document.querySelector('.hero .actions, .home-hero-actions');
+    const heroActions = document.querySelector('.opening-dock, .hero .actions');
     if (heroActions && 'IntersectionObserver' in window) {
       setSuppressed('hero-actions-visible', true);
       const observer = new IntersectionObserver(([entry]) => {
@@ -136,6 +136,7 @@
 (() => {
   const root = document.documentElement;
   const OBSERVER_FALLBACK_MS = 1600;
+  const OBSERVER_CONFIRM_MS = 420;
 
   const revealEverything = () => {
     document.querySelectorAll('[data-reveal]').forEach((element) => {
@@ -144,8 +145,19 @@
     document.querySelectorAll('[data-timeline-step]').forEach((step) => {
       step.dataset.active = 'true';
     });
+    document.querySelectorAll('[data-clock-step]').forEach((step) => {
+      step.dataset.active = 'true';
+    });
     document.querySelectorAll('[data-timeline]').forEach((section) => {
       section.style.setProperty('--timeline-progress', '1');
+    });
+    document.querySelectorAll('[data-clock]').forEach((section) => {
+      section.style.setProperty('--clock-progress', '1');
+      const meter = section.querySelector('[data-clock-count]');
+      if (meter) meter.textContent = meter.dataset.clockCount;
+    });
+    document.querySelectorAll('[data-lifted]').forEach((element) => {
+      element.dataset.lifted = 'true';
     });
   };
 
@@ -162,6 +174,9 @@
     const reveals = [...document.querySelectorAll('[data-reveal]')];
     const heroes = [...document.querySelectorAll('[data-hero]')];
     const timelines = [...document.querySelectorAll('[data-timeline]')];
+    const clocks = [...document.querySelectorAll('[data-clock]')];
+    const lifts = [...document.querySelectorAll('[data-lifted]')];
+    const opening = document.querySelector('[data-opening]');
     let running = false;
     let ticking = false;
     let observer = null;
@@ -189,6 +204,26 @@
           step.dataset.active = String(step.getBoundingClientRect().top + 24 <= anchor);
         });
       });
+      clocks.forEach((section) => {
+        const steps = [...section.querySelectorAll('[data-clock-step]')];
+        if (!steps.length) return;
+        const anchor = window.innerHeight * 0.66;
+        let reached = 0;
+        steps.forEach((step) => {
+          const active = step.getBoundingClientRect().top <= anchor;
+          step.dataset.active = String(active);
+          if (active) reached += 1;
+        });
+        section.style.setProperty('--clock-progress', (reached / steps.length).toFixed(4));
+        const meter = section.querySelector('[data-clock-count]');
+        if (meter) meter.textContent = String(Math.max(1, reached)).padStart(2, '0');
+      });
+      if (opening) {
+        const bottom = opening.getBoundingClientRect().bottom;
+        lifts.forEach((element) => {
+          element.dataset.lifted = String(bottom <= element.getBoundingClientRect().height + 2);
+        });
+      }
     };
 
     const onScroll = () => {
@@ -220,14 +255,19 @@
       window.addEventListener('orientationchange', onScroll, {passive: true});
       update();
       if (reveals.length) {
+        // Watchdog. A programmatic jump can outrun the observer callback, so a suspected
+        // miss is confirmed one beat later and only counts while the element is still on
+        // screen. A genuinely broken observer still fails open.
+        const stranded = () => reveals.filter((element) => {
+          if (element.dataset.revealed === 'true') return false;
+          const rect = element.getBoundingClientRect();
+          return rect.top < window.innerHeight && rect.bottom > 0;
+        });
         window.setTimeout(() => {
-          if (!running) return;
-          const missedVisibleTarget = reveals.some((element) => {
-            if (element.dataset.revealed === 'true') return false;
-            const rect = element.getBoundingClientRect();
-            return rect.top < window.innerHeight && rect.bottom > 0;
-          });
-          if (missedVisibleTarget) failOpen();
+          if (!running || !stranded().length) return;
+          window.setTimeout(() => {
+            if (running && stranded().length) failOpen();
+          }, OBSERVER_CONFIRM_MS);
         }, OBSERVER_FALLBACK_MS);
       }
     };
