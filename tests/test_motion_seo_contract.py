@@ -194,7 +194,7 @@ def test_all_pages_use_case_artwork_and_no_synthetic_team_photography():
     assert image["fetchpriority"] == "high" and image["decoding"] == "async"
     assert home.select_one(".home-hero-art")["aria-hidden"] == "true"
     portraits = {img["src"] for img in home.select("img")} - {image["src"]}
-    assert portraits <= {"/images/tam-berhe.jpg", "/images/the-berhe-law-firm-apc-logo-white.png"}
+    assert portraits <= {"/images/tam-berhe.jpg", "/images/the-berhe-law-firm-apc-logo-white-320.webp"}
 
 
 def test_case_evaluation_timeline_is_present_and_complete_without_javascript():

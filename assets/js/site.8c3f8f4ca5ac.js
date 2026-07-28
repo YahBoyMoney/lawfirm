@@ -243,11 +243,17 @@
         });
       }
       if (cinematic && practiceItems.length) {
+        // Keyboard focus owns the stage while it is inside the practice index. Focusing a
+        // lower link can scroll the page, so a scroll-derived update must not immediately
+        // overwrite the focus-derived selection.
+        const focused = document.activeElement?.closest?.('[data-practice]');
         const anchor = window.innerHeight * 0.55;
-        let current = practiceItems[0];
-        practiceItems.forEach((item) => {
-          if (item.getBoundingClientRect().top <= anchor) current = item;
-        });
+        let current = focused || practiceItems[0];
+        if (!focused) {
+          practiceItems.forEach((item) => {
+            if (item.getBoundingClientRect().top <= anchor) current = item;
+          });
+        }
         setActivePractice(current.dataset.practice);
       }
       timelines.forEach((section) => {

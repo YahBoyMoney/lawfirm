@@ -18,9 +18,9 @@ from site_data import (
 ADMIN_ACTION = "https://admin.berhelaw.com/api/leads/case-review"
 RELEASE_DATE = "2026-07-27"
 REVIEW_LABEL = "Reviewed July 27, 2026"
-BRAND_LOGO = "/images/the-berhe-law-firm-apc-logo-white.png"
-BRAND_LOGO_WIDTH = 1251
-BRAND_LOGO_HEIGHT = 745
+BRAND_LOGO = "/images/the-berhe-law-firm-apc-logo-white-320.webp"
+BRAND_LOGO_WIDTH = 320
+BRAND_LOGO_HEIGHT = 191
 SOCIAL_IMAGE = "https://berhelaw.com/images/og-the-berhe-law-firm-apc.png"
 outputs = {}
 
@@ -46,6 +46,7 @@ def asset(source_name, output_prefix):
 
 
 CSS = asset("site.css", "site")
+HEAD_JS = asset("head.js", "head")
 SITE_JS = asset("site.js", "site")
 INTAKE_JS = asset("intake.js", "intake")
 
@@ -192,6 +193,7 @@ def document(route, title, description, body, *, robots="index, follow", kind="W
     return f'''<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="{HEAD_JS}"></script>
 <meta name="generator" content="BerheLaw static builder"><meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="robots" content="{robots}"><title>{esc(title)}</title><meta name="description" content="{esc(description)}">
 <link rel="canonical" href="https://berhelaw.com{route}"><link rel="icon" href="/favicon.ico"><meta name="theme-color" content="#0b151d">
@@ -246,7 +248,7 @@ def case_architecture_picture():
 
 def ghost(word):
     """Oversized editorial ghost type. Structural decoration, never the only copy of a word."""
-    return f'<span class="ghost-type" data-ghost="{word.lower()}" aria-hidden="true">{esc(word)}</span>'
+    return f'<span class="ghost-type" data-ghost="{word.lower()}" aria-hidden="true"></span>'
 
 
 def scene_plane(kind):

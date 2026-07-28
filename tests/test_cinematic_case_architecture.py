@@ -178,10 +178,11 @@ def test_decorative_scene_layers_are_hidden_from_assistive_technology():
 def test_ghost_typography_is_decorative_only():
     ghosts = HOME.select(".ghost-type")
     assert len(ghosts) >= 3, "editorial ghost type is a structural device in the spec"
-    words = {ghost.get_text(strip=True).upper() for ghost in ghosts}
+    words = {str(ghost.get("data-ghost", "")).upper() for ghost in ghosts}
     assert {"MATTER", "RECORD", "PROOF", "EVIDENCE"} <= words, words
     for ghost in ghosts:
         assert ghost.get("aria-hidden") == "true"
+        assert not ghost.get_text(strip=True), "decorative words render only through CSS pseudo-content"
         # Ghost words must never be the only place a real word appears.
         assert ghost.name in {"span", "div", "p"}, ghost.name
 
@@ -250,6 +251,13 @@ def test_intake_scene_resolves_the_dark_world_around_the_real_form():
     assert form["action"] == "https://admin.berhelaw.com/api/leads/case-review"
     assert form["method"] == "post"
     assert scene.select_one("[data-plane]"), "the object resolves into a frame around the panel"
+
+
+def test_process_pin_uses_the_case_object_and_intake_notice_restores_paper_contrast():
+    css = (ROOT / "src/assets/site.css").read_text(encoding="utf-8")
+    assert ".cinema .process-pin-object" in css
+    assert 'url("/images/case-architecture-object-1200.avif")' in css
+    assert ".scene .intake-form .notice{background:var(--paper);color:var(--ink)}" in css
 
 
 # --- progressive enhancement gating ----------------------------------------
@@ -376,7 +384,7 @@ def test_legal_and_no_guarantee_language_survives_the_redesign():
         assert phrase not in lowered, f"unsupported claim reached the homepage: {phrase}"
 
 
-def test_security_headers_and_official_logo_are_untouched():
+def test_security_headers_and_authorized_logo_are_preserved():
     headers = (ROOT / "_headers").read_text(encoding="utf-8")
     for header in (
         "Strict-Transport-Security", "X-Content-Type-Options: nosniff", "X-Frame-Options: DENY",
@@ -385,8 +393,12 @@ def test_security_headers_and_official_logo_are_untouched():
         assert header in headers, header
     assert "form-action https://admin.berhelaw.com" in headers
     assert "unsafe-inline" not in headers and "unsafe-eval" not in headers
-    # The official mark is referenced at its real intrinsic size and never recoloured here.
-    logo = HOME.select_one('header img[src="/images/the-berhe-law-firm-apc-logo-white.png"]')
-    assert logo and (int(logo["width"]), int(logo["height"])) == (1251, 745)
+    # The public mark is a lossless responsive derivative of the hash-locked official source.
+    logo = HOME.select_one('header img[src="/images/the-berhe-law-firm-apc-logo-white-320.webp"]')
+    assert logo and (int(str(logo["width"])), int(str(logo["height"]))) == (320, 191)
     assert logo["alt"] == "The Berhe Law Firm, APC"
     assert "the-berhe-law-firm-apc-logo-white" not in CSS_SOURCE, "do not restyle the mark's pixels"
+    assert HOME.head is not None
+    head_script = HOME.head.select_one('script[src^="/assets/js/head."]')
+    assert head_script and not head_script.has_attr("defer")
+    assert "'sha256-" not in headers, "the early enhancement flag stays external under script-src self"

@@ -1223,7 +1223,7 @@
       "details": {
         "marker": true,
         "fontSize": 58.32,
-        "bottom": 866.125,
+        "bottom": 866.34375,
         "objectPosition": null
       }
     },
@@ -1233,7 +1233,7 @@
       "details": {
         "marker": true,
         "fontSize": 51.84,
-        "bottom": 823.5625,
+        "bottom": 823.78125,
         "objectPosition": "72% 45%"
       }
     },
@@ -1250,7 +1250,7 @@
       "details": {
         "suppressed": "true",
         "visibility": "hidden",
-        "secondaryBottom": 682.8125,
+        "secondaryBottom": 682.984375,
         "viewportHeight": 844
       }
     },
@@ -1286,13 +1286,13 @@
       "passed": true,
       "details": {
         "call": {
-          "bottom": 685.875,
-          "top": 627.4375,
+          "bottom": 686.046875,
+          "top": 627.609375,
           "opacity": 1
         },
         "review": {
-          "bottom": 751.46875,
-          "top": 697.875,
+          "bottom": 751.640625,
+          "top": 698.046875,
           "opacity": 1
         },
         "viewport": 844
@@ -1303,13 +1303,13 @@
       "passed": true,
       "details": {
         "call": {
-          "bottom": 617.21875,
-          "top": 558.78125,
+          "bottom": 617.390625,
+          "top": 558.953125,
           "opacity": 1
         },
         "review": {
-          "bottom": 682.8125,
-          "top": 629.21875,
+          "bottom": 682.984375,
+          "top": 629.390625,
           "opacity": 1
         },
         "viewport": 844
@@ -1368,34 +1368,34 @@
     }
   ],
   "screenshots": [
-    "qa/cinematic-case-architecture-2026-07-27/webkit/home-hero-320.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/home-hero-390.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/home-hero-768.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/home-hero-1440.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/home-hero-2560.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/scene-record-1440.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/scene-practice-1440.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/scene-practice-390.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/scene-evidence-1440.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/scene-evidence-390.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/scene-process-1440.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/scene-process-390.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/scene-resources-1440.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/scene-intake-1440.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/scene-intake-390.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/reduced-motion-practice-1440.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/reduced-motion-hero-390.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/practice-stakes-1440.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/practice-hub-desktop.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/resource-hub-1440.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/resource-guide-1440.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/resource-guide-390.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/case-review-form-mobile.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/garden-grove-updates-mobile.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/privacy-mobile.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/no-js-home-1440.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/no-js-home-390.png",
-    "qa/cinematic-case-architecture-2026-07-27/webkit/no-js-practice-1440.png"
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/home-hero-320.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/home-hero-390.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/home-hero-768.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/home-hero-1440.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/home-hero-2560.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/scene-record-1440.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/scene-practice-1440.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/scene-practice-390.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/scene-evidence-1440.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/scene-evidence-390.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/scene-process-1440.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/scene-process-390.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/scene-resources-1440.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/scene-intake-1440.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/scene-intake-390.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/reduced-motion-practice-1440.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/reduced-motion-hero-390.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/practice-stakes-1440.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/practice-hub-desktop.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/resource-hub-1440.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/resource-guide-1440.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/resource-guide-390.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/case-review-form-mobile.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/garden-grove-updates-mobile.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/privacy-mobile.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/no-js-home-1440.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/no-js-home-390.png",
+    "qa/cinematic-case-architecture-final-2026-07-27/webkit/no-js-practice-1440.png"
   ],
   "browser": "/root/.cache/ms-playwright/webkit-2311/pw_run.sh",
   "passed": true,

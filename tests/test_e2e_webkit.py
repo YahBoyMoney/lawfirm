@@ -404,8 +404,11 @@ def test_scroll_progress_is_decorative_and_tracks_the_document(webkit_browser):
     assert bar.evaluate("element => element.getAttribute('role')") is None
     read = "() => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--scroll-progress'))"
     assert page.evaluate(read) < 0.05
-    page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-    page.wait_for_timeout(200)
+    page.evaluate("document.documentElement.style.scrollBehavior = 'auto'; window.scrollTo(0, document.documentElement.scrollHeight)")
+    page.wait_for_function(
+        "() => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--scroll-progress')) > 0.9",
+        timeout=2000,
+    )
     assert page.evaluate(read) > 0.9
     assert page.evaluate("() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1")
     context.close()

@@ -32,6 +32,17 @@ def main():
     report = {"routes": [], "assertions": [], "screenshots": [], "browser": None}
     def record_assertion(name, passed, details):
         report["assertions"].append({"name": name, "passed": bool(passed), "details": details})
+    def await_mobile_clearance(page):
+        """Wait for WebKit to expose the fetched mobile media rule in computed styles."""
+        try:
+            page.wait_for_function(
+                "parseFloat(getComputedStyle(document.body).paddingBottom) > 0",
+                timeout=3000,
+            )
+        except PlaywrightError:
+            # Preserve the actual zero value for the assertion below; do not convert a
+            # missing/broken rule into a pass.
+            pass
     def serve(route):
         parsed = urlparse(route.request.url)
         if parsed.hostname == "fonts.googleapis.com":
@@ -50,7 +61,7 @@ def main():
             route.fulfill(status=404, body="Not found", content_type="text/plain")
             return
         content_type = mimetypes.guess_type(path.name)[0] or "application/octet-stream"
-        route.fulfill(status=200, body=path.read_bytes(), content_type=content_type)
+        route.fulfill(status=200, path=path, content_type=content_type)
 
     def context_for(browser, width, height, reduced=True):
         context = browser.new_context(viewport={"width": width, "height": height}, reduced_motion="reduce" if reduced else "no-preference")
@@ -88,6 +99,12 @@ def main():
                     })
                     page.close()
                 context.close()
+
+            # The route matrix deliberately stress-tests 135 page/viewport combinations.
+            # Release that engine process before interaction and screenshot checks so WebKit
+            # resource pressure cannot delay a cached stylesheet in the next phase.
+            browser.close()
+            browser = engine.launch(**launch_options)
 
             context = context_for(browser, 1440, 1000)
             page = context.new_page()
@@ -135,7 +152,10 @@ def main():
                 home_sticky,
             )
             page.goto(f"{ORIGIN}/free-case-review/", wait_until="domcontentloaded", timeout=10000)
-            first_control = page.locator('form[data-intake-form] input:not([type="hidden"])').first
+            await_mobile_clearance(page)
+            first_control = page.locator(
+                'form[data-intake-form] input:not([type="hidden"]):not([aria-hidden="true"]):not([tabindex="-1"])'
+            ).first
             first_control.scroll_into_view_if_needed()
             first_control.focus()
             page.wait_for_timeout(50)
@@ -157,6 +177,7 @@ def main():
             )
             for route in ("/privacy.html", "/landing/garden-grove-chemical-leak/"):
                 page.goto(f"{ORIGIN}{route}", wait_until="domcontentloaded", timeout=10000)
+                await_mobile_clearance(page)
                 clearance = page.evaluate("""() => {
                     const sticky = document.querySelector('.mobile-actions');
                     return {

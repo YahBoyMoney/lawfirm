@@ -1,3 +1,4 @@
+import hashlib
 import importlib.util
 import json
 import re
@@ -151,7 +152,7 @@ def test_shared_accessibility_and_legal_markers():
 def test_authorized_firm_brand_is_the_only_public_brand_identity():
     firm_name = "The Berhe Law Firm, APC"
     legacy_brand = re.compile(r"\bBerhe Jones(?: LLP)?\b", re.IGNORECASE)
-    expected_logo = "/images/the-berhe-law-firm-apc-logo-white.png"
+    expected_logo = "/images/the-berhe-law-firm-apc-logo-white-320.webp"
     expected_social = "https://berhelaw.com/images/og-the-berhe-law-firm-apc.png"
 
     for path in html_files():
@@ -177,7 +178,9 @@ def test_authorized_firm_brand_is_the_only_public_brand_identity():
     logo_path = ROOT / expected_logo.lstrip("/")
     assert logo_path.is_file()
     with Image.open(logo_path) as logo:
-        assert logo.size == (1251, 745)
+        assert logo.size == (320, 191)
+    approved_source = ROOT / "images/the-berhe-law-firm-apc-logo-white.png"
+    assert hashlib.sha256(approved_source.read_bytes()).hexdigest() == "60dc2afa2437af718b9c28abca7dee057ae9ba1f1a15a07012db218020c76e8e"
 
     social_path = ROOT / "images/og-the-berhe-law-firm-apc.png"
     assert social_path.is_file()
@@ -334,7 +337,8 @@ def test_visual_qa_markers_and_mobile_sticky_contract():
     assert ".hero--practice-hub h1" in css
     assert ".hero-media picture{position:absolute;inset:0;display:block}" in css
     assert ".mobile-actions[data-suppressed=true]" in css
-    assert "body{padding-bottom:var(--mobile-action-height)}" in css
+    assert "body{margin:0;padding-bottom:3.5rem" in css
+    assert "@media(min-width:901px){body{padding-bottom:0}" in css
 
     site_js = next((ROOT / "assets" / "js").glob("site.*.js")).read_text(encoding="utf-8")
     assert "hero-actions-visible" in site_js

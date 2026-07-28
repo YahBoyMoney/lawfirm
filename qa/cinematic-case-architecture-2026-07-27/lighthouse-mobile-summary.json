@@ -1,0 +1,19 @@
+{
+  "tested_url": "http://127.0.0.1:4173/",
+  "lighthouse_version": "13.4.1",
+  "fetch_time_utc": "2026-07-28T07:43:36.680Z",
+  "scores": {
+    "performance": 97,
+    "accessibility": 100,
+    "best_practices": 100,
+    "seo": 100
+  },
+  "metrics": {
+    "first_contentful_paint": "1.1 s",
+    "largest_contentful_paint": "2.6 s",
+    "cumulative_layout_shift": 0,
+    "total_blocking_time": "20 ms",
+    "speed_index": "1.1 s"
+  },
+  "source_report": "/tmp/berhelaw-cinematic-v2-lighthouse-exact-final.json"
+}
