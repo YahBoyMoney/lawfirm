@@ -143,9 +143,54 @@ def test_shared_accessibility_and_legal_markers():
         text = doc.get_text(" ", strip=True).lower()
         if path.name == "success.html":
             continue
-        assert "berhe jones is a dba of the berhe law firm" in text
+        assert "the berhe law firm, apc is responsible for this website" in text
         assert "signed written agreement" in text
         assert "attorney-client relationship" in text
+
+
+def test_authorized_firm_brand_is_the_only_public_brand_identity():
+    firm_name = "The Berhe Law Firm, APC"
+    legacy_brand = re.compile(r"\bBerhe Jones(?: LLP)?\b", re.IGNORECASE)
+    expected_logo = "/images/the-berhe-law-firm-apc-logo-white.png"
+    expected_social = "https://berhelaw.com/images/og-the-berhe-law-firm-apc.png"
+
+    for path in html_files():
+        markup = path.read_text(encoding="utf-8")
+        assert not legacy_brand.search(markup), f"legacy public brand in {path}"
+
+        doc = BeautifulSoup(markup, "html.parser")
+        assert doc.select_one(f'a.brand[aria-label="{firm_name} home"]'), path
+        brand_images = doc.select("a.brand img.brand-logo")
+        assert len(brand_images) == 2, path
+        assert all(image.get("src") == expected_logo for image in brand_images), path
+        assert all(image.get("alt") == firm_name for image in brand_images), path
+
+        assert doc.select_one('meta[property="og:site_name"]')["content"] == firm_name, path
+        assert doc.select_one('meta[property="og:image"]')["content"] == expected_social, path
+        assert doc.select_one('meta[name="twitter:image"]')["content"] == expected_social, path
+
+        graph = json.loads(doc.select_one('script[type="application/ld+json"]').string)["@graph"]
+        legal_service = next(node for node in graph if node.get("@id") == "https://berhelaw.com/#firm")
+        assert legal_service["name"] == firm_name, path
+        assert not legacy_brand.search(json.dumps(graph)), path
+
+    logo_path = ROOT / expected_logo.lstrip("/")
+    assert logo_path.is_file()
+    with Image.open(logo_path) as logo:
+        assert logo.size == (1251, 745)
+
+    social_path = ROOT / "images/og-the-berhe-law-firm-apc.png"
+    assert social_path.is_file()
+    with Image.open(social_path) as social:
+        assert social.size == (1200, 630)
+
+    for relative in (
+        "images/berhe-jones-llp-logo.png",
+        "images/berhe-jones-llp-logo-reverse.png",
+        "images/berhe-jones-icon.png",
+        "images/og-berhe-jones-llp.png",
+    ):
+        assert not (ROOT / relative).exists(), f"legacy public asset still ships: {relative}"
 
 
 def test_no_unsupported_marketing_claims_or_internal_labels():
@@ -280,7 +325,7 @@ def test_visual_qa_markers_and_mobile_sticky_contract():
     firm = next(node for node in metadata["@graph"] if node.get("@id") == "https://berhelaw.com/#firm")
     assert firm["areaServed"]["name"] == "California"
     assert "Personal injury law" in firm["serviceType"]
-    assert home.title.get_text(strip=True) == "California Personal Injury & Civil Rights Lawyer | Berhe Jones LLP"
+    assert home.title.get_text(strip=True) == "California Injury and Civil Rights Lawyer | The Berhe Law Firm, APC"
     assert "free California case review" in home.select_one('meta[name="description"]')["content"]
 
     css = next((ROOT / "assets" / "css").glob("site.*.css")).read_text(encoding="utf-8")

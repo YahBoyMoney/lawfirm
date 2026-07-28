@@ -58,3 +58,6 @@
 @media(prefers-reduced-motion:reduce){.scroll-progress{display:none!important}[data-reveal]{opacity:1!important;transform:none!important}[data-hero] *{animation:none!important}.case-track-fill{transform:scaleY(1)!important}.button:hover{transform:none}html{scroll-behavior:auto}}
 @media print{.scroll-progress{display:none!important}[data-reveal]{opacity:1!important;transform:none!important}.guide-aside,.cta-band-actions{display:none!important}.guide-layout{display:block}}
 @keyframes hero-rise{from{opacity:0;transform:translate3d(0,22px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+/* Official firm mark: preserve the wordmark proportions on dark navigation surfaces. */
+.site-header .brand-logo{width:10rem;height:auto;max-width:10rem;object-fit:contain}.site-footer .brand-logo{width:11.5rem;height:auto;max-width:11.5rem;object-fit:contain;margin-bottom:var(--s4)}
+@media(max-width:600px){.site-header .brand-logo{width:8rem;height:auto;max-width:8rem}.header-inner{min-height:5.5rem;padding-block:var(--s2)}}
