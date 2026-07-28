@@ -1,6 +1,7 @@
 PHONE_DISPLAY = "909-609-6685"
-PHONE_HREF = "tel:+19096096685"
-DBA = "Berhe Jones is a DBA of The Berhe Law Firm, APC."
+PHONE_HREF = "tel:+1" + PHONE_DISPLAY.replace("-", "")
+FIRM_NAME = "The Berhe Law Firm, APC"
+FIRM_PUBLIC_STATEMENT = "The Berhe Law Firm, APC is responsible for this website."
 DISCLAIMER = (
     "Attorney advertising. General information only; not legal advice. A form, call, email, "
     "text, or public checklist request does not create an attorney-client relationship. "
@@ -13,8 +14,8 @@ PRACTICES = [
     {
         "slug": "personal-injury-wrongful-death",
         "name": "Personal Injury and Wrongful Death",
-        "title": "California Personal Injury and Wrongful Death Lawyer | Berhe Jones LLP",
-        "description": "Hurt in a California crash, fall, or preventable death? Berhe Jones LLP reviews liability, medical proof, coverage, and deadlines free. Call 909-609-6685.",
+        "title": f"California Personal Injury Lawyer | {FIRM_NAME}",
+        "description": f"Hurt in a California crash, fall, or preventable death? {FIRM_NAME} reviews liability, medical proof, coverage, and deadlines free. Call 909-609-6685.",
         "h1": "Serious injury or wrongful death deserves more than a quick intake script.",
         "lead": "The first review connects responsibility, medical proof, life impact, available coverage, and any preservation or deadline issue.",
         "card": "A collision, a fall, an unsafe property, or a preventable death has changed your health, your income, and your family's plans. The other side's insurer started building its version of the story on day one.",
@@ -37,8 +38,8 @@ PRACTICES = [
     {
         "slug": "employment-workplace-claims",
         "name": "Employment and Workplace Claims",
-        "title": "California Wrongful Termination and Retaliation Lawyer | Berhe Jones LLP",
-        "description": "Fired, demoted, or retaliated against in California? Berhe Jones LLP reviews the timeline, documents, and filing steps free. Call 909-609-6685 to start.",
+        "title": f"California Employment Lawyer | {FIRM_NAME}",
+        "description": f"Fired, demoted, or retaliated against in California? {FIRM_NAME} reviews the timeline, documents, and filing steps free. Call 909-609-6685 to start.",
         "h1": "Workplace claims need a clean timeline, documents, and deadline review.",
         "lead": "A useful employment screen starts with what happened, when it happened, who knew, what was reported, and what changed afterward.",
         "card": "You were fired, demoted, cut back, or pushed out after you raised a problem. The paycheck stopped, and the proof is sitting in an account you may lose access to.",
@@ -61,8 +62,8 @@ PRACTICES = [
     {
         "slug": "civil-rights-government-accountability",
         "name": "Civil Rights and Government Accountability",
-        "title": "California Civil Rights and Accountability Lawyer | Berhe Jones LLP",
-        "description": "Harmed by a government actor or public entity in California? Berhe Jones LLP reviews video, records, notice steps, and deadlines free. Call 909-609-6685.",
+        "title": f"California Civil Rights Lawyer | {FIRM_NAME}",
+        "description": f"Harmed by a government actor or public entity in California? {FIRM_NAME} reviews video, records, notice steps, and deadlines free. Call 909-609-6685.",
         "h1": "Civil rights and government-accountability matters are deadline-sensitive and evidence-driven.",
         "lead": "Early review can matter when a public entity, government actor, video record, or special notice process may be involved.",
         "card": "A public agency or a government actor caused harm, and the records that would prove it are held by the same institution you are questioning.",
@@ -85,8 +86,8 @@ PRACTICES = [
     {
         "slug": "consumer-protection-lemon-law",
         "name": "Consumer Protection and Lemon Law",
-        "title": "California Lemon Law and Consumer Protection Lawyer | Berhe Jones LLP",
-        "description": "Defective vehicle, warranty runaround, or deceptive sale in California? Berhe Jones LLP reviews repair history, contracts, and loss free. Call 909-609-6685.",
+        "title": f"California Lemon Law and Consumer Lawyer | {FIRM_NAME}",
+        "description": f"Defective vehicle, warranty runaround, or deceptive sale in California? {FIRM_NAME} reviews repair history, contracts, and loss free. Call 909-609-6685.",
         "h1": "Consumer cases usually turn on documents, dates, and a defendant that can be held accountable.",
         "lead": "The first review focuses on the transaction, what was promised, repair or complaint history, notices, measurable loss, and the responsible business.",
         "card": "A vehicle, product, lender, or seller failed, and the company keeps routing you back into the same repair loop or the same phone queue.",
@@ -109,8 +110,8 @@ PRACTICES = [
     {
         "slug": "insurance-bad-faith",
         "name": "Insurance Bad Faith",
-        "title": "California Insurance Bad Faith Lawyer: Denied Claims | Berhe Jones LLP",
-        "description": "Claim denied, delayed, or underpaid in California? Berhe Jones LLP reviews the policy, claim file, and insurer communications free. Call 909-609-6685.",
+        "title": f"California Insurance Bad Faith Lawyer | {FIRM_NAME}",
+        "description": f"Claim denied, delayed, or underpaid in California? {FIRM_NAME} reviews the policy, claim file, and insurer communications free. Call 909-609-6685.",
         "h1": "When an insurer delays, denies, or underpays, the file needs policy-first review.",
         "lead": "The policy, complete claim chronology, insurer communications, underlying loss, and resulting harm anchor the first screen.",
         "card": "You paid the premiums for years. Now the claim is delayed, underpaid, or denied, the repairs are unfinished, and the bills keep arriving.",
@@ -133,8 +134,8 @@ PRACTICES = [
     {
         "slug": "catastrophic-injury",
         "name": "Catastrophic Injury",
-        "title": "California Catastrophic Injury Lawyer: Brain and Spine | Berhe Jones LLP",
-        "description": "Life-changing injury in California? Berhe Jones LLP reviews liability, future care needs, coverage layers, and evidence preservation free. Call 909-609-6685.",
+        "title": f"California Catastrophic Injury Lawyer | {FIRM_NAME}",
+        "description": f"Life-changing injury in California? {FIRM_NAME} reviews liability, future care needs, coverage layers, and evidence preservation free. Call 909-609-6685.",
         "h1": "Catastrophic injury cases require early investigation and a real damages strategy.",
         "lead": "Severe harm requires proof of responsibility and a disciplined record of medical needs, future care, work impact, family impact, and available recovery sources.",
         "card": "The injury changed what the next thirty years look like. Care, work, housing, and family roles all shifted at once, and decisions are being asked of you now.",
@@ -157,8 +158,8 @@ PRACTICES = [
     {
         "slug": "select-civil-litigation",
         "name": "Select Civil Litigation",
-        "title": "California Civil Litigation Lawyer: Fraud and Business | Berhe Jones LLP",
-        "description": "Serious fraud, contract, fiduciary, or business tort dispute in California? Berhe Jones LLP reviews proof, damages, and economics free. Call 909-609-6685.",
+        "title": f"California Civil Litigation Lawyer | {FIRM_NAME}",
+        "description": f"Serious fraud, contract, fiduciary, or business tort dispute in California? {FIRM_NAME} reviews proof, damages, and economics free. Call 909-609-6685.",
         "h1": "Select civil litigation is accepted only when the facts and economics justify the work.",
         "lead": "The first screen tests documented wrongdoing, provable damages, timing, forum, collectability, and whether the fee structure fits the work required.",
         "card": "A business, a partner, or a professional caused serious documented loss, and the other side already has counsel drafting its version of events.",
@@ -186,7 +187,7 @@ RESOURCE_GUIDES = [
     {
         "slug": "prepare-for-case-review",
         "name": "What to prepare before a case review",
-        "title": "What to Prepare Before a Free Case Review | Berhe Jones LLP",
+        "title": f"What to Prepare Before a Case Review | {FIRM_NAME}",
         "description": "A conflict-safe checklist for a California case review: the parties, dates, documents, harm, and questions to organize before you call. General information only.",
         "h1": "What to prepare before a case review.",
         "lead": "Organize the facts that let an attorney see timing, responsibility, harm, evidence, and a practical recovery route.",
@@ -251,7 +252,7 @@ RESOURCE_GUIDES = [
     {
         "slug": "commercial-vehicle-evidence-checklist",
         "name": "Commercial-vehicle accident evidence checklist",
-        "title": "Truck and Rideshare Accident Evidence Checklist | Berhe Jones LLP",
+        "title": f"Truck and Rideshare Evidence Checklist | {FIRM_NAME}",
         "description": "Evidence checklist for California truck, fleet, delivery, and rideshare crashes: scene proof, carrier records, telematics, video retention, and preservation steps.",
         "h1": "Commercial-vehicle accident evidence checklist.",
         "lead": "Commercial vehicle evidence is spread across a driver, a carrier, a platform, an owner, a maintenance provider, insurers, devices, and nearby cameras.",
@@ -316,7 +317,7 @@ RESOURCE_GUIDES = [
     {
         "slug": "deadlines-and-early-review",
         "name": "Deadlines and early case review",
-        "title": "Legal Deadlines and Why Early Case Review Matters | Berhe Jones LLP",
+        "title": f"California Legal Deadlines Guide | {FIRM_NAME}",
         "description": "Why California civil deadlines are not one number: notice steps, agency processes, insurance timing, and evidence that disappears. General information, not advice.",
         "h1": "Why early review can matter when deadlines are unclear.",
         "lead": "No general guide can calculate an individual deadline. Early organization helps counsel identify which dates and procedures need attention first.",
@@ -380,7 +381,7 @@ RESOURCE_GUIDES = [
     {
         "slug": "after-a-collision-first-steps",
         "name": "First steps after a California crash",
-        "title": "What to Do After a Car Accident in California | Berhe Jones LLP",
+        "title": f"What to Do After a California Car Accident | {FIRM_NAME}",
         "description": "A practical checklist for the first hours, days, and weeks after a California crash: documentation, medical records, insurer calls, and evidence that disappears fast.",
         "h1": "What to do in the first days after a California crash.",
         "lead": "The first week often contains the earliest available record of what happened. Much of that information is practical to collect, and some of it can change quickly.",
@@ -445,7 +446,7 @@ RESOURCE_GUIDES = [
     {
         "slug": "insurance-claim-communication",
         "name": "Talking to an insurance or claims adjuster",
-        "title": "Recorded Statements, Releases, and Adjuster Calls | Berhe Jones LLP",
+        "title": f"Insurance Adjuster Calls and Releases | {FIRM_NAME}",
         "description": "What to know before a recorded statement, a medical authorization, or a release: what to document, what to ask in writing, and what a denial letter should contain.",
         "h1": "What to know before you talk to a claims adjuster.",
         "lead": "Claim files are built out of documents and recorded words. Understanding what is being asked, and why, keeps a routine call from narrowing your options.",
@@ -509,7 +510,7 @@ RESOURCE_GUIDES = [
     {
         "slug": "workplace-documentation",
         "name": "How to document a workplace problem",
-        "title": "How to Document a Workplace Problem in California | Berhe Jones LLP",
+        "title": f"California Workplace Documentation Guide | {FIRM_NAME}",
         "description": "Build a workplace record before access ends: chronology, written reports, pay and schedule records, and what to keep after a termination. General information only.",
         "h1": "How to document a workplace problem while you still have access.",
         "lead": "Employment matters are often evaluated through chronology and records. Many of those records live in systems your employer controls.",

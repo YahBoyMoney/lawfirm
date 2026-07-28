@@ -1223,7 +1223,7 @@
       "details": {
         "marker": true,
         "fontSize": 58.32,
-        "bottom": 776.703125,
+        "bottom": 823,
         "objectPosition": null
       }
     },
@@ -1233,7 +1233,7 @@
       "details": {
         "marker": true,
         "fontSize": 51.84,
-        "bottom": 777.359375,
+        "bottom": 823.59375,
         "objectPosition": "72% 45%"
       }
     },
@@ -1250,7 +1250,7 @@
       "details": {
         "suppressed": "true",
         "visibility": "hidden",
-        "secondaryBottom": 670.59375,
+        "secondaryBottom": 706.609375,
         "viewportHeight": 844
       }
     },
@@ -1286,13 +1286,13 @@
       "passed": true,
       "details": {
         "call": {
-          "bottom": 673.65625,
-          "top": 615.21875,
+          "bottom": 685.921875,
+          "top": 627.46875,
           "opacity": 1
         },
         "review": {
-          "bottom": 739.25,
-          "top": 685.65625,
+          "bottom": 751.515625,
+          "top": 697.921875,
           "opacity": 1
         },
         "viewport": 844
@@ -1303,13 +1303,13 @@
       "passed": true,
       "details": {
         "call": {
-          "bottom": 605,
-          "top": 546.5625,
+          "bottom": 641.015625,
+          "top": 582.5625,
           "opacity": 1
         },
         "review": {
-          "bottom": 670.59375,
-          "top": 617,
+          "bottom": 706.609375,
+          "top": 653.015625,
           "opacity": 1
         },
         "viewport": 844
@@ -1355,7 +1355,7 @@
     "qa/opus5-motion-seo/garden-grove-updates-mobile.png",
     "qa/opus5-motion-seo/privacy-mobile.png"
   ],
-  "browser": "/root/.cache/ms-playwright/webkit-2287/pw_run.sh",
+  "browser": "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome",
   "passed": true,
   "failures": []
 }

@@ -191,7 +191,7 @@ def test_all_pages_use_case_artwork_and_no_synthetic_team_photography():
     assert image["fetchpriority"] == "high" and image["decoding"] == "async"
     assert home.select_one(".home-hero-art")["aria-hidden"] == "true"
     portraits = {img["src"] for img in home.select("img")} - {"/images/case-intelligence-hero.jpg"}
-    assert portraits <= {"/images/tam-berhe.jpg", "/images/berhe-jones-llp-logo-reverse.png"}
+    assert portraits <= {"/images/tam-berhe.jpg", "/images/the-berhe-law-firm-apc-logo-white.png"}
 
 
 def test_case_evaluation_timeline_is_present_and_complete_without_javascript():
@@ -413,12 +413,12 @@ def test_source_copy_avoids_em_dashes_and_inline_styles():
         assert not doc.select("[style]"), f"inline style attribute on {route} violates the CSP"
 
 
-def test_disclaimers_and_dba_survive_the_redesign():
+def test_disclaimers_and_responsible_firm_identity_survive_the_redesign():
     for route, doc in documents().items():
         if route == "/success.html":
             continue
         text = doc.get_text(" ", strip=True)
-        assert "Berhe Jones is a DBA of The Berhe Law Firm, APC." in text, route
+        assert "The Berhe Law Firm, APC is responsible for this website." in text, route
         assert "signed written agreement" in text, route
         assert "does not create an attorney-client relationship" in text.lower() or "not create an attorney-client relationship" in text.lower(), route
     guide = soup(ROOT / "resources/after-a-collision-first-steps/index.html")
