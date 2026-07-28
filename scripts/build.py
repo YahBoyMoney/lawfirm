@@ -221,6 +221,47 @@ def picture(name="case", alt=CASE_ART_ALT):
             f'<img src="/images/case-intelligence-hero.jpg" alt="{esc(alt or CASE_ART_ALT)}" width="1672" height="940" decoding="async" fetchpriority="high"></picture>')
 
 
+# Case Architecture world plane. Every variant is derived from the approved cleaned Higgsfield
+# asset by scripts/make_case_architecture_assets.py. The art is decorative: the headline and
+# every public claim stay in semantic HTML, so the image carries an empty alt.
+CASE_ARCHITECTURE_MOBILE = "/images/case-architecture-mobile-{width}.{fmt}"
+CASE_ARCHITECTURE_WORLD = "/images/case-architecture-world-{width}.{fmt}"
+
+
+def _srcset(template, widths, fmt):
+    return ", ".join(f'{template.format(width=w, fmt=fmt)} {w}w' for w in widths)
+
+
+def case_architecture_picture():
+    sources = ""
+    for fmt in ("avif", "webp"):
+        sources += (f'<source media="(max-width:600px)" type="image/{fmt}" '
+                    f'srcset="{_srcset(CASE_ARCHITECTURE_MOBILE, (720, 1080), fmt)}" sizes="100vw">')
+    for fmt in ("avif", "webp"):
+        sources += (f'<source type="image/{fmt}" '
+                    f'srcset="{_srcset(CASE_ARCHITECTURE_WORLD, (1200, 1600, 2400), fmt)}" sizes="100vw">')
+    return (f'<picture>{sources}<img src="/images/case-architecture-world-1200.png" alt="" '
+            'width="1200" height="686" decoding="async" fetchpriority="high"></picture>')
+
+
+def ghost(word):
+    """Oversized editorial ghost type. Structural decoration, never the only copy of a word."""
+    return f'<span class="ghost-type" data-ghost="{word.lower()}" aria-hidden="true">{esc(word)}</span>'
+
+
+def scene_plane(kind):
+    return f'<span class="scene-plane scene-plane--{kind}" data-plane="{kind}" aria-hidden="true"></span>'
+
+
+def atmosphere(*layers):
+    """Containment wrapper for decorative depth layers.
+
+    The clipping lives here rather than on the scene itself: an overflow on the scene would
+    turn it into a scroll container and silently break the CSS position: sticky pins.
+    """
+    return f'<div class="scene-atmosphere" aria-hidden="true">{"".join(layers)}</div>'
+
+
 def hero(h1, lead, eyebrow="California civil counsel", image="case", primary="Request a case review", primary_href="/free-case-review/", marker=""):
     classes = "hero" + (f" hero--{marker}" if marker else "") + " hero--case-art"
     return f'''<section class="{classes}" data-hero><div class="hero-grid"><div class="hero-copy"><span class="eyebrow">{esc(eyebrow)}</span><h1>{esc(h1)}</h1><p class="lead">{esc(lead)}</p><div class="actions"><a class="button button-primary" href="{primary_href}">{esc(primary)}</a><a class="button button-secondary" href="{PHONE_HREF}">Call {PHONE_DISPLAY}</a></div></div><div class="hero-media">{picture(image)}</div></div></section>'''
@@ -293,12 +334,13 @@ CASE_TIMELINE = [
 
 
 def case_timeline(eyebrow="How a case review runs", heading="Five stages that organize the first review.",
-                  intro="Nothing here is a promise about a result. These stages show the questions that guide a first review before you pick up the phone."):
+                  intro="Nothing here is a promise about a result. These stages show the questions that guide a first review before you pick up the phone.",
+                  pin=""):
     steps = "".join(
         f'''<li class="case-step" data-timeline-step data-step="{index}"><span class="case-step-dot" aria-hidden="true"></span><div class="case-step-body"><span class="case-step-index">Stage {index:02d}</span><h3>{esc(title)}</h3><p>{esc(text)}</p><p class="case-step-bring">{esc(bring)}</p></div></li>'''
         for index, (title, text, bring) in enumerate(CASE_TIMELINE, 1)
     )
-    return f'''<section class="section case-review-timeline" id="how-review-works" data-timeline><div class="section-inner"><div class="home-section-heading" data-reveal><div><span class="eyebrow">{esc(eyebrow)}</span><h2>{esc(heading)}</h2></div><p>{esc(intro)}</p></div><div class="case-track"><div class="case-track-rail" aria-hidden="true"><span class="case-track-fill"></span></div><ol class="case-steps">{steps}</ol></div></div></section>'''
+    return f'''<div class="section-inner" id="how-review-works"><div class="home-section-heading" data-reveal><div><span class="eyebrow">{esc(eyebrow)}</span><h2>{esc(heading)}</h2></div><p>{esc(intro)}</p></div><div class="process-layout"><div class="case-track"><div class="case-track-rail" aria-hidden="true"><span class="case-track-fill"></span></div><ol class="case-steps">{steps}</ol></div>{pin}</div></div>'''
 
 
 def intake_form(form_id="case-review", matter="General civil matter", campaign="general", heading="Case review request", extra="", source_route="/"):
@@ -314,8 +356,10 @@ def intake_form(form_id="case-review", matter="General civil matter", campaign="
 
 
 def homepage():
+    # Every practice keeps its sourced description in readable document order. The pinned
+    # stage beside it is decorative and never the only place a description appears.
     practice_cards = "".join(
-        f'''<article class="home-practice-card" data-reveal><span class="home-practice-number">{index:02d}</span><h3><a href="/practice-areas/{p["slug"]}/">{esc(p["name"])}</a></h3><p>{esc(p["card"])}</p><a class="text-link" href="/practice-areas/{p["slug"]}/">How this review works <span aria-hidden="true">→</span></a></article>'''
+        f'''<li class="practice-item" data-practice="{p["slug"]}" data-practice-index="{index}" data-reveal><span class="home-practice-number">{index:02d}</span><h3><a href="/practice-areas/{p["slug"]}/">{esc(p["name"])}</a></h3><p>{esc(p["card"])}</p><a class="text-link" href="/practice-areas/{p["slug"]}/">How this review works <span aria-hidden="true">→</span></a></li>'''
         for index, p in enumerate(PRACTICES, 1)
     )
     preserve_cards = [
@@ -338,16 +382,43 @@ def homepage():
         ("Where does the firm handle matters?", f"{FIRM_NAME} is a California civil practice and reviews matters connected to California. Matters outside the firm's practice may be referred or declined after review."),
         ("What if I already have an attorney for this matter?", "Say so at the start. If you are represented, the firm will not step between you and your current counsel. Attorney-to-attorney referral and co-counsel questions go through the referrals page."),
     ]
+    practice_stage = "".join(
+        f'<span class="practice-stage-item" data-stage-for="{p["slug"]}"><span class="practice-stage-number">{index:02d}</span><span class="practice-stage-name">{esc(p["name"])}</span></span>'
+        for index, p in enumerate(PRACTICES, 1)
+    )
+    # Scene 2 restates approved copy already published on this site: the opening statement,
+    # the preservation-triage stage, and the chronology stage of the five-stage review.
+    record_beats = [
+        ("matter", "The matter",
+         "People call because something already changed their health, their income, their record, or their family."),
+        ("record", "The record",
+         "Video, vehicles, devices, logs, scenes, and personnel access run on their own clocks. What may disappear first is identified before anyone starts drafting anything."),
+        ("proof", "The next move",
+         "A date-indexed record is built from what you already have. The goal is a sequence another person can follow and verify, with the gaps marked instead of hidden."),
+    ]
+    record_html = "".join(
+        f'<article class="record-beat" data-reveal><span class="record-beat-label">{esc(label)}</span><p>{esc(text)}</p></article>'
+        for _, label, text in record_beats
+    )
+    evidence_markers = [
+        ("Deadlines can run early", "Matters involving public entities, agencies, insurance notices, and courts can require action sooner than people expect, and some require a step before any lawsuit."),
+        ("Evidence expires quietly", "Video is overwritten on a retention schedule. Vehicles get repaired. Scenes get cleaned. App and telematics data cycles out. Witnesses move."),
+        ("Early choices stick", "Recorded statements, signed releases, medical authorizations, severance paperwork, and insurer correspondence shape what is still possible months later."),
+    ]
+    evidence_html = "".join(
+        f'<li class="evidence-marker" data-evidence-marker data-marker="{index}" data-reveal><span class="evidence-node" aria-hidden="true"></span><strong>{esc(title)}</strong><p>{esc(text)}</p></li>'
+        for index, (title, text) in enumerate(evidence_markers, 1)
+    )
+    process_pin = '<div class="scene-pin process-pin" aria-hidden="true"><span class="process-pin-object"></span></div>'
     body = f'''<main id="main">
-<section class="home-hero" data-hero><div class="home-hero-art" aria-hidden="true">{picture("case")}</div><div class="home-hero-inner"><div class="home-hero-copy"><span class="eyebrow">California civil law firm</span><h1>Something serious happened. What you do next can shape what you can prove.</h1><p class="home-hero-lead">Injured. Fired after you spoke up. Denied by an insurer. Harmed by a company or an agency that will not answer. The first review with {FIRM_NAME} is free and attorney-led, and it starts with two things that can change quickly: your deadlines and your evidence.</p><div class="home-hero-actions"><a class="button button-call" href="{PHONE_HREF}"><span>Call now</span><strong>{PHONE_DISPLAY}</strong></a><a class="button button-secondary-light" href="/free-case-review/">Start a free case review</a></div><p class="home-hero-urgency"><strong>Deadlines and evidence do not wait.</strong> If the matter is urgent, call now. A call does not create an attorney-client relationship.</p></div><aside class="home-attorney-card" aria-label="Attorney-led case review"><img src="/images/tam-berhe.jpg" alt="Tam Berhe, California attorney" width="200" height="200" decoding="async"><div><span class="eyebrow">Attorney-led review</span><h2>Tell us what happened.</h2><p>Start with the event, the people or organizations involved, the harm, and any deadline. You do not need every document before you call.</p><a class="text-link text-link-light" href="/attorney-tam-berhe/">Meet Tam Berhe <span aria-hidden="true">→</span></a></div></aside></div></section>
+<section class="scene scene--hero home-hero" data-scene="hero" data-hero><div class="home-hero-art" data-plane="world" aria-hidden="true">{case_architecture_picture()}</div>{atmosphere(scene_plane("lines"), scene_plane("ribbon"))}<div class="home-hero-inner"><div class="home-hero-copy"><span class="eyebrow">California civil law firm</span><h1>Something serious happened. What you do next can shape what you can prove.</h1><p class="home-hero-lead">Injured. Fired after you spoke up. Denied by an insurer. Harmed by a company or an agency that will not answer. The first review with {FIRM_NAME} is free and attorney-led, and it starts with two things that can change quickly: your deadlines and your evidence.</p><div class="home-hero-actions"><a class="button button-call" href="{PHONE_HREF}"><span>Call now</span><strong>{PHONE_DISPLAY}</strong></a><a class="button button-secondary-light" href="/free-case-review/">Start a free case review</a></div><p class="home-hero-urgency"><strong>Deadlines and evidence do not wait.</strong> If the matter is urgent, call now. A call does not create an attorney-client relationship.</p></div><aside class="home-attorney-card" aria-label="Attorney-led case review"><img src="/images/tam-berhe.jpg" alt="Tam Berhe, California attorney" width="200" height="200" decoding="async"><div><span class="eyebrow">Attorney-led review</span><h2>Tell us what happened.</h2><p>Start with the event, the people or organizations involved, the harm, and any deadline. You do not need every document before you call.</p><a class="text-link text-link-light" href="/attorney-tam-berhe/">Meet Tam Berhe <span aria-hidden="true">→</span></a></div></aside></div></section>
 {proof_band()}
-<section class="section home-stakes"><div class="section-inner"><div class="home-section-heading" data-reveal><div><span class="eyebrow">Start with the problem, not the label</span><h2>What happened to you, and what it is costing.</h2></div><p>People call because something already changed their health, their income, their record, or their family. Choose the situation closest to yours. If none of them fit, call and describe it in your own words.</p></div><div class="home-practice-grid" data-reveal-group>{practice_cards}</div><div class="home-inline-cta" data-reveal><p><strong>Not sure which one fits?</strong> That is normal, and it is not your job to know. Describe what happened and the category gets sorted out during the review.</p><a class="button button-primary" href="{PHONE_HREF}">Call {PHONE_DISPLAY}</a></div></div></section>
-<section class="home-urgency"><div class="section-inner home-urgency-grid"><div data-reveal><span class="eyebrow">Why timing matters</span><h2>The facts may stay the same while proof becomes harder to recover.</h2><p class="section-intro">Waiting can make a matter harder to evaluate because records, video, devices, scenes, and memories can change or disappear.</p></div><div class="home-reasons" data-reveal-group><article data-reveal><strong>Deadlines can run early</strong><p>Matters involving public entities, agencies, insurance notices, and courts can require action sooner than people expect, and some require a step before any lawsuit.</p></article><article data-reveal><strong>Evidence expires quietly</strong><p>Video is overwritten on a retention schedule. Vehicles get repaired. Scenes get cleaned. App and telematics data cycles out. Witnesses move.</p></article><article data-reveal><strong>Early choices stick</strong><p>Recorded statements, signed releases, medical authorizations, severance paperwork, and insurer correspondence shape what is still possible months later.</p></article><a class="button button-call button-call-wide" href="{PHONE_HREF}"><span>Talk to the firm</span><strong>{PHONE_DISPLAY}</strong></a></div></div></section>
-{case_timeline()}
-<section class="section paper home-preserve"><div class="section-inner"><div class="home-section-heading" data-reveal><div><span class="eyebrow">Useful first steps</span><h2>Four ways to build a record while details are still available.</h2></div><p>These general documentation steps may help preserve a usable record. Each one links to a guide that goes deeper.</p></div><div class="preserve-grid" data-reveal-group>{preserve_html}</div><div class="home-inline-cta" data-reveal><p><strong>Working through a specific situation?</strong> The resource library covers crashes, adjuster calls, workplace records, commercial-vehicle evidence, and deadline questions.</p><a class="button button-secondary" href="/resources/">Open the resource library</a></div></div></section>
-<section class="section home-advocate"><div class="section-inner home-advocate-grid"><div class="home-portrait" data-reveal><img src="/images/tam-berhe.jpg" alt="Tam Berhe, California attorney" width="200" height="200" decoding="async" loading="lazy"></div><div data-reveal><span class="eyebrow">Your first step is attorney-led</span><h2>A serious matter deserves more than a generic intake script.</h2><p class="section-intro">Tam Berhe reviews selected California civil matters for conflicts, urgency, legal fit, available proof, and the next practical move. The goal of the first review is clarity: what matters now, what should be preserved, and whether the firm may be able to help.</p><div class="actions"><a class="button button-primary" href="{PHONE_HREF}">Call {PHONE_DISPLAY}</a><a class="button button-secondary" href="/attorney-tam-berhe/">Attorney profile</a></div></div></div></section>
-<section class="section home-faq"><div class="section-inner">{faq_block(faqs, heading="Questions people ask at the beginning.", eyebrow="Before you call", intro="You do not need to know the legal name of your claim. Start with what happened and what changed because of it.")}</div></section>
-<section class="section deep"><div class="section-inner intake-wrap"><div data-reveal><span class="eyebrow">Prefer to start online?</span><h2>Send a short summary for a free case review.</h2><p class="section-intro">Name the parties, key dates, what happened, the harm, and any deadline you know about. Do not send privileged or highly sensitive records through this public form. If time may matter, call {PHONE_DISPLAY} instead.</p><a class="home-form-call" href="{PHONE_HREF}">Call now: {PHONE_DISPLAY}</a></div>{intake_form("home-review", heading="Request a free case review", source_route="/")}</div></section>
+<section class="scene scene--record" data-scene="record">{atmosphere(ghost("MATTER"), ghost("RECORD"), ghost("PROOF"), scene_plane("ribbon"))}<div class="section-inner"><div class="home-section-heading" data-reveal><div><span class="eyebrow">Before the label, the facts</span><h2>The matter, the record, and the next move.</h2></div><p>A first review works in that order. What happened, what is still provable, and what can actually be done next.</p></div><div class="record-beats" data-reveal-group>{record_html}</div></div></section>
+<section class="scene scene--practice" data-scene="practice">{atmosphere(scene_plane("lines"))}<div class="section-inner"><div class="home-section-heading" data-reveal><div><span class="eyebrow">Start with the problem, not the label</span><h2>What happened to you, and what it is costing.</h2></div><p>People call because something already changed their health, their income, their record, or their family. Choose the situation closest to yours. If none of them fit, call and describe it in your own words.</p></div><div class="practice-layout"><ol class="practice-index" data-reveal-group>{practice_cards}</ol><div class="scene-pin practice-stage" data-practice-stage aria-hidden="true"><span class="practice-stage-object"></span><span class="practice-stage-readout">{practice_stage}</span></div></div><div class="home-inline-cta" data-reveal><p><strong>Not sure which one fits?</strong> That is normal, and it is not your job to know. Describe what happened and the category gets sorted out during the review.</p><a class="button button-primary" href="{PHONE_HREF}">Call {PHONE_DISPLAY}</a></div></div></section>
+<section class="scene scene--evidence" data-scene="evidence">{atmosphere(ghost("EVIDENCE"), scene_plane("ribbon"))}<div class="section-inner evidence-grid"><div data-reveal><span class="eyebrow">Why timing matters</span><h2>The facts may stay the same while proof becomes harder to recover.</h2><p class="section-intro">Waiting can make a matter harder to evaluate because records, video, devices, scenes, and memories can change or disappear.</p><a class="button button-call button-call-wide" href="{PHONE_HREF}"><span>Talk to the firm</span><strong>{PHONE_DISPLAY}</strong></a></div><div class="evidence-run"><span class="evidence-thread" aria-hidden="true"></span><ol class="evidence-list" data-reveal-group>{evidence_html}</ol></div></div></section>
+<section class="scene scene--process" data-scene="process" data-timeline>{atmosphere(scene_plane("lines"))}{case_timeline(pin=process_pin)}</section>
+<section class="scene scene--paper scene--resources" data-scene="resources"><div class="section-inner"><div class="home-section-heading" data-reveal><div><span class="eyebrow">Useful first steps</span><h2>Four ways to build a record while details are still available.</h2></div><p>These general documentation steps may help preserve a usable record. Each one links to a guide that goes deeper.</p></div><div class="preserve-grid" data-reveal-group>{preserve_html}</div><div class="home-inline-cta" data-reveal><p><strong>Working through a specific situation?</strong> The resource library covers crashes, adjuster calls, workplace records, commercial-vehicle evidence, and deadline questions.</p><a class="button button-secondary" href="/resources/">Open the resource library</a></div></div><div class="section-inner home-advocate-grid"><div class="home-portrait" data-reveal><img src="/images/tam-berhe.jpg" alt="Tam Berhe, California attorney" width="200" height="200" decoding="async" loading="lazy"></div><div data-reveal><span class="eyebrow">Your first step is attorney-led</span><h2>A serious matter deserves more than a generic intake script.</h2><p class="section-intro">Tam Berhe reviews selected California civil matters for conflicts, urgency, legal fit, available proof, and the next practical move. The goal of the first review is clarity: what matters now, what should be preserved, and whether the firm may be able to help.</p><div class="actions"><a class="button button-primary" href="{PHONE_HREF}">Call {PHONE_DISPLAY}</a><a class="button button-secondary" href="/attorney-tam-berhe/">Attorney profile</a></div></div></div><div class="section-inner">{faq_block(faqs, heading="Questions people ask at the beginning.", eyebrow="Before you call", intro="You do not need to know the legal name of your claim. Start with what happened and what changed because of it.")}</div></section>
+<section class="scene scene--intake" data-scene="intake">{atmosphere(scene_plane("ribbon"))}<div class="section-inner intake-wrap"><div data-reveal><span class="eyebrow">Prefer to start online?</span><h2>Send a short summary for a free case review.</h2><p class="section-intro">Name the parties, key dates, what happened, the harm, and any deadline you know about. Do not send privileged or highly sensitive records through this public form. If time may matter, call {PHONE_DISPLAY} instead.</p><a class="home-form-call" href="{PHONE_HREF}">Call now: {PHONE_DISPLAY}</a></div><div class="intake-frame"><span class="intake-frame-edge" data-plane="frame" aria-hidden="true"></span>{intake_form("home-review", heading="Request a free case review", source_route="/")}</div></div></section>
 </main>'''
     return document("/", f"California Injury and Civil Rights Lawyer | {FIRM_NAME}", f"Injured, mistreated at work, denied insurance, or harmed by misconduct? Call {FIRM_NAME} at 909-609-6685 for a free California case review.", body)
 
