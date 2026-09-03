@@ -680,6 +680,11 @@ def infrastructure():
 /images/*
   Cache-Control: public, max-age=604800
 
+/downloads/colton-cjusd-claimant-facts-questionnaire.docx
+  X-Robots-Tag: noindex, nofollow, noarchive
+  Cache-Control: private, no-store, max-age=0
+  Content-Disposition: attachment; filename="Colton-CJUSD-Claimant-Facts-Questionnaire.docx"
+
 /success.html
   X-Robots-Tag: noindex, nofollow
   Cache-Control: no-store

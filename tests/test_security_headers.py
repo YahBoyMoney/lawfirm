@@ -1,3 +1,4 @@
+import hashlib
 from pathlib import Path
 from bs4 import BeautifulSoup
 
@@ -81,3 +82,22 @@ def test_success_page_is_header_hardened_against_indexing():
 
     html = (ROOT / "success.html").read_text(encoding="utf-8").lower()
     assert '<meta name="robots" content="noindex, nofollow"' in html
+
+
+def test_colton_questionnaire_download_is_unindexed_unlinked_and_forced_download():
+    path = "/downloads/colton-cjusd-claimant-facts-questionnaire.docx"
+    download_headers = parsed_headers_for_path(path)
+    questionnaire = ROOT / path.lstrip("/")
+
+    assert download_headers.get("X-Robots-Tag") == "noindex, nofollow, noarchive"
+    assert download_headers.get("Cache-Control") == "private, no-store, max-age=0"
+    assert download_headers.get("Content-Disposition") == (
+        'attachment; filename="Colton-CJUSD-Claimant-Facts-Questionnaire.docx"'
+    )
+    assert questionnaire.is_file()
+    assert hashlib.sha256(questionnaire.read_bytes()).hexdigest() == (
+        "a380f88f5861b99d488391f4997db4536a129714055a722c317dcd20887b19bb"
+    )
+    assert path not in (ROOT / "sitemap.xml").read_text(encoding="utf-8")
+    for html_path in ROOT.rglob("*.html"):
+        assert path not in html_path.read_text(encoding="utf-8")
