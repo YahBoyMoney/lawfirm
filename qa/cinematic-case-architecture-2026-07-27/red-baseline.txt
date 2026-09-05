@@ -1,0 +1,40 @@
+        art = home.select_one(".home-hero-art picture")
+        assert art is not None
+        # The homepage world plane is the approved Case Architecture derivative, offered as a
+        # mobile crop and a landscape frame in AVIF then WebP. Formats and widths are asserted
+        # in tests/test_cinematic_case_architecture.py.
+        webp = art.select('source[type="image/webp"]')
+        assert len(webp) == 2
+        assert webp[0]["media"] == "(max-width:600px)"
+>       assert "case-architecture-mobile" in webp[0]["srcset"]
+E       AssertionError: assert 'case-architecture-mobile' in '/images/case-intelligence-hero-mobile.webp'
+
+tests/test_motion_seo_contract.py:190: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_cinematic_case_architecture.py::test_hero_poster_uses_responsive_sources_and_a_mobile_crop
+FAILED tests/test_cinematic_case_architecture.py::test_object_depth_plane_is_css_gated_and_not_loaded_on_small_screens
+FAILED tests/test_cinematic_case_architecture.py::test_homepage_renders_every_directed_scene_in_order
+FAILED tests/test_cinematic_case_architecture.py::test_decorative_scene_layers_are_hidden_from_assistive_technology
+FAILED tests/test_cinematic_case_architecture.py::test_ghost_typography_is_decorative_only
+FAILED tests/test_cinematic_case_architecture.py::test_practice_progression_lists_all_seven_categories_in_document_flow
+FAILED tests/test_cinematic_case_architecture.py::test_evidence_scene_keeps_the_timing_statements_as_markers
+FAILED tests/test_cinematic_case_architecture.py::test_process_scene_preserves_all_five_case_review_stages
+FAILED tests/test_cinematic_case_architecture.py::test_resource_zone_is_the_calm_light_editorial_rest
+FAILED tests/test_cinematic_case_architecture.py::test_intake_scene_resolves_the_dark_world_around_the_real_form
+FAILED tests/test_cinematic_case_architecture.py::test_enhanced_desktop_mode_checks_every_required_capability
+FAILED tests/test_cinematic_case_architecture.py::test_scene_progress_uses_one_scheduler_and_restrained_custom_properties
+FAILED tests/test_cinematic_case_architecture.py::test_sticky_scenes_are_css_only_and_scoped_to_the_cinema_class
+FAILED tests/test_cinematic_case_architecture.py::test_reduced_motion_disables_the_cinematic_layer
+FAILED tests/test_cinematic_browser.py::test_enhanced_desktop_mode_only_engages_on_capable_desktop[chromium]
+FAILED tests/test_cinematic_browser.py::test_every_scene_is_readable_without_javascript[chromium]
+FAILED tests/test_cinematic_browser.py::test_hero_selects_the_mobile_crop_on_phones_and_the_world_plane_on_desktop[chromium]
+FAILED tests/test_cinematic_browser.py::test_scene_progress_properties_advance_with_native_scrolling[chromium]
+FAILED tests/test_cinematic_browser.py::test_practice_stage_tracks_scroll_and_keyboard_focus[chromium]
+FAILED tests/test_cinematic_browser.py::test_sticky_scenes_release_and_never_cover_the_footer[chromium]
+FAILED tests/test_cinematic_browser.py::test_enhanced_desktop_mode_only_engages_on_capable_desktop[webkit]
+FAILED tests/test_cinematic_browser.py::test_every_scene_is_readable_without_javascript[webkit]
+FAILED tests/test_cinematic_browser.py::test_hero_selects_the_mobile_crop_on_phones_and_the_world_plane_on_desktop[webkit]
+FAILED tests/test_cinematic_browser.py::test_scene_progress_properties_advance_with_native_scrolling[webkit]
+FAILED tests/test_cinematic_browser.py::test_practice_stage_tracks_scroll_and_keyboard_focus[webkit]
+FAILED tests/test_motion_seo_contract.py::test_all_pages_use_case_artwork_and_no_synthetic_team_photography
+26 failed, 53 passed in 91.65s (0:01:31)

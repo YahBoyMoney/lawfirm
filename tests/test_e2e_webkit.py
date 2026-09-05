@@ -404,8 +404,11 @@ def test_scroll_progress_is_decorative_and_tracks_the_document(webkit_browser):
     assert bar.evaluate("element => element.getAttribute('role')") is None
     read = "() => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--scroll-progress'))"
     assert page.evaluate(read) < 0.05
-    page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-    page.wait_for_timeout(200)
+    page.evaluate("document.documentElement.style.scrollBehavior = 'auto'; window.scrollTo(0, document.documentElement.scrollHeight)")
+    page.wait_for_function(
+        "() => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--scroll-progress')) > 0.9",
+        timeout=2000,
+    )
     assert page.evaluate(read) > 0.9
     assert page.evaluate("() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1")
     context.close()
@@ -498,4 +501,28 @@ def test_motion_remains_active_while_mobile_visitor_reads_the_hero(webkit_browse
     page.locator("[data-reveal]").first.scroll_into_view_if_needed()
     page.wait_for_timeout(400)
     assert page.locator("[data-reveal]").first.get_attribute("data-revealed") == "true"
+    context.close()
+
+
+def test_no_javascript_intake_does_not_cover_form_controls(webkit_browser):
+    context = webkit_browser.new_context(
+        viewport={"width": 390, "height": 844},
+        java_script_enabled=False,
+    )
+    install_routes(context)
+    page = context.new_page()
+    page.goto(f"{ORIGIN}/free-case-review/")
+    assert page.locator("body.has-intake-form").count() == 1
+    assert not page.locator(".mobile-actions").is_visible()
+    assert page.locator(".site-header").evaluate("el => getComputedStyle(el).position") == "relative"
+    controls = page.locator(
+        'form[data-intake-form] input:not([type="hidden"]):not([aria-hidden="true"]), '
+        'form[data-intake-form] select, form[data-intake-form] textarea, '
+        'form[data-intake-form] button'
+    )
+    for index in range(controls.count()):
+        control = controls.nth(index)
+        control.scroll_into_view_if_needed()
+        box = control.bounding_box()
+        assert box and box["y"] >= 0 and box["y"] + box["height"] <= 844, (index, box)
     context.close()

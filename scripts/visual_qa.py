@@ -8,7 +8,8 @@ from urllib.parse import urlparse
 from playwright.sync_api import Error as PlaywrightError, sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-QA = ROOT / "qa" / "opus5-motion-seo"
+# Output directory is task-scoped so a new QA pass never overwrites an earlier record.
+QA = ROOT / os.environ.get("VISUAL_QA_DIR", "qa/opus5-motion-seo")
 ORIGIN = "http://berhelaw.test"
 VIEWPORTS = (
     (320, 720, "small-mobile"),
@@ -31,6 +32,17 @@ def main():
     report = {"routes": [], "assertions": [], "screenshots": [], "browser": None}
     def record_assertion(name, passed, details):
         report["assertions"].append({"name": name, "passed": bool(passed), "details": details})
+    def await_mobile_clearance(page):
+        """Wait for WebKit to expose the fetched mobile media rule in computed styles."""
+        try:
+            page.wait_for_function(
+                "parseFloat(getComputedStyle(document.body).paddingBottom) > 0",
+                timeout=3000,
+            )
+        except PlaywrightError:
+            # Preserve the actual zero value for the assertion below; do not convert a
+            # missing/broken rule into a pass.
+            pass
     def serve(route):
         parsed = urlparse(route.request.url)
         if parsed.hostname == "fonts.googleapis.com":
@@ -49,7 +61,7 @@ def main():
             route.fulfill(status=404, body="Not found", content_type="text/plain")
             return
         content_type = mimetypes.guess_type(path.name)[0] or "application/octet-stream"
-        route.fulfill(status=200, body=path.read_bytes(), content_type=content_type)
+        route.fulfill(status=200, path=path, content_type=content_type)
 
     def context_for(browser, width, height, reduced=True):
         context = browser.new_context(viewport={"width": width, "height": height}, reduced_motion="reduce" if reduced else "no-preference")
@@ -87,6 +99,12 @@ def main():
                     })
                     page.close()
                 context.close()
+
+            # The route matrix deliberately stress-tests 135 page/viewport combinations.
+            # Release that engine process before interaction and screenshot checks so WebKit
+            # resource pressure cannot delay a cached stylesheet in the next phase.
+            browser.close()
+            browser = engine.launch(**launch_options)
 
             context = context_for(browser, 1440, 1000)
             page = context.new_page()
@@ -134,7 +152,10 @@ def main():
                 home_sticky,
             )
             page.goto(f"{ORIGIN}/free-case-review/", wait_until="domcontentloaded", timeout=10000)
-            first_control = page.locator('form[data-intake-form] input:not([type="hidden"])').first
+            await_mobile_clearance(page)
+            first_control = page.locator(
+                'form[data-intake-form] input:not([type="hidden"]):not([aria-hidden="true"]):not([tabindex="-1"])'
+            ).first
             first_control.scroll_into_view_if_needed()
             first_control.focus()
             page.wait_for_timeout(50)
@@ -156,6 +177,7 @@ def main():
             )
             for route in ("/privacy.html", "/landing/garden-grove-chemical-leak/"):
                 page.goto(f"{ORIGIN}{route}", wait_until="domcontentloaded", timeout=10000)
+                await_mobile_clearance(page)
                 clearance = page.evaluate("""() => {
                     const sticky = document.querySelector('.mobile-actions');
                     return {
@@ -254,25 +276,38 @@ def main():
             context.close()
 
             captures = [
-                ("/", 320, 720, None, "home-hero-320.png"),
-                ("/", 390, 844, None, "home-hero-390.png"),
-                ("/", 768, 1024, None, "home-hero-768.png"),
-                ("/", 1440, 1000, None, "home-hero-1440.png"),
-                ("/", 2560, 1440, None, "home-hero-2560.png"),
-                ("/", 1440, 1000, "[data-timeline]", "home-case-timeline-1440.png"),
-                ("/", 390, 844, "[data-timeline]", "home-case-timeline-390.png"),
-                ("/", 1440, 1000, ".home-preserve", "home-preserve-1440.png"),
-                ("/practice-areas/personal-injury-wrongful-death/", 1440, 1000, ".stakes-list", "practice-stakes-1440.png"),
-                ("/practice-areas/", 1440, 1000, None, "practice-hub-desktop.png"),
-                ("/resources/", 1440, 1000, ".editorial-list", "resource-hub-1440.png"),
-                ("/resources/after-a-collision-first-steps/", 1440, 1000, ".guide-layout", "resource-guide-1440.png"),
-                ("/resources/insurance-claim-communication/", 390, 844, ".guide-body", "resource-guide-390.png"),
-                ("/free-case-review/", 390, 844, "#general-review", "case-review-form-mobile.png"),
-                ("/landing/garden-grove-chemical-leak/", 390, 844, "#updates-status", "garden-grove-updates-mobile.png"),
-                ("/privacy.html", 390, 844, "main", "privacy-mobile.png"),
+                # Responsive sweep of the cinematic homepage.
+                ("/", 320, 844, None, "home-hero-320.png", False),
+                ("/", 390, 844, None, "home-hero-390.png", False),
+                ("/", 768, 1024, None, "home-hero-768.png", False),
+                ("/", 1440, 1000, None, "home-hero-1440.png", False),
+                ("/", 2560, 1440, None, "home-hero-2560.png", False),
+                # Every directed scene, focused.
+                ("/", 1440, 1000, '[data-scene="record"]', "scene-record-1440.png", False),
+                ("/", 1440, 1000, '[data-scene="practice"]', "scene-practice-1440.png", False),
+                ("/", 390, 844, '[data-scene="practice"]', "scene-practice-390.png", False),
+                ("/", 1440, 1000, '[data-scene="evidence"]', "scene-evidence-1440.png", False),
+                ("/", 390, 844, '[data-scene="evidence"]', "scene-evidence-390.png", False),
+                ("/", 1440, 1000, "[data-timeline]", "scene-process-1440.png", False),
+                ("/", 390, 844, "[data-timeline]", "scene-process-390.png", False),
+                ("/", 1440, 1000, '[data-scene="resources"]', "scene-resources-1440.png", False),
+                ("/", 1440, 1000, '[data-scene="intake"]', "scene-intake-1440.png", False),
+                ("/", 390, 844, '[data-scene="intake"]', "scene-intake-390.png", False),
+                # Fail-open states.
+                ("/", 1440, 1000, '[data-scene="practice"]', "reduced-motion-practice-1440.png", True),
+                ("/", 390, 844, None, "reduced-motion-hero-390.png", True),
+                # Preserved interior routes.
+                ("/practice-areas/personal-injury-wrongful-death/", 1440, 1000, ".stakes-list", "practice-stakes-1440.png", False),
+                ("/practice-areas/", 1440, 1000, None, "practice-hub-desktop.png", False),
+                ("/resources/", 1440, 1000, ".editorial-list", "resource-hub-1440.png", False),
+                ("/resources/after-a-collision-first-steps/", 1440, 1000, ".guide-layout", "resource-guide-1440.png", False),
+                ("/resources/insurance-claim-communication/", 390, 844, ".guide-body", "resource-guide-390.png", False),
+                ("/free-case-review/", 390, 844, "#general-review", "case-review-form-mobile.png", False),
+                ("/landing/garden-grove-chemical-leak/", 390, 844, "#updates-status", "garden-grove-updates-mobile.png", False),
+                ("/privacy.html", 390, 844, "main", "privacy-mobile.png", False),
             ]
-            for route, width, height, selector, filename in captures:
-                context = context_for(browser, width, height, reduced=False)
+            for route, width, height, selector, filename, reduced in captures:
+                context = context_for(browser, width, height, reduced=reduced)
                 page = context.new_page()
                 page.goto(f"{ORIGIN}{route}", wait_until="domcontentloaded", timeout=10000)
                 page.wait_for_timeout(1200)
@@ -284,6 +319,58 @@ def main():
                 if selector:
                     page.locator(selector).scroll_into_view_if_needed()
                     page.wait_for_timeout(900)
+                target = QA / filename
+                page.screenshot(path=str(target), full_page=False)
+                report["screenshots"].append(str(target.relative_to(ROOT)))
+                page.close()
+                context.close()
+
+            # No-JavaScript run: the page must be complete without the motion layer.
+            for route, width, height, filename in (
+                ("/", 1440, 1000, "no-js-home-1440.png"),
+                ("/", 390, 844, "no-js-home-390.png"),
+                ("/", 1440, 1000, "no-js-practice-1440.png"),
+                ("/free-case-review/", 390, 844, "no-js-intake-390.png"),
+            ):
+                context = browser.new_context(
+                    viewport={"width": width, "height": height},
+                    reduced_motion="no-preference",
+                    java_script_enabled=False,
+                )
+                context.route("**/*", serve)
+                page = context.new_page()
+                page.goto(f"{ORIGIN}{route}", wait_until="load", timeout=10000)
+                page.wait_for_timeout(400)
+                if "practice" in filename:
+                    page.locator('[data-scene="practice"]').scroll_into_view_if_needed()
+                    page.wait_for_timeout(300)
+                if "intake" in filename:
+                    page.locator('.intake-form .notice').scroll_into_view_if_needed()
+                    page.wait_for_timeout(300)
+                no_js = page.evaluate("""() => ({
+                    cinema: document.documentElement.classList.contains('cinema'),
+                    motion: document.documentElement.classList.contains('motion'),
+                    hiddenScenes: [...document.querySelectorAll('[data-scene]')]
+                        .filter(s => parseFloat(getComputedStyle(s).opacity) < 1).length,
+                    hiddenReveals: [...document.querySelectorAll('[data-reveal]')]
+                        .filter(s => parseFloat(getComputedStyle(s).opacity) < 1).length,
+                    intakeClass: document.body.classList.contains('has-intake-form'),
+                    mobileActionsVisible: document.querySelector('.mobile-actions')
+                        ? getComputedStyle(document.querySelector('.mobile-actions')).display !== 'none'
+                        : false,
+                })""")
+                record_assertion(
+                    f"no-JavaScript {route} at {width}px renders the finished page",
+                    not no_js["cinema"] and not no_js["motion"]
+                    and no_js["hiddenScenes"] == 0 and no_js["hiddenReveals"] == 0,
+                    no_js,
+                )
+                if "intake" in filename:
+                    record_assertion(
+                        "no-JavaScript intake hides the redundant fixed mobile action bar",
+                        no_js["intakeClass"] and not no_js["mobileActionsVisible"],
+                        no_js,
+                    )
                 target = QA / filename
                 page.screenshot(path=str(target), full_page=False)
                 report["screenshots"].append(str(target.relative_to(ROOT)))

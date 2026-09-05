@@ -181,17 +181,20 @@ def test_all_pages_use_case_artwork_and_no_synthetic_team_photography():
     home = soup(ROOT / "index.html")
     art = home.select_one(".home-hero-art picture")
     assert art is not None
-    sources = art.select('source[type="image/webp"]')
-    assert len(sources) == 2
-    assert sources[0]["srcset"] == "/images/case-intelligence-hero-mobile.webp"
-    assert sources[0]["media"] == "(max-width:600px)"
-    assert sources[1]["srcset"] == "/images/case-intelligence-hero.webp"
+    # The homepage world plane is the approved Case Architecture derivative, offered as a
+    # mobile crop and a landscape frame in AVIF then WebP. Formats and widths are asserted
+    # in tests/test_cinematic_case_architecture.py.
+    webp = art.select('source[type="image/webp"]')
+    assert len(webp) == 2
+    assert webp[0]["media"] == "(max-width:600px)"
+    assert "case-architecture-mobile" in webp[0]["srcset"]
+    assert not webp[1].get("media") and "case-architecture-world" in webp[1]["srcset"]
     image = art.select_one("img")
-    assert image["src"] == "/images/case-intelligence-hero.jpg"
+    assert image["src"].startswith("/images/case-architecture-world-")
     assert image["fetchpriority"] == "high" and image["decoding"] == "async"
     assert home.select_one(".home-hero-art")["aria-hidden"] == "true"
-    portraits = {img["src"] for img in home.select("img")} - {"/images/case-intelligence-hero.jpg"}
-    assert portraits <= {"/images/tam-berhe.jpg", "/images/the-berhe-law-firm-apc-logo-white.png"}
+    portraits = {img["src"] for img in home.select("img")} - {image["src"]}
+    assert portraits <= {"/images/tam-berhe.jpg", "/images/the-berhe-law-firm-apc-logo-white-320.webp"}
 
 
 def test_case_evaluation_timeline_is_present_and_complete_without_javascript():
@@ -438,9 +441,16 @@ def test_every_image_declares_its_real_dimensions_and_has_a_webp_source():
         webp = picture.select_one('source[type="image/webp"]:not([media])')
         fallback = picture.select_one("img")
         assert webp and fallback
-        with Image.open(ROOT / webp["srcset"].lstrip("/")) as modern:
-            with Image.open(ROOT / fallback["src"].lstrip("/")) as legacy:
-                assert modern.size == legacy.size
+        # srcset may offer several widths; every candidate must resolve and, where a width
+        # descriptor is declared, match the real file.
+        candidates = [entry.split() for entry in webp["srcset"].split(",") if entry.strip()]
+        assert candidates
+        for candidate in candidates:
+            with Image.open(ROOT / candidate[0].lstrip("/")) as modern:
+                if len(candidate) > 1 and candidate[1].endswith("w"):
+                    assert modern.width == int(candidate[1][:-1]), candidate
+        with Image.open(ROOT / fallback["src"].lstrip("/")) as legacy:
+            assert (int(fallback["width"]), int(fallback["height"])) == legacy.size
 
 
 def test_build_module_stays_deterministic_and_content_hashed():

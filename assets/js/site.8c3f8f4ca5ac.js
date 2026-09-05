@@ -137,6 +137,13 @@
   const root = document.documentElement;
   const OBSERVER_FALLBACK_MS = 1600;
 
+  // Scene progress variables. Every rule that reads one falls back to its finished value,
+  // so these must be cleared on fail-open or a half-drawn scene would be frozen in place.
+  const SCENE_PROPERTIES = [
+    '--scroll-progress', '--hero-progress', '--practice-progress',
+    '--process-progress', '--evidence-progress',
+  ];
+
   const revealEverything = () => {
     document.querySelectorAll('[data-reveal]').forEach((element) => {
       element.dataset.revealed = 'true';
@@ -147,10 +154,18 @@
     document.querySelectorAll('[data-timeline]').forEach((section) => {
       section.style.setProperty('--timeline-progress', '1');
     });
+    document.querySelectorAll('[data-practice]').forEach((item) => {
+      delete item.dataset.active;
+    });
+    document.querySelectorAll('[data-stage-for]').forEach((item) => {
+      delete item.dataset.current;
+    });
+    SCENE_PROPERTIES.forEach((name) => root.style.removeProperty(name));
   };
 
   const failOpen = () => {
     root.classList.remove('motion');
+    root.classList.remove('cinema');
     revealEverything();
   };
 
@@ -159,14 +174,46 @@
     const capable = 'IntersectionObserver' in window && typeof window.requestAnimationFrame === 'function';
     if (!capable) return;
 
+    // Enhanced desktop mode. Pinned scenes and object transforms need room, a fine pointer,
+    // and hover; a narrow or coarse-pointer visitor keeps the plain document.
+    const desktop = window.matchMedia('(min-width: 960px) and (hover: hover) and (pointer: fine)');
+
     const reveals = [...document.querySelectorAll('[data-reveal]')];
     const heroes = [...document.querySelectorAll('[data-hero]')];
     const timelines = [...document.querySelectorAll('[data-timeline]')];
+    const practiceItems = [...document.querySelectorAll('[data-practice]')];
+    const stageItems = [...document.querySelectorAll('[data-stage-for]')];
+    const scene = (name) => document.querySelector(`[data-scene="${name}"]`);
+    const practiceScene = scene('practice');
+    const processScene = scene('process');
+    const evidenceRun = document.querySelector('.evidence-run');
     let running = false;
+    let cinematic = false;
     let ticking = false;
     let observer = null;
+    let activePractice = null;
+    let pending = [];
 
     const clamp = (value) => Math.min(1, Math.max(0, value));
+
+    // One shared ramp: 0 before the element reaches the anchor, 1 once it has passed.
+    const sceneProgress = (name, element, anchorRatio) => {
+      if (!element) return;
+      const rect = element.getBoundingClientRect();
+      const travelled = window.innerHeight * anchorRatio - rect.top;
+      root.style.setProperty(name, clamp(travelled / Math.max(1, rect.height)).toFixed(4));
+    };
+
+    const setActivePractice = (slug) => {
+      if (slug === activePractice) return;
+      activePractice = slug;
+      practiceItems.forEach((item) => {
+        item.dataset.active = String(item.dataset.practice === slug);
+      });
+      stageItems.forEach((item) => {
+        item.dataset.current = String(item.dataset.stageFor === slug);
+      });
+    };
 
     const update = () => {
       ticking = false;
@@ -179,6 +226,36 @@
         const shift = rect.bottom > 0 ? Math.min(52, Math.max(0, -rect.top) * 0.11) : 52;
         hero.style.setProperty('--hero-parallax', `${shift.toFixed(2)}px`);
       });
+      sceneProgress('--hero-progress', heroes[0], 0);
+      sceneProgress('--practice-progress', practiceScene, 0.72);
+      sceneProgress('--process-progress', processScene, 0.72);
+      sceneProgress('--evidence-progress', evidenceRun, 0.78);
+      // Safety net for jump scrolling. An anchor jump or an instant scroll can carry an
+      // element past the viewport without the observer ever seeing it intersect, which would
+      // strand it at opacity 0. Anything at or above the fold is revealed here regardless.
+      if (pending.length) {
+        pending = pending.filter((element) => {
+          if (element.dataset.revealed === 'true') return false;
+          if (element.getBoundingClientRect().top >= window.innerHeight) return true;
+          element.dataset.revealed = 'true';
+          if (observer) observer.unobserve(element);
+          return false;
+        });
+      }
+      if (cinematic && practiceItems.length) {
+        // Keyboard focus owns the stage while it is inside the practice index. Focusing a
+        // lower link can scroll the page, so a scroll-derived update must not immediately
+        // overwrite the focus-derived selection.
+        const focused = document.activeElement?.closest?.('[data-practice]');
+        const anchor = window.innerHeight * 0.55;
+        let current = focused || practiceItems[0];
+        if (!focused) {
+          practiceItems.forEach((item) => {
+            if (item.getBoundingClientRect().top <= anchor) current = item;
+          });
+        }
+        setActivePractice(current.dataset.practice);
+      }
       timelines.forEach((section) => {
         const track = section.querySelector('.case-track');
         if (!track) return;
@@ -195,6 +272,29 @@
       if (ticking || !running) return;
       ticking = true;
       window.requestAnimationFrame(update);
+    };
+
+    // Keyboard and focus reach the same stage the scroll position drives, so the pinned
+    // practice scene is never mouse-only.
+    const onFocusIn = (event) => {
+      if (!cinematic) return;
+      const item = event.target.closest('[data-practice]');
+      if (item) setActivePractice(item.dataset.practice);
+    };
+
+    const applyCinema = () => {
+      const wanted = running && desktop.matches;
+      if (wanted === cinematic) return;
+      cinematic = wanted;
+      if (wanted) {
+        root.classList.add('cinema');
+      } else {
+        root.classList.remove('cinema');
+        activePractice = null;
+        practiceItems.forEach((item) => delete item.dataset.active);
+        stageItems.forEach((item) => delete item.dataset.current);
+      }
+      update();
     };
 
     const start = () => {
@@ -215,9 +315,13 @@
         });
       }, {rootMargin: '0px 0px -6% 0px', threshold: 0.04});
       reveals.forEach((element) => observer.observe(element));
+      pending = reveals.filter((element) => element.dataset.revealed !== 'true');
       window.addEventListener('scroll', onScroll, {passive: true});
       window.addEventListener('resize', onScroll, {passive: true});
       window.addEventListener('orientationchange', onScroll, {passive: true});
+      window.addEventListener('resize', applyCinema, {passive: true});
+      document.addEventListener('focusin', onFocusIn);
+      applyCinema();
       update();
       if (reveals.length) {
         window.setTimeout(() => {
@@ -234,10 +338,13 @@
 
     const stop = () => {
       running = false;
+      cinematic = false;
       if (observer) observer.disconnect();
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
       window.removeEventListener('orientationchange', onScroll);
+      window.removeEventListener('resize', applyCinema);
+      document.removeEventListener('focusin', onFocusIn);
       failOpen();
     };
 
@@ -248,6 +355,7 @@
 
     if (typeof reduceMotion.addEventListener === 'function') reduceMotion.addEventListener('change', applyPreference);
     else if (typeof reduceMotion.addListener === 'function') reduceMotion.addListener(applyPreference);
+    if (typeof desktop.addEventListener === 'function') desktop.addEventListener('change', applyCinema);
     applyPreference();
   } catch (error) {
     failOpen();
