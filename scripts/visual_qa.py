@@ -330,6 +330,7 @@ def main():
                 ("/", 1440, 1000, "no-js-home-1440.png"),
                 ("/", 390, 844, "no-js-home-390.png"),
                 ("/", 1440, 1000, "no-js-practice-1440.png"),
+                ("/free-case-review/", 390, 844, "no-js-intake-390.png"),
             ):
                 context = browser.new_context(
                     viewport={"width": width, "height": height},
@@ -343,6 +344,9 @@ def main():
                 if "practice" in filename:
                     page.locator('[data-scene="practice"]').scroll_into_view_if_needed()
                     page.wait_for_timeout(300)
+                if "intake" in filename:
+                    page.locator('.intake-form .notice').scroll_into_view_if_needed()
+                    page.wait_for_timeout(300)
                 no_js = page.evaluate("""() => ({
                     cinema: document.documentElement.classList.contains('cinema'),
                     motion: document.documentElement.classList.contains('motion'),
@@ -350,6 +354,10 @@ def main():
                         .filter(s => parseFloat(getComputedStyle(s).opacity) < 1).length,
                     hiddenReveals: [...document.querySelectorAll('[data-reveal]')]
                         .filter(s => parseFloat(getComputedStyle(s).opacity) < 1).length,
+                    intakeClass: document.body.classList.contains('has-intake-form'),
+                    mobileActionsVisible: document.querySelector('.mobile-actions')
+                        ? getComputedStyle(document.querySelector('.mobile-actions')).display !== 'none'
+                        : false,
                 })""")
                 record_assertion(
                     f"no-JavaScript {route} at {width}px renders the finished page",
@@ -357,6 +365,12 @@ def main():
                     and no_js["hiddenScenes"] == 0 and no_js["hiddenReveals"] == 0,
                     no_js,
                 )
+                if "intake" in filename:
+                    record_assertion(
+                        "no-JavaScript intake hides the redundant fixed mobile action bar",
+                        no_js["intakeClass"] and not no_js["mobileActionsVisible"],
+                        no_js,
+                    )
                 target = QA / filename
                 page.screenshot(path=str(target), full_page=False)
                 report["screenshots"].append(str(target.relative_to(ROOT)))

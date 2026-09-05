@@ -1,7 +1,7 @@
 {
   "tested_url": "http://127.0.0.1:4173/",
   "lighthouse_version": "13.4.1",
-  "fetch_time_utc": "2026-07-28T07:43:36.680Z",
+  "fetch_time_utc": "2026-07-28T08:17:58.426Z",
   "scores": {
     "performance": 97,
     "accessibility": 100,
@@ -9,11 +9,11 @@
     "seo": 100
   },
   "metrics": {
-    "first_contentful_paint": "1.1 s",
+    "first_contentful_paint": "1.2 s",
     "largest_contentful_paint": "2.6 s",
     "cumulative_layout_shift": 0,
-    "total_blocking_time": "20 ms",
-    "speed_index": "1.1 s"
+    "total_blocking_time": "0 ms",
+    "speed_index": "1.2 s"
   },
-  "source_report": "/tmp/berhelaw-cinematic-v2-lighthouse-exact-final.json"
+  "source_report": "/tmp/berhelaw-cinematic-v2-lighthouse-nojs-final.json"
 }

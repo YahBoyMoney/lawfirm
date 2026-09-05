@@ -4,23 +4,24 @@ Date: 2026-07-27/28 Pacific
 Branch: `feature/berhelaw-cinematic-motion-v2`
 Production base: `7a03117e66db53a59df47a3e531dfd82ff82fe4a`
 Implementation commit: `01c6a3ca7666aef75829db5b9c57782c87380d9`
+QA hardening commit: `495fddcdfbc421b03f5417a5c4335dcda7c4278b` plus the PR #7 no-JavaScript intake follow-up.
 
 ## Exact-build automated verification
 
 - Build determinism: `python3 scripts/build.py --check` passed, 34 generated files current.
-- Pytest: 134 passed.
-- Chromium visual QA: 135 route/viewport checks, 14 scripted assertions, 28 screenshots, zero failures.
-- WebKit visual QA: 135 route/viewport checks, 14 scripted assertions, 28 screenshots, zero failures.
+- Pytest: 136 passed.
+- Chromium visual QA: 135 route/viewport checks, 16 scripted assertions, 29 screenshots, zero failures.
+- WebKit visual QA: 135 route/viewport checks, 16 scripted assertions, 29 screenshots, zero failures.
 - Lighthouse 13.4.1 mobile, local exact build:
   - Performance: 97
   - Accessibility: 100
   - Best Practices: 100
   - SEO: 100
-  - FCP: 1.1 s
+  - FCP: 1.2 s
   - LCP: 2.6 s
   - CLS: 0
-  - TBT: 20 ms
-  - Speed Index: 1.1 s
+  - TBT: 0 ms
+  - Speed Index: 1.2 s
 - `git diff --check`: passed.
 
 ## Manual visual QA
@@ -33,11 +34,11 @@ Inspected full-resolution final captures in Chromium and WebKit for:
 - official The Berhe Law Firm, APC logo rendering;
 - primary call and case-review CTAs;
 - navigation open state;
-- no-JavaScript fallback;
+- no-JavaScript homepage and intake fallbacks;
 - reduced-motion fallback;
 - mobile intake notice, fields, and sticky action clearance.
 
-No clipping, blank panels, unreadable notices, hidden substantive content, sticky-bar collisions, or engine-specific release blockers remained.
+No clipping, blank panels, unreadable notices, hidden substantive content, sticky-bar collisions, covered no-JavaScript form controls, or engine-specific release blockers remained.
 
 ## Corrective QA findings resolved
 
@@ -49,6 +50,8 @@ No clipping, blank panels, unreadable notices, hidden substantive content, stick
 6. Decorative ghost words were too faint for Lighthouse, then too dominant when directly recolored; they now render as subtle CSS-only decoration with no meaningful hidden text.
 7. WebKit reduced-motion intermittently resolved a custom-property body clearance to zero; clearance is now a robust fixed 3.5rem at the mobile-first base layer with a desktop reset.
 8. The visual QA harness now uses file-backed fulfillment, a real user field instead of the honeypot, and isolates its route stress phase from interaction checks.
+9. A fixed mobile action bar and sticky expanded navigation could cover no-JavaScript intake controls. Intake pages are now marked at build time; their redundant no-JavaScript action bar is hidden and the no-JavaScript header scrolls normally.
+10. The WebKit scroll-progress test assumed smooth scrolling completed within 200 ms. It now disables smooth scrolling for that assertion and waits for the actual final state.
 
 ## Asset provenance
 

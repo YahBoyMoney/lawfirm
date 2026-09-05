@@ -1343,7 +1343,9 @@
         "cinema": false,
         "motion": false,
         "hiddenScenes": 0,
-        "hiddenReveals": 0
+        "hiddenReveals": 0,
+        "intakeClass": true,
+        "mobileActionsVisible": false
       }
     },
     {
@@ -1353,7 +1355,9 @@
         "cinema": false,
         "motion": false,
         "hiddenScenes": 0,
-        "hiddenReveals": 0
+        "hiddenReveals": 0,
+        "intakeClass": true,
+        "mobileActionsVisible": false
       }
     },
     {
@@ -1363,39 +1367,66 @@
         "cinema": false,
         "motion": false,
         "hiddenScenes": 0,
-        "hiddenReveals": 0
+        "hiddenReveals": 0,
+        "intakeClass": true,
+        "mobileActionsVisible": false
+      }
+    },
+    {
+      "name": "no-JavaScript /free-case-review/ at 390px renders the finished page",
+      "passed": true,
+      "details": {
+        "cinema": false,
+        "motion": false,
+        "hiddenScenes": 0,
+        "hiddenReveals": 0,
+        "intakeClass": true,
+        "mobileActionsVisible": false
+      }
+    },
+    {
+      "name": "no-JavaScript intake hides the redundant fixed mobile action bar",
+      "passed": true,
+      "details": {
+        "cinema": false,
+        "motion": false,
+        "hiddenScenes": 0,
+        "hiddenReveals": 0,
+        "intakeClass": true,
+        "mobileActionsVisible": false
       }
     }
   ],
   "screenshots": [
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/home-hero-320.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/home-hero-390.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/home-hero-768.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/home-hero-1440.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/home-hero-2560.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/scene-record-1440.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/scene-practice-1440.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/scene-practice-390.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/scene-evidence-1440.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/scene-evidence-390.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/scene-process-1440.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/scene-process-390.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/scene-resources-1440.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/scene-intake-1440.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/scene-intake-390.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/reduced-motion-practice-1440.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/reduced-motion-hero-390.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/practice-stakes-1440.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/practice-hub-desktop.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/resource-hub-1440.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/resource-guide-1440.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/resource-guide-390.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/case-review-form-mobile.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/garden-grove-updates-mobile.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/privacy-mobile.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/no-js-home-1440.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/no-js-home-390.png",
-    "qa/cinematic-case-architecture-final-2026-07-27/chromium/no-js-practice-1440.png"
+    "qa/cinematic-case-architecture-2026-07-27/chromium/home-hero-320.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/home-hero-390.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/home-hero-768.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/home-hero-1440.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/home-hero-2560.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/scene-record-1440.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/scene-practice-1440.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/scene-practice-390.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/scene-evidence-1440.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/scene-evidence-390.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/scene-process-1440.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/scene-process-390.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/scene-resources-1440.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/scene-intake-1440.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/scene-intake-390.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/reduced-motion-practice-1440.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/reduced-motion-hero-390.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/practice-stakes-1440.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/practice-hub-desktop.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/resource-hub-1440.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/resource-guide-1440.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/resource-guide-390.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/case-review-form-mobile.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/garden-grove-updates-mobile.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/privacy-mobile.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/no-js-home-1440.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/no-js-home-390.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/no-js-practice-1440.png",
+    "qa/cinematic-case-architecture-2026-07-27/chromium/no-js-intake-390.png"
   ],
   "browser": "/root/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome",
   "passed": true,

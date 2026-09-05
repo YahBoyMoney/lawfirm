@@ -190,6 +190,7 @@ def schema(route, title, description, body, kind="WebPage"):
 def document(route, title, description, body, *, robots="index, follow", kind="WebPage"):
     og_type = "article" if kind == "Article" else "website"
     article_meta = (f'<meta property="article:published_time" content="{RELEASE_DATE}"><meta property="article:modified_time" content="{RELEASE_DATE}">' if kind == "Article" else "")
+    body_class = ' class="has-intake-form"' if 'data-intake-form' in body else ''
     return f'''<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -200,7 +201,7 @@ def document(route, title, description, body, *, robots="index, follow", kind="W
 <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{CSS}"><meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(description)}"><meta property="og:url" content="https://berhelaw.com{route}"><meta property="og:type" content="{og_type}">{article_meta}<meta property="og:site_name" content="{FIRM_NAME}"><meta property="og:locale" content="en_US"><meta property="og:image" content="{SOCIAL_IMAGE}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="{FIRM_NAME} branded social preview image for California legal services."><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{esc(title)}"><meta name="twitter:description" content="{esc(description)}"><meta name="twitter:image" content="{SOCIAL_IMAGE}"><meta name="twitter:image:alt" content="{FIRM_NAME} branded social preview image for California legal services.">
 <script type="application/ld+json">{schema(route, title, description, body, kind)}</script>
-</head><body id="top">{header(route)}{body}{footer()}<script src="{SITE_JS}" defer></script><script src="{INTAKE_JS}" defer></script></body></html>'''
+</head><body id="top"{body_class}>{header(route)}{body}{footer()}<script src="{SITE_JS}" defer></script><script src="{INTAKE_JS}" defer></script></body></html>'''
 
 
 def breadcrumbs(items):

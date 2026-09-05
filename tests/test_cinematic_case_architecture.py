@@ -260,6 +260,20 @@ def test_process_pin_uses_the_case_object_and_intake_notice_restores_paper_contr
     assert ".scene .intake-form .notice{background:var(--paper);color:var(--ink)}" in css
 
 
+def test_intake_pages_are_marked_for_safe_no_javascript_mobile_layout():
+    intake_pages = [
+        ROOT / "free-case-review" / "index.html",
+        ROOT / "landing" / "garden-grove-chemical-leak" / "index.html",
+        ROOT / "landing" / "truck-fleet-rideshare-accident-california" / "index.html",
+    ]
+    for page in intake_pages:
+        doc = BeautifulSoup(page.read_text(encoding="utf-8"), "html.parser")
+        assert doc.body is not None
+        assert 'class="has-intake-form"' in str(doc.body), page
+    assert "html:not(.js) body.has-intake-form .mobile-actions{display:none}" in CSS_SOURCE
+    assert "html:not(.js) .site-header{position:relative}" in CSS_SOURCE
+
+
 # --- progressive enhancement gating ----------------------------------------
 
 
